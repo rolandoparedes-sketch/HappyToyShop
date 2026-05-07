@@ -1,4 +1,4 @@
-
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +7,7 @@ public class FirstPersonController : MonoBehaviour
 {
     public InputSystem_Actions inputs;
     private CharacterController controller;
-    public Camera characterCamera;
+    public CinemachineCamera characterCamera;
 
 
 
@@ -80,6 +80,7 @@ public class FirstPersonController : MonoBehaviour
 
         Vector3 moveDir = (cameraForwardDir * moveInput.y + transform.right * moveInput.x) * moveSpeed;
 
+        float magnitud = Mathf.Abs(controller.velocity.magnitude);
 
         verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
