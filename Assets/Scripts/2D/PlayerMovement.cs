@@ -1,13 +1,19 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [FoldoutGroup("References")]
     public InputSystem_Actions inputs;
+    [FoldoutGroup("References")]
+    [SerializeField] private Rigidbody2D rb;
 
+    [FoldoutGroup("ControllerSettings")]
     [SerializeField] private Vector2 moveInput;
+    [FoldoutGroup("ControllerSettings")]
     [SerializeField] private float moveSpeed = 5f;
 
-    [SerializeField] private Rigidbody2D rb;
+
     private void Awake()
     {
         inputs = new();

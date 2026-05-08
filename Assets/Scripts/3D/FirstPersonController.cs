@@ -1,3 +1,5 @@
+using Sirenix.OdinInspector;
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,27 +7,28 @@ using UnityEngine.InputSystem;
 
 public class FirstPersonController : MonoBehaviour
 {
+    #region Properties
+    [FoldoutGroup("References")]
     public InputSystem_Actions inputs;
+    [FoldoutGroup("References")]
     private CharacterController controller;
+    [FoldoutGroup("References")]
     public CinemachineCamera characterCamera;
+   
 
-
-
+    [FoldoutGroup("ControllerSettings")]
     public float moveSpeed = 5f;
-    public float rotationSpeed = 200f;
-    public float verticalVelocity = 0;
-    public float jumpForce = 10;
 
-    public float pushForce = 4;
+    [FoldoutGroup("ControllerSettings")]
 
-    private bool IsDashing;
-    public float dashForce;
-    public float dashDuration = 0.2f;
-    private float dashTimer;
+    public GameObject flashlight;
 
+    private bool flashlightOn = true;
     [SerializeField] private Vector2 moveInput;
+    #endregion
 
 
+    #region Inicialization
     private void Awake()
     {
         inputs = new();
@@ -34,6 +37,9 @@ public class FirstPersonController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    #endregion
+
+    #region InputSystem
     private void OnEnable()
     {
         inputs.Enable();
@@ -41,9 +47,23 @@ public class FirstPersonController : MonoBehaviour
         inputs.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputs.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
+        inputs.Player.FlashLight.performed += ctx =>
+        {
+            if (flashlightOn)
+            {
+                flashlight.SetActive(false);
+                flashlightOn = false;
+            }
+            else
+            {
+                flashlight.SetActive(true);
+                flashlightOn = true;
+            }
+        };
 
 
-       
+
+
 
 
 
@@ -56,12 +76,26 @@ public class FirstPersonController : MonoBehaviour
         inputs.Player.Move.canceled -= ctx => moveInput = Vector2.zero;
 
 
+        inputs.Player.FlashLight.performed -= ctx =>
+        {
+            if (flashlightOn)
+            {
+                flashlight.SetActive(false);
+                flashlightOn = false;
+            }
+            else
+            {
+                flashlight.SetActive(true);
+                flashlightOn = true;
+            }
+        };
 
 
 
 
 
     }
+    #endregion
     void Start()
     {
 
@@ -73,51 +107,8 @@ public class FirstPersonController : MonoBehaviour
         OnSimpleMove();
     }
 
-    public void OnMove()
-    {
-        Vector3 cameraForwardDir = characterCamera.transform.forward;
-        cameraForwardDir.y = 0;
-        cameraForwardDir.Normalize();
 
-
-
-        Quaternion targetQuaternion = Quaternion.LookRotation(cameraForwardDir);
-        transform.rotation = targetQuaternion;
-        /*transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            targetQuaternion,
-            rotationSpeed * Time.deltaTime);*/
-
-
-
-
-        Vector3 moveDir = (cameraForwardDir * moveInput.y + transform.right * moveInput.x) * moveSpeed;
-
-        float magnitud = Mathf.Abs(controller.velocity.magnitude);
-
-        verticalVelocity += Physics.gravity.y * Time.deltaTime;
-
-        if (controller.isGrounded && verticalVelocity < 0)
-            verticalVelocity = -2f;
-
-
-        moveDir.y = verticalVelocity;
-
-
-        if (IsDashing)
-        {
-            //->convertir el dash a un barrido por el piso! dash con gravedad integrada omaegoto!
-            moveDir = transform.forward * dashForce * (dashTimer / dashDuration);
-
-            dashTimer -= Time.deltaTime;
-
-            if (dashTimer <= 0)
-                IsDashing = false;
-        }
-        controller.Move(moveDir * Time.deltaTime);
-    }
-
-   
+    #region Methods
     public void OnSimpleMove()
     {
         Vector3 cameraForwardDir = characterCamera.transform.forward;
@@ -132,17 +123,7 @@ public class FirstPersonController : MonoBehaviour
        
         controller.SimpleMove(moveDir);
     }
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
 
-
-        Vector3 pushDir = (hit.transform.position - transform.position).normalized;
-
-        if (hit.rigidbody != null && hit.rigidbody.linearVelocity == Vector3.zero)
-        {
-            print(hit.gameObject.name);
-            hit.rigidbody.AddForce(pushDir * pushForce, ForceMode.Impulse);
-        }
-    }
-    
+    #endregion 
+ 
 }
