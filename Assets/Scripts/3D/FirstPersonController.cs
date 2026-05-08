@@ -106,6 +106,11 @@ public class FirstPersonController : MonoBehaviour
         inputs.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputs.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
+        inputs.Player.Sprint.performed += ctx => moveSpeed *= 2;
+
+        inputs.Player.Sprint.canceled += ctx => moveSpeed /= 2;
+
+
         inputs.Player.FlashLight.performed += LightOn;
       
 
@@ -124,6 +129,10 @@ public class FirstPersonController : MonoBehaviour
         inputs.Player.Move.performed -= ctx => moveInput = ctx.ReadValue<Vector2>();
         inputs.Player.Move.canceled -= ctx => moveInput = Vector2.zero;
 
+        inputs.Player.Sprint.performed -= ctx => moveSpeed *= 2;
+      
+        inputs.Player.Sprint.canceled -= ctx => moveSpeed /= 2;
+      
 
         inputs.Player.FlashLight.performed -= LightOn;
 
@@ -142,6 +151,7 @@ public class FirstPersonController : MonoBehaviour
         currentCordure = maxCordure;
 
         StartCoroutine(BatteryCoroutine());
+        ChangefearEffect();
 
     }
     void Update()
@@ -150,7 +160,6 @@ public class FirstPersonController : MonoBehaviour
         //OnMove();
    
         OnSimpleMove();
-        ChangefearEffect(); 
 
     }
 
