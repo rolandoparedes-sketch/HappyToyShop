@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
                 return;
             }
 
-            Day.text = GameManager.instance.TextEvents.Dequeue();
+            Day.text = GameManager.instance.TextEvents.Peek();
         }
         else
         {

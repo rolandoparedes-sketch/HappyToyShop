@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public ParanormalSuccess paranormalSuccess;
     [FoldoutGroup("GameSettings")]
     public MyQueue<int> Day = new();
     [FoldoutGroup("GameSettings")]
@@ -45,6 +46,10 @@ public class GameManager : MonoBehaviour
 
         }
 
+        SpecialDays = new List<int>() { 2, 4, 7};
+
+        NewText("InitalTextVoid");
+
         NewText("Hay algo afuera...");
 
         NewText("Escuchaste eso?...");
@@ -81,6 +86,8 @@ public class GameManager : MonoBehaviour
         {
             SpecialDay = true;
             Debug.Log("Día " + Day.Peek() + " es un día especial");
+            TextEvents.Dequeue();
+
         }
         else
         {

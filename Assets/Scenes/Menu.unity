@@ -950,7 +950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   NumbersOfDays: 7
   TurnDay: 1
-  SpecialDays: 020000000400000007000000
+  SpecialDays: 
 --- !u!1 &1613700751
 GameObject:
   m_ObjectHideFlags: 0
