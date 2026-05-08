@@ -42,7 +42,6 @@ public class FirstPersonController : MonoBehaviour
         inputs.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
 
-        inputs.Player.Jump.performed += OnJump;
 
        
 
@@ -56,8 +55,8 @@ public class FirstPersonController : MonoBehaviour
     void Update()
     {
 
-        OnMove();
-        //OnSimpleMove();
+        //OnMove();
+        OnSimpleMove();
     }
 
     public void OnMove()
@@ -104,16 +103,19 @@ public class FirstPersonController : MonoBehaviour
         controller.Move(moveDir * Time.deltaTime);
     }
 
-    private void OnJump(InputAction.CallbackContext context)
-    {
-        if (!controller.isGrounded) return;
-
-        verticalVelocity = jumpForce;
-    }
+   
     public void OnSimpleMove()
     {
-        transform.Rotate(Vector3.up * moveInput.x * rotationSpeed * Time.deltaTime);
-        Vector3 moveDir = transform.forward * moveSpeed * moveInput.y;
+        Vector3 cameraForwardDir = characterCamera.transform.forward;
+        cameraForwardDir.y = 0;
+        cameraForwardDir.Normalize();
+
+
+        Quaternion targetQuaternion = Quaternion.LookRotation(cameraForwardDir);
+        transform.rotation = targetQuaternion;
+
+        Vector3 moveDir = (cameraForwardDir * moveInput.y + transform.right * moveInput.x) * moveSpeed;
+       
         controller.SimpleMove(moveDir);
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
