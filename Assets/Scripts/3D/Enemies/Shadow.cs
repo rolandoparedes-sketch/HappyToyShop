@@ -8,9 +8,12 @@ public class Shadow : MonoBehaviour
     [FoldoutGroup("StatsSettings")]
     public Transform target;
 
-    public Vector3 lastPlayerPos;
+    private Vector3 lastPlayerPos;
+
+    [FoldoutGroup("StatsSettings")]
     public float distanceBehind = 5f;
-    public float followSpeed = 5f;
+    [FoldoutGroup("StatsSettings")]
+    public float rotationSpeed = 5f;
 
     private void Awake()
     {
@@ -34,11 +37,15 @@ public class Shadow : MonoBehaviour
             transform.position = Vector3.Lerp(
                 transform.position,
                 behindPos,
-                followSpeed * Time.deltaTime
+                rotationSpeed * Time.deltaTime
             );
         }
 
         lastPlayerPos = target.position;
-        //transform.LookAt(target);
+        transform.LookAt(target);
+    }
+    public void ShadowDetected()
+    {
+        Destroy(gameObject);
     }
 }

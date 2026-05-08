@@ -55,6 +55,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float timeDontMove = 2.5f;
 
     [SerializeField] private Vector2 moveInput;
+
   
     private bool CanMove = false;
 

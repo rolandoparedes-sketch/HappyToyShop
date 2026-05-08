@@ -60,6 +60,8 @@ public class ScenesManager : MonoBehaviour
     {
         StartCoroutine(SceneLoad("3D"));
         GameManager.instance.TurnDay = false;
+
+
     }
     [Button]
     public void ChangeMode2D()
@@ -76,8 +78,22 @@ public class ScenesManager : MonoBehaviour
         yield return new WaitForSeconds(fadeDuration);
         SceneManager.LoadScene(scene);
 
+        FindObjects();
+
 
     }
+    public void FindObjects()
+    {
+        if (FindFirstObjectByType<ParanormalSuccess>() != null)
+        {
+            GameManager.instance.paranormalSuccess =
+                FindFirstObjectByType<ParanormalSuccess>();
+        }
+        if( FindFirstObjectByType<FirstPersonController>() != null)
+        {
+            GameManager.instance.paranormalSuccess.Player = FindFirstObjectByType<FirstPersonController>().transform;
+        }
 
 
+    }
 }

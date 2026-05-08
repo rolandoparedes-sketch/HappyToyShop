@@ -19,7 +19,7 @@ public class ParanormalSuccess : MonoBehaviour
     private float timer;
     [FoldoutGroup("Settings")]
     private bool CanSpawn = true;
-
+   
     void Start()
     {
 
@@ -27,13 +27,16 @@ public class ParanormalSuccess : MonoBehaviour
 
     void Update()
     {
-        if (CanSpawn)
+        if(!GameManager.instance.TurnDay)
         {
-            timer += Time.deltaTime;
-            if (timer >= TimeToTrySpawn)
+            if (CanSpawn)
             {
-                timer = 0f;
-                TrySpawnShadow();
+                timer += Time.deltaTime;
+                if (timer >= TimeToTrySpawn)
+                {
+                    timer = 0f;
+                    TrySpawnShadow();
+                }
             }
         }
     }
@@ -41,7 +44,7 @@ public class ParanormalSuccess : MonoBehaviour
     private void TrySpawnShadow()
     {
         int random = Random.Range(0, 100);
-
+        Debug.Log("Random number for spawning shadow: " + random);
         if (random <= PercentageProbablityToApper)
         {
             {

@@ -948,6 +948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450ce6c35ab35164f850956373cfdd1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  paranormalSuccess: {fileID: 0}
   NumbersOfDays: 7
   TurnDay: 1
   SpecialDays: 

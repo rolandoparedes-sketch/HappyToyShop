@@ -5086,7 +5086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ParanormalSuccess
   Shadow: {fileID: 4466441373361895306, guid: 91b0dc138a8284c4e840d55a3b1b4153, type: 3}
   Player: {fileID: 219048601}
-  PercentageProbablityToApper: 100
+  PercentageProbablityToApper: 25
   TimeToTrySpawn: 5
 --- !u!1 &907407617
 GameObject:
@@ -12031,7 +12031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1091229607089667645
 MonoBehaviour:
   m_ObjectHideFlags: 0
