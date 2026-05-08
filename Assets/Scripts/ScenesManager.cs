@@ -4,9 +4,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuSystem : MonoBehaviour
+public class ScenesManager : MonoBehaviour
 {
-    public static MenuSystem instance;
+    public static ScenesManager instance;
 
     private Animator Anim;
 

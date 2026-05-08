@@ -31,15 +31,27 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+    private void OnDisable()
+    {
+        inputs.Disable();
+
+        inputs.Player.Move.performed -= ctx => moveInput = ctx.ReadValue<Vector2>();
+        inputs.Player.Move.canceled -= ctx => moveInput = Vector2.zero;
+
+
+
+
+
+
+
+    }
     void Update()
     {
 
     }
     private void FixedUpdate()
     {
-        transform.Translate(moveInput * Time.fixedDeltaTime);
 
-        //Movimiento en x y y con rigibody2D
 
         rb.linearVelocity = moveInput * moveSpeed;
 

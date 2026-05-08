@@ -48,6 +48,20 @@ public class FirstPersonController : MonoBehaviour
 
 
     }
+    private void OnDisable()
+    {
+        inputs.Disable();
+
+        inputs.Player.Move.performed -= ctx => moveInput = ctx.ReadValue<Vector2>();
+        inputs.Player.Move.canceled -= ctx => moveInput = Vector2.zero;
+
+
+
+
+
+
+
+    }
     void Start()
     {
 
