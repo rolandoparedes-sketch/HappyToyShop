@@ -8,9 +8,9 @@ public class ScenesManager : MonoBehaviour
 {
     public static ScenesManager instance;
 
-    private Animator Anim;
+    private Animator FadeAnim;
 
-    [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private float fadeDuration = 2f;
 
     private void Awake()
     {
@@ -20,7 +20,7 @@ public class ScenesManager : MonoBehaviour
             Destroy(gameObject);
 
 
-        Anim = GetComponentInChildren<Animator>();
+        FadeAnim = GetComponentInChildren<Animator>();
     }
 
     public void Jugar()
@@ -43,15 +43,21 @@ public class ScenesManager : MonoBehaviour
     public void ChangeMode3D()
     {
         StartCoroutine(SceneLoad("3D"));
+
+        GameManager.instance.TurnDay = false;
     }
     [Button]
     public void ChangeMode2D()
     {
         StartCoroutine(SceneLoad("2D"));
+        GameManager.instance.NextDay();
+
+        GameManager.instance.TurnDay = true;
     }
     public IEnumerator SceneLoad(string scene)
     {
-        Anim.SetTrigger("Fade");
+        FadeAnim.SetTrigger("Fade");
+        
         yield return new WaitForSeconds(fadeDuration);
         SceneManager.LoadScene(scene);
     }

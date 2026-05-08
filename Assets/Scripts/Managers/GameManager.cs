@@ -5,14 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [FoldoutGroup("References")]
-    public UIManager uiManager;
     [FoldoutGroup("GameSettings")]
     public MyQueue<int> Day = new();
     [FoldoutGroup("GameSettings")]
     public int NumbersOfDays = 7;
   
     public Action OnNextDay;
+    public bool TurnDay = true;
     private void Awake()
     {
         if (instance == null)
@@ -52,6 +51,10 @@ public class GameManager : MonoBehaviour
     public void NextDay()
     {
         Debug.Log("Día " + Day.Dequeue() + " finalizado");
+        
+        OnNextDay?.Invoke();
+        
+        
     }
 
     [Button]
