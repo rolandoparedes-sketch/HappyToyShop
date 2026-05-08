@@ -1,6 +1,8 @@
 using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,11 +25,14 @@ public class FirstPersonController : MonoBehaviour
 
     public GameObject flashlight;
 
+    [FoldoutGroup("ControllerSettings")]
+    [SerializeField] private float timeDontMove = 2.5f;
+
     private bool flashlightOn = true;
     [SerializeField] private Vector2 moveInput;
+  
+    private bool CanMove = false; 
     #endregion
-
-
     #region Inicialization
     private void Awake()
     {
@@ -38,7 +43,6 @@ public class FirstPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
     #endregion
-
     #region InputSystem
     private void OnEnable()
     {
@@ -62,6 +66,7 @@ public class FirstPersonController : MonoBehaviour
         };
 
 
+        inputs.Player.Jump.performed += ctx => ScenesManager.instance.ChangeMode2D();
 
 
 
@@ -92,25 +97,33 @@ public class FirstPersonController : MonoBehaviour
 
 
 
+        inputs.Player.Jump.performed -= ctx => ScenesManager.instance.ChangeMode2D();
 
 
     }
     #endregion
     void Start()
     {
+        StartCoroutine(WaitForPlay());
 
     }
     void Update()
     {
 
         //OnMove();
+   
         OnSimpleMove();
+       
     }
 
 
     #region Methods
     public void OnSimpleMove()
     {
+        if (!CanMove)
+        {
+            return;
+        }
         Vector3 cameraForwardDir = characterCamera.transform.forward;
         cameraForwardDir.y = 0;
         cameraForwardDir.Normalize();
@@ -124,6 +137,10 @@ public class FirstPersonController : MonoBehaviour
         controller.SimpleMove(moveDir);
     }
 
-    #endregion 
- 
+    #endregion
+    public IEnumerator WaitForPlay()
+    {
+        yield return new WaitForSeconds(timeDontMove);
+        CanMove = true;
+    }
 }

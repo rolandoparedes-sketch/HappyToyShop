@@ -20,16 +20,20 @@ public class UIManager : MonoBehaviour
     {
         if(GameManager.instance.TurnDay)
         Day.text = "Día " + GameManager.instance.Day.Peek();
+       
+        else if (!GameManager.instance.TurnDay && GameManager.instance.SpecialDay)
+        {
+            if (GameManager.instance.TextEvents.Count <= 0)
+            {
+                return;
+            }
+
+            Day.text = GameManager.instance.TextEvents.Dequeue();
+        }
         else
         {
             Day.gameObject.SetActive(false);
         }
-
-        if(!GameManager.instance.TurnDay && GameManager.instance.Day.Peek() ==2)
-        {
-                Day.text = "Hay algo afuera...";
-        }
-
 
 
     }

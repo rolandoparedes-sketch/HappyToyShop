@@ -1,5 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -11,7 +13,17 @@ public class GameManager : MonoBehaviour
     public int NumbersOfDays = 7;
   
     public Action OnNextDay;
+
+    public Action OnWeekComplete;
+    [FoldoutGroup("GameSettings")]
     public bool TurnDay = true;
+    [FoldoutGroup("GameSettings")]
+    public List<int> SpecialDays = new();
+    [FoldoutGroup("GameSettings")]
+
+    public MyQueue<string> TextEvents = new();
+
+    public bool SpecialDay { get; private set; } = false;
     private void Awake()
     {
         if (instance == null)
@@ -33,6 +45,11 @@ public class GameManager : MonoBehaviour
 
         }
 
+        NewText("Hay algo afuera...");
+
+        NewText("Escuchaste eso?...");
+
+        NewText("Alguien entro al local...");
 
     }
 
@@ -42,30 +59,57 @@ public class GameManager : MonoBehaviour
 
     }
     [Button]
-    public void NewDay(int day)
+    public void NewText(string text)
     {
-        Day.Enqueue(day);
+        TextEvents.Enqueue(text);
     }
 
     [Button]
     public void NextDay()
     {
+        if (Day.count <= 1)
+        {
+            Debug.Log("Semana Completada");
+            OnWeekComplete?.Invoke();
+            return;
+        }
         Debug.Log("Día " + Day.Dequeue() + " finalizado");
         
         OnNextDay?.Invoke();
         
-        
+        if(SpecialDays.Contains(Day.Peek()))
+        {
+            SpecialDay = true;
+            Debug.Log("Día " + Day.Peek() + " es un día especial");
+        }
+        else
+        {
+            SpecialDay = false;
+        }
+
+
     }
 
     [Button]
-    public void Peek()
+    public void LookDay()
     {
         Debug.Log("Día actual: " + Day.Peek());
         
     }
+    public void LookText()
+    {
+        Debug.Log("Texto actual: " + TextEvents.Peek());
+
+    }
+
     [Button]
     public void Clear()
     {
         Day.Clear();
+    }
+    [Button]
+    public void Count()
+    {
+        Debug.Log("Días restantes: " + Day.Count);
     }
 }

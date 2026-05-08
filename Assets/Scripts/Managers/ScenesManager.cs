@@ -10,7 +10,7 @@ public class ScenesManager : MonoBehaviour
 
     private Animator FadeAnim;
 
-    [SerializeField] private float fadeDuration = 2f;
+    [SerializeField] private float fadeDuration = 1f;
 
     private void Awake()
     {
@@ -21,19 +21,35 @@ public class ScenesManager : MonoBehaviour
 
 
         FadeAnim = GetComponentInChildren<Animator>();
-    }
 
-    public void Jugar()
+
+
+    }
+    private void OnEnable()
     {
-        SceneManager.LoadScene("Level1");
-    }
 
-    public void Salir()
+        GameManager.instance.OnWeekComplete += YouWon;
+    }
+    private void OnDisable()
+    {
+
+        GameManager.instance.OnWeekComplete -= YouWon;
+    }
+    public void Play()
+    {
+        Debug.Log("Play");
+        StartCoroutine(SceneLoad("2D"));
+    }
+    public void YouWon()
+    {
+        Debug.Log("Ganaste");
+        StartCoroutine(SceneLoad("Win"));
+    }
+    public void Quit()
     {
         Debug.Log("Saliendo");
         Application.Quit();
     }
-
 
     public void GameOver()
     {
@@ -43,7 +59,6 @@ public class ScenesManager : MonoBehaviour
     public void ChangeMode3D()
     {
         StartCoroutine(SceneLoad("3D"));
-
         GameManager.instance.TurnDay = false;
     }
     [Button]
@@ -57,9 +72,11 @@ public class ScenesManager : MonoBehaviour
     public IEnumerator SceneLoad(string scene)
     {
         FadeAnim.SetTrigger("Fade");
-        
+
         yield return new WaitForSeconds(fadeDuration);
         SceneManager.LoadScene(scene);
+
+
     }
 
 
