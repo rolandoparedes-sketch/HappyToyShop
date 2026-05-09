@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,6 +10,17 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("References")]
     [SerializeField] private Rigidbody2D rb;
 
+    [FoldoutGroup("References")]
+    public CinemachineCamera cam1;
+
+    [FoldoutGroup("References")]
+    public CinemachineCamera cam2;
+
+    [FoldoutGroup("References")]
+    public Collider2D MainRoom;
+
+    [FoldoutGroup("References")]
+    public Collider2D Almacen;
     [FoldoutGroup("ControllerSettings")]
     [SerializeField] private Vector2 moveInput;
     [FoldoutGroup("ControllerSettings")]
@@ -75,9 +87,36 @@ public class PlayerMovement : MonoBehaviour
         }
         rb.linearVelocity = moveInput * moveSpeed;
     }
+    
+  
     public IEnumerator WaitForPlay()
     {
         yield return new WaitForSeconds(timeDontMove);
         CanMove = true;
     }
+    [Button]
+    public void EnterAlmacen()
+    {
+
+        cam1.Priority = 0;
+        cam2.Priority = 1;
+    }
+    [Button]
+    public void EnterMainRoom()
+    {
+        cam1.Priority = 1;
+        cam2.Priority = 0;
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision == Almacen)
+        {
+            EnterAlmacen();
+        }
+        else if (collision == MainRoom)
+        {
+            EnterMainRoom();
+        }
+    }
+
 }

@@ -18,7 +18,7 @@ public class ParanormalSuccess : MonoBehaviour
     public float TimeToTrySpawn = 10f;
     private float timer;
     [FoldoutGroup("Settings")]
-    private bool CanSpawn = true;
+    public bool CanSpawn = true;
 
    
     void Start()

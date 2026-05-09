@@ -1,26 +1,25 @@
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Shadow : MonoBehaviour
 {
 
-    [FoldoutGroup("StatsSettings")]
+    [FoldoutGroup("References")]
     public Transform target;
 
     private Vector3 lastPlayerPos;
 
-    [FoldoutGroup("StatsSettings")]
-    public float distanceBehind = 5f;
-    [FoldoutGroup("StatsSettings")]
-    public float followSpeed = 5f;
-
+    [FoldoutGroup("Effects")]
+    public float fearIncrease = 10f;
     private void Awake()
     {
 
     }
     void Start()
     {
+        lastPlayerPos = target.position;
     }
 
     void Update()
@@ -29,20 +28,26 @@ public class Shadow : MonoBehaviour
     }
     private void FollowPlayer()
     {
-        Vector3 moveDir = target.position - lastPlayerPos;
 
-        if (moveDir.magnitude > 0.01f)
-        {
-            Vector3 behindPos = target.position - target.forward * distanceBehind;
 
-            transform.position = Vector3.Lerp( transform.position, behindPos, followSpeed * Time.deltaTime);
-        }
+        Vector3 newPos = target.position - lastPlayerPos;
 
-        lastPlayerPos = target.position;
+        transform.position += newPos;
+
+
         transform.LookAt(target);
+        lastPlayerPos = target.position;
     }
     public void ShadowDetected()
     {
+        FirstPersonController player = GameManager.instance.paranormalSuccess.Player.GetComponent<FirstPersonController>();
+
+        player.currentCordure -= fearIncrease;
+
+        player.UpdateFearState();
+
         Destroy(gameObject);
+
+        GameManager.instance.paranormalSuccess.CanSpawn = true;
     }
 }

@@ -29,6 +29,17 @@ public class FirstPersonController : MonoBehaviour
     public GameObject flashlight;
 
     [FoldoutGroup("ControllerSettings/Flashlight")]
+
+    public LayerMask Shadows;
+    [FoldoutGroup("ControllerSettings/Flashlight")]
+    public float DistanceRay = 10f;
+    [FoldoutGroup("ControllerSettings/Flashlight")]
+    [SerializeField] private float inclinacionVertical = 10f;
+
+    [FoldoutGroup("ControllerSettings/Flashlight")]
+    [SerializeField] private float inclinacionHorizontal = 10f;
+
+    [FoldoutGroup("ControllerSettings/Flashlight")]
     public float batteryDrainRate = 0.1f;
 
     [FoldoutGroup("ControllerSettings/Flashlight")]
@@ -54,7 +65,7 @@ public class FirstPersonController : MonoBehaviour
     [FoldoutGroup("ControllerSettings")]
     [SerializeField] private float timeDontMove = 2.5f;
 
-    [SerializeField] private Vector2 moveInput;
+    public Vector2 moveInput;
 
   
     private bool CanMove = false;
@@ -87,6 +98,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float amplitudeGainTerrified = 0.5f;
     [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 300f)]
     [SerializeField] private float frequencyGainTerrified = 0.5f;
+    
     #endregion
     #region Inicialization
     private void Awake()
@@ -104,7 +116,9 @@ public class FirstPersonController : MonoBehaviour
         inputs.Enable();
 
         inputs.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+      
         inputs.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+      
 
         inputs.Player.Sprint.performed += ctx => moveSpeed *= 2;
 
@@ -119,14 +133,13 @@ public class FirstPersonController : MonoBehaviour
         OnStateFearChange += ChangefearEffect;
 
 
-
     }
 
     private void OnDisable()
     {
         inputs.Disable();
-
         inputs.Player.Move.performed -= ctx => moveInput = ctx.ReadValue<Vector2>();
+
         inputs.Player.Move.canceled -= ctx => moveInput = Vector2.zero;
 
         inputs.Player.Sprint.performed -= ctx => moveSpeed *= 2;
@@ -160,10 +173,84 @@ public class FirstPersonController : MonoBehaviour
         //OnMove();
    
         OnSimpleMove();
+        Rays();
+    }
+    public void Rays()
+    {
+        Vector3 origin = characterCamera.transform.position;
 
+        Vector3 forward = characterCamera.transform.forward;
+
+        Vector3 upRay = Quaternion.AngleAxis(-inclinacionVertical, characterCamera.transform.right) * forward;
+
+        Vector3 downRay = Quaternion.AngleAxis(inclinacionVertical, characterCamera.transform.right) * forward;
+
+        Vector3 leftRay = Quaternion.AngleAxis(-inclinacionHorizontal, characterCamera.transform.up) * forward;
+
+        Vector3 rightRay = Quaternion.AngleAxis(inclinacionHorizontal, characterCamera.transform.up) * forward;
+
+        DetectShadow(origin, forward);
+
+        DetectShadow(origin, upRay);
+
+        DetectShadow(origin, downRay);
+
+        DetectShadow(origin, leftRay);
+
+        DetectShadow(origin, rightRay);
     }
 
+    private void DetectShadow(Vector3 origin, Vector3 direction)
+    {
+        if (Physics.Raycast(origin, direction, out RaycastHit hit, DistanceRay, Shadows))
+        {
+            if (hit.collider != null)
+            {
+                Shadow shadow = hit.collider.GetComponent<Shadow>();
 
+                if (shadow != null)
+                {
+                    shadow.ShadowDetected();
+                }
+            }
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        if (characterCamera == null)
+            return;
+
+        Vector3 origin = characterCamera.transform.position;
+
+        Vector3 forward = characterCamera.transform.forward;
+
+        Vector3 upRay =
+            Quaternion.AngleAxis(-inclinacionVertical, characterCamera.transform.right)
+            * forward;
+
+        Vector3 downRay =
+            Quaternion.AngleAxis(inclinacionVertical, characterCamera.transform.right)
+            * forward;
+
+        Vector3 leftRay =
+            Quaternion.AngleAxis(-inclinacionHorizontal, characterCamera.transform.up)
+            * forward;
+
+        Vector3 rightRay =
+            Quaternion.AngleAxis(inclinacionHorizontal, characterCamera.transform.up)
+            * forward;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(origin, forward * DistanceRay);
+
+        Gizmos.DrawRay(origin, upRay * DistanceRay);
+
+        Gizmos.DrawRay(origin, downRay * DistanceRay);
+
+        Gizmos.DrawRay(origin, leftRay * DistanceRay);
+
+        Gizmos.DrawRay(origin, rightRay * DistanceRay);
+    }
     #region Methods
     public void OnSimpleMove()
     {
@@ -213,8 +300,7 @@ public class FirstPersonController : MonoBehaviour
         }
 
     }
-
-    private void UpdateFearState()
+    public void UpdateFearState()
     {
         if (currentCordure <= 10)
         {
@@ -238,7 +324,7 @@ public class FirstPersonController : MonoBehaviour
             OnStateFearChange?.Invoke();
         }
     }
-    public void ChangefearEffect()
+    private void ChangefearEffect()
     {
         switch (currentFearState)
         {
