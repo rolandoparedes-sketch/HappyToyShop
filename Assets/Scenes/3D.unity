@@ -1823,8 +1823,6 @@ MonoBehaviour:
   characterCamera: {fileID: 1620334787}
   currentFearState: 0
   moveSpeed: 5
-  AmplitudeGainRun: 1
-  FrequencyGainRun: 1
   flashlight: {fileID: 945475343}
   batteryDrainRate: 0.1
   maxBattery: 100
@@ -5271,7 +5269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ParanormalSuccess
   Shadow: {fileID: 4466441373361895306, guid: 91b0dc138a8284c4e840d55a3b1b4153, type: 3}
   Player: {fileID: 219048601}
-  PercentageProbablityToApper: 25
+  PercentageProbablityToApper: 10
   TimeToTrySpawn: 5
 --- !u!1 &907407617
 GameObject:

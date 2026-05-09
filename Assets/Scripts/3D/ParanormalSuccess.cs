@@ -11,7 +11,7 @@ public class ParanormalSuccess : MonoBehaviour
     public Transform Player;
 
     [FoldoutGroup("Settings"), Range(0,100)]
-    public float PercentageProbablityToApper = 50;
+    public float PercentageProbablityToApper = 15;
 
 
     [FoldoutGroup("Settings")]
@@ -19,9 +19,13 @@ public class ParanormalSuccess : MonoBehaviour
     private float timer;
     [FoldoutGroup("Settings")]
     private bool CanSpawn = true;
+
    
     void Start()
     {
+        PercentageProbablityToApper = Mathf.Min (PercentageProbablityToApper * (GameManager.instance.Day.Peek()), 100f);
+
+        Debug.Log("Initial probability to spawn shadow: " + PercentageProbablityToApper);
 
     }
 
@@ -55,6 +59,7 @@ public class ParanormalSuccess : MonoBehaviour
                 Shadow enemy = shadowInstance.GetComponent<Shadow>();
 
                 enemy.target = Player;
+
 
                 CanSpawn = false;
             }

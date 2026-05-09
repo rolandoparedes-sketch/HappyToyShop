@@ -130,9 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shadow
   target: {fileID: 0}
-  lastPlayerPos: {x: 0, y: 0, z: 0}
-  distanceBehind: 5
-  followSpeed: 5
+  distanceBehind: 6
+  followSpeed: 3
 --- !u!1 &4555916828933017933
 GameObject:
   m_ObjectHideFlags: 0

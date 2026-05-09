@@ -13,10 +13,11 @@ public class Shadow : MonoBehaviour
     [FoldoutGroup("StatsSettings")]
     public float distanceBehind = 5f;
     [FoldoutGroup("StatsSettings")]
-    public float rotationSpeed = 5f;
+    public float followSpeed = 5f;
 
     private void Awake()
     {
+
     }
     void Start()
     {
@@ -34,11 +35,7 @@ public class Shadow : MonoBehaviour
         {
             Vector3 behindPos = target.position - target.forward * distanceBehind;
 
-            transform.position = Vector3.Lerp(
-                transform.position,
-                behindPos,
-                rotationSpeed * Time.deltaTime
-            );
+            transform.position = Vector3.Lerp( transform.position, behindPos, followSpeed * Time.deltaTime);
         }
 
         lastPlayerPos = target.position;
