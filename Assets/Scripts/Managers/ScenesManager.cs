@@ -27,13 +27,18 @@ public class ScenesManager : MonoBehaviour
     }
     private void OnEnable()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
-        GameManager.instance.OnWeekComplete += YouWon;
+        if (GameManager.instance != null)
+            GameManager.instance.OnWeekComplete += YouWon;
     }
+
     private void OnDisable()
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        GameManager.instance.OnWeekComplete -= YouWon;
+        if (GameManager.instance != null)
+            GameManager.instance.OnWeekComplete -= YouWon;
     }
     public void Play()
     {
@@ -78,9 +83,12 @@ public class ScenesManager : MonoBehaviour
         yield return new WaitForSeconds(fadeDuration);
         SceneManager.LoadScene(scene);
 
+
+
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
         FindObjects();
-
-
     }
     public void FindObjects()
     {

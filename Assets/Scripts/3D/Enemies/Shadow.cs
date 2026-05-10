@@ -40,10 +40,10 @@ public class Shadow : MonoBehaviour
     }
     public void ShadowDetected()
     {
+        Debug.Log(GameManager.instance.paranormalSuccess.Player);
         FirstPersonController player = GameManager.instance.paranormalSuccess.Player.GetComponent<FirstPersonController>();
 
         player.currentCordure -= fearIncrease;
-
         player.UpdateFearState();
 
         Destroy(gameObject);

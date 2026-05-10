@@ -162,8 +162,18 @@ public class FirstPersonController : MonoBehaviour
 
         currentBattery = maxBattery;
         currentCordure = maxCordure;
+        if(flashlightOn)
+        {
+            flashlight.SetActive(flashlightOn);
+            currentCoroutine = StartCoroutine(BatteryCoroutine());
 
-        StartCoroutine(BatteryCoroutine());
+        }
+        else
+        {
+            flashlight.SetActive(flashlightOn);
+            currentCoroutine = StartCoroutine(CordureCoroutine());
+        }
+   
         ChangefearEffect();
 
     }
