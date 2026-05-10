@@ -5,6 +5,7 @@ using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 
 public class FirstPersonController : MonoBehaviour
@@ -54,7 +55,7 @@ public class FirstPersonController : MonoBehaviour
     [FoldoutGroup("ControllerSettings/Flashlight")]
     public bool flashlightOn = true;
     [FoldoutGroup("ControllerSettings/Cordure")]
-    public float cordureDrainRate = 0.1f;
+    public float cordureDrainRate = 0.25f;
 
     [FoldoutGroup("ControllerSettings/Cordure")]
     public float maxCordure = 100f;
@@ -159,7 +160,10 @@ public class FirstPersonController : MonoBehaviour
     void Start()
     {
         StartCoroutine(WaitForPlay());
-
+        if (GameManager.instance.Day.Peek() == 7)
+        {
+            flashlight.GetComponent<Light>().color = Color.red;
+        }
         currentBattery = maxBattery;
         currentCordure = maxCordure;
         if(flashlightOn)
@@ -216,11 +220,17 @@ public class FirstPersonController : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                Shadow shadow = hit.collider.GetComponent<Shadow>();
+                ShadowFollower shadowFollower = hit.collider.GetComponent<ShadowFollower>();
 
-                if (shadow != null)
+                if (shadowFollower != null)
                 {
-                    shadow.ShadowDetected();
+                    shadowFollower.ShadowDetected();
+                }
+
+                ShadowPassageway shadowPassageway = hit.collider.GetComponent<ShadowPassageway>();
+                if (shadowPassageway != null)
+                {
+                    shadowPassageway.ShadowDetected();
                 }
             }
         }
@@ -360,7 +370,7 @@ public class FirstPersonController : MonoBehaviour
                 break;
         }
     }
-
+   
 
     #endregion
     #region Coroutines

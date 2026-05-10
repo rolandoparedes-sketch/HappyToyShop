@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public ParanormalSuccess paranormalSuccess;
+    public ParanormalSuccess3D paranormalSuccess;
     [FoldoutGroup("GameSettings")]
     public MyQueue<int> Day = new();
     [FoldoutGroup("GameSettings")]

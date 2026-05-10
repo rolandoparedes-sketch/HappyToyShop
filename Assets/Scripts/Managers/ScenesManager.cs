@@ -92,10 +92,10 @@ public class ScenesManager : MonoBehaviour
     }
     public void FindObjects()
     {
-        if (FindFirstObjectByType<ParanormalSuccess>() != null)
+        if (FindFirstObjectByType<ParanormalSuccess3D>() != null)
         {
             GameManager.instance.paranormalSuccess =
-                FindFirstObjectByType<ParanormalSuccess>();
+                FindFirstObjectByType<ParanormalSuccess3D>();
         }
         if( FindFirstObjectByType<FirstPersonController>() != null)
         {

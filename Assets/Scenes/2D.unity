@@ -119,55 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &35802231
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 35802233}
-  - component: {fileID: 35802232}
-  m_Layer: 0
-  m_Name: ParanormalSuccess
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &35802232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35802231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6714be253f8f72e449405355fd77dd03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParanormalSuccess
-  Shadow: {fileID: 4466441373361895306, guid: 91b0dc138a8284c4e840d55a3b1b4153, type: 3}
-  Player: {fileID: 0}
-  PercentageProbablityToApper: 10
-  TimeToTrySpawn: 50
-  CanSpawn: 1
---- !u!4 &35802233
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35802231}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.667, y: 3.03742, z: -1.13753}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &212961870
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,7 +869,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.6, y: -0.18999958, z: -10}
+  m_LocalPosition: {x: -1.4091616, y: -0.18999958, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1029,7 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450ce6c35ab35164f850956373cfdd1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  paranormalSuccess: {fileID: 35802232}
+  paranormalSuccess: {fileID: 0}
   NumbersOfDays: 7
   TurnDay: 1
   SpecialDays: 
@@ -1287,7 +1238,7 @@ Transform:
   m_GameObject: {fileID: 399213731}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.6, y: -0.18999958, z: -10}
+  m_LocalPosition: {x: -1.4091616, y: -0.18999958, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5424,4 +5375,3 @@ SceneRoots:
   - {fileID: 464021450}
   - {fileID: 542298926359471839}
   - {fileID: 331838852}
-  - {fileID: 35802233}

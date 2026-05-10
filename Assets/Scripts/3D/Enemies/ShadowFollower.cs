@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Shadow : MonoBehaviour
+public class ShadowFollower : MonoBehaviour
 {
 
     [FoldoutGroup("References")]
@@ -43,11 +43,12 @@ public class Shadow : MonoBehaviour
         Debug.Log(GameManager.instance.paranormalSuccess.Player);
         FirstPersonController player = GameManager.instance.paranormalSuccess.Player.GetComponent<FirstPersonController>();
 
-        player.currentCordure -= fearIncrease;
+        player.currentCordure = Mathf.Max(player.currentCordure - fearIncrease, 0);
+
         player.UpdateFearState();
 
         Destroy(gameObject);
 
-        GameManager.instance.paranormalSuccess.CanSpawn = true;
+        GameManager.instance.paranormalSuccess.CanSpawnFollower = true;
     }
 }
