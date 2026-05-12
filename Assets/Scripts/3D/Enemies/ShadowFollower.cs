@@ -1,3 +1,4 @@
+using MoreMountains.Tools;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
@@ -10,21 +11,30 @@ public class ShadowFollower : MonoBehaviour
     public Transform target;
 
     private Vector3 lastPlayerPos;
-
+    public Vector3 Offset;
     [FoldoutGroup("Effects")]
     public float fearIncrease = 10f;
+    public MMFollowTarget FollowTarget;
     private void Awake()
     {
 
     }
     void Start()
     {
-        lastPlayerPos = target.position;
+        //lastPlayerPos = target.position;
+
+        FollowTarget = GetComponent<MMFollowTarget>();
+
+        FollowTarget.Target = target;
+
+        Offset = (target.forward * - 5);
+        FollowTarget.Offset = Offset;
     }
 
     void Update()
     {
-        FollowPlayer();
+        transform.LookAt(target);
+        // FollowPlayer();
     }
     private void FollowPlayer()
     {
@@ -40,7 +50,6 @@ public class ShadowFollower : MonoBehaviour
     }
     public void ShadowDetected()
     {
-        Debug.Log(GameManager.instance.paranormalSuccess.Player);
         FirstPersonController player = GameManager.instance.paranormalSuccess.Player.GetComponent<FirstPersonController>();
 
         player.currentCordure = Mathf.Max(player.currentCordure - fearIncrease, 0);
