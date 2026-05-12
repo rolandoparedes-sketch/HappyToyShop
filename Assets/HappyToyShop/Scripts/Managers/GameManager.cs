@@ -6,8 +6,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [FoldoutGroup("References")]
     public static GameManager instance;
+    [FoldoutGroup("References")]
     public ParanormalSuccess3D paranormalSuccess;
+    [FoldoutGroup("References")]
+    public Transform Player;
     [FoldoutGroup("GameSettings")]
     public MyQueue<int> Day = new();
     [FoldoutGroup("GameSettings")]

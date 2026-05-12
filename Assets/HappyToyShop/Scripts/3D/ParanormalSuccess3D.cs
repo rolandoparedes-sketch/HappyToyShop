@@ -7,9 +7,6 @@ public class ParanormalSuccess3D : MonoBehaviour
    
 
     [FoldoutGroup("References")]
-    public Transform Player;
-
-    [FoldoutGroup("References")]
     public Collider ColliderDetectedA;
     [FoldoutGroup("References")]
     public Collider ColliderDetectedB;
@@ -87,13 +84,13 @@ public class ParanormalSuccess3D : MonoBehaviour
         if (random <= PercentageProbablityToApper)
         {
             {
-                Vector3 SpawnShadowFollower =  Player.position - Player.forward * 5f;
+                Vector3 SpawnShadowFollower =  GameManager.instance.Player.position - GameManager.instance.Player.forward * 5f;
 
                 GameObject shadowFollowerInstance = Instantiate(ShadowFollower, SpawnShadowFollower, Quaternion.identity);
 
                 ShadowFollower enemy = shadowFollowerInstance.GetComponent<ShadowFollower>();
 
-                enemy.target = Player;
+                enemy.target = GameManager.instance.Player;
 
 
                 CanSpawnFollower = false;
@@ -104,7 +101,7 @@ public class ParanormalSuccess3D : MonoBehaviour
 
     private void TryActivateShadowPassageway()
     {
-        float n = GameManager.instance.paranormalSuccess.Player.GetComponent<FirstPersonController>().currentCordure;
+        float n = GameManager.instance.Player.GetComponent<FirstPersonController>().currentCordure;
 
 
         int random = Random.Range(0, 100);
@@ -119,7 +116,7 @@ public class ParanormalSuccess3D : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform == Player)
+        if (other.transform == GameManager.instance.Player)
         {
             if (CanSpawnPassageway)
             {

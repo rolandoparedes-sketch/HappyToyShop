@@ -99,7 +99,7 @@ public class ScenesManager : MonoBehaviour
         }
         if( FindFirstObjectByType<FirstPersonController>() != null)
         {
-            GameManager.instance.paranormalSuccess.Player = FindFirstObjectByType<FirstPersonController>().transform;
+            GameManager.instance.Player = FindFirstObjectByType<FirstPersonController>().transform;
         }
 
 
