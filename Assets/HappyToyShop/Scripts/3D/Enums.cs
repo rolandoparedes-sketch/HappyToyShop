@@ -6,3 +6,11 @@ public enum FearState
     Scared,
     Terrified
 }
+public enum Quality
+{
+    Common,
+    SuperRare,
+    Epic,
+    Legendary,
+    Secret,
+}
