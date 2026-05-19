@@ -91,14 +91,31 @@ public class ParanormalSuccess3D : MonoBehaviour
                 ShadowFollower enemy = shadowFollowerInstance.GetComponent<ShadowFollower>();
 
                 enemy.target = GameManager.instance.Player;
+                int number= Random.Range(0, 2);
 
-
+                switch (number)
+                {
+                    case 0:
+                        GameManager.instance.MusicPool.PlayAudio("ISeeYou");
+                        break;
+                    case 1:
+                        GameManager.instance.MusicPool.PlayAudio("BehindYou");
+                        break;
+                }
                 CanSpawnFollower = false;
             }
         }
     }
 
+    [Button]
+    public int TestRandom(int MaxNumber)
+    {
+        int number = Random.Range(0, MaxNumber);
 
+        Debug.Log(number);  
+        return number;
+        
+    }
     private void TryActivateShadowPassageway()
     {
         float n = GameManager.instance.Player.GetComponent<FirstPersonController>().currentCordure;

@@ -2,8 +2,8 @@ using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Toys", menuName = "Happy Toy Shop/Toys")]
-public class Toys : BaseEntityData
+[CreateAssetMenu(fileName = "ToysData", menuName = "Happy Toy Shop/ToysData")]
+public class ToysData : BaseEntityData
 {
     #region Properties/Privates
     [FoldoutGroup("References")]

@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 using System;
-using System.Collections;
+using HappyToyShop.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public ParanormalSuccess3D paranormalSuccess;
     [FoldoutGroup("References")]
     public Transform Player;
+    [FoldoutGroup("References")]
+    public MusicDatabase MusicDatabase;
+    [FoldoutGroup("References")]
+    public MusicPool MusicPool;
     [FoldoutGroup("GameSettings")]
     public MyQueue<int> Day = new();
     [FoldoutGroup("GameSettings")]
@@ -76,7 +80,7 @@ public class GameManager : MonoBehaviour
     [Button]
     public void NextDay()
     {
-        if (Day.count <= 1)
+        if (Day.Count <= 1)
         {
             Debug.Log("Semana Completada");
             OnWeekComplete?.Invoke();
