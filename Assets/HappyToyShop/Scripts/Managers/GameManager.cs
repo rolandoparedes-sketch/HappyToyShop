@@ -1,7 +1,9 @@
+using HappyToyShop.Collections;
+using HappyToyShop.Collections.Graphs;
 using Sirenix.OdinInspector;
 using System;
-using HappyToyShop.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -33,6 +35,52 @@ public class GameManager : MonoBehaviour
     public MyQueue<string> TextEvents = new();
 
     public bool SpecialDay { get; private set; } = false;
+
+    //List
+
+    public UnorientedGraph<string> graph = new ();
+
+    //Matrix
+
+    [Button]
+    public void AddNode(string Skill)
+    {
+       Node<string> a = graph.AddNode(Skill);
+    }
+
+    /*[Button]
+  public void RemoveNode(string skill)
+   {
+       Node<string> a = graph.AddNode(Skill);
+       graph.RemoveNode("si");
+   }
+  */
+
+    [Button]
+    public void AddEdges(int pos, int pos2)
+    {
+        graph.AddEdges(pos, pos2);
+    }
+
+
+    /*
+    [Button]
+    public void DeleteEdges(Node<T> a, Node<T> b)
+    {
+        graph.DeleteEdges(Skill1, Skill2);
+    }*/
+    [Button]
+    public void PrintAdjacencyList()
+    {
+        graph.PrintAdjancencyList();
+    }
+    [Button]
+    public void PrintAdjacencyMatrix()
+    {
+        graph.PrintAdjacencyMatrix();
+    }
+
+
     private void Awake()
     {
         if (instance == null)
@@ -63,6 +111,9 @@ public class GameManager : MonoBehaviour
         NewText("Escuchaste eso?...");
 
         NewText("Alguien entro al local...");
+
+
+
 
     }
 
