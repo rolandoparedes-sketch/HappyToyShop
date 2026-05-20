@@ -15,9 +15,10 @@ public class SoundPlayer : MonoBehaviour
     {
 
     }
-    public void PlayAudio(AudioClip clip)
+    public void PlayAudio(AudioClip clip, float volume)
     {
         audioSource.clip = clip;
+        audioSource.volume = volume;
         audioSource.Play();
 
         //audioSource.clip.length
@@ -31,6 +32,6 @@ public class SoundPlayer : MonoBehaviour
         //->comunicarme con mi music pool
         //-> regresar a casa :c 
         audioSource.clip = null;
-        MusicPool.OnFinishAudio?.Invoke(this);
+        SoundManager.OnFinishAudio?.Invoke(this);
     }
 }

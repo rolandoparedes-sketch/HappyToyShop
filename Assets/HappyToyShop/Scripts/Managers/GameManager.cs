@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("References")]
     public MusicDatabase MusicDatabase;
     [FoldoutGroup("References")]
-    public MusicPool MusicPool;
+    public SoundManager SoundManager;
     [FoldoutGroup("GameSettings")]
     public MyQueue<int> Day = new();
     [FoldoutGroup("GameSettings")]

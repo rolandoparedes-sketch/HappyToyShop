@@ -4,7 +4,7 @@ using System;
 using HappyToyShop.Collections;
 using UnityEngine;
 
-public class MusicPool : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
     public SoundPlayer SoundPlayerPrefab;
 
@@ -14,16 +14,19 @@ public class MusicPool : MonoBehaviour
 
     public static Action<SoundPlayer> OnFinishAudio;
 
-
-    private void OnEnable()
-    {
-        OnFinishAudio += EnqueueAudio;
-    }
-
     void Start()
     {
         CreateSoundPlayerObjs(size);
     }
+    private void OnEnable()
+    {
+        OnFinishAudio += EnqueueAudio;
+    }
+    private void OnDisable()
+    {
+        OnFinishAudio -= EnqueueAudio;
+    }
+ 
 
     public void PlayAudio(string audioName)
     {
@@ -34,11 +37,11 @@ public class MusicPool : MonoBehaviour
             // PlayAudio(audioName);
             return;
         }
-        AudioClip clip = GameManager.instance.MusicDatabase.GetAudio(audioName);
+        MusicData data = GameManager.instance.MusicDatabase.GetAudio(audioName);
 
         SoundPlayer soundPlayer = Pool.Dequeue();
         soundPlayer.gameObject.SetActive(true);
-        soundPlayer.PlayAudio(clip);
+        soundPlayer.PlayAudio(data.Clip, data.Volume);
     }
     private void EnqueueAudio(SoundPlayer soundPlayer)
     {

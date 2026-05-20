@@ -5,11 +5,11 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "MusicDatabase", menuName = "Happy Toy Shop/MusicDatabase")]
 public class MusicDatabase : SerializedScriptableObject
 {
-    public Dictionary<string, AudioClip> ClipDatabase = new();
+    public Dictionary<string, MusicData> ClipDatabase = new();
 
-    public AudioClip GetAudio(string audioName)
+    public MusicData GetAudio(string audioName)
     {
-        if (ClipDatabase.TryGetValue(audioName, out AudioClip clip))
+        if (ClipDatabase.TryGetValue(audioName, out MusicData clip))
         {
             return clip;
         }
