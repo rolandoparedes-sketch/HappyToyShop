@@ -538,7 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   paranormalSuccess: {fileID: 890196600}
   Player: {fileID: 0}
-  musicDatabase: {fileID: 0}
+  musicDatabase: {fileID: 11400000, guid: 93ce523edb3640e4ca8bf42cbd1cef8a, type: 2}
   soundManager: {fileID: 0}
   factorySystem: {fileID: 0}
   warehouseSystem: {fileID: 0}
