@@ -22,6 +22,10 @@ public class FirstPersonController : MonoBehaviour
     public FearState currentFearState;
 
 
+    [FoldoutGroup("ControllerSettings/Inventory")]
+    private bool inventoryOpen;
+    public GameObject inventoryUI;
+
     [FoldoutGroup("ControllerSettings")]
     public float moveSpeed = 5f;
 
@@ -127,13 +131,13 @@ public class FirstPersonController : MonoBehaviour
 
 
         inputs.Player.FlashLight.performed += LightOn;
-      
+        inputs.Player.Inventory.performed += OpenInventory;
 
         inputs.Player.Jump.performed += ctx => ScenesManager.instance.ChangeMode2D();
 
         OnStateFearChange += ChangefearEffect;
 
-
+        
     }
 
     private void OnDisable()
@@ -146,7 +150,8 @@ public class FirstPersonController : MonoBehaviour
         inputs.Player.Sprint.performed -= ctx => moveSpeed *= 2;
       
         inputs.Player.Sprint.canceled -= ctx => moveSpeed /= 2;
-      
+
+        inputs.Player.Inventory.performed -= OpenInventory;
 
         inputs.Player.FlashLight.performed -= LightOn;
 
@@ -369,6 +374,7 @@ public class FirstPersonController : MonoBehaviour
                 characterCamera.GetComponent<CinemachineBasicMultiChannelPerlin>().FrequencyGain = frequencyGainTerrified;
                 break;
         }
+
     }
    
 
@@ -413,6 +419,15 @@ public class FirstPersonController : MonoBehaviour
     {
         yield return new WaitForSeconds(timeDontMove);
         CanMove = true;
+    }
+
+    private void OpenInventory(InputAction.CallbackContext ctx)
+    {
+        inventoryOpen = !inventoryOpen;
+
+        inventoryUI.SetActive(inventoryOpen);
+
+       
     }
     #endregion
 }

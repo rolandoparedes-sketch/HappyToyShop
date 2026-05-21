@@ -1801,6 +1801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonController
   characterCamera: {fileID: 1620334787}
   currentFearState: 0
+  inventoryUI: {fileID: 0}
   moveSpeed: 5
   flashlight: {fileID: 945475343}
   Shadows:
