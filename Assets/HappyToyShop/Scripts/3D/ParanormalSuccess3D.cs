@@ -96,10 +96,10 @@ public class ParanormalSuccess3D : MonoBehaviour
                 switch (number)
                 {
                     case 0:
-                        GameManager.instance.SoundManager.PlayAudio("ISeeYou");
+                        GameManager.instance.soundManager.PlayAudio("ISeeYou");
                         break;
                     case 1:
-                        GameManager.instance.SoundManager.PlayAudio("BehindYou");
+                        GameManager.instance.soundManager.PlayAudio("BehindYou");
                         break;
                 }
                 CanSpawnFollower = false;
@@ -107,15 +107,7 @@ public class ParanormalSuccess3D : MonoBehaviour
         }
     }
 
-    [Button]
-    public int TestRandom(int MaxNumber)
-    {
-        int number = Random.Range(0, MaxNumber);
-
-        Debug.Log(number);  
-        return number;
-        
-    }
+    
     private void TryActivateShadowPassageway()
     {
         float n = GameManager.instance.Player.GetComponent<FirstPersonController>().currentCordure;

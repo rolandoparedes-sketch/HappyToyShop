@@ -4,7 +4,7 @@ using UnityEngine;
 public class FactorySystem : MonoBehaviour
 {
 
-    [SerializeField] private ToyDataBase toyDataBase;
+    public ToyDataBase toyDataBase;
 
     void Start()
     {
@@ -20,16 +20,5 @@ public class FactorySystem : MonoBehaviour
     {
         ToyData toy = toyDataBase.GetToy(toyID);
         return toy;
-    }
-    public void BuyDozen(int toyID)
-    {
-        ToyData toy = TakeToy(toyID);
-
-        
-
-    }
-    public void BuyHalfDozen(int toyID)
-    {
-        
     }
 }

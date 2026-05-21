@@ -103,7 +103,7 @@ public class ScenesManager : MonoBehaviour
         }
         if(FindAnyObjectByType<SoundManager>() != null)
         {
-            GameManager.instance.SoundManager = FindFirstObjectByType<SoundManager>();
+            GameManager.instance.soundManager = FindFirstObjectByType<SoundManager>();
 
         }
 

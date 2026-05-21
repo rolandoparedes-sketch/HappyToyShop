@@ -15,9 +15,13 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("References")]
     public Transform Player;
     [FoldoutGroup("References")]
-    public MusicDatabase MusicDatabase;
+    public MusicDatabase musicDatabase;
     [FoldoutGroup("References")]
-    public SoundManager SoundManager;
+    public SoundManager soundManager;
+    [FoldoutGroup("References")]
+    public FactorySystem factorySystem;
+    [FoldoutGroup("References")]
+    public WarehouseSystem warehouseSystem;
     [FoldoutGroup("GameSettings")]
     public MyQueue<int> Day = new();
     [FoldoutGroup("GameSettings")]
@@ -33,8 +37,14 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("GameSettings")]
 
     public MyQueue<string> TextEvents = new();
-
+    [FoldoutGroup("GameSettings")]
     public bool SpecialDay { get; private set; } = false;
+    [FoldoutGroup("MoneySystem")]
+    public float CurrentMoney;
+    [FoldoutGroup("MoneySystem")]
+    public int DailySalesGoal;
+    [FoldoutGroup("MoneySystem")]
+    public int WeekSalesGoal;
 
     //List
 
@@ -113,8 +123,6 @@ public class GameManager : MonoBehaviour
         NewText("Escuchaste eso?...");
 
         NewText("Alguien entro al local...");
-
-
 
 
     }

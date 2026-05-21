@@ -37,7 +37,7 @@ public class SoundManager : MonoBehaviour
             // PlayAudio(audioName);
             return;
         }
-        MusicData data = GameManager.instance.MusicDatabase.GetAudio(audioName);
+        MusicData data = GameManager.instance.musicDatabase.GetAudio(audioName);
 
         SoundPlayer soundPlayer = Pool.Dequeue();
         soundPlayer.gameObject.SetActive(true);
