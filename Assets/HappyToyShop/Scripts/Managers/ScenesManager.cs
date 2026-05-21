@@ -12,6 +12,7 @@ public class ScenesManager : MonoBehaviour
 
     [SerializeField] private float fadeDuration = 1f;
 
+    public Action OnChangeScene;
     private void Awake()
     {
         if (instance == null)
@@ -106,7 +107,18 @@ public class ScenesManager : MonoBehaviour
             GameManager.instance.soundManager = FindFirstObjectByType<SoundManager>();
 
         }
+        if (FindAnyObjectByType<FactorySystem>() != null)
+        {
+            GameManager.instance.factorySystem = FindFirstObjectByType<FactorySystem>();
 
+        }
+        if (FindAnyObjectByType<WarehouseSystem>() != null)
+        {
+            GameManager.instance.warehouseSystem = FindFirstObjectByType<WarehouseSystem>();
 
+        }
+
+        
+        OnChangeScene?.Invoke();
     }
 }

@@ -23,8 +23,7 @@ public class WarehouseSystem : MonoBehaviour
 
     private void Awake()
     {
-
-        Shelfs.SetLength(GameManager.instance.factorySystem.toyDataBase.toyDataBase.Count);
+        ScenesManager.instance.OnChangeScene += () => Shelfs.SetLength(GameManager.instance.factorySystem.toyDataBase.toyDataBase.Count); 
     }
     void Start()
     {
@@ -40,6 +39,17 @@ public class WarehouseSystem : MonoBehaviour
 
     }
     [Button]
+    public void AplicarDataEnCadaAlmacen()
+    {
+
+        for (int i = 0; i < Shelfs.Count; i++)
+        {
+            Debug.Log(i);
+            Shelfs[i].data = GameManager.instance.factorySystem.toyDataBase.GetToy(i);
+        }
+
+    }
+    [Button]
     public void AplicarID()
     {
 
@@ -49,13 +59,5 @@ public class WarehouseSystem : MonoBehaviour
             Shelfs[i].ShelfID = Shelfs[i].data.ID;
         }
     }
-    [Button]
-    public void AplicarDataEnCadaAlmacen()
-    {
-        for (int i = 0; i < Shelfs.Count; i++)
-        {
-            Debug.Log(i);
-            Shelfs[i].data = GameManager.instance.factorySystem.toyDataBase.GetToy(i);
-        }
-    }
+    
 }
