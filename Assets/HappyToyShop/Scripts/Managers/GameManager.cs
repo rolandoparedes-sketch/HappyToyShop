@@ -43,32 +43,32 @@ public class GameManager : MonoBehaviour
     //Matrix
 
     [Button]
-    public void AddNode(string Skill)
+    public void AddNode(string Vertex)
     {
-       Node<string> a = graph.AddNode(Skill);
+       Node<string> a = graph.AddNode(Vertex);
     }
 
-    /*[Button]
-  public void RemoveNode(string skill)
-   {
-       Node<string> a = graph.AddNode(Skill);
-       graph.RemoveNode("si");
-   }
-  */
-
     [Button]
-    public void AddEdges(int pos, int pos2)
+    public void RemoveNode(int VertexPos)
     {
-        graph.AddEdges(pos, pos2);
+
+       graph.RemoveNode(VertexPos);
+       
     }
 
 
-    /*
     [Button]
-    public void DeleteEdges(Node<T> a, Node<T> b)
+    public void AddEdges(int VertexPos, int VertexPos2)
     {
-        graph.DeleteEdges(Skill1, Skill2);
-    }*/
+        graph.AddEdges(VertexPos, VertexPos2);
+    }
+
+
+    [Button]
+    public void DeleteEdges(int VertexPos, int VertexPos2)
+    {
+        graph.DeleteEdges(VertexPos, VertexPos2);
+    }
     [Button]
     public void PrintAdjacencyList()
     {
@@ -103,6 +103,8 @@ public class GameManager : MonoBehaviour
         }
 
         SpecialDays = new List<int>() { 2, 4, 7};
+
+
 
         NewText("InitalTextVoid");
 

@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -99,7 +100,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float amplitudeGainTerrified = 0.5f;
     [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 300f)]
     [SerializeField] private float frequencyGainTerrified = 0.5f;
-    
+
     #endregion
     #region Inicialization
     private void Awake()

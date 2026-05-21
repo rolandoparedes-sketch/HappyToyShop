@@ -2,11 +2,12 @@ using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ToysData", menuName = "Happy Toy Shop/ToysData")]
-public class ToysData : BaseEntityData
+[CreateAssetMenu(fileName = "ToyData", menuName = "Happy Toy Shop/ToyDataBase/ToyData")]
+[InlineEditor]
+public class ToyData : BaseEntityData
 {
     #region Properties/Privates
-    [FoldoutGroup("References")]
+    [FoldoutGroup("ToyObject")]
     [SerializeField] private GameObject toyPrefab;
     [FoldoutGroup("Value")]
     [SerializeField] private float salePrice;
