@@ -540,8 +540,8 @@ MonoBehaviour:
   Player: {fileID: 0}
   musicDatabase: {fileID: 11400000, guid: 93ce523edb3640e4ca8bf42cbd1cef8a, type: 2}
   soundManager: {fileID: 0}
-  factorySystem: {fileID: 0}
-  warehouseSystem: {fileID: 0}
+  factorySystem: {fileID: 1662006962}
+  warehouseSystem: {fileID: 1654454216}
   NumbersOfDays: 7
   TurnDay: 1
   SpecialDays: 
