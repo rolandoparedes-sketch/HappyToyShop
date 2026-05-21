@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &29257614 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4466441373361895306, guid: 575965c5db1c99441bcf4e8b7bfd1950, type: 3}
-  m_PrefabInstance: {fileID: 139749690}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &37688752
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,11 +538,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   paranormalSuccess: {fileID: 890196600}
   Player: {fileID: 0}
-  MusicDatabase: {fileID: 11400000, guid: 93ce523edb3640e4ca8bf42cbd1cef8a, type: 2}
-  SoundManager: {fileID: 175519098}
+  musicDatabase: {fileID: 0}
+  soundManager: {fileID: 0}
+  factorySystem: {fileID: 0}
+  warehouseSystem: {fileID: 0}
   NumbersOfDays: 7
   TurnDay: 1
   SpecialDays: 
+  CurrentMoney: 0
+  DailySalesGoal: 0
+  WeekSalesGoal: 0
 --- !u!43 &46949028
 Mesh:
   m_ObjectHideFlags: 0
@@ -5179,11 +5179,6 @@ Transform:
   - {fileID: 999727829}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &635843954 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4466441373361895306, guid: 575965c5db1c99441bcf4e8b7bfd1950, type: 3}
-  m_PrefabInstance: {fileID: 712249376}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &690311702
 Mesh:
   m_ObjectHideFlags: 0
@@ -7458,10 +7453,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ParanormalSuccess
   ColliderDetectedA: {fileID: 890196602}
   ColliderDetectedB: {fileID: 890196601}
-  ShadowFollower: {fileID: 4466441373361895306, guid: 91b0dc138a8284c4e840d55a3b1b4153, type: 3}
-  ShadowsPassageway: {fileID: 29257614}
-  ShadowsPassageway2: {fileID: 635843954}
-  ShadowsScream: {fileID: 4466441373361895306, guid: 4edfaacca1e8d0c45808100d2ac1f924, type: 3}
+  ShadowFollower: {fileID: 1228942355955790531, guid: 91b0dc138a8284c4e840d55a3b1b4153, type: 3}
+  ShadowsPassageway: {fileID: -8955573343521684139, guid: 575965c5db1c99441bcf4e8b7bfd1950, type: 3}
+  ShadowsPassageway2: {fileID: -8955573343521684139, guid: 575965c5db1c99441bcf4e8b7bfd1950, type: 3}
+  ShadowsScream: {fileID: 2552061862885812540, guid: 4edfaacca1e8d0c45808100d2ac1f924, type: 3}
   PercentageProbablityToApper: 10
   TimeToTrySpawnFollower: 50
   TimeToActivatePassageway: 50

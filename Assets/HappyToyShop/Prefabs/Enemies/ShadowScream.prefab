@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8961426049053499941}
   - component: {fileID: 7166476253842050747}
   - component: {fileID: 9097618080153725846}
-  - component: {fileID: 1228942355955790531}
+  - component: {fileID: 2552061862885812540}
   m_Layer: 3
   m_Name: ShadowScream
   m_TagString: Untagged
@@ -117,7 +117,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1228942355955790531
+--- !u!114 &2552061862885812540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,11 +126,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4466441373361895306}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce4713a352432994bbef491be8052f90, type: 3}
+  m_Script: {fileID: 11500000, guid: 99042d966b551aa439efbd36f503eda0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Shadow
-  target: {fileID: 0}
-  fearIncrease: 10
+  m_EditorClassIdentifier: Assembly-CSharp::ShadowScream
 --- !u!1 &4555916828933017933
 GameObject:
   m_ObjectHideFlags: 0

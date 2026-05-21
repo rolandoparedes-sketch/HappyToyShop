@@ -12,16 +12,16 @@ public class ParanormalSuccess3D : MonoBehaviour
     public Collider ColliderDetectedB;
 
     [FoldoutGroup("References/Shadows")]
-    public GameObject ShadowFollower;
+    public ShadowFollower ShadowFollower;
 
     [FoldoutGroup("References/Shadows")]
-    public GameObject ShadowsPassageway;
+    public ShadowPassageway ShadowsPassageway;
 
     [FoldoutGroup("References/Shadows")]
-    public GameObject ShadowsPassageway2;
+    public ShadowPassageway ShadowsPassageway2;
 
     [FoldoutGroup("References/Shadows")]
-    public GameObject ShadowsScream;
+    public ShadowScream ShadowsScream;
 
 
     [FoldoutGroup("Settings"), Range(0,100)]
@@ -86,7 +86,7 @@ public class ParanormalSuccess3D : MonoBehaviour
             {
                 Vector3 SpawnShadowFollower =  GameManager.instance.Player.position - GameManager.instance.Player.forward * 5f;
 
-                GameObject shadowFollowerInstance = Instantiate(ShadowFollower, SpawnShadowFollower, Quaternion.identity);
+                GameObject shadowFollowerInstance = Instantiate(ShadowFollower.gameObject, SpawnShadowFollower, Quaternion.identity);
 
                 ShadowFollower enemy = shadowFollowerInstance.GetComponent<ShadowFollower>();
 
@@ -117,8 +117,8 @@ public class ParanormalSuccess3D : MonoBehaviour
         Debug.Log("Random number for activating shadow passageway: " + random);
         if(random >= n)
         {
-            ShadowsPassageway.SetActive(true);
-            ShadowsPassageway2.SetActive(true);
+            ShadowsPassageway.gameObject.SetActive(true);
+            ShadowsPassageway2.gameObject.SetActive(true);
             CanSpawnPassageway = false;
         }
 
