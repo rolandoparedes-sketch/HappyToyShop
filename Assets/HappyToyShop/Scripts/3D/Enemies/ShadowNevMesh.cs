@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using Sirenix.OdinInspector;
 public class EnemyShadow : MonoBehaviour
 {
     public Transform[] windows;
@@ -8,40 +9,55 @@ public class EnemyShadow : MonoBehaviour
     public float breakTime = 5f;
 
     private NavMeshAgent agent;
-    private bool waiting = false;
+    public bool waiting = false;
 
+    private int LastWindow;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
 
-        GoToNewWindow();
+        StartCoroutine(BreakWindow());
     }
 
-    void Update()
-    {
-        if (!waiting && !agent.pathPending && agent.remainingDistance <= 0.5f)
-        {
-            StartCoroutine(BreakWindow());
-        }
-    }
+    
+
+
 
     IEnumerator BreakWindow()
     {
-        waiting = true;
+        /* while (!waiting && !agent.pathPending && agent.remainingDistance <= 0.5f)
+         {
+             waiting = true;
 
-        Debug.Log("Intentando Romper la ventana");
+             Debug.Log("Intentando Romper la ventana");
+
+             yield return new WaitForSeconds(breakTime);
+             Debug.Log("Cambiando Ventana");
+             GoToNewWindow();
+
+             waiting = false;
+         }*/
+        GoToNewWindow();
+        yield return new WaitUntil(() => agent.remainingDistance<= 0.001f);
+        Debug.Log(agent.remainingDistance);
+
 
         yield return new WaitForSeconds(breakTime);
 
-        GoToNewWindow();
-
-        waiting = false;
+        StartCoroutine(BreakWindow());
     }
-
+    [Button]
     void GoToNewWindow()
     {
+        Debug.Log("SelectWindow");
         int randomIndex = Random.Range(0, windows.Length);
-
+        if(randomIndex == LastWindow)
+        {
+            GoToNewWindow();
+            return;
+        }
         agent.SetDestination(windows[randomIndex].position);
+        LastWindow = randomIndex;
+        
     }
 }
