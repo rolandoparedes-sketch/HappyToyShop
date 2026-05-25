@@ -24,6 +24,7 @@ public class FirstPersonController : MonoBehaviour
     [FoldoutGroup("ControllerSettings/Windows")]
     public GameObject woodText;
     public float interactDistance = 3f;
+    public GameObject woodPlanks;
 
     [FoldoutGroup("ControllerSettings/Inventory")]
     private bool inventoryOpen;
@@ -132,6 +133,7 @@ public class FirstPersonController : MonoBehaviour
 
         inputs.Player.Sprint.canceled += ctx => moveSpeed /= 2;
 
+        inputs.Player.Repair.performed += RepairWindow;
 
         inputs.Player.FlashLight.performed += LightOn;
         inputs.Player.Inventory.performed += OpenInventory;
@@ -158,6 +160,7 @@ public class FirstPersonController : MonoBehaviour
 
         inputs.Player.FlashLight.performed -= LightOn;
 
+        inputs.Player.Repair.performed -= RepairWindow;
 
         inputs.Player.Jump.performed -= ctx => ScenesManager.instance.ChangeMode2D();
 
@@ -450,6 +453,19 @@ public class FirstPersonController : MonoBehaviour
         else
         {
             woodText.SetActive(false);
+        }
+    }
+
+    private void RepairWindow(InputAction.CallbackContext ctx)
+    {
+        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+        {
+            if (hit.collider.CompareTag("Window"))
+            {
+                woodPlanks.SetActive(true);
+            }
         }
     }
     #endregion
