@@ -21,6 +21,9 @@ public class FirstPersonController : MonoBehaviour
     [FoldoutGroup("ControllerSettings")]
     public FearState currentFearState;
 
+    [FoldoutGroup("ControllerSettings/Windows")]
+    public GameObject woodText;
+    public float interactDistance = 3f;
 
     [FoldoutGroup("ControllerSettings/Inventory")]
     private bool inventoryOpen;
@@ -190,7 +193,7 @@ public class FirstPersonController : MonoBehaviour
     {
 
         //OnMove();
-   
+        CheckWindow();
         OnSimpleMove();
         Rays();
     }
@@ -428,6 +431,26 @@ public class FirstPersonController : MonoBehaviour
         inventoryUI.SetActive(inventoryOpen);
 
        
+    }
+    private void CheckWindow()
+    {
+        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
+        {
+            if (hit.collider.CompareTag("Window"))
+            {
+                woodText.SetActive(true);
+            }
+            else
+            {
+                woodText.SetActive(false);
+            }
+        }
+        else
+        {
+            woodText.SetActive(false);
+        }
     }
     #endregion
 }
