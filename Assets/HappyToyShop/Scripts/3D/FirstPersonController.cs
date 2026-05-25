@@ -464,7 +464,9 @@ public class FirstPersonController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Window"))
             {
-                woodPlanks.SetActive(true);
+                GameObject wood = hit.collider.transform.Find("WoodPlanks").gameObject;
+
+                wood.SetActive(true);
             }
         }
     }
