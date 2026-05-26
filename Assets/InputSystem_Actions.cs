@@ -609,6 +609,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+<<<<<<< HEAD
                     ""id"": ""a064dea7-d67c-4a0e-ba46-a89a20fcc15b"",
                     ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
@@ -637,6 +638,14 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Grab"",
+=======
+                    ""id"": ""1378bfa3-96e6-46c2-99b8-7df24d1e0094"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FlashLight"",
+>>>>>>> JeremyBranch
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }

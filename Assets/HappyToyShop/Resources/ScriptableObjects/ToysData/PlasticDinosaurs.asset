@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1935830778ec9b640907469b67f77a07, type: 3}
+  m_Name: PlasticDinosaurs
+  m_EditorClassIdentifier: Assembly-CSharp::Toys
+  iD: 10
+  entityName: Plastic Dinosaurs
+  icon: {fileID: 0}
+  description: Dinosaur figures for imaginative adventures
+  toyPrefab: {fileID: 0}
+  salePrice: 16
+  dozenCost: 130
+  halfDozenCost: 70

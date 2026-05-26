@@ -12,6 +12,7 @@ public class ScenesManager : MonoBehaviour
 
     [SerializeField] private float fadeDuration = 1f;
 
+    public Action OnChangeScene;
     private void Awake()
     {
         if (instance == null)
@@ -92,16 +93,32 @@ public class ScenesManager : MonoBehaviour
     }
     public void FindObjects()
     {
-        if (FindFirstObjectByType<ParanormalSuccess3D>() != null)
+        if(FindFirstObjectByType<ParanormalSuccess3D>() != null)
         {
             GameManager.instance.paranormalSuccess =
                 FindFirstObjectByType<ParanormalSuccess3D>();
         }
-        if( FindFirstObjectByType<FirstPersonController>() != null)
+        if(FindFirstObjectByType<FirstPersonController>() != null)
         {
             GameManager.instance.Player = FindFirstObjectByType<FirstPersonController>().transform;
         }
+        if(FindAnyObjectByType<SoundManager>() != null)
+        {
+            GameManager.instance.soundManager = FindFirstObjectByType<SoundManager>();
 
+        }
+        if (FindAnyObjectByType<FactorySystem>() != null)
+        {
+            GameManager.instance.factorySystem = FindFirstObjectByType<FactorySystem>();
 
+        }
+        if (FindAnyObjectByType<WarehouseSystem>() != null)
+        {
+            GameManager.instance.warehouseSystem = FindFirstObjectByType<WarehouseSystem>();
+
+        }
+
+        
+        OnChangeScene?.Invoke();
     }
 }
