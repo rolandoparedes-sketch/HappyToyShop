@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
-public class FirstPersonController : MonoBehaviour
+public class Player3DMovement : MonoBehaviour
 {
     #region Properties
     [FoldoutGroup("References")]
@@ -124,6 +124,7 @@ public class FirstPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
     #endregion
+
     #region InputSystem
     private void OnEnable()
     {
@@ -205,7 +206,7 @@ public class FirstPersonController : MonoBehaviour
     {
 
         //OnMove();
-        CheckWindow();
+       // CheckWindow();
         OnSimpleMove();
         Rays();
 
@@ -300,9 +301,9 @@ public class FirstPersonController : MonoBehaviour
     #region Methods
     public void OnSimpleMove()
     {
-        if (!CanMove)
-        {
-            return;
+        if(!CanMove)
+        {  
+            return; 
         }
         Vector3 cameraForwardDir = characterCamera.transform.forward;
         cameraForwardDir.y = 0;
@@ -318,32 +319,7 @@ public class FirstPersonController : MonoBehaviour
     }
     private void LightOn(InputAction.CallbackContext context)
     {
-        if(flashlightOn)
-        {
-
-            flashlightOn = false;
-            flashlight.SetActive(flashlightOn);
-
-
-            if (currentCoroutine != null)
-                StopCoroutine(currentCoroutine);
-
-            currentCoroutine = StartCoroutine(
-                flashlightOn ? BatteryCoroutine() : CordureCoroutine()
-            );
-        }
-        else
-        {
-            flashlightOn = true;
-            flashlight.SetActive(flashlightOn);
-
-            if(currentCoroutine != null)
-                StopCoroutine (currentCoroutine);
-            
-            currentCoroutine = StartCoroutine(
-                flashlightOn ? BatteryCoroutine() : CordureCoroutine()
-            );
-        }
+        Debug.Log("ActivarLinterna");
 
     }
     public void UpdateFearState()
@@ -449,7 +425,7 @@ public class FirstPersonController : MonoBehaviour
         inventoryUI.SetActive(inventoryOpen);
 
        
-    }
+    }/*
     private void CheckWindow()
     {
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
@@ -470,7 +446,7 @@ public class FirstPersonController : MonoBehaviour
             woodText.SetActive(false);
         }
     }
-
+    */
     private void RepairWindow(InputAction.CallbackContext ctx)
     {
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);

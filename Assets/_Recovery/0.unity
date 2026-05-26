@@ -538,10 +538,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   paranormalSuccess: {fileID: 890196600}
   Player: {fileID: 0}
-  musicDatabase: {fileID: 11400000, guid: 93ce523edb3640e4ca8bf42cbd1cef8a, type: 2}
+  musicDatabase: {fileID: 0}
   soundManager: {fileID: 0}
-  factorySystem: {fileID: 1662006962}
-  warehouseSystem: {fileID: 1654454216}
+  factorySystem: {fileID: 0}
+  warehouseSystem: {fileID: 0}
   NumbersOfDays: 7
   TurnDay: 1
   SpecialDays: 
@@ -1595,37 +1595,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1 &167780769
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 167780770}
-  m_Layer: 0
-  m_Name: a
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &167780770
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167780769}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.09072, y: 0, z: -15.24495}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175519097
 GameObject:
   m_ObjectHideFlags: 0
@@ -7515,9 +7484,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ParanormalSuccess
   ColliderDetectedA: {fileID: 890196602}
   ColliderDetectedB: {fileID: 890196601}
-  ShadowFollower: {fileID: 1228942355955790531, guid: 91b0dc138a8284c4e840d55a3b1b4153, type: 3}
-  ShadowsPassageway: {fileID: -8955573343521684139, guid: 575965c5db1c99441bcf4e8b7bfd1950, type: 3}
-  ShadowsPassageway2: {fileID: -8955573343521684139, guid: 575965c5db1c99441bcf4e8b7bfd1950, type: 3}
+  ShadowFollower: {fileID: 0}
+  ShadowsPassageway: {fileID: 0}
+  ShadowsPassageway2: {fileID: 0}
   ShadowsScream: {fileID: 2552061862885812540, guid: 4edfaacca1e8d0c45808100d2ac1f924, type: 3}
   PercentageProbablityToApper: 10
   TimeToTrySpawnFollower: 50
@@ -8508,6 +8477,9 @@ GameObject:
   - component: {fileID: 895927719}
   - component: {fileID: 895927718}
   - component: {fileID: 895927721}
+  - component: {fileID: 895927724}
+  - component: {fileID: 895927723}
+  - component: {fileID: 895927722}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -8566,9 +8538,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 895927716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57f1947ce1c0e0a4fa657cfb098f9e02, type: 3}
+  m_Script: {fileID: 11500000, guid: 13db0b266f660d949ba4e9a9fcd7e829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonController
+  characterCamera: {fileID: 1620334787}
+  currentFearState: 0
+  woodText: {fileID: 0}
+  interactDistance: 3
+  woodPlanks: {fileID: 0}
+  holdPoint: {fileID: 0}
+  inventoryUI: {fileID: 0}
+  moveSpeed: 5
+  flashlight: {fileID: 0}
+  Shadows:
+    serializedVersion: 2
+    m_Bits: 0
+  DistanceRay: 10
+  inclinacionVertical: 10
+  inclinacionHorizontal: 10
+  batteryDrainRate: 0.1
+  maxBattery: 100
+  currentBattery: 0
+  flashlightOn: 1
+  cordureDrainRate: 0.25
+  maxCordure: 100
+  currentCordure: 0
+  timeDontMove: 2.5
+  moveInput: {x: 0, y: 0}
+  amplitudeGainCalm: 0.5
+  frequencyGainCalm: 0.5
+  amplitudeGainNervous: 0.5
+  frequencyGainNervous: 0.5
+  amplitudeGainScared: 0.5
+  frequencyGainScared: 0.5
+  amplitudeGainTerrified: 0.5
+  frequencyGainTerrified: 0.5
 --- !u!136 &895927720
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8604,6 +8608,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3adf664391efd3d4cb37948abcbac45a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEconomicSystem
+--- !u!114 &895927722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895927716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f948ccad0b2542247a0b359f97fd7d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player3DController
+  movement3D: {fileID: 0}
+  inventory3D: {fileID: 0}
+  state3D: {fileID: 0}
+--- !u!114 &895927723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895927716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e67c59035dd8384c825c402b0a36caf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player3DState
+--- !u!114 &895927724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895927716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd46ca7d48d1c44ebc251a248b0ee2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player3DInventory
+  sizeBase: 0
 --- !u!43 &896746978
 Mesh:
   m_ObjectHideFlags: 0
@@ -9437,6 +9481,37 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1018086994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1018086995}
+  m_Layer: 0
+  m_Name: HoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1018086995
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018086994}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1102825904}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1024350553
 GameObject:
   m_ObjectHideFlags: 0
@@ -10016,7 +10091,8 @@ Transform:
   m_LocalPosition: {x: -0.14400005, y: 0.4820001, z: 0.27000046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1018086995}
   m_Father: {fileID: 895927717}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1126046447
@@ -23045,4 +23121,3 @@ SceneRoots:
   - {fileID: 849567229}
   - {fileID: 1662006963}
   - {fileID: 1654454217}
-  - {fileID: 167780770}

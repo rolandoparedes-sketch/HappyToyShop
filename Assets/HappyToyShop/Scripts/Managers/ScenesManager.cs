@@ -98,9 +98,9 @@ public class ScenesManager : MonoBehaviour
             GameManager.instance.paranormalSuccess =
                 FindFirstObjectByType<ParanormalSuccess3D>();
         }
-        if(FindFirstObjectByType<FirstPersonController>() != null)
+        if(FindFirstObjectByType<Player3DMovement>() != null)
         {
-            GameManager.instance.Player = FindFirstObjectByType<FirstPersonController>().transform;
+            GameManager.instance.Player = FindFirstObjectByType<Player3DMovement>().transform;
         }
         if(FindAnyObjectByType<SoundManager>() != null)
         {
