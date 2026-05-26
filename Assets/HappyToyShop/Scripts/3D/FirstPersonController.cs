@@ -26,6 +26,10 @@ public class FirstPersonController : MonoBehaviour
     public float interactDistance = 3f;
     public GameObject woodPlanks;
 
+    [FoldoutGroup("ControllerSettings/Hold")]
+    public Transform holdPoint;
+    private Rigidbody grabbedObject;
+
     [FoldoutGroup("ControllerSettings/Inventory")]
     private bool inventoryOpen;
     public GameObject inventoryUI;
@@ -127,7 +131,9 @@ public class FirstPersonController : MonoBehaviour
         inputs.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
       
         inputs.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-      
+
+        inputs.Player.Grab.performed += GrabObject;
+        inputs.Player.Grab.canceled += ReleaseObject;
 
         inputs.Player.Sprint.performed += ctx => moveSpeed *= 2;
 
@@ -166,6 +172,8 @@ public class FirstPersonController : MonoBehaviour
 
         OnStateFearChange -= ChangefearEffect;
 
+        inputs.Player.Grab.performed -= GrabObject;
+        inputs.Player.Grab.canceled -= ReleaseObject;
     }
     #endregion
     void Start()
@@ -199,6 +207,12 @@ public class FirstPersonController : MonoBehaviour
         CheckWindow();
         OnSimpleMove();
         Rays();
+
+        if (grabbedObject != null)
+        {
+            grabbedObject.transform.position = holdPoint.position;
+        }
+    
     }
     public void Rays()
     {
@@ -468,6 +482,32 @@ public class FirstPersonController : MonoBehaviour
 
                 wood.SetActive(true);
             }
+        }
+    }
+    private void GrabObject(InputAction.CallbackContext ctx)
+    {
+        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+        {
+            if (hit.collider.CompareTag("Box"))
+            {
+                grabbedObject = hit.collider.GetComponent<Rigidbody>();
+
+                if (grabbedObject != null)
+                {
+                    grabbedObject.useGravity = false;
+                }
+            }
+        }
+    }
+    private void ReleaseObject(InputAction.CallbackContext ctx)
+    {
+        if (grabbedObject != null)
+        {
+            grabbedObject.useGravity = true;
+
+            grabbedObject = null;
         }
     }
     #endregion
