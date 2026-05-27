@@ -27,7 +27,9 @@ public class FirstPersonController : MonoBehaviour
     [FoldoutGroup("ControllerSettings/Monitor")]
     public Camera[] securityCameras;
 
-  
+    [FoldoutGroup("ControllerSettings/Monitor")]
+    public Transform monitorViewPoint;
+
 
     [FoldoutGroup("ControllerSettings/Monitor")]
     public GameObject monitorUI;
@@ -212,7 +214,7 @@ public class FirstPersonController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Monitor"))
             {
-                StartCoroutine(TimeToActiveMonitor());
+                StartCoroutine(MoveToMonitor());
             }
         }
     }
@@ -223,7 +225,24 @@ public class FirstPersonController : MonoBehaviour
         characterCamera.Lens.FieldOfView = 60;
         EnterMonitor();
     }
-    
+
+    IEnumerator MoveToMonitor()
+    {
+        while (Vector3.Distance(characterCamera.transform.position, monitorViewPoint.position) > 0.01f)
+        {
+            characterCamera.transform.position = Vector3.MoveTowards(
+                characterCamera.transform.position,
+                monitorViewPoint.position,
+                2f * Time.deltaTime
+            );
+
+            yield return null;
+        }
+
+        characterCamera.transform.position = monitorViewPoint.position;
+
+        StartCoroutine(TimeToActiveMonitor());
+    }
     public IEnumerator AcercarCamera()
     {
 
