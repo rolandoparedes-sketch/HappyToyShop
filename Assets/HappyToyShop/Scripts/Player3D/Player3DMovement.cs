@@ -21,7 +21,7 @@ public class Player3DMovement : MonoBehaviour
 
     [FoldoutGroup("ControllerSettings")]
     public FearState currentFearState;
-
+    public static event Action OnFlashOn;
     /*[FoldoutGroup("ControllerSettings/Windows")]
     public GameObject woodText;
     public float interactDistance = 3f;
@@ -320,6 +320,8 @@ public class Player3DMovement : MonoBehaviour
     private void LightOn(InputAction.CallbackContext context)
     {
         Debug.Log("ActivarLinterna");
+        OnFlashOn?.Invoke();
+
 
     }
     public void UpdateFearState()

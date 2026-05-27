@@ -38,6 +38,8 @@ public class Flashlight : ItemBase
             {
                 currentBattery = Mathf.Clamp(currentBattery, 0, maxBattery);
                 enoughBattery = false;
+
+                OnDeadBattery?.Invoke();
                 yield break;
 
             }
