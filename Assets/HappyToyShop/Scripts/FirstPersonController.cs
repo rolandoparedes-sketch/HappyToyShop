@@ -218,17 +218,27 @@ public class FirstPersonController : MonoBehaviour
     }
     IEnumerator TimeToActiveMonitor()
     {
+        StartCoroutine(AcercarCamera());
+        yield return new WaitForSeconds(timeToActiveMonitor);
+        characterCamera.Lens.FieldOfView = 60;
+        EnterMonitor();
+    }
+    
+    public IEnumerator AcercarCamera()
+    {
+
         float timer = 0;
         while (timer < timeToActiveMonitor)
         {
             timer += Time.deltaTime;
 
-            characterCamera.Lens.FieldOfView -= velocityToAccessCamera * Time.deltaTime;
+            characterCamera.Lens.FieldOfView -= velocityToAccessCamera/timer * Time.deltaTime;
+
+            yield return null;
         }
-        yield return new WaitForSeconds(timeToActiveMonitor);
-        characterCamera.Lens.FieldOfView = 60;
-        EnterMonitor();
     }
+    
+
     #endregion
     void Start()
     {
