@@ -22,6 +22,17 @@ public class FirstPersonController : MonoBehaviour
     [FoldoutGroup("ControllerSettings")]
     public FearState currentFearState;
 
+    [FoldoutGroup("ControllerSettings/Monitor")]
+    public Camera[] securityCameras;
+
+  
+
+    [FoldoutGroup("ControllerSettings/Monitor")]
+    public GameObject monitorUI;
+
+    private int currentCameraIndex;
+
+    private bool usingMonitor;
 
     [FoldoutGroup("ControllerSettings/Monitor")]
     public Camera securityCamera1;
@@ -140,7 +151,7 @@ public class FirstPersonController : MonoBehaviour
         inputs.Player.Grab.performed += GrabObject;
         inputs.Player.Grab.canceled += ReleaseObject;
 
-        inputs.Player.Interact.performed += Interact;
+        inputs.Player.Interact.started += Interact;
 
         inputs.Player.Sprint.performed += ctx => moveSpeed *= 2;
 
@@ -173,7 +184,7 @@ public class FirstPersonController : MonoBehaviour
 
         inputs.Player.FlashLight.performed -= LightOn;
 
-        inputs.Player.Interact.performed -= Interact;
+        inputs.Player.Interact.started -= Interact;
 
         inputs.Player.Repair.performed -= RepairWindow;
 
@@ -187,7 +198,21 @@ public class FirstPersonController : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Presione E");
+        if (usingMonitor)
+        {
+            ExitMonitor();
+            return;
+        }
+
+        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f))
+        {
+            if (hit.collider.CompareTag("Monitor"))
+            {
+                EnterMonitor();
+            }
+        }
     }
     #endregion
     void Start()
@@ -309,6 +334,46 @@ public class FirstPersonController : MonoBehaviour
         Gizmos.DrawRay(origin, leftRay * DistanceRay);
 
         Gizmos.DrawRay(origin, rightRay * DistanceRay);
+    }
+    private void EnterMonitor()
+    {
+        usingMonitor = true;
+
+        characterCamera.gameObject.SetActive(false);
+
+        securityCameras[currentCameraIndex].gameObject.SetActive(true);
+
+        monitorUI.SetActive(true);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+    }
+    private void ExitMonitor()
+    {
+        usingMonitor = false;
+
+        securityCameras[currentCameraIndex].gameObject.SetActive(false);
+
+        characterCamera.gameObject.SetActive(true);
+
+        monitorUI.SetActive(false);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+    public void NextCamera()
+    {
+        securityCameras[currentCameraIndex].gameObject.SetActive(false);
+
+        currentCameraIndex++;
+
+        if (currentCameraIndex >= securityCameras.Length)
+        {
+            currentCameraIndex = 0;
+        }
+
+        securityCameras[currentCameraIndex].gameObject.SetActive(true);
     }
     #region Methods
     public void OnSimpleMove()
