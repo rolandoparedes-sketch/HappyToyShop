@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   paranormalSuccess: {fileID: 890196600}
-  Player: {fileID: 0}
+  Player: {fileID: 895927717}
   musicDatabase: {fileID: 11400000, guid: 93ce523edb3640e4ca8bf42cbd1cef8a, type: 2}
   soundManager: {fileID: 0}
   factorySystem: {fileID: 1662006962}
@@ -8474,9 +8474,12 @@ GameObject:
   m_Component:
   - component: {fileID: 895927717}
   - component: {fileID: 895927720}
-  - component: {fileID: 895927719}
   - component: {fileID: 895927718}
+  - component: {fileID: 895927725}
   - component: {fileID: 895927721}
+  - component: {fileID: 895927724}
+  - component: {fileID: 895927723}
+  - component: {fileID: 895927722}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -8526,18 +8529,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &895927719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895927716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57f1947ce1c0e0a4fa657cfb098f9e02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FirstPersonController
 --- !u!136 &895927720
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8573,6 +8564,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3adf664391efd3d4cb37948abcbac45a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEconomicSystem
+--- !u!114 &895927722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895927716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e67c59035dd8384c825c402b0a36caf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player3DState
+--- !u!114 &895927723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895927716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd46ca7d48d1c44ebc251a248b0ee2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player3DInventory
+  itemInHandLeft: {fileID: 0}
+  itemInHandRight: {fileID: 0}
+  inventoryCapacity: []
+  sizeBase: 10
+--- !u!114 &895927724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895927716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13db0b266f660d949ba4e9a9fcd7e829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player3DMovement
+  characterCamera: {fileID: 1620334787}
+  currentFearState: 0
+  inventoryUI: {fileID: 0}
+  moveSpeed: 5
+  flashlight: {fileID: 0}
+  Shadows:
+    serializedVersion: 2
+    m_Bits: 0
+  DistanceRay: 10
+  inclinacionVertical: 10
+  inclinacionHorizontal: 10
+  batteryDrainRate: 0.1
+  maxBattery: 100
+  currentBattery: 0
+  flashlightOn: 1
+  cordureDrainRate: 0.25
+  maxCordure: 100
+  currentCordure: 0
+  timeDontMove: 2.5
+  moveInput: {x: 0, y: 0}
+  amplitudeGainCalm: 0.5
+  frequencyGainCalm: 0.5
+  amplitudeGainNervous: 0.5
+  frequencyGainNervous: 0.5
+  amplitudeGainScared: 0.5
+  frequencyGainScared: 0.5
+  amplitudeGainTerrified: 0.5
+  frequencyGainTerrified: 0.5
+--- !u!114 &895927725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895927716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f948ccad0b2542247a0b359f97fd7d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player3DController
+  movement3D: {fileID: 0}
+  inventory3D: {fileID: 0}
+  state3D: {fileID: 0}
 --- !u!43 &896746978
 Mesh:
   m_ObjectHideFlags: 0

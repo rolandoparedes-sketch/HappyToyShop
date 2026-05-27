@@ -22,7 +22,7 @@ public class Player3DMovement : MonoBehaviour
     [FoldoutGroup("ControllerSettings")]
     public FearState currentFearState;
 
-    [FoldoutGroup("ControllerSettings/Windows")]
+    /*[FoldoutGroup("ControllerSettings/Windows")]
     public GameObject woodText;
     public float interactDistance = 3f;
     public GameObject woodPlanks;
@@ -30,7 +30,7 @@ public class Player3DMovement : MonoBehaviour
     [FoldoutGroup("ControllerSettings/Hold")]
     public Transform holdPoint;
     private Rigidbody grabbedObject;
-
+    */
     [FoldoutGroup("ControllerSettings/Inventory")]
     private bool inventoryOpen;
     public GameObject inventoryUI;
@@ -134,8 +134,8 @@ public class Player3DMovement : MonoBehaviour
       
         inputs.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
-        inputs.Player.Grab.performed += GrabObject;
-        inputs.Player.Grab.canceled += ReleaseObject;
+       // inputs.Player.Grab.performed += GrabObject;
+        //inputs.Player.Grab.canceled += ReleaseObject;
 
         inputs.Player.Sprint.performed += ctx => moveSpeed *= 2;
 
@@ -174,8 +174,8 @@ public class Player3DMovement : MonoBehaviour
 
         OnStateFearChange -= ChangefearEffect;
 
-        inputs.Player.Grab.performed -= GrabObject;
-        inputs.Player.Grab.canceled -= ReleaseObject;
+       // inputs.Player.Grab.performed -= GrabObject;
+       // inputs.Player.Grab.canceled -= ReleaseObject;
     }
     #endregion
     void Start()
@@ -210,10 +210,10 @@ public class Player3DMovement : MonoBehaviour
         OnSimpleMove();
         Rays();
 
-        if (grabbedObject != null)
+        /*if (grabbedObject != null)
         {
             grabbedObject.transform.position = holdPoint.position;
-        }
+        }*/
     
     }
     public void Rays()
@@ -461,7 +461,7 @@ public class Player3DMovement : MonoBehaviour
             }
         }
     }
-    private void GrabObject(InputAction.CallbackContext ctx)
+  /*  private void GrabObject(InputAction.CallbackContext ctx)
     {
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
@@ -486,6 +486,6 @@ public class Player3DMovement : MonoBehaviour
 
             grabbedObject = null;
         }
-    }
+    }*/
     #endregion
 }
