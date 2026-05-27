@@ -12,6 +12,8 @@ using UnityEngine.UI;
 public class FirstPersonController : MonoBehaviour
 {
     #region Properties
+    public float timeToActiveMonitor = 1.5f;
+    public float velocityToAccessCamera = 4;
     [FoldoutGroup("References")]
     public InputSystem_Actions inputs;
     [FoldoutGroup("References")]
@@ -210,9 +212,22 @@ public class FirstPersonController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Monitor"))
             {
-                EnterMonitor();
+                StartCoroutine(TimeToActiveMonitor());
             }
         }
+    }
+    IEnumerator TimeToActiveMonitor()
+    {
+        float timer = 0;
+        while (timer < timeToActiveMonitor)
+        {
+            timer += Time.deltaTime;
+
+            characterCamera.Lens.FieldOfView -= velocityToAccessCamera * Time.deltaTime;
+        }
+        yield return new WaitForSeconds(timeToActiveMonitor);
+        characterCamera.Lens.FieldOfView = 60;
+        EnterMonitor();
     }
     #endregion
     void Start()
