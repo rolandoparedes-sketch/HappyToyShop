@@ -22,6 +22,10 @@ public class FirstPersonController : MonoBehaviour
     [FoldoutGroup("ControllerSettings")]
     public FearState currentFearState;
 
+
+    [FoldoutGroup("ControllerSettings/Monitor")]
+    public Camera securityCamera1;
+
     [FoldoutGroup("ControllerSettings/Windows")]
     public GameObject woodText;
     public float interactDistance = 3f;
@@ -136,6 +140,8 @@ public class FirstPersonController : MonoBehaviour
         inputs.Player.Grab.performed += GrabObject;
         inputs.Player.Grab.canceled += ReleaseObject;
 
+        inputs.Player.Interact.performed += Interact;
+
         inputs.Player.Sprint.performed += ctx => moveSpeed *= 2;
 
         inputs.Player.Sprint.canceled += ctx => moveSpeed /= 2;
@@ -167,6 +173,8 @@ public class FirstPersonController : MonoBehaviour
 
         inputs.Player.FlashLight.performed -= LightOn;
 
+        inputs.Player.Interact.performed -= Interact;
+
         inputs.Player.Repair.performed -= RepairWindow;
 
         inputs.Player.Jump.performed -= ctx => ScenesManager.instance.ChangeMode2D();
@@ -175,6 +183,11 @@ public class FirstPersonController : MonoBehaviour
 
         inputs.Player.Grab.performed -= GrabObject;
         inputs.Player.Grab.canceled -= ReleaseObject;
+    }
+
+    private void Interact(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Presione E");
     }
     #endregion
     void Start()
