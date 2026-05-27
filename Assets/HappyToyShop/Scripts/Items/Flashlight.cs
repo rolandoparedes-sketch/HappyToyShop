@@ -62,6 +62,11 @@ public class Flashlight : ItemBase
     {
         currentBattery = maxBattery;
         enoughBattery = true;
+
+        if (GameManager.instance.Day.Peek() == 7)
+        {
+            pointlight.GetComponent<Light>().color = Color.red;
+        }
     }
 
     #region Getters

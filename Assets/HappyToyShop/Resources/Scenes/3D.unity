@@ -8704,17 +8704,12 @@ MonoBehaviour:
   currentFearState: 0
   inventoryUI: {fileID: 0}
   moveSpeed: 5
-  flashlight: {fileID: 0}
   Shadows:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   DistanceRay: 10
   inclinacionVertical: 10
   inclinacionHorizontal: 10
-  batteryDrainRate: 0.1
-  maxBattery: 100
-  currentBattery: 0
-  flashlightOn: 1
   cordureDrainRate: 0.25
   maxCordure: 100
   currentCordure: 0
