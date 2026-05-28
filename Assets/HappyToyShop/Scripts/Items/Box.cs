@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Box : MonoBehaviour , IInteractable
+public class Box : MonoBehaviour 
 {
     private bool InHand;
 
