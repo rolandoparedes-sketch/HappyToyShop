@@ -605,6 +605,7 @@ public class FirstPersonController : MonoBehaviour
             if (hit.collider.CompareTag("Window"))
             {
                 reapirCounter += 1;
+
                 Debug.Log(reapirCounter);
                 if (reapirCounter >= 10)
                 {
