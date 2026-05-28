@@ -20,7 +20,6 @@ public class SoundPlayer : MonoBehaviour
         audioSource.clip = clip;
         audioSource.volume = volume;
         audioSource.Play();
-
         //audioSource.clip.length
 
         //->Corrutinas

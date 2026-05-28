@@ -22,6 +22,6 @@ public enum SoundType
     Music,
     UI,
     Ambient,
-    Voices,
+    Voice,
     SFX,
 }
