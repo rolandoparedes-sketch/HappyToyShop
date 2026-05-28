@@ -45,6 +45,7 @@ public class FirstPersonController : MonoBehaviour
     public GameObject woodText;
     public float interactDistance = 3f;
     public GameObject woodPlanks;
+    private float reapirCounter;
 
     [FoldoutGroup("ControllerSettings/Hold")]
     public Transform holdPoint;
@@ -202,6 +203,11 @@ public class FirstPersonController : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext ctx)
     {
+        if (usingMonitor)
+        {
+            ExitMonitor();
+                return;
+        }
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 10f))
@@ -590,15 +596,24 @@ public class FirstPersonController : MonoBehaviour
 
     private void RepairWindow(InputAction.CallbackContext ctx)
     {
+        
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 3f))
         {
+
             if (hit.collider.CompareTag("Window"))
             {
-                GameObject wood = hit.collider.transform.Find("WoodPlanks").gameObject;
+                reapirCounter += 1;
+                Debug.Log(reapirCounter);
+                if (reapirCounter >= 10)
+                {
+                    GameObject wood = hit.collider.transform.Find("WoodPlanks").gameObject;
 
-                wood.SetActive(true);
+                    wood.SetActive(true);
+
+                    reapirCounter = 0;
+                }
             }
         }
     }
