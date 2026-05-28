@@ -16,9 +16,9 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 379d3b7fb8d2b2b4c9cd1345d447789a, type: 2}
     - {fileID: 11400000, guid: 1aa4e02df29e6174bba0138449adf478, type: 2}
     - {fileID: 11400000, guid: 224a2e91837122b46a8f7548730f0cc6, type: 2}
-    - {fileID: 11400000, guid: 379d3b7fb8d2b2b4c9cd1345d447789a, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -43,7 +43,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: BehindYou
+      Data: CashRegister
     - Name: $v
       Entry: 10
       Data: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: ISeeYou
+      Data: BehindYou
     - Name: $v
       Entry: 10
       Data: 1
@@ -67,7 +67,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: CashRegister
+      Data: ISeeYou
     - Name: $v
       Entry: 10
       Data: 2
