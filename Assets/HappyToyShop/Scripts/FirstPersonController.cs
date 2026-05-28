@@ -26,7 +26,7 @@ public class FirstPersonController : MonoBehaviour
 
     [FoldoutGroup("ControllerSettings/Monitor")]
     public Camera[] securityCameras;
-
+    public Transform cameraTarget;
     [FoldoutGroup("ControllerSettings/Monitor")]
     public Transform monitorViewPoint;
 
@@ -202,22 +202,17 @@ public class FirstPersonController : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext ctx)
     {
-        if (usingMonitor)
-        {
-            ExitMonitor();
-            return;
-        }
-
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 10f))
         {
-            if (hit.collider.CompareTag("Monitor"))
+            if (hit.collider.gameObject.name.Contains("Monitor"))
             {
                 StartCoroutine(MoveToMonitor());
             }
         }
     }
+    
     IEnumerator TimeToActiveMonitor()
     {
         StartCoroutine(AcercarCamera());
@@ -228,18 +223,18 @@ public class FirstPersonController : MonoBehaviour
 
     IEnumerator MoveToMonitor()
     {
-        while (Vector3.Distance(characterCamera.transform.position, monitorViewPoint.position) > 0.01f)
+        while (Vector3.Distance(cameraTarget.position, monitorViewPoint.position) > 0.01f)
         {
-            characterCamera.transform.position = Vector3.MoveTowards(
-                characterCamera.transform.position,
+            cameraTarget.position = Vector3.MoveTowards(
+                cameraTarget.position,
                 monitorViewPoint.position,
-                2f * Time.deltaTime
+                3f * Time.deltaTime
             );
 
             yield return null;
         }
 
-        characterCamera.transform.position = monitorViewPoint.position;
+        cameraTarget.position = monitorViewPoint.position;
 
         StartCoroutine(TimeToActiveMonitor());
     }
