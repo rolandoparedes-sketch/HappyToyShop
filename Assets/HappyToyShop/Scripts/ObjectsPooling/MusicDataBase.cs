@@ -1,21 +1,22 @@
-using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Unity.Android.Gradle.Manifest;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "MusicDatabase", menuName = "Happy Toy Shop/MusicDatabase")]
 public class MusicDatabase : SerializedScriptableObject
 {
-    public Dictionary<string, MusicData> ClipDatabase = new();
-
-    public MusicData GetAudio(string audioName)
+    public Dictionary<SoundType, List<AudioData>> ClipsDataBase = new();
+   
+    public AudioData GetAudio(SoundType type, int id)
     {
-        if (ClipDatabase.TryGetValue(audioName, out MusicData clip))
+        if (ClipsDataBase.TryGetValue(type, out List<AudioData> entities))
         {
-            return clip;
+            return entities[id];
         }
         else
         {
-            throw new System.Exception("El audio al que intentas acceder no existe o esta mal escrito");
+            throw new System.Exception("El id del audio al que intentas acceder no existe");
         }
     }
 }

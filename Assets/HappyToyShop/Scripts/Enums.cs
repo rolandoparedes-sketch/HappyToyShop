@@ -1,6 +1,7 @@
 
 public enum FearState
 {
+    None,
     Calm,
     Nervous,
     Scared,
@@ -8,9 +9,19 @@ public enum FearState
 }
 public enum Quality
 {
+    None,
     Common,
     SuperRare,
     Epic,
     Legendary,
     Secret,
+}
+public enum SoundType
+{
+    None,
+    Music,
+    UI,
+    Ambient,
+    Voices,
+    SFX,
 }

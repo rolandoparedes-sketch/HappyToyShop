@@ -26,9 +26,7 @@ public class SoundManager : MonoBehaviour
     {
         OnFinishAudio -= EnqueueAudio;
     }
- 
-
-    public void PlayAudio(string audioName)
+    public void PlayAudio(SoundType type, int id)
     {
         if (Pool.Head == null || Pool.Count == 0)
         {
@@ -37,12 +35,13 @@ public class SoundManager : MonoBehaviour
             // PlayAudio(audioName);
             return;
         }
-        MusicData data = GameManager.instance.musicDatabase.GetAudio(audioName);
+        AudioData data = GameManager.instance.musicDatabase.GetAudio(type, id);
 
         SoundPlayer soundPlayer = Pool.Dequeue();
         soundPlayer.gameObject.SetActive(true);
         soundPlayer.PlayAudio(data.Clip, data.Volume);
     }
+
     private void EnqueueAudio(SoundPlayer soundPlayer)
     {
         soundPlayer.gameObject.SetActive(false);
@@ -59,10 +58,11 @@ public class SoundManager : MonoBehaviour
         }
     }
     [Button]
-    public void TestAudio(string audioName)
+    public void TestAudio(SoundType type,int id)
     {
-        PlayAudio(audioName);
+        PlayAudio(type, id);
         Debug.Log(Pool.Count);
     }
+
    
 }
