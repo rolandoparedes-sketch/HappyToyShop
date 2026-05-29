@@ -6,6 +6,7 @@ public class SoundPlayer : MonoBehaviour
 
 
     private AudioSource audioSource;
+    private SoundType audiotype;
 
     private void Awake()
     {
@@ -15,8 +16,9 @@ public class SoundPlayer : MonoBehaviour
     {
 
     }
-    public void PlayAudio(AudioClip clip, float volume)
+    public void PlayAudio(AudioClip clip, float volume, SoundType type)
     {
+        audiotype = type;
         audioSource.clip = clip;
         audioSource.volume = volume;
         audioSource.Play();
@@ -33,4 +35,6 @@ public class SoundPlayer : MonoBehaviour
         audioSource.clip = null;
         SoundManager.OnFinishAudio?.Invoke(this);
     }
+
+    public SoundType AudioType => audiotype;
 }

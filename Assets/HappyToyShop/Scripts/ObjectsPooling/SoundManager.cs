@@ -44,6 +44,8 @@ public class SoundManager : MonoBehaviour
         switch (type)
         {
             case SoundType.None:
+                Debug.LogWarning("El SoundPlayer tiene un tipo None, no se puede encolar.");
+               
                 break;
         
             case SoundType.Music:
@@ -66,7 +68,8 @@ public class SoundManager : MonoBehaviour
                 PlaySFX(type, id);
                 break;
 
-            default: 
+            default:
+                Debug.LogWarning("El SoundPlayer no tiene un tipo válido asignado: " + type);
                 break;
 
         }
@@ -86,7 +89,7 @@ public class SoundManager : MonoBehaviour
         SoundPlayer soundPlayer = SoundPlayerList[0];
         soundPlayer = MusicPool.Dequeue();
         soundPlayer.gameObject.SetActive(true);
-        soundPlayer.PlayAudio(data.Clip, data.Volume);
+        soundPlayer.PlayAudio(data.Clip, data.Volume, type);
     }
 
     public void PlaySFX(SoundType type, int id)
@@ -102,7 +105,7 @@ public class SoundManager : MonoBehaviour
         SoundPlayer soundPlayer = SoundPlayerList[1];
         soundPlayer = SFXPool.Dequeue();
         soundPlayer.gameObject.SetActive(true);
-        soundPlayer.PlayAudio(data.Clip, data.Volume);
+        soundPlayer.PlayAudio(data.Clip, data.Volume, type);
     }
     public void PlayUI(SoundType type, int id)
     {
@@ -118,7 +121,7 @@ public class SoundManager : MonoBehaviour
         SoundPlayer soundPlayer = SoundPlayerList[2];
         soundPlayer = UIPool.Dequeue();
         soundPlayer.gameObject.SetActive(true);
-        soundPlayer.PlayAudio(data.Clip, data.Volume);
+        soundPlayer.PlayAudio(data.Clip, data.Volume, type);
     }
     public void PlayAmbient(SoundType type, int id)
     {
@@ -134,7 +137,7 @@ public class SoundManager : MonoBehaviour
         SoundPlayer soundPlayer = SoundPlayerList[3];
         soundPlayer = AmbientPool.Dequeue();
         soundPlayer.gameObject.SetActive(true);
-        soundPlayer.PlayAudio(data.Clip, data.Volume);
+        soundPlayer.PlayAudio(data.Clip, data.Volume, type);
     }
     public void PlayVoice(SoundType type, int id)
     {
@@ -150,12 +153,38 @@ public class SoundManager : MonoBehaviour
         SoundPlayer soundPlayer = SoundPlayerList[4];
         soundPlayer = VoicePool.Dequeue();
         soundPlayer.gameObject.SetActive(true);
-        soundPlayer.PlayAudio(data.Clip, data.Volume);
+        soundPlayer.PlayAudio(data.Clip, data.Volume, type);
     }
     private void EnqueueAudio(SoundPlayer soundPlayer)
     {
         soundPlayer.gameObject.SetActive(false);
-        MusicPool.Enqueue(soundPlayer);
+
+        switch (soundPlayer.AudioType)
+        {
+            case SoundType.None:
+                Debug.LogWarning("El SoundPlayer tiene un tipo None, no se puede encolar.");
+                Destroy(soundPlayer.gameObject); 
+                break;
+            case SoundType.Music:
+                MusicPool.Enqueue(soundPlayer);
+                break;
+            case SoundType.SFX:
+                SFXPool.Enqueue(soundPlayer);
+                break;
+            case SoundType.UI:
+                UIPool.Enqueue(soundPlayer);
+                break;
+            case SoundType.Ambient:
+                AmbientPool.Enqueue(soundPlayer);
+                break;
+            case SoundType.Voice:
+                VoicePool.Enqueue(soundPlayer);
+                break;
+            default:
+                Debug.LogWarning("El SoundPlayer no tiene un tipo válido asignado: " + soundPlayer.AudioType);
+                Destroy(soundPlayer.gameObject); 
+                break;
+        }
     }
     [Button]
     private void ExpandSoundPlayerMusic(int quantity)
@@ -215,13 +244,13 @@ public class SoundManager : MonoBehaviour
     public void TestAudio(SoundType type,int id)
     {
         CheckTypeAudio(type, id);
-        Debug.Log(MusicPool.Count);
+        Debug.Log(SFXPool.Count);
     }
     [Button]
     public void TestCount()
     {
 
-        Debug.Log(MusicPool.Count);
+        Debug.Log(SFXPool.Count);
     }
 
 
