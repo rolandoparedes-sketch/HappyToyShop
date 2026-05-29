@@ -29,6 +29,7 @@ public class FirstPersonController : MonoBehaviour
     public Transform cameraTarget;
     [FoldoutGroup("ControllerSettings/Monitor")]
     public Transform monitorViewPoint;
+    private Vector3 originalTargetPosition;
 
 
     [FoldoutGroup("ControllerSettings/Monitor")]
@@ -45,7 +46,7 @@ public class FirstPersonController : MonoBehaviour
     public GameObject woodText;
     public float interactDistance = 3f;
     public GameObject woodPlanks;
-    private float reapirCounter;
+    private float repairCounter;
 
     [FoldoutGroup("ControllerSettings/Hold")]
     public Transform holdPoint;
@@ -229,6 +230,8 @@ public class FirstPersonController : MonoBehaviour
 
     IEnumerator MoveToMonitor()
     {
+        originalTargetPosition = cameraTarget.position;
+
         while (Vector3.Distance(cameraTarget.position, monitorViewPoint.position) > 0.01f)
         {
             cameraTarget.position = Vector3.MoveTowards(
@@ -296,7 +299,8 @@ public class FirstPersonController : MonoBehaviour
         {
             grabbedObject.transform.position = holdPoint.position;
         }
-    
+
+
     }
     public void Rays()
     {
@@ -396,9 +400,12 @@ public class FirstPersonController : MonoBehaviour
     }
     private void ExitMonitor()
     {
+
         usingMonitor = false;
 
         securityCameras[currentCameraIndex].gameObject.SetActive(false);
+
+        cameraTarget.position = originalTargetPosition;
 
         characterCamera.gameObject.SetActive(true);
 
@@ -596,27 +603,43 @@ public class FirstPersonController : MonoBehaviour
 
     private void RepairWindow(InputAction.CallbackContext ctx)
     {
-        
+
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 3f))
         {
-
             if (hit.collider.CompareTag("Window"))
             {
-                reapirCounter += 1;
-
-                Debug.Log(reapirCounter);
-                if (reapirCounter >= 10)
-                {
-                    GameObject wood = hit.collider.transform.Find("WoodPlanks").gameObject;
-
-                    wood.SetActive(true);
-
-                    reapirCounter = 0;
-                }
+                StartCoroutine(RepairCoroutine(hit.collider));
             }
         }
+    }
+
+    private IEnumerator RepairCoroutine(Collider window)
+    {
+        repairCounter = 0;
+
+        while (inputs.Player.Repair.IsPressed())
+        {
+            repairCounter += Time.deltaTime * 2;
+
+            Debug.Log(repairCounter);
+
+            if (repairCounter >= 10)
+            {
+                GameObject wood = window.transform.Find("WoodPlanks").gameObject;
+
+                wood.SetActive(true);
+
+                repairCounter = 0;
+
+                yield break;
+            }
+
+            yield return null;
+        }
+
+        repairCounter = 0;
     }
     private void GrabObject(InputAction.CallbackContext ctx)
     {
