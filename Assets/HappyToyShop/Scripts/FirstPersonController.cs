@@ -430,7 +430,7 @@ public class FirstPersonController : MonoBehaviour
     #region Methods
     public void OnSimpleMove()
     {
-        if (!CanMove)
+        if (!CanMove || usingMonitor)
         {
             return;
         }
