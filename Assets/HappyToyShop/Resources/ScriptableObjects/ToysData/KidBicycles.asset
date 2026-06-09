@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Small bicycles designed for children
   toyPrefab: {fileID: 0}
   salePrice: 250
-  dozenCost: 2400
-  halfDozenCost: 1250
+  factoryCost: 245

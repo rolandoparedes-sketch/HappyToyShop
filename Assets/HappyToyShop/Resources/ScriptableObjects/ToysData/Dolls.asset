@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Classic dolls with different outfits and accessories
   toyPrefab: {fileID: 0}
   salePrice: 35
-  dozenCost: 300
-  halfDozenCost: 160
+  factoryCost: 30

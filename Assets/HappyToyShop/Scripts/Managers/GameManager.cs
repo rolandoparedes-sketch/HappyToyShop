@@ -18,10 +18,6 @@ public class GameManager : MonoBehaviour
     public MusicDatabase musicDatabase;
     [FoldoutGroup("References")]
     public SoundManager soundManager;
-    [FoldoutGroup("References")]
-    public FactorySystem factorySystem;
-    [FoldoutGroup("References")]
-    public WarehouseSystem warehouseSystem;
     [FoldoutGroup("GameSettings")]
     public MyQueue<int> Day = new();
     [FoldoutGroup("GameSettings")]
@@ -33,18 +29,6 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("GameSettings")]
     public bool TurnDay = true;
     [FoldoutGroup("GameSettings")]
-    public List<int> SpecialDays = new();
-    [FoldoutGroup("GameSettings")]
-
-    public MyQueue<string> TextEvents = new();
-    [FoldoutGroup("GameSettings")]
-    public bool SpecialDay { get; private set; } = false;
-    [FoldoutGroup("MoneySystem")]
-    public float CurrentMoney;
-    [FoldoutGroup("MoneySystem")]
-    public int DailySalesGoal;
-    [FoldoutGroup("MoneySystem")]
-    public int WeekSalesGoal;
 
     //List
 
@@ -106,23 +90,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        for (int i = 0; i < NumbersOfDays; i++)
-        {
-            Day.Enqueue(i+1);
-
-        }
-
-        SpecialDays = new List<int>() { 2, 4, 7};
-
-
-
-        NewText("InitalTextVoid");
-
-        NewText("Hay algo afuera...");
-
-        NewText("Escuchaste eso?...");
-
-        NewText("Alguien entro al local...");
+       
 
 
     }
@@ -131,61 +99,5 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-    }
-    [Button]
-    public void NewText(string text)
-    {
-        TextEvents.Enqueue(text);
-    }
-
-    [Button]
-    public void NextDay()
-    {
-        if (Day.Count <= 1)
-        {
-            Debug.Log("Semana Completada");
-            OnWeekComplete?.Invoke();
-            return;
-        }
-        Debug.Log("Día " + Day.Dequeue() + " finalizado");
-        
-        OnNextDay?.Invoke();
-        
-        if(SpecialDays.Contains(Day.Peek()))
-        {
-            SpecialDay = true;
-            Debug.Log("Día " + Day.Peek() + " es un día especial");
-            TextEvents.Dequeue();
-
-        }
-        else
-        {
-            SpecialDay = false;
-        }
-
-
-    }
-
-    [Button]
-    public void LookDay()
-    {
-        Debug.Log("Día actual: " + Day.Peek());
-        
-    }
-    public void LookText()
-    {
-        Debug.Log("Texto actual: " + TextEvents.Peek());
-
-    }
-
-    [Button]
-    public void Clear()
-    {
-        Day.Clear();
-    }
-    [Button]
-    public void Count()
-    {
-        Debug.Log("Días restantes: " + Day.Count);
     }
 }

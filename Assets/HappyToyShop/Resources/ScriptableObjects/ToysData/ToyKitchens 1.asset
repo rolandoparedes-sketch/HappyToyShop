@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Decorative miniature homes for dolls
   toyPrefab: {fileID: 0}
   salePrice: 110
-  dozenCost: 1000
-  halfDozenCost: 520
+  factoryCost: 105

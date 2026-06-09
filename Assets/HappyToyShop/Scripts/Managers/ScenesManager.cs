@@ -30,16 +30,16 @@ public class ScenesManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        if (GameManager.instance != null)
-            GameManager.instance.OnWeekComplete += YouWon;
+        if (GameManager2D.instance != null)
+            GameManager2D.instance.DayManager.OnWeekComplete += YouWon;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        if (GameManager.instance != null)
-            GameManager.instance.OnWeekComplete -= YouWon;
+        if (GameManager2D.instance != null)
+            GameManager2D.instance.DayManager.OnWeekComplete -= YouWon;
     }
     public void Play()
     {
@@ -73,9 +73,8 @@ public class ScenesManager : MonoBehaviour
     public void ChangeMode2D()
     {
         StartCoroutine(SceneLoad("2D"));
-        GameManager.instance.NextDay();
+        GameManager2D.instance.DayManager.NextDay();
 
-        GameManager.instance.TurnDay = true;
     }
     public IEnumerator SceneLoad(string scene)
     {
@@ -89,36 +88,7 @@ public class ScenesManager : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FindObjects();
-    }
-    public void FindObjects()
-    {
-        if(FindFirstObjectByType<ParanormalSuccess3D>() != null)
-        {
-            GameManager.instance.paranormalSuccess =
-                FindFirstObjectByType<ParanormalSuccess3D>();
-        }
-        if(FindFirstObjectByType<Player3DMovement>() != null)
-        {
-            GameManager.instance.Player = FindFirstObjectByType<Player3DMovement>().transform;
-        }
-        if(FindAnyObjectByType<SoundManager>() != null)
-        {
-            GameManager.instance.soundManager = FindFirstObjectByType<SoundManager>();
-
-        }
-        if (FindAnyObjectByType<FactorySystem>() != null)
-        {
-            GameManager.instance.factorySystem = FindFirstObjectByType<FactorySystem>();
-
-        }
-        if (FindAnyObjectByType<WarehouseSystem>() != null)
-        {
-            GameManager.instance.warehouseSystem = FindFirstObjectByType<WarehouseSystem>();
-
-        }
-
-        
         OnChangeScene?.Invoke();
     }
+    
 }

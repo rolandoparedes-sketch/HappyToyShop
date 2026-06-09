@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Traditional spinning toys for simple fun
   toyPrefab: {fileID: 0}
   salePrice: 10
-  dozenCost: 80
-  halfDozenCost: 45
+  factoryCost: 5

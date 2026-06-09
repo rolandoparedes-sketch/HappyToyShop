@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Dinosaur figures for imaginative adventures
   toyPrefab: {fileID: 0}
   salePrice: 16
-  dozenCost: 130
-  halfDozenCost: 70
+  factoryCost: 11

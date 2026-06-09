@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Classic string toys for tricks and games
   toyPrefab: {fileID: 0}
   salePrice: 12
-  dozenCost: 95
-  halfDozenCost: 50
+  factoryCost: 7

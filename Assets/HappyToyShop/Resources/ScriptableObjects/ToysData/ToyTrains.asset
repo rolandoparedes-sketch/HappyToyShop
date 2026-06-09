@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Mini train sets with tracks and wagons
   toyPrefab: {fileID: 0}
   salePrice: 28
-  dozenCost: 240
-  halfDozenCost: 125
+  factoryCost: 23

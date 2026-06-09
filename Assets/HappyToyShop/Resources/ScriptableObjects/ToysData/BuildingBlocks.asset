@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Creative blocks for building structures and shapes
   toyPrefab: {fileID: 0}
   salePrice: 40
-  dozenCost: 350
-  halfDozenCost: 180
+  factoryCost: 35

@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Soft and colorful balls for kids games and outdoor fun
   toyPrefab: {fileID: 0}
   salePrice: 15
-  dozenCost: 120
-  halfDozenCost: 65
+  factoryCost: 10

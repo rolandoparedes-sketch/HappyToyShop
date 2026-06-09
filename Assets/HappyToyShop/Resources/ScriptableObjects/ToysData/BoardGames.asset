@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Fun tabletop games for family and friends
   toyPrefab: {fileID: 0}
   salePrice: 45
-  dozenCost: 400
-  halfDozenCost: 210
+  factoryCost: 40

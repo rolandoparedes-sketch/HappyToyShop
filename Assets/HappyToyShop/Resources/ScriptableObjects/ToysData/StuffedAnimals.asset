@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Soft plush toys in different animal shapes
   toyPrefab: {fileID: 0}
   salePrice: 30
-  dozenCost: 250
-  halfDozenCost: 130
+  factoryCost: 25

@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Flying toys for windy outdoor days
   toyPrefab: {fileID: 0}
   salePrice: 14
-  dozenCost: 115
-  halfDozenCost: 60
+  factoryCost: 9
