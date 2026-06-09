@@ -23,9 +23,9 @@ public class Player3DMovement : MonoBehaviour
     public FearState currentFearState;
 
     [FoldoutGroup("ControllerSettings/Windows")]
-    public GameObject woodText;
+    //public GameObject woodText;
     public float interactDistance = 3f;
-    public GameObject woodPlanks;
+  
 
     [FoldoutGroup("ControllerSettings/Hold")]
     public Transform holdPoint;

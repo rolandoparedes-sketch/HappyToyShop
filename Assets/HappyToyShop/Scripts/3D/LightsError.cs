@@ -34,10 +34,7 @@ public class LightsError : MonoBehaviour
         //timer = Random.Range(MinTime, MaxTime);
         StartCoroutine(FlickerRoutine());
         GameManager.instance.Player.GetComponent<Player3DMovement>().OnStateFearChange += lightsEffects;
-        if(GameManager.instance.Day.Peek() == 7)
-        {
-            lightSource.color = Color.red;
-        }
+       
     }
    
  

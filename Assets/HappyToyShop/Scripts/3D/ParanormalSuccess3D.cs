@@ -46,7 +46,6 @@ public class ParanormalSuccess3D : MonoBehaviour
 
     void Start()
     {
-        PercentageProbablityToApper = Mathf.Min (PercentageProbablityToApper * (GameManager.instance.Day.Peek()), 100f);
 
         Debug.Log("Initial probability to spawn shadow: " + PercentageProbablityToApper);
 
