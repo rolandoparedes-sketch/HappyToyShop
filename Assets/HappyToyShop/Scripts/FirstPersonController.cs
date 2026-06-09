@@ -607,7 +607,7 @@ public class FirstPersonController : MonoBehaviour
     }
 
     private void 
-        RepairWindow(InputAction.CallbackContext ctx)
+     RepairWindow(InputAction.CallbackContext ctx)
     {
 
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
