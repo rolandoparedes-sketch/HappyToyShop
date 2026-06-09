@@ -191,8 +191,12 @@ public class Player3DMovement : MonoBehaviour
     }
     private void LightOn(InputAction.CallbackContext context)
     {
-        Debug.Log("ActivarLinterna");
-
+        if(Player3DController.instance.inventory3D.itemInHandRight.gameObject.activeSelf)
+        {
+            Player3DController.instance.inventory3D.itemInHandRight.gameObject.SetActive(false);
+        }
+        else 
+            Player3DController.instance.inventory3D.itemInHandRight.gameObject.SetActive(true);
     }
     public void UpdateFearState()
     {

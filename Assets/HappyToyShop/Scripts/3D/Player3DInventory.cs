@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player3DInventory : MonoBehaviour
 {
-    [SerializeField] private ItemBase itemInHandLeft;
-    [SerializeField] private ItemBase itemInHandRight;
+    [SerializeField] public ItemBase itemInHandLeft;
+    [SerializeField] public ItemBase itemInHandRight;
     [SerializeField] private List<ItemBase> inventoryCapacity = new ();
 
     [SerializeField] private int sizeBase = 10;

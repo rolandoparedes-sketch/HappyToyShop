@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 
@@ -15,34 +16,33 @@ public class Flashlight : ItemBase
 
     public static event Action OnDeadBattery;
 
-    [FoldoutGroup("ControllerSettings/Flashlight")]
 
     public GameObject flashlight;
 
-    [FoldoutGroup("ControllerSettings/Flashlight")]
 
     public LayerMask Shadows;
-    [FoldoutGroup("ControllerSettings/Flashlight")]
     public float DistanceRay = 10f;
-    [FoldoutGroup("ControllerSettings/Flashlight")]
     [SerializeField] private float inclinacionVertical = 10f;
 
-    [FoldoutGroup("ControllerSettings/Flashlight")]
     [SerializeField] private float inclinacionHorizontal = 10f;
 
 
-    [FoldoutGroup("ControllerSettings/Flashlight")]
     //public float batteryRechargeRate = 0.05f;
 
     
 
 
-    [FoldoutGroup("ControllerSettings/Flashlight")]
     public bool flashlightOn = true;
 
     private void Awake()
     {
         pointlight = GetComponent<Light>();
+    }
+    public void Start()
+    {
+
+        ApplyBaseBattery();
+        currentCoroutine = StartCoroutine(BatteryCoroutine());
     }
     private void OnEnable()
     {
@@ -52,7 +52,9 @@ public class Flashlight : ItemBase
     }
     private void OnDisable()
     {
-       StopCoroutine(currentCoroutine);
+
+            StopCoroutine(currentCoroutine);
+      
     }
 
     private IEnumerator BatteryCoroutine()
@@ -72,11 +74,7 @@ public class Flashlight : ItemBase
         }
     }
 
-    void Start()
-    {
-        ApplyBaseBattery();
-    }
-
+   
     void Update()
     {
         Rays();

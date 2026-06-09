@@ -7,11 +7,11 @@ public class Player3DController : MonoBehaviour
 {
     public static Player3DController instance;
     [FoldoutGroup("References")]
-    [SerializeField] private Player3DMovement movement3D;
+    [SerializeField] public Player3DMovement movement3D;
     [FoldoutGroup("References")]
-    [SerializeField] private Player3DInventory inventory3D;
+    [SerializeField] public Player3DInventory inventory3D;
     [FoldoutGroup("References")]
-    [SerializeField] private Player3DState state3D;
+    [SerializeField] public Player3DState state3D;
     
 
 
