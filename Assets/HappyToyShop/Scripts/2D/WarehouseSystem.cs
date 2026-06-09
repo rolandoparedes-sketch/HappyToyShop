@@ -27,7 +27,7 @@ public class WarehouseSystem : MonoBehaviour
     void Start()
     {
 
-        AplicarDataEnCadaAlmacen();
+        ApplyDataToEachShelf();
       
     }
     
@@ -37,7 +37,7 @@ public class WarehouseSystem : MonoBehaviour
 
     }
     [Button]
-    public bool AddToyToShelf(int ShelfID, int Amount)
+    public bool CheckIfThereIsEnoughSpace(int ShelfID,int Amount)
     {
         if (Shelfs[ShelfID].CurrentAmount + Amount > Shelfs[ShelfID].MaxCapacity)
         {
@@ -45,15 +45,19 @@ public class WarehouseSystem : MonoBehaviour
             return false;
         }
         else
-        {
-            Shelfs[ShelfID].CurrentAmount += Amount;
-            Debug.Log("You added " + Amount + " " + Shelfs[ShelfID].data.EntityName + " to the warehouse, now you have " + Shelfs[ShelfID].CurrentAmount);
-            return true;
-        }
+        return true;
+    }
+    public void AddToyToShelf(int ShelfID, int Amount)
+    {
+      
+        Shelfs[ShelfID].CurrentAmount += Amount;    
+        Debug.Log("You added " + Amount + " " + Shelfs[ShelfID].data.EntityName + " to the warehouse, now you have " + Shelfs[ShelfID].CurrentAmount);
+         
+        
     }
 
 
-    public void AplicarDataEnCadaAlmacen()
+    public void ApplyDataToEachShelf()
     {
 
         Shelfs.SetLength(GameManager2D.instance.FactorySystem.toyDataBase.toyDataBase.Count);

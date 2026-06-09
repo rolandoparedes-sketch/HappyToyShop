@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class SpeedBuff : Buff
 {
-    public float Amount = 5;
-
     public SpeedBuff(float duration, float amount)
     {
         BuffName = "SpeedBuff";
@@ -11,13 +9,13 @@ public class SpeedBuff : Buff
         Amount = amount;
     }
 
-    public override void Apply(BaseEntity entity)
+    public override void Apply(PlayerStats Stats)
     {
-        entity.Speed += Amount;
+        Stats.moveSpeed += Amount;
     }
-    public override void Remove(BaseEntity entity)
+    public override void Remove(PlayerStats Stats)
     {
-        entity.Speed -= Amount;
+        Stats.moveSpeed -= Amount;
     }
 
 

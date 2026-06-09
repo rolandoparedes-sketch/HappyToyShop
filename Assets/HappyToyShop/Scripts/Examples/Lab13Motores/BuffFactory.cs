@@ -4,8 +4,8 @@ public enum BuffType
 {
     None,
     Speed,
-    Slow,
-    Poison,
+    FastHands,
+    WetFloot,
 }
 
 public class BuffFactory : MonoBehaviour
@@ -17,13 +17,13 @@ public class BuffFactory : MonoBehaviour
         {
 
 
-            case BuffType.None: return new SpeedBuff(3, 5);
+            case BuffType.None: return null;
 
-            case BuffType.Speed: return new SpeedBuff(3, 5);
+            case BuffType.Speed: return new SpeedBuff(5, 8);
 
-            case BuffType.Slow: return new SpeedBuff(3, 5);
+            case BuffType.FastHands: return new FastHandsBuff(15, 5);
 
-            case BuffType.Poison: return new SpeedBuff(3, 5);
+            case BuffType.WetFloot: return new WetFloorDebuff(5, 5);
                 
 
 

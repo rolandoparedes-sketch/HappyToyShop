@@ -8,22 +8,23 @@ public class BuffPickUp : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.TryGetComponent(out BuffManager buffManager))
+
+        Debug.Log("Collision");
+        if (other.TryGetComponent(out BuffManager buffManager))
         {
             Buff buff = BuffFactory.CreateBuff(buffType);
 
             buffManager.AddBuff(buff);
 
-
-            GetComponent<Collider>().enabled = false;
+            Debug.Log("Collision2");
+            GetComponent<Collider2D>().enabled = false;
             Destroy(gameObject,1);
 
         }

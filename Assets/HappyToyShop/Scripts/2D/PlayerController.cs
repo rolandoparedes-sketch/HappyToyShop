@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovement))]
 
 [RequireComponent(typeof(PlayerAnimations))]
+[RequireComponent (typeof(PlayerStats))]
 public class PlayerController : MonoBehaviour
 {
     [FoldoutGroup("References")]
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public PlayerMovement playerMovement;
     [FoldoutGroup("References")]
     public PlayerAnimations playerAnimations;
+    [FoldoutGroup("References")]
+    public PlayerStats playerStats;
 
     private void Awake()
     {
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
         }
         playerMovement = GetComponent<PlayerMovement>();
         playerAnimations = GetComponent<PlayerAnimations>();
+        playerStats = GetComponent<PlayerStats>();
 
     }
     void Start()

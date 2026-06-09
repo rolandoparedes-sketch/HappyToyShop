@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Collections;
 
 
-[RequireComponent(typeof(BaseEntity))]
+[RequireComponent(typeof(PlayerStats))]
 public class BuffManager : MonoBehaviour
 {
     public List<Buff> activeBuffs = new();
-    private BaseEntity baseEntity;
+    private PlayerStats Stats;
 
     private void Awake()
     {
-        baseEntity = GetComponent<BaseEntity>();
+        Stats = GetComponent<PlayerStats>();
     }
 
     public void AddBuff(Buff buff)
     {
-        buff.Apply(baseEntity);
+        buff.Apply(Stats);
         activeBuffs.Add(buff);
         StartCoroutine(RemoveBuff(buff));
     }
@@ -24,7 +24,7 @@ public class BuffManager : MonoBehaviour
     {
         yield return new WaitForSeconds(buff.Duration);
         
-        buff.Remove(baseEntity);
+        buff.Remove(Stats);
         activeBuffs.Remove(buff);
     }
 }

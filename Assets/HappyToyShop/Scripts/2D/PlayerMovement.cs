@@ -16,25 +16,21 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("References")]
     public CinemachineCamera cam2;
 
-    [FoldoutGroup("References")]
-    public Collider2D MainRoom;
-
-    [FoldoutGroup("References")]
-    public Collider2D Almacen;
     [FoldoutGroup("ControllerSettings")]
     [SerializeField] private Vector2 moveInput;
-    [FoldoutGroup("ControllerSettings")]
-    [SerializeField] private float moveSpeed = 5f;
 
     [FoldoutGroup("ControllerSettings")]
     [SerializeField] private float timeDontMove = 2.5f;
+
+
+
     private bool CanMove = false;
     private void Awake()
     {
         inputs = new();
         rb = GetComponent<Rigidbody2D>();
     }
-        void Start()
+    void Start()
     {
         StartCoroutine(WaitForPlay());
     }
@@ -85,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             return;
         }
-        rb.linearVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = moveInput * PlayerController.instance.playerStats.moveSpeed;
     }
     
   
@@ -94,29 +90,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(timeDontMove);
         CanMove = true;
     }
-    [Button]
-    public void EnterAlmacen()
-    {
-
-        cam1.Priority = 0;
-        cam2.Priority = 1;
-    }
-    [Button]
-    public void EnterMainRoom()
-    {
-        cam1.Priority = 1;
-        cam2.Priority = 0;
-    }
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision == Almacen)
-        {
-            EnterAlmacen();
-        }
-        else if (collision == MainRoom)
-        {
-            EnterMainRoom();
-        }
-    }
+    
+    
 
 }

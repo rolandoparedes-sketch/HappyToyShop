@@ -3,8 +3,9 @@ using UnityEngine;
 public abstract class Buff 
 {
     public string BuffName;
+    public float Amount;
     public float Duration;
 
-    public abstract void Apply(BaseEntity entity);
-    public abstract void Remove(BaseEntity entity);
+    public abstract void Apply(PlayerStats entity);
+    public abstract void Remove(PlayerStats entity);
 }

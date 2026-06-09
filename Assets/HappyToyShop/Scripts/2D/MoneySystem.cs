@@ -31,7 +31,7 @@ public class MoneySystem : MonoBehaviour
         var warehouse = GameManager2D.instance.WarehouseSystem;
 
 
-        if (TryToBuy(ShelfID, Amount))
+        if (CheckIfThereIsEnoughMoney(ShelfID, Amount))
         {
 
 
@@ -41,14 +41,12 @@ public class MoneySystem : MonoBehaviour
         }
 
     }
-    public bool TryToBuy(int ShelfID, int Amount)
+    public bool CheckIfThereIsEnoughMoney(int ShelfID, int Amount)
     {
         var factory = GameManager2D.instance.FactorySystem;
 
         ToyData data = factory.TakeToy(ShelfID);
-
-
-
+       
 
         if (CurrentMoney < data.FactoryCost)
         {
@@ -58,14 +56,24 @@ public class MoneySystem : MonoBehaviour
         }
         else
         {
+            if (GameManager2D.instance.WarehouseSystem.CheckIfThereIsEnoughSpace(ShelfID, Amount))
+            {
 
-            CurrentMoney -= data.FactoryCost * Amount;
-            
-            Debug.Log("Purchased " + Amount + " " + data.EntityName + " for " + (data.FactoryCost * Amount) + " dollars");
+                CurrentMoney -= data.FactoryCost * Amount;
 
-            return true;
+                Debug.Log("Purchased " + Amount + " " + data.EntityName + " for " + (data.FactoryCost * Amount) + " dollars");
+
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
 
         }
+
+
 
     }
 }
