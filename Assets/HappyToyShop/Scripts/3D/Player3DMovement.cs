@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,8 @@ using UnityEngine.UI;
 public class Player3DMovement : MonoBehaviour
 {
     #region Properties
+    public float timeToActiveMonitor = 1.5f;
+    public float velocityToAccessCamera = 4;
     [FoldoutGroup("References")]
     public InputSystem_Actions inputs;
     [FoldoutGroup("References")]
@@ -25,7 +28,18 @@ public class Player3DMovement : MonoBehaviour
     [FoldoutGroup("ControllerSettings/Windows")]
     //public GameObject woodText;
     public float interactDistance = 3f;
-  
+
+    [FoldoutGroup("ControllerSettings/Monitor")]
+    public Transform monitorViewPoint;
+    private Vector3 originalTargetPosition;
+
+    [FoldoutGroup("ControllerSettings/Monitor")]
+    public GameObject woodText;
+    public float interactDistanceMonitor = 3f;
+    public GameObject woodPlanks;
+    private float repairCounter;
+    public Slider repairBar;
+    public TextMeshPro repairText;
 
     [FoldoutGroup("ControllerSettings/Hold")]
     public Transform holdPoint;
@@ -341,6 +355,48 @@ public class Player3DMovement : MonoBehaviour
 
             grabbedObject = null;
         }
+    }
+    private IEnumerator RepairCoroutine(Collider window)
+    {
+        repairCounter = 0;
+        repairBar.gameObject.SetActive(true);
+        repairBar.value = 0;
+
+        while (inputs.Player.Repair.IsPressed())
+        {
+            repairBar.value = repairCounter / 10f;
+            repairCounter += Time.deltaTime * 2;
+
+            Debug.Log(repairCounter);
+
+            if (repairCounter >= 10)
+            {
+                GameObject wood = window.transform.Find("WoodPlanks").gameObject;
+
+                wood.SetActive(true);
+                repairBar.gameObject.SetActive(false);
+                repairText.text = "Tablas de Maderas Puestas";
+
+                StartCoroutine(HideMessage());
+
+                repairCounter = 0;
+
+                yield break;
+            }
+
+            yield return null;
+        }
+
+        repairCounter = 0;
+
+        repairBar.value = 0;
+        repairBar.gameObject.SetActive(false);
+    }
+    private IEnumerator HideMessage()
+    {
+        yield return new WaitForSeconds(2f);
+
+        repairText.text = "";
     }
     #endregion
 }
