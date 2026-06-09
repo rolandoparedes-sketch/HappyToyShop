@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class FirstPersonController : MonoBehaviour
 {
@@ -41,12 +41,16 @@ public class FirstPersonController : MonoBehaviour
 
     [FoldoutGroup("ControllerSettings/Monitor")]
     public Camera securityCamera1;
-
+  
     [FoldoutGroup("ControllerSettings/Windows")]
     public GameObject woodText;
     public float interactDistance = 3f;
     public GameObject woodPlanks;
     private float repairCounter;
+
+    [FoldoutGroup("ControllerSettings/Windows")]
+    public Slider repairBar;
+    public TMP_Text repairText;
 
     [FoldoutGroup("ControllerSettings/Hold")]
     public Transform holdPoint;
@@ -260,7 +264,7 @@ public class FirstPersonController : MonoBehaviour
             yield return null;
         }
     }
-    
+
 
     #endregion
     void Start()
@@ -272,7 +276,7 @@ public class FirstPersonController : MonoBehaviour
         }
         currentBattery = maxBattery;
         currentCordure = maxCordure;
-        if(flashlightOn)
+        if (flashlightOn)
         {
             flashlight.SetActive(flashlightOn);
             currentCoroutine = StartCoroutine(BatteryCoroutine());
@@ -283,9 +287,10 @@ public class FirstPersonController : MonoBehaviour
             flashlight.SetActive(flashlightOn);
             currentCoroutine = StartCoroutine(CordureCoroutine());
         }
-   
+
         ChangefearEffect();
 
+     
     }
     void Update()
     {
@@ -601,7 +606,8 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
-    private void RepairWindow(InputAction.CallbackContext ctx)
+    private void 
+        RepairWindow(InputAction.CallbackContext ctx)
     {
 
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
@@ -618,9 +624,12 @@ public class FirstPersonController : MonoBehaviour
     private IEnumerator RepairCoroutine(Collider window)
     {
         repairCounter = 0;
+        repairBar.gameObject.SetActive(true);
+        repairBar.value = 0;
 
         while (inputs.Player.Repair.IsPressed())
         {
+            repairBar.value = repairCounter / 10f;
             repairCounter += Time.deltaTime * 2;
 
             Debug.Log(repairCounter);
@@ -630,6 +639,10 @@ public class FirstPersonController : MonoBehaviour
                 GameObject wood = window.transform.Find("WoodPlanks").gameObject;
 
                 wood.SetActive(true);
+                repairBar.gameObject.SetActive(false);
+                repairText.text = "Tablas de Maderas Puestas";
+
+                StartCoroutine(HideMessage());
 
                 repairCounter = 0;
 
@@ -640,6 +653,9 @@ public class FirstPersonController : MonoBehaviour
         }
 
         repairCounter = 0;
+
+        repairBar.value = 0;
+        repairBar.gameObject.SetActive (false);
     }
     private void GrabObject(InputAction.CallbackContext ctx)
     {
@@ -666,6 +682,13 @@ public class FirstPersonController : MonoBehaviour
 
             grabbedObject = null;
         }
+    }
+
+    private IEnumerator HideMessage()
+    {
+        yield return new WaitForSeconds(2f);
+
+        repairText.text = "";
     }
     #endregion
 }
