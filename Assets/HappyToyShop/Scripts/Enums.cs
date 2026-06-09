@@ -49,3 +49,12 @@ public enum DayEvents
     MysterySounds,
     HorrorDay,
 }
+public enum SoundType
+{
+    None,
+    Music,
+    Ambient,
+    Voice,
+    SFX,
+    UI,
+}

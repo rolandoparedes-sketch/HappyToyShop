@@ -108,15 +108,13 @@ public class DayManager : MonoBehaviour
 
         monthDays.Enqueue(finishedDay);
 
-        Debug.Log("Día " + finishedDay + " finalizado");
+        Debug.Log("Day " + finishedDay + " completed");
 
 
         Days WeekDay = weekDays.Dequeue();
 
         weekDays.Enqueue(WeekDay);
 
-
-        Debug.Log(weekDays.Peek() + ", "+ Months.Peek() + " " + monthDays.Peek());
 
         OnNextDay?.Invoke();
 
@@ -131,10 +129,13 @@ public class DayManager : MonoBehaviour
             Debug.Log("Month completed");
         }
 
+
+        Debug.Log(weekDays.Peek() + ", " + Months.Peek() + " " + monthDays.Peek());
+
         // Verificar si el día actual es un día especial
         if (specialDays.Count > 0 && specialDays.Peek().Day == monthDays.Peek())
         {
-            Debug.Log("Día " + monthDays.Peek() + " es un día especial");
+            Debug.Log("Day " + monthDays.Peek() + " is a Special Day");
 
             currentEvent = specialDays.Dequeue();
 
@@ -167,13 +168,13 @@ public class DayManager : MonoBehaviour
     [Button]
     public void LookDay()
     {
-        Debug.Log("Día actual: " + monthDays.Peek());
+        Debug.Log("Current Day: " + monthDays.Peek());
 
     }
     [Button]
     public void LookText()
     {
-        Debug.Log("Texto actual: " + specialDays.Peek().EventText);
+        Debug.Log("Current Text: " + specialDays.Peek().EventText);
 
     }
 
@@ -185,7 +186,7 @@ public class DayManager : MonoBehaviour
     [Button]
     public void Count()
     {
-        Debug.Log("Días restantes: " + monthDays.Count);
+        Debug.Log(monthDays.Count);
     }
     [Button]
     public void AddSpecialDay(int day, string eventText, DayEvents dayEvents)
