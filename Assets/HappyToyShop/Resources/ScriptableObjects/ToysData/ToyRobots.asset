@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Interactive robot toys with lights and sounds
   toyPrefab: {fileID: 0}
   salePrice: 55
-  dozenCost: 500
-  halfDozenCost: 260
+  factoryCost: 50

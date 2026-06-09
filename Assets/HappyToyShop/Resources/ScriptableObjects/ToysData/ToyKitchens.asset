@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Pretend kitchen sets with cooking accessories
   toyPrefab: {fileID: 0}
   salePrice: 90
-  dozenCost: 850
-  halfDozenCost: 440
+  factoryCost: 85

@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Educational puzzles that improve problem solving skills
   toyPrefab: {fileID: 0}
   salePrice: 25
-  dozenCost: 210
-  halfDozenCost: 110
+  factoryCost: 20

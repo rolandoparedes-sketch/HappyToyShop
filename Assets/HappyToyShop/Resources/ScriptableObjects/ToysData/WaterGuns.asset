@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Plastic water blasters for outdoor play
   toyPrefab: {fileID: 0}
   salePrice: 20
-  dozenCost: 170
-  halfDozenCost: 90
+  factoryCost: 15

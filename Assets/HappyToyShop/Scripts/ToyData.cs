@@ -12,15 +12,12 @@ public class ToyData : BaseEntityData
     [FoldoutGroup("Value")]
     [SerializeField] private float salePrice;
     [FoldoutGroup("Value")]
-    [SerializeField] private float dozenCost;
-    [FoldoutGroup("Value")]
-    [SerializeField] private float halfDozenCost;
+    [SerializeField] private float factoryCost;
 
     #endregion
     #region Getters
     public GameObject ToyPrefab => toyPrefab;
     public float SalePrice => salePrice;
-    public float DozenCost => dozenCost;
-    public float HalfDozenCost => halfDozenCost;
+    public float FactoryCost => factoryCost;
     #endregion
 }

@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Hand puppets for storytelling and entertainment
   toyPrefab: {fileID: 0}
   salePrice: 22
-  dozenCost: 190
-  halfDozenCost: 100
+  factoryCost: 17

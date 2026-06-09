@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Kits with crayons, paints, and drawing tools
   toyPrefab: {fileID: 0}
   salePrice: 38
-  dozenCost: 320
-  halfDozenCost: 165
+  factoryCost: 33

@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Battery powered cars controlled with remotes
   toyPrefab: {fileID: 0}
   salePrice: 75
-  dozenCost: 700
-  halfDozenCost: 360
+  factoryCost: 70

@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Hero and character figures for pretend play
   toyPrefab: {fileID: 0}
   salePrice: 32
-  dozenCost: 280
-  halfDozenCost: 145
+  factoryCost: 27

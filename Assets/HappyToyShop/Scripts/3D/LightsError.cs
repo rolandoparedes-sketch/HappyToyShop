@@ -33,7 +33,7 @@ public class LightsError : MonoBehaviour
 
         //timer = Random.Range(MinTime, MaxTime);
         StartCoroutine(FlickerRoutine());
-        GameManager.instance.Player.GetComponent<FirstPersonController>().OnStateFearChange += lightsEffects;
+        GameManager.instance.Player.GetComponent<Player3DMovement>().OnStateFearChange += lightsEffects;
         if(GameManager.instance.Day.Peek() == 7)
         {
             lightSource.color = Color.red;
@@ -44,7 +44,7 @@ public class LightsError : MonoBehaviour
     public void lightsEffects()
     {
 
-        var Enum = GameManager.instance.Player.GetComponent<FirstPersonController>().currentFearState;
+        var Enum = GameManager.instance.Player.GetComponent<Player3DMovement>().currentFearState;
 
         switch (Enum)
         {

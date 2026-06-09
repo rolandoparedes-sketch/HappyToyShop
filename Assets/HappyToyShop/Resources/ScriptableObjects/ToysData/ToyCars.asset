@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Small toy vehicles for racing and collecting
   toyPrefab: {fileID: 0}
   salePrice: 18
-  dozenCost: 150
-  halfDozenCost: 80
+  factoryCost: 13

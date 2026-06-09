@@ -1,7 +1,6 @@
 
 public enum FearState
 {
-    None,
     Calm,
     Nervous,
     Scared,
@@ -9,19 +8,44 @@ public enum FearState
 }
 public enum Quality
 {
-    None,
     Common,
     SuperRare,
     Epic,
     Legendary,
     Secret,
 }
-public enum SoundType
+public enum Days
+{
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
+}
+
+public enum Months
+{
+    January,
+    February,
+    March,
+    April,
+    May,
+    June,
+    July,
+    August,
+    September,
+    October,
+    November,
+    December
+}
+public enum DayEvents
 {
     None,
-    Music,
-    UI,
-    Ambient,
-    Voice,
-    SFX,
+    PayDay,
+    MysteryVisitor,
+    Shadows,
+    MysterySounds,
+    HorrorDay,
 }

@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Lightweight scooters for kids outdoor activity
   toyPrefab: {fileID: 0}
   salePrice: 120
-  dozenCost: 1100
-  halfDozenCost: 570
+  factoryCost: 115

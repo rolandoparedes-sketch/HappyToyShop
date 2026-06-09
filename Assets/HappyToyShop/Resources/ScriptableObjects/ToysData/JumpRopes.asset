@@ -18,5 +18,4 @@ MonoBehaviour:
   description: Exercise ropes for active play and fitness
   toyPrefab: {fileID: 0}
   salePrice: 14
-  dozenCost: 110
-  halfDozenCost: 60
+  factoryCost: 9

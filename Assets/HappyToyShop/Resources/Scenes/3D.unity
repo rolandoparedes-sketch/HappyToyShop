@@ -1595,37 +1595,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1 &167780769
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 167780770}
-  m_Layer: 0
-  m_Name: a
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &167780770
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167780769}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.09072, y: 0, z: -15.24495}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175519097
 GameObject:
   m_ObjectHideFlags: 0
@@ -8569,33 +8538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f1947ce1c0e0a4fa657cfb098f9e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonController
-  characterCamera: {fileID: 1620334787}
-  currentFearState: 0
-  moveSpeed: 5
-  flashlight: {fileID: 945475343}
-  Shadows:
-    serializedVersion: 2
-    m_Bits: 8
-  DistanceRay: 40
-  inclinacionVertical: 8
-  inclinacionHorizontal: 8
-  batteryDrainRate: 0.5
-  maxBattery: 100
-  currentBattery: 0
-  flashlightOn: 0
-  cordureDrainRate: 0.25
-  maxCordure: 100
-  currentCordure: 0
-  timeDontMove: 2.5
-  moveInput: {x: 0, y: 0}
-  amplitudeGainCalm: 0.5
-  frequencyGainCalm: 0.5
-  amplitudeGainNervous: 0.2
-  frequencyGainNervous: 3
-  amplitudeGainScared: 0.125
-  frequencyGainScared: 40
-  amplitudeGainTerrified: 0.2
-  frequencyGainTerrified: 255
 --- !u!136 &895927720
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8820,6 +8762,7 @@ GameObject:
   - component: {fileID: 945475344}
   - component: {fileID: 945475346}
   - component: {fileID: 945475345}
+  - component: {fileID: 945475347}
   m_Layer: 0
   m_Name: FlashLight
   m_TagString: Untagged
@@ -8936,6 +8879,23 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &945475347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945475343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee030ba275ee77b4a925d6825515e218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Flashlight
+  pointlight: {fileID: 0}
+  enoughBattery: 1
+  currentBattery: 0
+  maxBattery: 100
+  batteryDrainRate: 0.25
 --- !u!1 &975739619
 GameObject:
   m_ObjectHideFlags: 0
@@ -23054,4 +23014,3 @@ SceneRoots:
   - {fileID: 849567229}
   - {fileID: 1662006963}
   - {fileID: 1654454217}
-  - {fileID: 167780770}
