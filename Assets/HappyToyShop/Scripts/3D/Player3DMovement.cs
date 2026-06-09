@@ -38,35 +38,6 @@ public class Player3DMovement : MonoBehaviour
     [FoldoutGroup("ControllerSettings")]
     public float moveSpeed = 5f;
 
-    [FoldoutGroup("ControllerSettings/Flashlight")]
-
-    public GameObject flashlight;
-
-    [FoldoutGroup("ControllerSettings/Flashlight")]
-
-    public LayerMask Shadows;
-    [FoldoutGroup("ControllerSettings/Flashlight")]
-    public float DistanceRay = 10f;
-    [FoldoutGroup("ControllerSettings/Flashlight")]
-    [SerializeField] private float inclinacionVertical = 10f;
-
-    [FoldoutGroup("ControllerSettings/Flashlight")]
-    [SerializeField] private float inclinacionHorizontal = 10f;
-
-    [FoldoutGroup("ControllerSettings/Flashlight")]
-    public float batteryDrainRate = 0.1f;
-
-    [FoldoutGroup("ControllerSettings/Flashlight")]
-    //public float batteryRechargeRate = 0.05f;
-
-    [FoldoutGroup("ControllerSettings/Flashlight")]
-    public float maxBattery = 100f;
-
-    [FoldoutGroup("ControllerSettings/Flashlight")]
-    public float currentBattery;
-
-    [FoldoutGroup("ControllerSettings/Flashlight")]
-    public bool flashlightOn = true;
     [FoldoutGroup("ControllerSettings/Cordure")]
     public float cordureDrainRate = 0.25f;
 
@@ -181,23 +152,6 @@ public class Player3DMovement : MonoBehaviour
     void Start()
     {
         StartCoroutine(WaitForPlay());
-        if (GameManager.instance.Day.Peek() == 7)
-        {
-            flashlight.GetComponent<Light>().color = Color.red;
-        }
-        currentBattery = maxBattery;
-        currentCordure = maxCordure;
-        if(flashlightOn)
-        {
-            flashlight.SetActive(flashlightOn);
-            currentCoroutine = StartCoroutine(BatteryCoroutine());
-
-        }
-        else
-        {
-            flashlight.SetActive(flashlightOn);
-            currentCoroutine = StartCoroutine(CordureCoroutine());
-        }
    
         ChangefearEffect();
 
@@ -208,95 +162,13 @@ public class Player3DMovement : MonoBehaviour
         //OnMove();
        // CheckWindow();
         OnSimpleMove();
-        Rays();
+       
 
         if (grabbedObject != null)
         {
             grabbedObject.transform.position = holdPoint.position;
         }
     
-    }
-    public void Rays()
-    {
-        Vector3 origin = characterCamera.transform.position;
-
-        Vector3 forward = characterCamera.transform.forward;
-
-        Vector3 upRay = Quaternion.AngleAxis(-inclinacionVertical, characterCamera.transform.right) * forward;
-
-        Vector3 downRay = Quaternion.AngleAxis(inclinacionVertical, characterCamera.transform.right) * forward;
-
-        Vector3 leftRay = Quaternion.AngleAxis(-inclinacionHorizontal, characterCamera.transform.up) * forward;
-
-        Vector3 rightRay = Quaternion.AngleAxis(inclinacionHorizontal, characterCamera.transform.up) * forward;
-
-        DetectShadow(origin, forward);
-
-        DetectShadow(origin, upRay);
-
-        DetectShadow(origin, downRay);
-
-        DetectShadow(origin, leftRay);
-
-        DetectShadow(origin, rightRay);
-    }
-
-    private void DetectShadow(Vector3 origin, Vector3 direction)
-    {
-        if (Physics.Raycast(origin, direction, out RaycastHit hit, DistanceRay, Shadows))
-        {
-            if (hit.collider != null)
-            {
-                ShadowFollower shadowFollower = hit.collider.GetComponent<ShadowFollower>();
-
-                if (shadowFollower != null)
-                {
-                    shadowFollower.ShadowDetected();
-                }
-
-                ShadowPassageway shadowPassageway = hit.collider.GetComponent<ShadowPassageway>();
-                if (shadowPassageway != null)
-                {
-                    shadowPassageway.ShadowDetected();
-                }
-            }
-        }
-    }
-    private void OnDrawGizmos()
-    {
-        if (characterCamera == null)
-            return;
-
-        Vector3 origin = characterCamera.transform.position;
-
-        Vector3 forward = characterCamera.transform.forward;
-
-        Vector3 upRay =
-            Quaternion.AngleAxis(-inclinacionVertical, characterCamera.transform.right)
-            * forward;
-
-        Vector3 downRay =
-            Quaternion.AngleAxis(inclinacionVertical, characterCamera.transform.right)
-            * forward;
-
-        Vector3 leftRay =
-            Quaternion.AngleAxis(-inclinacionHorizontal, characterCamera.transform.up)
-            * forward;
-
-        Vector3 rightRay =
-            Quaternion.AngleAxis(inclinacionHorizontal, characterCamera.transform.up)
-            * forward;
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(origin, forward * DistanceRay);
-
-        Gizmos.DrawRay(origin, upRay * DistanceRay);
-
-        Gizmos.DrawRay(origin, downRay * DistanceRay);
-
-        Gizmos.DrawRay(origin, leftRay * DistanceRay);
-
-        Gizmos.DrawRay(origin, rightRay * DistanceRay);
     }
     #region Methods
     public void OnSimpleMove()
@@ -377,31 +249,10 @@ public class Player3DMovement : MonoBehaviour
 
     #endregion
     #region Coroutines
-    private IEnumerator BatteryCoroutine()
-    {
-        while (flashlightOn)
-        {
-            currentBattery -= batteryDrainRate * Time.deltaTime;
-
-            if (currentBattery <= 0)
-            {
-                currentBattery = 0;
-
-                flashlightOn = false;
-                flashlight.SetActive(false);
-
-                currentCoroutine = StartCoroutine(CordureCoroutine());
-
-                yield break;
-            }
-
-            yield return null;
-        }
-    }
 
     private IEnumerator CordureCoroutine()
     {
-        while (!flashlightOn && currentCordure > 0)
+        while (currentCordure > 0)
         {
             currentCordure -= cordureDrainRate * Time.deltaTime;
 

@@ -36,7 +36,6 @@ public class WarehouseSystem : MonoBehaviour
     {
 
     }
-    [Button]
     public bool CheckIfThereIsEnoughSpace(int ShelfID,int Amount)
     {
         if (Shelfs[ShelfID].CurrentAmount + Amount > Shelfs[ShelfID].MaxCapacity)
