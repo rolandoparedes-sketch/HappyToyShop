@@ -13,6 +13,8 @@ using UnityEngine.UI;
 public class Player3DMovement : MonoBehaviour
 {
     #region Properties
+
+    private bool usingMonitor;
     public float timeToActiveMonitor = 1.5f;
     public float velocityToAccessCamera = 4;
     [FoldoutGroup("References")]
@@ -32,7 +34,13 @@ public class Player3DMovement : MonoBehaviour
     [FoldoutGroup("ControllerSettings/Monitor")]
     public Transform monitorViewPoint;
     private Vector3 originalTargetPosition;
+    public Transform cameraTarget;
+    public Camera[] securityCameras;
+    public GameObject monitorUI;
 
+    private int currentCameraIndex = 0;
+
+   
     [FoldoutGroup("ControllerSettings/Monitor")]
     public GameObject woodText;
     public float interactDistanceMonitor = 3f;
@@ -40,6 +48,7 @@ public class Player3DMovement : MonoBehaviour
     private float repairCounter;
     public Slider repairBar;
     public TMP_Text repairText;
+    
 
     [FoldoutGroup("ControllerSettings/Hold")]
     public Transform holdPoint;
@@ -116,11 +125,14 @@ public class Player3DMovement : MonoBehaviour
         inputs.Enable();
 
         inputs.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-      
+
         inputs.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
         inputs.Player.Grab.performed += GrabObject;
         inputs.Player.Grab.canceled += ReleaseObject;
+
+        inputs.Player.Interact.performed += Interact;
+        inputs.Player.Interact.canceled += Interact;
 
         inputs.Player.Sprint.performed += ctx => moveSpeed *= 2;
 
@@ -296,6 +308,36 @@ public class Player3DMovement : MonoBehaviour
             }
         }
     }
+    private void NextCamera()
+    {
+        securityCameras[currentCameraIndex].gameObject.SetActive(false);
+
+        currentCameraIndex++;
+
+        if (currentCameraIndex >= securityCameras.Length)
+        {
+            currentCameraIndex = 0;
+
+        }
+        securityCameras[currentCameraIndex].gameObject.SetActive(true);
+    }
+    private void Interact(InputAction.CallbackContext ctx)
+    {
+        if (usingMonitor)
+        {
+            ExitMonitor();
+            return;
+        }
+        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f))
+        {
+            if (hit.collider.gameObject.name.Contains("Monitor"))
+            {
+                StartCoroutine(MoveToMonitor());
+            }
+        }
+    }
 
 
 
@@ -346,6 +388,31 @@ public class Player3DMovement : MonoBehaviour
                 }
             }
         }
+    }
+    private void EnterMonitor()
+    {
+        usingMonitor = true;
+        characterCamera.gameObject.SetActive(false);
+        securityCameras[currentCameraIndex].gameObject.SetActive(true);
+
+        monitorUI.SetActive(true);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void ExitMonitor()
+    {
+        usingMonitor = false;
+        characterCamera.gameObject.SetActive(false);
+        securityCameras[currentCameraIndex].gameObject.SetActive(true);
+
+        monitorUI.SetActive(false);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        cameraTarget.position = originalTargetPosition;
     }
     private void ReleaseObject(InputAction.CallbackContext ctx)
     {
@@ -398,5 +465,48 @@ public class Player3DMovement : MonoBehaviour
 
         repairText.text = "";
     }
+
+    IEnumerator TimeToActiveMonitor()
+    {
+        StartCoroutine(AcercarCamera());
+        yield return new WaitForSeconds(timeToActiveMonitor);
+        characterCamera.Lens.FieldOfView = 60;
+        EnterMonitor();
+    }
+
+    IEnumerator MoveToMonitor()
+    {
+        originalTargetPosition = cameraTarget.position;
+
+        while (Vector3.Distance(cameraTarget.position, monitorViewPoint.position) > 0.01f)
+        {
+            cameraTarget.position = Vector3.MoveTowards(
+                cameraTarget.position,
+                monitorViewPoint.position,
+                3f * Time.deltaTime
+            );
+
+            yield return null;
+        }
+
+        cameraTarget.position = monitorViewPoint.position;
+
+        StartCoroutine(TimeToActiveMonitor());
+    }
+
+    public IEnumerator AcercarCamera()
+    {
+
+        float timer = 0;
+        while (timer < timeToActiveMonitor)
+        {
+            timer += Time.deltaTime;
+
+            characterCamera.Lens.FieldOfView -= velocityToAccessCamera / timer * Time.deltaTime;
+
+            yield return null;
+        }
+    }
+
     #endregion
 }
