@@ -39,7 +39,7 @@ public class Player3DMovement : MonoBehaviour
     public GameObject woodPlanks;
     private float repairCounter;
     public Slider repairBar;
-    public TextMeshPro repairText;
+    public TMP_Text repairText;
 
     [FoldoutGroup("ControllerSettings/Hold")]
     public Transform holdPoint;
