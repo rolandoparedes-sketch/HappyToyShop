@@ -174,7 +174,7 @@ public class Player3DMovement : MonoBehaviour
     {
 
         //OnMove();
-       // CheckWindow();
+        CheckWindow();
         OnSimpleMove();
        
 
