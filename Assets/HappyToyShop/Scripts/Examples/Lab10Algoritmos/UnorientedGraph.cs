@@ -43,7 +43,7 @@ namespace HappyToyShop.Collections.Graphs
 
             foreach (var other in nodes)
             {
-                other.Disconnect(nodeToRemove);
+                other.DisconnectUnidirectional(nodeToRemove);
             }
 
             nodes.RemoveAt(pos);
@@ -62,7 +62,7 @@ namespace HappyToyShop.Collections.Graphs
 
 
             }
-            nodes[posA].Connect(nodes[posB]);
+            nodes[posA].ConnectUnidirectional(nodes[posB]);
         }
         /*public void DeleteEdges(Node<T> a, Node<T> b)
         {
@@ -76,7 +76,7 @@ namespace HappyToyShop.Collections.Graphs
 
                 throw new System.InvalidOperationException("One or more of the vertices selected for disconnection are outside the valid range");
             }
-                nodes[posA].Disconnect(nodes[posB]);
+                nodes[posA].DisconnectUnidirectional(nodes[posB]);
         }
         public void PrintAdjancencyList()//-> cuadratica
         {

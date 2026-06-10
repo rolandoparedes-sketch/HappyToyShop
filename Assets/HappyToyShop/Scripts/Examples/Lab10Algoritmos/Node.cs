@@ -19,14 +19,26 @@ namespace HappyToyShop.Collections.Graphs
             this.value = value; 
         }
 
-        public void Connect(Node<T> node) //Bidireccional
+        public void ConnectUnidirectional(Node<T> node) //Unidireccional
+        {
+            if (!neighbors.Contains(node))
+                neighbors.Add(node);
+
+        }
+        public void ConnectBidireccional(Node<T> node) //Bidireccional
         {
             if(!neighbors.Contains(node))
                 neighbors.Add(node);
 
             node.neighbors.Add(this);
         }
-        public void Disconnect(Node<T> node) //Bidireccional
+        public void DisconnectUnidirectional(Node<T> node) //Unidireccional
+        {
+            if (neighbors.Contains(node))
+                neighbors.Remove(node);
+
+        }
+        public void DisconnectBidireccional(Node<T> node) //Bidireccional
         {
             if (neighbors.Contains(node))
                 neighbors.Remove(node);

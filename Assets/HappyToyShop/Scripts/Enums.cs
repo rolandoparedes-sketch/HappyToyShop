@@ -58,3 +58,15 @@ public enum SoundType
     SFX,
     UI,
 }
+
+public enum Endings
+{
+    None,
+    Unemployed,
+    Normal,
+    MisteryResolved,
+    Bankrupt,
+    Fugitive,
+    Bad,
+    Secret,
+}
