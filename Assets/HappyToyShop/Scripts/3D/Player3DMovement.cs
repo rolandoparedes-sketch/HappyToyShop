@@ -263,7 +263,41 @@ public class Player3DMovement : MonoBehaviour
         }
 
     }
-   
+    private void CheckWindow()
+    {
+        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
+        {
+            if (hit.collider.CompareTag("Window"))
+            {
+                woodText.SetActive(true);
+            }
+            else
+            {
+                woodText.SetActive(false);
+            }
+        }
+        else
+        {
+            woodText.SetActive(false);
+        }
+    }
+    private void RepairWindow(InputAction.CallbackContext ctx)
+    {
+
+        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+        {
+            if (hit.collider.CompareTag("Window"))
+            {
+                StartCoroutine(RepairCoroutine(hit.collider));
+            }
+        }
+    }
+
+
 
     #endregion
     #region Coroutines
@@ -294,42 +328,8 @@ public class Player3DMovement : MonoBehaviour
         inventoryUI.SetActive(inventoryOpen);
 
        
-    }/*
-    private void CheckWindow()
-    {
-        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
-        {
-            if (hit.collider.CompareTag("Window"))
-            {
-                woodText.SetActive(true);
-            }
-            else
-            {
-                woodText.SetActive(false);
-            }
-        }
-        else
-        {
-            woodText.SetActive(false);
-        }
     }
-    */
-    private void RepairWindow(InputAction.CallbackContext ctx)
-    {
-        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
-        {
-            if (hit.collider.CompareTag("Window"))
-            {
-                GameObject wood = hit.collider.transform.Find("WoodPlanks").gameObject;
-
-                wood.SetActive(true);
-            }
-        }
-    }
+    
     private void GrabObject(InputAction.CallbackContext ctx)
     {
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
