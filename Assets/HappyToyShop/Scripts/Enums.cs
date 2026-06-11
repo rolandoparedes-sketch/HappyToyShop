@@ -6,6 +6,14 @@ public enum FearState
     Scared,
     Terrified
 }
+public enum TypeDialogue
+{
+    None,
+    Normal,
+    Angry,
+    Strange,
+    Disturbing,
+}
 public enum Quality
 {
     Common,

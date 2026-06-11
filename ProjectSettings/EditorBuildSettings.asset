@@ -18,5 +18,7 @@ EditorBuildSettings:
     path: Assets/HappyToyShop/Resources/Scenes/Win.unity
     guid: 101f9be8347632e42b6cccc8a408ed18
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 731d421676ab30e4b888d940864945d7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: 84eba426c650d7243b9586f53144a060, type: 2}
   m_UseUCBPForAssetBundles: 0
