@@ -9,6 +9,7 @@ public class EnemyShadow : MonoBehaviour
     public Transform[] windows;
     public stateMachine stateMachine;
     public NavMeshAgent agent;
+    public Transform player;
 
     [HideInInspector]
     public Transform currentWindow;

@@ -7,8 +7,9 @@ public class BreakWindowState : IState
    
     private EnemyShadow enemy;
 
-    private float waitTimer;
+    private float timer;
 
+    private WoodPlanks planks;
 
     public BreakWindowState(EnemyShadow enemy)
     {
@@ -17,15 +18,27 @@ public class BreakWindowState : IState
 
     public void Enter()
     {
-        Debug.Log(" Rompiendo las ventanas");
+        GameObject wood =
+        enemy.currentWindow.Find("WoodPlanks").gameObject;
 
-        GameObject wood = enemy.currentWindow.Find("WoodPlanks").gameObject;
+        if (!wood.activeSelf)
+        {
+            Transform insidePoint =
+                enemy.currentWindow.Find("InsidePoint");
 
-         wood.SetActive(false);
+            enemy.agent.Warp(insidePoint.position);
 
-        enemy.currentWindow = enemy.windows[Random.Range(0, enemy.windows.Length)];
+            enemy.stateMachine.ChangeState(
+                new ChasePlayerState(enemy));
 
-        enemy.stateMachine.ChangeState(new GoToWindowState(enemy));
+            return;
+        }
+
+        Debug.Log("Rompiendo tablas");
+
+        planks = wood.GetComponent<WoodPlanks>();
+
+        timer = 1f;
     }
     public void Exit()
     {
@@ -33,7 +46,26 @@ public class BreakWindowState : IState
     }
     public void Update()
     {
+        timer -= Time.deltaTime;
 
+        if (timer <= 0)
+        {
+            planks.health--;
+
+            Debug.Log("Vida tablas: " + planks.health);
+
+            timer = 1f;
+
+            if (planks.health <= 0)
+            {
+                GameObject wood =
+                    enemy.currentWindow.Find("WoodPlanks").gameObject;
+
+                wood.SetActive(false);
+
+                Debug.Log("Tablas rotas");  
+            }
+        }
     }
     
     

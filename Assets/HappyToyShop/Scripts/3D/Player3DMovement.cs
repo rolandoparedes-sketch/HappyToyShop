@@ -476,6 +476,8 @@ public class Player3DMovement : MonoBehaviour
                 GameObject wood = window.transform.Find("WoodPlanks").gameObject;
 
                 wood.SetActive(true);
+                WoodPlanks planks = wood.GetComponent<WoodPlanks>();
+                planks.health = 5;
                 repairBar.gameObject.SetActive(false);
                 repairText.text = "Tablas de Maderas Puestas";
 
