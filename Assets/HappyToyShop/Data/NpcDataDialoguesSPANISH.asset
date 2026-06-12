@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: befe964beec0b34409ad2a7f455966d8, type: 3}
-  m_Name: NpcDataDialoguesENGLISH
+  m_Name: NpcDataDialoguesSPANISH
   m_EditorClassIdentifier: Assembly-CSharp::NpcDataDialogues
   serializationData:
     SerializedFormat: 2
@@ -52,25 +52,28 @@ MonoBehaviour:
       Data: 2|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 7
     - Name: 
       Entry: 1
-      Data: Beautiful day, isn't it?
+      Data: "Hermoso d\xEDa, \xBFno?"
     - Name: 
       Entry: 1
-      Data: Maybe it'll rain more tomorrow.
+      Data: "Quiza ma\xF1ana lleve m\xE1s"
     - Name: 
       Entry: 1
-      Data: Good value for the price.
+      Data: Calidad precio
     - Name: 
       Entry: 1
-      Data: My little brother will like this toy.
+      Data: "A mi hermanito le gustar\xE1 este juguete"
     - Name: 
       Entry: 1
-      Data: The perfect gift
+      Data: El regalo perfecto
     - Name: 
       Entry: 1
-      Data: Thank you so much.
+      Data: Muchas gracias
+    - Name: 
+      Entry: 1
+      Data: "Esto le encantar\xE1 a Junior."
     - Name: 
       Entry: 13
       Data: 
@@ -94,22 +97,22 @@ MonoBehaviour:
       Data: 6
     - Name: 
       Entry: 1
-      Data: I hope you last longer than the last one.
+      Data: "Espero que dures mas que el \xFAltimo"
     - Name: 
       Entry: 1
-      Data: I hate having to come all the way here.
+      Data: "Odio tener que venir hasta ac\xE1"
     - Name: 
       Entry: 1
-      Data: Last night I saw someone peeking through...
+      Data: Anoche vi alguien asomandose por la ventana
     - Name: 
       Entry: 1
-      Data: Get out of here as soon as possible.
+      Data: "Sal de aqu\xED lo antes posible "
     - Name: 
       Entry: 1
-      Data: Did you know this place used to be...?
+      Data: "\xBFSabias que este lugar solia ser un orfanato?"
     - Name: 
       Entry: 1
-      Data: Have you ever wondered...?
+      Data: "Alguna vez te preguntaste \xBFQu\xE9 hay despues de la muerte?"
     - Name: 
       Entry: 13
       Data: 
@@ -133,25 +136,25 @@ MonoBehaviour:
       Data: 7
     - Name: 
       Entry: 1
-      Data: Get out of here as soon as possible.
+      Data: "Sal de aqu\xED lo antes posible."
     - Name: 
       Entry: 1
-      Data: Don't let him in.
+      Data: No lo dejes entrar.
     - Name: 
       Entry: 1
-      Data: It's cold out here.
+      Data: Hace frio aqui afuera.
     - Name: 
       Entry: 1
-      Data: They're always watching you.
+      Data: Ellos siempre te observan
     - Name: 
       Entry: 1
       Data: :)
     - Name: 
       Entry: 1
-      Data: Trust no one.
+      Data: No confies en nadie
     - Name: 
       Entry: 1
-      Data: Wake up. Wake up. Wake up.
+      Data: Despierta Despierta Despierta
     - Name: 
       Entry: 13
       Data: 
@@ -175,13 +178,13 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 1
-      Data: Oh, that's a shame.
+      Data: Oh, que pena.
     - Name: 
       Entry: 1
-      Data: That's okay, maybe next time.
+      Data: "Esta bien quiza para la pr\xF3xima."
     - Name: 
       Entry: 1
-      Data: A toy store in decline.
+      Data: Jugueteria en decadencia
     - Name: 
       Entry: 13
       Data: 

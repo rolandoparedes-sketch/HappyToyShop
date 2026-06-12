@@ -38,5 +38,6 @@ MonoBehaviour:
         - m_KeyId: 10573656064
           m_TableCodes:
           - en
+          - es
         m_TypeString: NpcDataDialogues, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
