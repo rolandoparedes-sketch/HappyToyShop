@@ -37,8 +37,8 @@ public class Player3DMovement : MonoBehaviour
     public Transform cameraTarget;
     public Camera[] securityCameras;
     public GameObject monitorUI;
+    private CameraNode currentCamera;
 
-    private int currentCameraIndex = 0;
 
    
     [FoldoutGroup("ControllerSettings/Monitor")]
@@ -180,6 +180,7 @@ public class Player3DMovement : MonoBehaviour
         StartCoroutine(WaitForPlay());
    
         ChangefearEffect();
+        CreateCameraList();
 
     }
     void Update()
@@ -199,7 +200,7 @@ public class Player3DMovement : MonoBehaviour
     #region Methods
     public void OnSimpleMove()
     {
-        if(!CanMove)
+        if(!CanMove || usingMonitor)
         {  
             return; 
         }
@@ -308,18 +309,21 @@ public class Player3DMovement : MonoBehaviour
             }
         }
     }
-    private void NextCamera()
+    public  void NextCamera()
     {
-        securityCameras[currentCameraIndex].gameObject.SetActive(false);
+        currentCamera.camera.gameObject.SetActive(false);
 
-        currentCameraIndex++;
+        currentCamera = currentCamera.next;
 
-        if (currentCameraIndex >= securityCameras.Length)
-        {
-            currentCameraIndex = 0;
+        currentCamera.camera.gameObject.SetActive(true);
+    }
+    private void PreviousCamera()
+    {
+        currentCamera.camera.gameObject.SetActive(false);
 
-        }
-        securityCameras[currentCameraIndex].gameObject.SetActive(true);
+        currentCamera = currentCamera.previous;
+
+        currentCamera.camera.gameObject.SetActive(true);
     }
     private void Interact(InputAction.CallbackContext ctx)
     {
@@ -337,6 +341,33 @@ public class Player3DMovement : MonoBehaviour
                 StartCoroutine(MoveToMonitor());
             }
         }
+    }
+    private void CreateCameraList()
+    {
+        CameraNode first = null;
+        CameraNode previous = null;
+
+        foreach (Camera cam in securityCameras)
+        {
+            CameraNode node = new CameraNode(cam);
+
+            if (first == null)
+            {
+                first = node;
+            }
+
+            if (previous != null)
+            {
+                previous.next = node;
+                node.previous = previous;
+            }
+
+            previous = node;
+        }
+        previous.next = first;
+        first.previous = previous;
+
+        currentCamera = first;
     }
 
 
@@ -392,8 +423,10 @@ public class Player3DMovement : MonoBehaviour
     private void EnterMonitor()
     {
         usingMonitor = true;
+
         characterCamera.gameObject.SetActive(false);
-        securityCameras[currentCameraIndex].gameObject.SetActive(true);
+
+        currentCamera.camera.gameObject.SetActive(true);
 
         monitorUI.SetActive(true);
 
@@ -404,12 +437,14 @@ public class Player3DMovement : MonoBehaviour
     private void ExitMonitor()
     {
         usingMonitor = false;
-        characterCamera.gameObject.SetActive(false);
-        securityCameras[currentCameraIndex].gameObject.SetActive(true);
+
+        currentCamera.camera.gameObject.SetActive(false);
+
+        characterCamera.gameObject.SetActive(true);
 
         monitorUI.SetActive(false);
 
-        Cursor.visible = true;
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         cameraTarget.position = originalTargetPosition;
