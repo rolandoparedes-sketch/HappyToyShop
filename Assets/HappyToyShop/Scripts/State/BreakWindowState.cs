@@ -3,8 +3,8 @@ using UnityEngine.AI;
 
 public class BreakWindowState : IState
 {
-    
-   
+
+
     private EnemyShadow enemy;
 
     private float timer;
@@ -47,26 +47,44 @@ public class BreakWindowState : IState
     public void Update()
     {
         timer -= Time.deltaTime;
-
         if (timer <= 0)
         {
-            planks.health--;
+            if (planks.health > 0)
+            {
+                planks.health--;
 
-            Debug.Log("Vida tablas: " + planks.health);
+                Debug.Log("Vida tablas: " + planks.health);
+            }
 
             timer = 1f;
+        }
 
-            if (planks.health <= 0)
-            {
-                GameObject wood =
-                    enemy.currentWindow.Find("WoodPlanks").gameObject;
 
-                wood.SetActive(false);
+        if (planks.health <= 0)
+        {
+            planks.health = 0;
 
-                Debug.Log("Tablas rotas");  
-            }
+            GameObject wood =
+                enemy.currentWindow.Find("WoodPlanks").gameObject;
+
+            wood.SetActive(false);
+
+            Debug.Log("Tablas rotas");
+
+            Transform insidePoint =
+                enemy.currentWindow.Find("InsidePoint");
+
+            enemy.agent.Warp(insidePoint.position);
+
+            enemy.stateMachine.ChangeState(
+                new ChasePlayerState(enemy));
+
+            return;
         }
     }
-    
-    
 }
+
+
+
+
+
