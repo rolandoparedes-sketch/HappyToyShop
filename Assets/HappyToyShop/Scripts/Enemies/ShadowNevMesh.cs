@@ -20,6 +20,7 @@ public class EnemyShadow : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = 7.5f;
         stateMachine = new stateMachine();
         currentWindow = windows[Random.Range(0, windows.Length)];
       
@@ -29,5 +30,12 @@ public class EnemyShadow : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            ScenesManager.instance.GameOver();
+        }
     }
 }
