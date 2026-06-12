@@ -31,11 +31,6 @@ public class EnemyShadow : MonoBehaviour
     {
         stateMachine.Update();
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            ScenesManager.instance.GameOver();
-        }
-    }
+    
+    
 }
