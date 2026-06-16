@@ -166,9 +166,10 @@ public class DayManager : MonoBehaviour
     }
 
     [Button]
-    public void LookDay()
+    public int LookDay()
     {
         Debug.Log("Current Day: " + monthDays.Peek());
+        return monthDays.Peek();
 
     }
     [Button]

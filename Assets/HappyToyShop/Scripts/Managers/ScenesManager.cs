@@ -8,7 +8,7 @@ public class ScenesManager : MonoBehaviour
 {
     public static ScenesManager instance;
 
-    private Animator FadeAnim;
+    public Animator FadeAnim;
 
     [SerializeField] private float fadeDuration = 1f;
 

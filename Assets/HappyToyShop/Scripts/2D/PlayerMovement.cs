@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -10,11 +11,6 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("References")]
     [SerializeField] private Rigidbody2D rb;
 
-    [FoldoutGroup("References")]
-    public CinemachineCamera cam1;
-
-    [FoldoutGroup("References")]
-    public CinemachineCamera cam2;
 
     [FoldoutGroup("ControllerSettings")]
     [SerializeField] private Vector2 moveInput;
@@ -25,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
 
 
     private bool CanMove = false;
+
+    public event Action OnEnterDoor;
+
     private void Awake()
     {
         inputs = new();
@@ -32,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Start()
     {
-        StartCoroutine(WaitForPlay());
+        StartCoroutine(WaitForPlay(timeDontMove));
     }
     private void OnEnable()
     {
@@ -81,16 +80,28 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             return;
         }
-        rb.linearVelocity = moveInput * PlayerController.instance.playerStats.moveSpeed;
+        rb.linearVelocity = moveInput * PlayerController2D.instance.playerStats.moveSpeed;
     }
     
-  
-    public IEnumerator WaitForPlay()
+    public void MethodWaitForPlay(float time)
     {
-        yield return new WaitForSeconds(timeDontMove);
+        StartCoroutine(WaitForPlay(time));
+    }
+    public IEnumerator WaitForPlay(float time)
+    {
+        CanMove = false;
+        yield return new WaitForSeconds(time);
         CanMove = true;
     }
-    
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Puerta"))
+        {
+            OnEnterDoor?.Invoke();
+            Debug.Log("Entro");
+        }
+    }
+
 
 }

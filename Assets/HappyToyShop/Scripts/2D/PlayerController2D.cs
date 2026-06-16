@@ -5,10 +5,10 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerAnimations))]
 [RequireComponent (typeof(PlayerStats))]
-public class PlayerController : MonoBehaviour
+public class PlayerController2D : MonoBehaviour
 {
     [FoldoutGroup("References")]
-    public static PlayerController instance;
+    public static PlayerController2D instance;
     [FoldoutGroup("References")]
     public PlayerMovement playerMovement;
     [FoldoutGroup("References")]
