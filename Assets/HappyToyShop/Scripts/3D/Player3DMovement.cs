@@ -13,6 +13,8 @@ using UnityEngine.UI;
 public class Player3DMovement : MonoBehaviour
 {
     #region Properties
+
+    private bool usingMonitor;
     public float timeToActiveMonitor = 1.5f;
     public float velocityToAccessCamera = 4;
     [FoldoutGroup("References")]
@@ -32,7 +34,13 @@ public class Player3DMovement : MonoBehaviour
     [FoldoutGroup("ControllerSettings/Monitor")]
     public Transform monitorViewPoint;
     private Vector3 originalTargetPosition;
+    public Transform cameraTarget;
+    public Camera[] securityCameras;
+    public GameObject monitorUI;
+    private CameraNode currentCamera;
 
+
+   
     [FoldoutGroup("ControllerSettings/Monitor")]
     public GameObject woodText;
     public float interactDistanceMonitor = 3f;
@@ -40,6 +48,7 @@ public class Player3DMovement : MonoBehaviour
     private float repairCounter;
     public Slider repairBar;
     public TMP_Text repairText;
+    
 
     [FoldoutGroup("ControllerSettings/Hold")]
     public Transform holdPoint;
@@ -116,11 +125,14 @@ public class Player3DMovement : MonoBehaviour
         inputs.Enable();
 
         inputs.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-      
+
         inputs.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
         inputs.Player.Grab.performed += GrabObject;
         inputs.Player.Grab.canceled += ReleaseObject;
+
+        inputs.Player.Interact.performed += Interact;
+        inputs.Player.Interact.canceled += Interact;
 
         inputs.Player.Sprint.performed += ctx => moveSpeed *= 2;
 
@@ -168,6 +180,7 @@ public class Player3DMovement : MonoBehaviour
         StartCoroutine(WaitForPlay());
    
         ChangefearEffect();
+        CreateCameraList();
 
     }
     void Update()
@@ -187,7 +200,7 @@ public class Player3DMovement : MonoBehaviour
     #region Methods
     public void OnSimpleMove()
     {
-        if(!CanMove)
+        if(!CanMove || usingMonitor)
         {  
             return; 
         }
@@ -296,6 +309,66 @@ public class Player3DMovement : MonoBehaviour
             }
         }
     }
+    public  void NextCamera()
+    {
+        currentCamera.camera.gameObject.SetActive(false);
+
+        currentCamera = currentCamera.next;
+
+        currentCamera.camera.gameObject.SetActive(true);
+    }
+    private void PreviousCamera()
+    {
+        currentCamera.camera.gameObject.SetActive(false);
+
+        currentCamera = currentCamera.previous;
+
+        currentCamera.camera.gameObject.SetActive(true);
+    }
+    private void Interact(InputAction.CallbackContext ctx)
+    {
+        if (usingMonitor)
+        {
+            ExitMonitor();
+            return;
+        }
+        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f))
+        {
+            if (hit.collider.gameObject.name.Contains("Monitor"))
+            {
+                StartCoroutine(MoveToMonitor());
+            }
+        }
+    }
+    private void CreateCameraList()
+    {
+        CameraNode first = null;
+        CameraNode previous = null;
+
+        foreach (Camera cam in securityCameras)
+        {
+            CameraNode node = new CameraNode(cam);
+
+            if (first == null)
+            {
+                first = node;
+            }
+
+            if (previous != null)
+            {
+                previous.next = node;
+                node.previous = previous;
+            }
+
+            previous = node;
+        }
+        previous.next = first;
+        first.previous = previous;
+
+        currentCamera = first;
+    }
 
 
 
@@ -347,6 +420,35 @@ public class Player3DMovement : MonoBehaviour
             }
         }
     }
+    private void EnterMonitor()
+    {
+        usingMonitor = true;
+
+        characterCamera.gameObject.SetActive(false);
+
+        currentCamera.camera.gameObject.SetActive(true);
+
+        monitorUI.SetActive(true);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void ExitMonitor()
+    {
+        usingMonitor = false;
+
+        currentCamera.camera.gameObject.SetActive(false);
+
+        characterCamera.gameObject.SetActive(true);
+
+        monitorUI.SetActive(false);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        cameraTarget.position = originalTargetPosition;
+    }
     private void ReleaseObject(InputAction.CallbackContext ctx)
     {
         if (grabbedObject != null)
@@ -374,6 +476,8 @@ public class Player3DMovement : MonoBehaviour
                 GameObject wood = window.transform.Find("WoodPlanks").gameObject;
 
                 wood.SetActive(true);
+                WoodPlanks planks = wood.GetComponent<WoodPlanks>();
+                planks.health = 5;
                 repairBar.gameObject.SetActive(false);
                 repairText.text = "Tablas de Maderas Puestas";
 
@@ -398,5 +502,48 @@ public class Player3DMovement : MonoBehaviour
 
         repairText.text = "";
     }
+
+    IEnumerator TimeToActiveMonitor()
+    {
+        StartCoroutine(AcercarCamera());
+        yield return new WaitForSeconds(timeToActiveMonitor);
+        characterCamera.Lens.FieldOfView = 60;
+        EnterMonitor();
+    }
+
+    IEnumerator MoveToMonitor()
+    {
+        originalTargetPosition = cameraTarget.position;
+
+        while (Vector3.Distance(cameraTarget.position, monitorViewPoint.position) > 0.01f)
+        {
+            cameraTarget.position = Vector3.MoveTowards(
+                cameraTarget.position,
+                monitorViewPoint.position,
+                3f * Time.deltaTime
+            );
+
+            yield return null;
+        }
+
+        cameraTarget.position = monitorViewPoint.position;
+
+        StartCoroutine(TimeToActiveMonitor());
+    }
+
+    public IEnumerator AcercarCamera()
+    {
+
+        float timer = 0;
+        while (timer < timeToActiveMonitor)
+        {
+            timer += Time.deltaTime;
+
+            characterCamera.Lens.FieldOfView -= velocityToAccessCamera / timer * Time.deltaTime;
+
+            yield return null;
+        }
+    }
+
     #endregion
 }

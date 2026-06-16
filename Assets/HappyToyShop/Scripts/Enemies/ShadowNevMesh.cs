@@ -9,6 +9,9 @@ public class EnemyShadow : MonoBehaviour
     public Transform[] windows;
     public stateMachine stateMachine;
     public NavMeshAgent agent;
+    public Transform player;
+    [Header("Movement")]
+    public float enemySpeed = 6f;
 
     [HideInInspector]
     public Transform currentWindow;
@@ -19,6 +22,7 @@ public class EnemyShadow : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = enemySpeed;
         stateMachine = new stateMachine();
         currentWindow = windows[Random.Range(0, windows.Length)];
       
@@ -29,4 +33,6 @@ public class EnemyShadow : MonoBehaviour
     {
         stateMachine.Update();
     }
+    
+    
 }
