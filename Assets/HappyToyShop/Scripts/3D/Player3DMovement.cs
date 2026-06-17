@@ -341,7 +341,15 @@ public class Player3DMovement : MonoBehaviour
                 StartCoroutine(MoveToMonitor());
             }
         }
+        BoxFisic caja = hit.collider.GetComponent<BoxFisic>();
+
+        if (caja != null)
+        {
+            caja.AbrirCaja();
+        }
     }
+
+    
     private void CreateCameraList()
     {
         CameraNode first = null;
