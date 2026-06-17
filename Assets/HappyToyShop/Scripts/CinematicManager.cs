@@ -55,5 +55,9 @@ public class CinematicManager : MonoBehaviour
 
         fadeAnimator.SetTrigger("TransitionEffectCamera");
 
+        playerCamera.Priority = 100;
+        introcamera.Priority = 0;
+        
+
     }
 }

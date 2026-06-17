@@ -17039,7 +17039,7 @@ MonoBehaviour:
     - rid: 7308594904444961026
       type: {class: SplineAutoDolly/FixedSpeed, ns: Unity.Cinemachine, asm: Unity.Cinemachine}
       data:
-        Speed: 0.08
+        Speed: 0.02
 --- !u!114 &1332825569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17054,7 +17054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
     Enabled: 1
-    m_Value: 40
+    m_Value: 20
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -23504,6 +23504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8d90aa78f27204a9236ee7327a49e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinematicManager
+  endingCamera: {fileID: 201283156}
   introcamera: {fileID: 1332825569}
   playerCamera: {fileID: 1620334787}
   fadeAnimator: {fileID: 4281250599636800115}
