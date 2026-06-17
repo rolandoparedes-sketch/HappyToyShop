@@ -13,6 +13,12 @@ public class GameManager2D : MonoBehaviour
     [SerializeField] private FactorySystem factorySystem;
     [FoldoutGroup("References")]
     [SerializeField] private WarehouseSystem warehouseSystem;
+    [FoldoutGroup("References")]
+    [SerializeField] private CustomerManager customerManager;
+
+
+
+
 
     private void Awake()
     {
@@ -41,4 +47,6 @@ public class GameManager2D : MonoBehaviour
     public DayManager DayManager => dayManager;
     public FactorySystem FactorySystem => factorySystem;
     public WarehouseSystem WarehouseSystem => warehouseSystem;
+
+    public CustomerManager CustomerManager => customerManager;
 }

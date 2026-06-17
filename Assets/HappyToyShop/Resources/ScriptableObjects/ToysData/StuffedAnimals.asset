@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Toys
   iD: 6
   entityName: Stuffed Animals
-  icon: {fileID: 0}
+  icon: {fileID: -1647661915, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Soft plush toys in different animal shapes
   toyPrefab: {fileID: 0}
   salePrice: 30
