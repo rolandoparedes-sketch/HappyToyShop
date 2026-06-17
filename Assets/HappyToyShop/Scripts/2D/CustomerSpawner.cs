@@ -6,6 +6,10 @@ using UnityEngine;
 public class CustomerSpawner : MonoBehaviour
 {
     [SerializeField] private int customerPerDay = 15;
+
+    [SerializeField] private int customerSpawnedToday;
+
+
     [SerializeField] private float timeMinToSpawnCustomers = 10;
     [SerializeField] private float timeMaxToSpawnCustomers = 15;
     [SerializeField] private float currentTimeToSpawnCustomers;
@@ -16,40 +20,59 @@ public class CustomerSpawner : MonoBehaviour
 
 
 
-
     void Start()
     {
-        ApplySpawnTime();
+        Initializer();
+
+        StartCoroutine(SpawnRoutine());
     }
 
     void Update()
     {
 
     }
+    private void OnEnable()
+    {
+        CustomerManager.OnCustomerLeft += HandleCustomerLeft;
+    }
 
+    private void OnDisable()
+    {
+        CustomerManager.OnCustomerLeft -= HandleCustomerLeft;
+    }
+
+    private void HandleCustomerLeft(NPCCustomer customer)
+    {
+        currentCustomers--;
+    }
+    public void Initializer()
+    {
+        maxCustomersinStore = GameManager2D.instance.CustomerManager.Size;
+    }
     public void ApplySpawnTime()
     {
         currentTimeToSpawnCustomers = Random.Range(timeMinToSpawnCustomers, timeMaxToSpawnCustomers + 1);
     }
     private IEnumerator SpawnRoutine()
     {
-        ApplySpawnTime();
-
-        while (true)
+        while (customerSpawnedToday < customerPerDay)
         {
+            ApplySpawnTime();
+
             yield return new WaitForSeconds(currentTimeToSpawnCustomers);
 
             yield return new WaitUntil(() => currentCustomers < maxCustomersinStore);
 
             SpawnCustomer();
 
-            ApplySpawnTime();
+            customerSpawnedToday++;
         }
     }
 
     [Button]
     public void SpawnCustomer()
     {
+
         NPCCustomer customer = GameManager2D.instance.CustomerManager.NextCustomer();
 
         if (customer == null)
@@ -63,13 +86,9 @@ public class CustomerSpawner : MonoBehaviour
         customer.gameObject.SetActive(true);
         customer.Initializer();
 
+        GameManager2D.instance.CustomerManager.AddToQueue(customer);
         currentCustomers++;
     }
 
-
-    private void HandleCustomerLeft()
-    {
-        currentCustomers--;
-    }
 }
 

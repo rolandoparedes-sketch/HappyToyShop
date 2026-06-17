@@ -8,6 +8,8 @@ TagManager:
   - Box
   - Monitor
   - Puerta
+  - Customer
+  - Atention
   layers:
   - Default
   - TransparentFX
