@@ -98,7 +98,7 @@ public class CustomerManager : MonoBehaviour
 
         waitingCustomers.Dequeue();
         //customer.ResetCustomer();
-        UpdateQueue();
+        //UpdateQueue();
 
        // OnChangeQueue?.Invoke();
     }
