@@ -13,7 +13,7 @@ using UnityEngine.UI;
 public class Player3DMovement : MonoBehaviour
 {
     #region Properties
-
+    
     private bool usingMonitor;
     public float timeToActiveMonitor = 1.5f;
     public float velocityToAccessCamera = 4;
@@ -32,15 +32,16 @@ public class Player3DMovement : MonoBehaviour
     public float interactDistance = 3f;
 
     [FoldoutGroup("ControllerSettings/Monitor")]
-    public Transform monitorViewPoint;
+    public CinemachineCamera monitorCamera;
     private Vector3 originalTargetPosition;
     public Transform cameraTarget;
-    public Camera[] securityCameras;
+    public CinemachineCamera[] securityCameras;
     public GameObject monitorUI;
     private CameraNode currentCamera;
+    public GameObject nextButton;
 
 
-   
+
     [FoldoutGroup("ControllerSettings/Monitor")]
     public GameObject woodText;
     public float interactDistanceMonitor = 3f;
@@ -177,6 +178,8 @@ public class Player3DMovement : MonoBehaviour
     #endregion
     void Start()
     {
+        characterCamera.Priority = 50;
+        monitorCamera.Priority = 10;
         StartCoroutine(WaitForPlay());
    
         ChangefearEffect();
@@ -311,19 +314,22 @@ public class Player3DMovement : MonoBehaviour
     }
     public  void NextCamera()
     {
-        currentCamera.camera.gameObject.SetActive(false);
+        Debug.Log("Siguiente cámara");
+        currentCamera.camera.Priority = 10;
 
         currentCamera = currentCamera.next;
 
-        currentCamera.camera.gameObject.SetActive(true);
+        Debug.Log("Nueva: " + currentCamera.camera.name);
+
+        currentCamera.camera.Priority = 50;
     }
     private void PreviousCamera()
     {
-        currentCamera.camera.gameObject.SetActive(false);
+        currentCamera.camera.Priority = 10;
 
         currentCamera = currentCamera.previous;
 
-        currentCamera.camera.gameObject.SetActive(true);
+        currentCamera.camera.Priority = 50;
     }
     private void Interact(InputAction.CallbackContext ctx)
     {
@@ -338,10 +344,13 @@ public class Player3DMovement : MonoBehaviour
         {
             if (hit.collider.gameObject.name.Contains("Monitor"))
             {
-                StartCoroutine(MoveToMonitor());
+                characterCamera.Priority = 10;
+                monitorCamera.Priority = 50;
+
+                StartCoroutine(OpenSecurityCameras());
             }
         }
-        BoxFisic caja = hit.collider.GetComponent<BoxFisic>();
+            BoxFisic caja = hit.collider.GetComponent<BoxFisic>();
 
         if (caja != null)
         {
@@ -355,8 +364,10 @@ public class Player3DMovement : MonoBehaviour
         CameraNode first = null;
         CameraNode previous = null;
 
-        foreach (Camera cam in securityCameras)
+        foreach (CinemachineCamera cam in securityCameras)
         {
+          
+          
             CameraNode node = new CameraNode(cam);
 
             if (first == null)
@@ -376,6 +387,7 @@ public class Player3DMovement : MonoBehaviour
         first.previous = previous;
 
         currentCamera = first;
+        currentCamera.camera.Priority = 50;
     }
 
 
@@ -430,14 +442,14 @@ public class Player3DMovement : MonoBehaviour
     }
     private void EnterMonitor()
     {
+
         usingMonitor = true;
 
-        characterCamera.gameObject.SetActive(false);
-
-        currentCamera.camera.gameObject.SetActive(true);
+       
+        currentCamera.camera.Priority = 50;
 
         monitorUI.SetActive(true);
-
+        nextButton.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -445,17 +457,15 @@ public class Player3DMovement : MonoBehaviour
     private void ExitMonitor()
     {
         usingMonitor = false;
-
-        currentCamera.camera.gameObject.SetActive(false);
-
-        characterCamera.gameObject.SetActive(true);
+        currentCamera.camera.Priority = 10;
+        monitorCamera.Priority = 10;
+        characterCamera.Priority = 50;
 
         monitorUI.SetActive(false);
+        nextButton.SetActive(false);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
-        cameraTarget.position = originalTargetPosition;
     }
     private void ReleaseObject(InputAction.CallbackContext ctx)
     {
@@ -510,47 +520,30 @@ public class Player3DMovement : MonoBehaviour
 
         repairText.text = "";
     }
-
-    IEnumerator TimeToActiveMonitor()
-    {
-        StartCoroutine(AcercarCamera());
-        yield return new WaitForSeconds(timeToActiveMonitor);
-        characterCamera.Lens.FieldOfView = 60;
-        EnterMonitor();
-    }
-
-    IEnumerator MoveToMonitor()
-    {
-        originalTargetPosition = cameraTarget.position;
-
-        while (Vector3.Distance(cameraTarget.position, monitorViewPoint.position) > 0.01f)
-        {
-            cameraTarget.position = Vector3.MoveTowards(
-                cameraTarget.position,
-                monitorViewPoint.position,
-                3f * Time.deltaTime
-            );
-
-            yield return null;
-        }
-
-        cameraTarget.position = monitorViewPoint.position;
-
-        StartCoroutine(TimeToActiveMonitor());
-    }
-
     public IEnumerator AcercarCamera()
     {
-
         float timer = 0;
+
         while (timer < timeToActiveMonitor)
         {
             timer += Time.deltaTime;
 
-            characterCamera.Lens.FieldOfView -= velocityToAccessCamera / timer * Time.deltaTime;
+            monitorCamera.Lens.FieldOfView -= velocityToAccessCamera / timer * Time.deltaTime;
 
             yield return null;
         }
+    }
+
+
+
+
+    private IEnumerator OpenSecurityCameras()
+    {
+        yield return StartCoroutine(AcercarCamera());
+
+        monitorCamera.Priority = 10;
+
+        EnterMonitor();
     }
 
     #endregion
