@@ -21,30 +21,31 @@ public class CustomerManager : MonoBehaviour
     private readonly Queue<NPCCustomer> waitingCustomers = new();
 
 
-
+    public Action OnCutomerEnter;
     public static Action<NPCCustomer> OnCustomerLeft;
+    public Action<NPCCustomer> OnCustomerAttended;
 
-
-
+    public Action OnChangeQueue;
 
 
 
     void Start()
     {
         CreatPoolCustomers(size);
+        OnCustomerAttended += CustomerAttended;
 
     }
+
     private void OnEnable()
     {
-
-        OnCustomerLeft += HandleCustomerLeft;
-
+        OnCustomerLeft += ReturnNPCToPool;
     }
 
     private void OnDisable()
     {
-        OnCustomerLeft -= HandleCustomerLeft;
+        OnCustomerLeft -= ReturnNPCToPool;
     }
+
     [Button]
 
     public NPCCustomer NextCustomer()
@@ -70,26 +71,36 @@ public class CustomerManager : MonoBehaviour
 
     public void AddToQueue(NPCCustomer customer)
     {
-        customer.SetExitPoint(exitPoint);
 
         waitingCustomers.Enqueue(customer);
 
         UpdateQueue();
     }
-    private void HandleCustomerLeft(NPCCustomer customer)
+    private void ReturnNPCToPool(NPCCustomer customer)
+    {
+        if (waitingCustomers.Count == 0)
+            return;
+
+       // waitingCustomers.Dequeue();
+
+       // customer.ResetCustomer();
+
+        customer.gameObject.SetActive(false);
+
+        customerPool.Enqueue(customer);
+        UpdateQueue();
+
+    }
+    private void CustomerAttended(NPCCustomer customer)
     {
         if (waitingCustomers.Count == 0)
             return;
 
         waitingCustomers.Dequeue();
-
-        customer.ResetCustomer();
-
-        customer.gameObject.SetActive(false);
-
-        customerPool.Enqueue(customer);
-
+        //customer.ResetCustomer();
         UpdateQueue();
+
+       // OnChangeQueue?.Invoke();
     }
     private void UpdateQueue()
     {
@@ -103,11 +114,18 @@ public class CustomerManager : MonoBehaviour
             
                 break;
             }
-
             customer.SetTarget(queuePositions[index]);
+
+            Debug.Log("index: " + index);
+
+            Debug.Log("QueuePostions.Length: " + queuePositions.Length);
+
+            Debug.Log("WaitingCutomers.Count: " + waitingCustomers.Count);
 
             index++;
         }
+
+
     }
     #region Getters
     public NPCCustomer CustomerPrefab => customerPrefab;

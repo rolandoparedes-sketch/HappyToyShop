@@ -22,7 +22,6 @@ public class CustomerSpawner : MonoBehaviour
 
     void Start()
     {
-        Initializer();
 
         StartCoroutine(SpawnRoutine());
     }
@@ -33,21 +32,17 @@ public class CustomerSpawner : MonoBehaviour
     }
     private void OnEnable()
     {
-        CustomerManager.OnCustomerLeft += HandleCustomerLeft;
+        CustomerManager.OnCustomerLeft += RemoveCustomerInStore;
     }
 
     private void OnDisable()
     {
-        CustomerManager.OnCustomerLeft -= HandleCustomerLeft;
+        CustomerManager.OnCustomerLeft -= RemoveCustomerInStore;
     }
 
-    private void HandleCustomerLeft(NPCCustomer customer)
+    private void RemoveCustomerInStore(NPCCustomer customer)
     {
         currentCustomers--;
-    }
-    public void Initializer()
-    {
-        maxCustomersinStore = GameManager2D.instance.CustomerManager.Size;
     }
     public void ApplySpawnTime()
     {

@@ -25,22 +25,17 @@ public class NPCCustomer : MonoBehaviour
 
 
 
-    [SerializeField] private Transform exitPoint;
 
 
-    public Rigidbody2D Rb;
+    [SerializeField] private Rigidbody2D rb;
 
     [SerializeField] private float stopDistance = 0.05f;
 
-    private Transform target;
-    private bool isMoving;
-    private bool annoying;
+    [SerializeField] private Transform target;
+    [SerializeField] private bool isMoving;
 
-    private bool enter;
-    private bool exit;
+    [SerializeField] private bool exit;
 
-
-    private Coroutine currentPatienceCoroutine;
     /* public NPC(NpcDataDialogues dialogues, TypeDialogue typeDialogue, Sprite sprite, Animator animator, float patience)
      {
          Dialogues = dialogues;
@@ -52,33 +47,68 @@ public class NPCCustomer : MonoBehaviour
      }*/
     private void Awake()
     {
-        Rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
     void Start()
     {
         //Initializer();
 
+        
+
+    }
+
+    private void OnEnable()
+    {
+        GameManager2D.instance.CustomerManager.OnChangeQueue += expandPatience;
     }
     void Update()
+    {
+        NpcMovement();
+        TimeToWait();
+    }
+    public void expandPatience()
+    {
+        patience += 5;
+        Debug.Log("Paciencia aumentada");
+    }
+    public void TimeToWait()
+    {
+        if(isMoving || target == null)
+            return;
+
+        patience-= Time.deltaTime;
+
+        if (patience <= 0)
+        {
+            GameManager2D.instance.CustomerManager.OnCustomerAttended?.Invoke(this);
+            
+            ExitStore(GameManager2D.instance.CustomerManager.ExitPoint);
+        }
+
+            
+    }
+    public void NpcMovement()
     {
         if (!isMoving || target == null)
             return;
 
         Vector2 direction = (target.position - transform.position).normalized;
 
-        Rb.linearVelocity = direction * moveSpeed;
+        rb.linearVelocity = direction * moveSpeed;
 
         if (Vector2.Distance(transform.position, target.position) <= stopDistance)
         {
             transform.position = target.position;
 
-            Rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
 
             isMoving = false;
 
             if (exit)
             {
                 LeaveStore();
+
+                Debug.Log(target);
                 return;
             }
 
@@ -87,25 +117,24 @@ public class NPCCustomer : MonoBehaviour
                 globoPedido.SetActive(true);
             }
 
-            currentPatienceCoroutine = StartCoroutine(InitializerTimeToWait());
+            
+
         }
+
     }
     public void ExitStore(Transform exitTransform)
     {
         exit = true;
-        enter = false;
 
         target = exitTransform;
-        isMoving = true;
+        
+        isMoving= true;
 
         this.gameObject.GetComponent<Collider2D>().enabled = false;
         globoPedido.SetActive(false);
 
-        if (currentPatienceCoroutine != null)
-        {
-            StopCoroutine(currentPatienceCoroutine);
-            currentPatienceCoroutine = null;
-        }
+
+
     }
     public void SetTarget(Transform targetPoint)
     {
@@ -115,17 +144,7 @@ public class NPCCustomer : MonoBehaviour
         target = targetPoint;
         isMoving = true;
 
-        globoPedido.SetActive(false);
-
-        if (currentPatienceCoroutine != null)
-        {
-            StopCoroutine(currentPatienceCoroutine);
-            currentPatienceCoroutine = null;
-        }
-    }
-    public void SetExitPoint(Transform point)
-    {
-        exitPoint = point;
+       
     }
     [Button]
     public void Initializer()
@@ -190,36 +209,6 @@ public class NPCCustomer : MonoBehaviour
     {
 
         CustomerManager.OnCustomerLeft?.Invoke(this);
-    }
-
-    public IEnumerator InitializerTimeToWait()
-    {
-        Debug.Log($"{name}: paciencia iniciada");
-
-        yield return new WaitForSeconds(patience);
-
-        Debug.Log($"{name}: paciencia terminada");
-
-        ExitStore(exitPoint);
-    }
-    public void ResetCustomer()
-    {
-        if (currentPatienceCoroutine != null)
-        {
-            StopCoroutine(currentPatienceCoroutine);
-            currentPatienceCoroutine = null;
-        }
-
-        globoPedido.SetActive(false);
-
-        target = null;
-
-        isMoving = false;
-        exit = false;
-        annoying = false;
-
-        Rb.linearVelocity = Vector2.zero;
-        Rb.angularVelocity = 0f;
     }
 
 }

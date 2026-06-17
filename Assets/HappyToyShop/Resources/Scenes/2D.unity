@@ -150,8 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomerSpawner
   customerPerDay: 15
   customerSpawnedToday: 0
-  timeMinToSpawnCustomers: 8
-  timeMaxToSpawnCustomers: 10
+  timeMinToSpawnCustomers: 2
+  timeMaxToSpawnCustomers: 3
   currentTimeToSpawnCustomers: 0
   currentCustomers: 0
   maxCustomersinStore: 5
@@ -2569,13 +2569,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerManager
   customerPrefab: {fileID: 6480737342193323671, guid: 0b6b9e1d65a99764caf057d2004ef66d, type: 3}
-  size: 7
+  size: 5
   queuePositions:
   - {fileID: 613145401}
   - {fileID: 1095131861}
   - {fileID: 1823642187}
   - {fileID: 1624263174}
   - {fileID: 1497112548}
+  - {fileID: 1435104932}
   exitPoint: {fileID: 760933158}
 --- !u!4 &605017855
 Transform:
@@ -4400,6 +4401,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1435104931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1435104932}
+  m_Layer: 0
+  m_Name: PointF
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1435104932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435104931}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.37, y: 0.68, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1438882037
 GameObject:
   m_ObjectHideFlags: 0
@@ -6731,4 +6763,5 @@ SceneRoots:
   - {fileID: 1823642187}
   - {fileID: 1624263174}
   - {fileID: 1497112548}
+  - {fileID: 1435104932}
   - {fileID: 760933158}
