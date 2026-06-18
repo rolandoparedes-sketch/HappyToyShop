@@ -10394,7 +10394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13db0b266f660d949ba4e9a9fcd7e829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player3DMovement
-  timeToActiveMonitor: 5
+  fadeAnimator: {fileID: 4281250599636800115}
+  timeToActiveMonitor: 3
   velocityToAccessCamera: 4
   characterCamera: {fileID: 1620334787}
   currentFearState: 0
@@ -10408,6 +10409,7 @@ MonoBehaviour:
   - {fileID: 682998837}
   monitorUI: {fileID: 327873479}
   nextButton: {fileID: 1342328425}
+  cinemachineBrain: {fileID: 426998649}
   woodText: {fileID: 1305657440}
   interactDistanceMonitor: 3
   woodPlanks: {fileID: 1401422502}
@@ -11026,7 +11028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
-    Enabled: 0
+    Enabled: 1
     m_Value: 0
   OutputChannel: 1
   StandbyUpdate: 2
@@ -23371,6 +23373,7 @@ MonoBehaviour:
   introcamera: {fileID: 1332825569}
   playerCamera: {fileID: 1620334787}
   fadeAnimator: {fileID: 4281250599636800115}
+  cinematicDuration: 7
 --- !u!4 &1826245372
 Transform:
   m_ObjectHideFlags: 0

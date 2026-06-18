@@ -13,7 +13,7 @@ using UnityEngine.UI;
 public class Player3DMovement : MonoBehaviour
 {
     #region Properties
-    
+    public Animator fadeAnimator;
     private bool usingMonitor;
     public float timeToActiveMonitor = 1.5f;
     public float velocityToAccessCamera = 4;
@@ -39,7 +39,7 @@ public class Player3DMovement : MonoBehaviour
     public GameObject monitorUI;
     private CameraNode currentCamera;
     public GameObject nextButton;
-
+    public CinemachineBrain cinemachineBrain;
 
 
     [FoldoutGroup("ControllerSettings/Monitor")]
@@ -81,6 +81,7 @@ public class Player3DMovement : MonoBehaviour
 
     private Coroutine currentCoroutine;
     public Action OnStateFearChange;
+    public Action OnWatchingCameras;
 
     [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 1f)]
     [SerializeField]private float amplitudeGainCalm = 0.5f;
@@ -366,8 +367,8 @@ public class Player3DMovement : MonoBehaviour
 
         foreach (CinemachineCamera cam in securityCameras)
         {
-          
-          
+           
+
             CameraNode node = new CameraNode(cam);
 
             if (first == null)
@@ -387,7 +388,7 @@ public class Player3DMovement : MonoBehaviour
         first.previous = previous;
 
         currentCamera = first;
-        currentCamera.camera.Priority = 50;
+        
     }
 
 
@@ -445,21 +446,40 @@ public class Player3DMovement : MonoBehaviour
 
         usingMonitor = true;
 
-       
-        currentCamera.camera.Priority = 50;
+        if (cinemachineBrain != null)
+        {
+            cinemachineBrain.DefaultBlend = new CinemachineBlendDefinition
+            {
+                Style = CinemachineBlendDefinition.Styles.Cut,
+                Time = 0f
+            };
+        }
+
+        currentCamera.camera.Priority = 70;
 
         monitorUI.SetActive(true);
         nextButton.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        OnWatchingCameras?.Invoke();
     }
 
     private void ExitMonitor()
     {
         usingMonitor = false;
+
+        if (cinemachineBrain != null)
+        {
+            cinemachineBrain.DefaultBlend = new CinemachineBlendDefinition
+            {
+                Style = CinemachineBlendDefinition.Styles.EaseInOut,
+                Time = 0.8f 
+            };
+        }
         currentCamera.camera.Priority = 10;
-        monitorCamera.Priority = 10;
+        monitorCamera.Priority = 30;
         characterCamera.Priority = 50;
+
 
         monitorUI.SetActive(false);
         nextButton.SetActive(false);
@@ -539,6 +559,11 @@ public class Player3DMovement : MonoBehaviour
 
     private IEnumerator OpenSecurityCameras()
     {
+
+        fadeAnimator.SetTrigger("TransitionEffectCamera");
+
+        yield return new WaitForSeconds(0.3f);
+
         yield return StartCoroutine(AcercarCamera());
 
         monitorCamera.Priority = 10;
