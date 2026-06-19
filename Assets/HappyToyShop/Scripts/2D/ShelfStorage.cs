@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShelfStorage : MonoBehaviour, IInteractuable
@@ -7,11 +9,15 @@ public class ShelfStorage : MonoBehaviour, IInteractuable
     public int CurrentAmount;
     public int MaxCapacity = 18;
 
-    
+
+    public static event Action OnTakeToy;
 
     void Start()
     {
         
+
+
+
     }
 
     void Update()
@@ -20,31 +26,56 @@ public class ShelfStorage : MonoBehaviour, IInteractuable
     }
     public void Interact()
     {
+        Debug.Log("INTERACTUO");
 
-        if (PlayerController2D.instance.playerMechanics.ToyData != null)
+        var player = PlayerController2D.instance.playerMechanics;
+        if (player.ToyData == null)
+        {
+
             GiveToy();
-        else
+            return;
+        }
+        if (player.CurrentShelf == this)
+        {
             ReturnToy();
+            return;
+        }
+
+        player.CurrentShelf.ReturnToy();
+        GiveToy();
     }
     public void GiveToy()
     {
         if (CurrentAmount <= 0)
             return;
 
-        PlayerController2D.instance.playerMechanics.AddToy(data);
+        var player = PlayerController2D.instance.playerMechanics;
+
+        player.AddToy(data, this);
 
         CurrentAmount--;
 
         GameManager2D.instance.DataGame.currentAmountInShelfs[ShelfID]--;
+
+        Debug.Log("DIO JUGUETE: " + data.EntityName);
+
+
+        OnTakeToy?.Invoke();
     }
     public void ReturnToy()
     {
         if (CurrentAmount >= MaxCapacity)
             return;
 
-        PlayerController2D.instance.playerMechanics.RemoveToy();
+        var player = PlayerController2D.instance.playerMechanics;
+
+        player.RemoveToy();
         CurrentAmount++;
 
         GameManager2D.instance.DataGame.currentAmountInShelfs[ShelfID]++;
+
+
+        Debug.Log("DEVOLVIO JUGUETE: " + data.EntityName);
+        OnTakeToy?.Invoke();
     }
 }

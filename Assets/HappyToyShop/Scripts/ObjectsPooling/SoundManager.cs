@@ -9,10 +9,14 @@ using static UnityEngine.Rendering.PostProcessing.SubpixelMorphologicalAntialias
 
 public class SoundManager : MonoBehaviour
 {
+    [FoldoutGroup("References")]
+    public MusicDatabase musicDatabase;
+    [FoldoutGroup("References")]
     public SoundPlayer SoundPlayerPrefab;
 
 
 
+    [FoldoutGroup("References")]
     public List<SoundPlayer> SoundPlayerList;
     
     public MyQueue<SoundPlayer> MusicPool = new();
@@ -23,6 +27,20 @@ public class SoundManager : MonoBehaviour
 
     public int size = 20;
 
+    [FoldoutGroup("Music Background")]
+    [SerializeField] private float fadeOutDuration = 2;
+
+    [FoldoutGroup("Music Background")]
+    [SerializeField] private float fadeInDuration = 2;
+    [FoldoutGroup("Music Background")]
+    [SerializeField] private SoundPlayer currentMusic;
+    [FoldoutGroup("Music Background")]
+    [SerializeField] private SoundType SoundType;
+    [FoldoutGroup("Music Background")]
+    [SerializeField] private int ID;
+
+
+
     public static Action<SoundPlayer> OnFinishAudio;
 
     void Start()
@@ -32,7 +50,17 @@ public class SoundManager : MonoBehaviour
         ExpandSoundPlayerUI(size);
         ExpandSoundPlayerAmbient(size);
         ExpandSoundPlayerVoice(size);
+
+        PlayMusicBackground();
+
     }
+    [Button]
+    public void PlayMusicBackground()
+    {
+
+        PlayMusic(SoundType, ID);
+    }
+  
     private void OnEnable()
     {
         OnFinishAudio += EnqueueAudio;
@@ -80,19 +108,38 @@ public class SoundManager : MonoBehaviour
 
     public void PlayMusic(SoundType type, int id)
     {
+        /* if (MusicPool.Head == null || MusicPool.Count == 0)
+         {
+             Debug.Log("Se agrando la lista");
+             ExpandSoundPlayerMusic(5);
+             // PlayAudio(audioName);
+             return;
+         }
+         AudioData data = musicDatabase.GetAudio(type, id);
+
+         SoundPlayer soundPlayer = SoundPlayerList[0];
+         soundPlayer = MusicPool.Dequeue();
+         soundPlayer.gameObject.SetActive(true);
+         soundPlayer.PlayAudio(data.Clip, data.Volume, type);*/
+
+
+
+        if (currentMusic != null)
+        {
+            currentMusic.FadeOut(fadeOutDuration);
+        }
+
         if (MusicPool.Head == null || MusicPool.Count == 0)
         {
-            Debug.Log("Se agrando la lista");
             ExpandSoundPlayerMusic(5);
-            // PlayAudio(audioName);
-            return;
         }
-        AudioData data = GameManager.instance.musicDatabase.GetAudio(type, id);
 
-        SoundPlayer soundPlayer = SoundPlayerList[0];
-        soundPlayer = MusicPool.Dequeue();
-        soundPlayer.gameObject.SetActive(true);
-        soundPlayer.PlayAudio(data.Clip, data.Volume, type);
+        AudioData data = musicDatabase.GetAudio(type, id);
+
+        currentMusic = MusicPool.Dequeue();
+        currentMusic.gameObject.SetActive(true);
+
+        currentMusic.FadeIn(data.Clip, data.Volume, fadeInDuration, type);
     }
 
     public void PlaySFX(SoundType type, int id)
@@ -104,7 +151,7 @@ public class SoundManager : MonoBehaviour
             // PlayAudio(audioName);
             return;
         }
-        AudioData data = GameManager.instance.musicDatabase.GetAudio(type, id);
+        AudioData data = musicDatabase.GetAudio(type, id);
         SoundPlayer soundPlayer = SoundPlayerList[1];
         soundPlayer = SFXPool.Dequeue();
         soundPlayer.gameObject.SetActive(true);
@@ -119,7 +166,7 @@ public class SoundManager : MonoBehaviour
             // PlayAudio(audioName);
             return;
         }
-        AudioData data = GameManager.instance.musicDatabase.GetAudio(type, id);
+        AudioData data = musicDatabase.GetAudio(type, id);
 
         SoundPlayer soundPlayer = SoundPlayerList[2];
         soundPlayer = UIPool.Dequeue();
@@ -135,7 +182,7 @@ public class SoundManager : MonoBehaviour
             // PlayAudio(audioName);
             return;
         }
-        AudioData data = GameManager.instance.musicDatabase.GetAudio(type, id);
+        AudioData data = musicDatabase.GetAudio(type, id);
 
         SoundPlayer soundPlayer = SoundPlayerList[3];
         soundPlayer = AmbientPool.Dequeue();
@@ -151,7 +198,7 @@ public class SoundManager : MonoBehaviour
             // PlayAudio(audioName);
             return;
         }
-        AudioData data = GameManager.instance.musicDatabase.GetAudio(type, id);
+        AudioData data = musicDatabase.GetAudio(type, id);
 
         SoundPlayer soundPlayer = SoundPlayerList[4];
         soundPlayer = VoicePool.Dequeue();
@@ -256,5 +303,14 @@ public class SoundManager : MonoBehaviour
         Debug.Log(SFXPool.Count);
     }
 
+    [Button]
+    public void StopMusicBackground(float fadeDuration)
+    {
+        if (currentMusic == null)
+            return;
+
+        currentMusic.FadeOut(fadeDuration);
+        currentMusic = null;
+    }
 
 }

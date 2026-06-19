@@ -2,13 +2,18 @@ using Sirenix.OdinInspector;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     public TextMeshProUGUI Day;
+
+    public Image ToyInHand;
     private void Awake()
     {
+
+
      
         if (instance == null)
         {
@@ -20,7 +25,20 @@ public class UIManager : MonoBehaviour
         }
 
         GameManager2D.instance.DayManager.OnNextDay += UpdateDay;
+        ShelfStorage.OnTakeToy += ChangeUIinHand;
+    }
 
+    private void ChangeUIinHand()
+    {
+        if(PlayerController2D.instance.playerMechanics.ToyData == null)
+        {
+
+            ToyInHand.sprite = null;
+            return;
+        }
+
+        ToyInHand.sprite = PlayerController2D.instance.playerMechanics.ToyData.Icon;
+        
     }
 
     private void UpdateDay()

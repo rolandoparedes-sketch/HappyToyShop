@@ -9,32 +9,37 @@ public class PlayerMechanics2D : MonoBehaviour
 
 
     [FoldoutGroup("Interact")]
-    public Transform InteractController;
-    public Vector2 DimensionBox;
+    public ShelfStorage CurrentShelf;
+    [SerializeField] private Transform InteractController;
+    [SerializeField] private Vector2 DimensionBox;
+    [SerializeField] private LayerMask InteractuableObjects;
 
 
     void Start()
     {
         PlayerController2D.instance.playerMovement.OnInteract += Interact;
     }
-    public void AddToy(ToyData toy)
+    public void AddToy(ToyData toy, ShelfStorage shelf)
     {
         ToyData = toy;
+        CurrentShelf = shelf;
     }
     public void RemoveToy()
     {
         ToyData = null;
+        CurrentShelf = null;
     }
     private void Interact()
     {
         Debug.Log("Interacturar");
-        Collider2D objectTouched = Physics2D.OverlapBox(InteractController.position, DimensionBox, 0f);
+        Collider2D objectTouched = Physics2D.OverlapBox(InteractController.position, DimensionBox, 0f, InteractuableObjects);
 
-        if( objectTouched.TryGetComponent<IInteractuable>(out var interactuable))
+        if(objectTouched != null && objectTouched.TryGetComponent<IInteractuable>(out var interactuable))
         {
             Debug.Log(interactuable);
 
             interactuable.Interact();
+
         }
 
     }

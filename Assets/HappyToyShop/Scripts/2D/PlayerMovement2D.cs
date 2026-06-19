@@ -57,7 +57,6 @@ public class PlayerMovement2D : MonoBehaviour
 
         inputs.Player.Interact.performed += ctx =>
         {
-            Debug.Log("Tecla E");
             OnInteract?.Invoke();
         };
 

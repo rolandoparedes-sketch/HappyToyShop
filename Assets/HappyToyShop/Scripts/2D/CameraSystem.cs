@@ -11,11 +11,16 @@ public class CameraSystem : MonoBehaviour
     public CinemachineCamera camera1;
     public CinemachineCamera camera2;
 
+    public Transform Door1;
+    public Transform Door2;
 
     public float timeFade;
+    public Transform Target;
     void Start()
     {
         PlayerController2D.instance.playerMovement.OnEnterDoor += ChangeCameras;
+
+        Target = camera2.Target.TrackingTarget;
 
     }
     [Button]
@@ -26,6 +31,7 @@ public class CameraSystem : MonoBehaviour
         PlayerController2D.instance.playerMovement.MethodWaitForPlay(timeFade);
 
 
+        camera2.Target.TrackingTarget = null;
         StartCoroutine(DelayChangeCameras());
    
 
@@ -39,7 +45,7 @@ public class CameraSystem : MonoBehaviour
         if (camera1.Priority > camera2.Priority)
         {
 
-            Vector3 newpos = new Vector3(originalPos.x - 9.5f, originalPos.y, originalPos.z);
+            Vector3 newpos = new Vector3(Door2.position.x - 1f, originalPos.y, originalPos.z);
 
 
             PlayerController2D.instance.transform.position = newpos;
@@ -48,7 +54,7 @@ public class CameraSystem : MonoBehaviour
         else
         {
 
-            Vector3 newpos = new Vector3(originalPos.x + 9.5f, originalPos.y, originalPos.z);
+            Vector3 newpos = new Vector3(Door1.position.x + 2f, originalPos.y, originalPos.z);
 
             PlayerController2D.instance.transform.position = newpos;
         }
@@ -58,10 +64,12 @@ public class CameraSystem : MonoBehaviour
         {
             camera1.Priority = 0;
             camera2.Priority = 1;
+
+            camera2.Target.TrackingTarget = Target;
+            camera2.gameObject.SetActive(true);
         }
         else
         {
-
             camera1.Priority = 1;
             camera2.Priority = 0;
         }

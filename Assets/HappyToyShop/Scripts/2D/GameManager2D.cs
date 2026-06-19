@@ -17,7 +17,10 @@ public class GameManager2D : MonoBehaviour
     [SerializeField] private CustomerManager customerManager;
     [FoldoutGroup("References")]
     [SerializeField] private DataGame dataGame;
-
+    [FoldoutGroup("References")]
+    [SerializeField] private SoundManager soundManager;
+    [FoldoutGroup("References")]
+    [SerializeField] private CameraSystem cameraSystem;
 
 
     private void Awake()
@@ -25,7 +28,6 @@ public class GameManager2D : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -51,4 +53,7 @@ public class GameManager2D : MonoBehaviour
     public CustomerManager CustomerManager => customerManager;
 
     public DataGame DataGame => dataGame;
+    public SoundManager SoundManager => soundManager;
+
+    public CameraSystem CameraSystem => cameraSystem;
 }
