@@ -313,4 +313,6 @@ public class SoundManager : MonoBehaviour
         currentMusic = null;
     }
 
+
+    public SoundPlayer CurrentMusic => currentMusic;
 }

@@ -3,6 +3,9 @@ using UnityEngine;
 public class PlayerAnimations2D : MonoBehaviour
 {
     public Animator animator;
+
+
+    public bool isFacingUp;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -14,8 +17,9 @@ public class PlayerAnimations2D : MonoBehaviour
 
     void Update()
     {
-        
+
     }
+
     public void setMoveAnimation(Vector2 vector)
     {
         animator.SetFloat("Speed", vector.magnitude);
@@ -24,6 +28,8 @@ public class PlayerAnimations2D : MonoBehaviour
         {
             animator.SetFloat("Vertical", vector.y);
         }
-    }
 
+
+
+    }
 }

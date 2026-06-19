@@ -6,8 +6,8 @@ public class PlayerMechanics2D : MonoBehaviour
 {
     [FoldoutGroup("Inventory")]
     public ToyData ToyData;
-
-
+    public GameObject Gift;
+    public bool HasGift;
     [FoldoutGroup("Interact")]
     public ShelfStorage CurrentShelf;
     [SerializeField] private Transform InteractController;

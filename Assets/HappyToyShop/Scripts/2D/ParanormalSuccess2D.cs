@@ -1,4 +1,5 @@
 using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class ParanormalSuccess2D : MonoBehaviour
@@ -10,7 +11,7 @@ public class ParanormalSuccess2D : MonoBehaviour
     {
 
     }
-
+    [Button]
     public void KnockKnock()
     {
         FreezeALL();

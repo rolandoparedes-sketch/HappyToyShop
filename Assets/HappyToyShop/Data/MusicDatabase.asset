@@ -22,6 +22,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 224a2e91837122b46a8f7548730f0cc6, type: 2}
     - {fileID: 11400000, guid: 379d3b7fb8d2b2b4c9cd1345d447789a, type: 2}
     - {fileID: 11400000, guid: f34d5aa228928f84fa6be5b03a25a728, type: 2}
+    - {fileID: 11400000, guid: d40f41e2424869946bcf911897864427, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -133,13 +134,16 @@ MonoBehaviour:
       Data: 5|System.Collections.Generic.List`1[[AudioData, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 10
       Data: 4
     - Name: 
       Entry: 10
       Data: 5
+    - Name: 
+      Entry: 10
+      Data: 6
     - Name: 
       Entry: 13
       Data: 

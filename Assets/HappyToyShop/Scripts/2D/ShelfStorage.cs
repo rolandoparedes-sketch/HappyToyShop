@@ -29,6 +29,13 @@ public class ShelfStorage : MonoBehaviour, IInteractuable
         Debug.Log("INTERACTUO");
 
         var player = PlayerController2D.instance.playerMechanics;
+        if (player.HasGift)
+        {
+            Debug.Log("Debes entregar el regalo primero");
+
+            return;
+        }
+
         if (player.ToyData == null)
         {
 

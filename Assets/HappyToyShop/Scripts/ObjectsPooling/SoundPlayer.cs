@@ -37,7 +37,11 @@ public class SoundPlayer : MonoBehaviour
     {
         //->comunicarme con mi music pool
         //-> regresar a casa :c 
+        CancelInvoke();
+
+        audioSource.Stop();
         audioSource.clip = null;
+
         SoundManager.OnFinishAudio?.Invoke(this);
     }
 
@@ -59,6 +63,8 @@ public class SoundPlayer : MonoBehaviour
     }
     public void FadeOut(float duration)
     {
+        if (!gameObject.activeInHierarchy)
+            return;
         CancelInvoke();
 
         if (fadeCoroutine != null)
