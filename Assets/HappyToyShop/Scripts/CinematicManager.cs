@@ -30,6 +30,8 @@ public class CinematicManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         introcamera.Priority = 0;
         playerCamera.Priority = 100;
+
+        enabled = false;
     }
 }
 

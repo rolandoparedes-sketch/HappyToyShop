@@ -40,11 +40,10 @@ public class Player3DMovement : MonoBehaviour
     private CameraNode currentCamera;
     public GameObject nextButton;
     public CinemachineBrain cinemachineBrain;
+    public float interactDistanceMonitor = 1f;
 
-
-    [FoldoutGroup("ControllerSettings/Monitor")]
+    [FoldoutGroup("ControllerSettings/WoodPlanks")]
     public GameObject woodText;
-    public float interactDistanceMonitor = 3f;
     public GameObject woodPlanks;
     private float repairCounter;
     public Slider repairBar;
@@ -339,9 +338,10 @@ public class Player3DMovement : MonoBehaviour
             ExitMonitor();
             return;
         }
+
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
         {
             if (hit.collider.gameObject.name.Contains("Monitor"))
             {
@@ -350,16 +350,17 @@ public class Player3DMovement : MonoBehaviour
 
                 StartCoroutine(OpenSecurityCameras());
             }
-        }
+
             BoxFisic caja = hit.collider.GetComponent<BoxFisic>();
 
-        if (caja != null)
-        {
-            caja.AbrirCaja();
+            if (caja != null)
+            {
+                caja.AbrirCaja();
+            }
         }
     }
 
-    
+
     private void CreateCameraList()
     {
         CameraNode first = null;
@@ -428,7 +429,7 @@ public class Player3DMovement : MonoBehaviour
     {
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 8f))
         {
             if (hit.collider.CompareTag("Box"))
             {

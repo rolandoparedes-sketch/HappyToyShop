@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoodEndingTest : MonoBehaviour
 {
@@ -8,13 +9,29 @@ public class GoodEndingTest : MonoBehaviour
     public Transform player;
 
     public bool goodEnding;
+
     public CinemachineCamera playerCamera;
-    public CinemachineCamera endingCamera;
+    public CinemachineCamera endingSplineCamera;
+
 
     public Animator fadeAnimator;
     public Animator playerAnimator;
 
+    public GameObject TextGoodEnding;
+
+    public float TimeofCamera = 95f;
+    public float timeofText = 3f;
+
     bool played = false;
+
+    void Start()
+    {
+        playerAnimator.enabled = false;
+
+        if (TextGoodEnding != null)
+            TextGoodEnding.SetActive(false);
+        
+    }
 
     void Update()
     {
@@ -39,17 +56,29 @@ public class GoodEndingTest : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
 
-        endingCamera.enabled = true;
-        endingCamera.Priority = 100;
+        playerCamera.Priority = 0;
+        endingSplineCamera.Priority = 100;
+
+        var spline = endingSplineCamera.GetComponent<CinemachineSplineDolly>();
+
+        spline.CameraPosition = 0f;
+        spline.AutomaticDolly.Enabled = true;
+
 
         playerAnimator.enabled = true;
         playerAnimator.Play("FinalBueno");
 
-        fadeAnimator.SetTrigger("TransitionEffectCamera");
-    }
-    void Start()
-    {
-        playerAnimator.enabled = false;
+        while (spline.CameraPosition < 0.999f)
+        {
+            endingSplineCamera.Priority = 100;
+            yield return null;
+        }
+
+        fadeAnimator.Play("FadeIn 0");
+
+        yield return new WaitForSeconds(0.5f);
+
+        SceneManager.LoadScene("Win");
 
     }
 }
