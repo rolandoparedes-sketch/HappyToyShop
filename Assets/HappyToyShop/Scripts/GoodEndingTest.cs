@@ -41,7 +41,6 @@ public class GoodEndingTest : MonoBehaviour
             StartCoroutine(PlayEnding());
         }
     }
-
     IEnumerator PlayEnding()
     {
         fadeAnimator.Play("FadeIn 0");
@@ -56,7 +55,7 @@ public class GoodEndingTest : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
 
-        playerCamera.Priority = 0;
+        playerCamera.enabled = false;
         endingSplineCamera.Priority = 100;
 
         var spline = endingSplineCamera.GetComponent<CinemachineSplineDolly>();
