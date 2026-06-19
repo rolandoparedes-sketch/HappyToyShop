@@ -1,39 +1,57 @@
 using Sirenix.OdinInspector;
-using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.Splines.ExtrusionShapes;
 using UnityEngine.UI;
+
+using UnityEditor.Animations;
 
 public class NPCCustomer : MonoBehaviour
 {
+
+
+    [FoldoutGroup("References")]
     [SerializeField] private NpcData data;
+    [FoldoutGroup("References")]
+    [SerializeField] private NpcDataBase dataBase;
+    [FoldoutGroup("References")]
     [SerializeField] private TypeDialogue typeDialogue;
     //[SerializeField] private Sprite spriteNpc;
-
+    [FoldoutGroup("References")]
     [SerializeField] private GameObject NpcModel;
 
+
     //[SerializeField] private Sprite spriteToy;
+    [FoldoutGroup("References")]
     [SerializeField] private GameObject globoPedido;
+    [FoldoutGroup("References")]
     [SerializeField] private GameObject pedido;
-    [SerializeField] private int IDPedido;
-    [SerializeField] private float moveSpeed;
 
+    [FoldoutGroup("References")]
     [SerializeField] private Animator animator;
-    [SerializeField] private float patience = 30;
-
-
-
-
-
+    [FoldoutGroup("References")]
     [SerializeField] private Rigidbody2D rb;
 
+
+    [FoldoutGroup("References")]
+    [SerializeField] private Transform target;
+
+
+
+    [FoldoutGroup("NpcSettings")]
+    [SerializeField] private string entityName;
+    [FoldoutGroup("NpcSettings")]
+    [SerializeField] private int idPedido;
+    [FoldoutGroup("NpcSettings")]
+    [SerializeField] private float moveSpeed;
+
+    [FoldoutGroup("NpcSettings")]
+    [SerializeField] private float patience = 30;
+
+    [FoldoutGroup("NpcSettings")]
     [SerializeField] private float stopDistance = 0.05f;
 
-    [SerializeField] private Transform target;
+    [FoldoutGroup("NpcSettings")]
     [SerializeField] private bool isMoving;
-
+    [FoldoutGroup("NpcSettings")]
     [SerializeField] private bool exit;
 
     /* public NPC(NpcDataDialogues dialogues, TypeDialogue typeDialogue, Sprite sprite, Animator animator, float patience)
@@ -48,6 +66,9 @@ public class NPCCustomer : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+
+
     }
     void Start()
     {
@@ -59,7 +80,7 @@ public class NPCCustomer : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager2D.instance.CustomerManager.OnChangeQueue += expandPatience;
+        //GameManager2D.instance.CustomerManager.OnChangeQueue += expandPatience;
     }
     void Update()
     {
@@ -149,21 +170,23 @@ public class NPCCustomer : MonoBehaviour
     [Button]
     public void Initializer()
     {
-        globoPedido.SetActive(false);
+        data = dataBase.GetDataNpc();
+        //globoPedido.SetActive(false);
 
         int n = UnityEngine.Random.Range(0, 3);
 
         var factory = GameManager2D.instance.FactorySystem.toyDataBase;
 
-        NpcModel.GetComponent<SpriteRenderer>().sprite = data.GetSpriteNpc(n);
+        NpcModel.GetComponent<SpriteRenderer>().sprite = data.Icon;
 
+        animator.runtimeAnimatorController = data.Anim;
 
         int n2 = UnityEngine.Random.Range(0, factory.toyDataBase.Count);
 
         ToyData toydata = factory.GetToy(n2);
 
         pedido.GetComponent<SpriteRenderer>().sprite = toydata.Icon;
-        IDPedido = toydata.ID;
+        idPedido = toydata.ID;
 
         var DayManager = GameManager2D.instance.DayManager;
 
@@ -178,7 +201,7 @@ public class NPCCustomer : MonoBehaviour
 
 
 
-            Debug.Log(data.GetDialogue(typeDialogue));
+            Debug.Log(dataBase.GetDialogue(typeDialogue));
 
             return;
         }
@@ -190,7 +213,7 @@ public class NPCCustomer : MonoBehaviour
 
 
 
-            Debug.Log(data.GetDialogue(typeDialogue));
+            Debug.Log(dataBase.GetDialogue(typeDialogue));
 
             return;
         }
@@ -201,7 +224,7 @@ public class NPCCustomer : MonoBehaviour
 
 
 
-        Debug.Log(data.GetDialogue(typeDialogue));
+        Debug.Log(dataBase.GetDialogue(typeDialogue));
 
     }
     [Button]

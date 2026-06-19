@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: befe964beec0b34409ad2a7f455966d8, type: 3}
+  m_Name: NpcData 1
+  m_EditorClassIdentifier: Assembly-CSharp::NpcData
+  iD: 1
+  entityName: Mason
+  icon: {fileID: 245047354, guid: d9c34ac66c1c65e42a51b08ace0daa4b, type: 3}
+  description: 
+  anim: {fileID: 9100000, guid: 5b882d56195905e4b92086fd1da04279, type: 2}

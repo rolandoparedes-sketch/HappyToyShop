@@ -10,11 +10,11 @@ public class FastHandsBuff : Buff
         Duration = duration;
         Amount = amount;
     }
-    public override void Apply(PlayerStats entity)
+    public override void Apply(PlayerStats2D entity)
     {
         entity.wrapSpeed += Amount;
     }
-    public override void Remove(PlayerStats entity)
+    public override void Remove(PlayerStats2D entity)
     {
         entity.wrapSpeed -= Amount;
     }

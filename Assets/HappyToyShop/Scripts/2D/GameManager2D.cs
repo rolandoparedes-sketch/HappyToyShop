@@ -15,8 +15,8 @@ public class GameManager2D : MonoBehaviour
     [SerializeField] private WarehouseSystem warehouseSystem;
     [FoldoutGroup("References")]
     [SerializeField] private CustomerManager customerManager;
-
-
+    [FoldoutGroup("References")]
+    [SerializeField] private DataGame dataGame;
 
 
 
@@ -49,4 +49,6 @@ public class GameManager2D : MonoBehaviour
     public WarehouseSystem WarehouseSystem => warehouseSystem;
 
     public CustomerManager CustomerManager => customerManager;
+
+    public DataGame DataGame => dataGame;
 }

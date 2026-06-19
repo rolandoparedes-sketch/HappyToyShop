@@ -6,6 +6,6 @@ public abstract class Buff
     public float Amount;
     public float Duration;
 
-    public abstract void Apply(PlayerStats entity);
-    public abstract void Remove(PlayerStats entity);
+    public abstract void Apply(PlayerStats2D entity);
+    public abstract void Remove(PlayerStats2D entity);
 }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Collections;
 
 
-[RequireComponent(typeof(PlayerStats))]
+[RequireComponent(typeof(PlayerStats2D))]
 public class BuffManager : MonoBehaviour
 {
     public List<Buff> activeBuffs = new();
-    private PlayerStats Stats;
+    private PlayerStats2D Stats;
 
     private void Awake()
     {
-        Stats = GetComponent<PlayerStats>();
+        Stats = GetComponent<PlayerStats2D>();
     }
 
     public void AddBuff(Buff buff)

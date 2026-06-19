@@ -1,20 +1,23 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerMovement2D))]
 
-[RequireComponent(typeof(PlayerAnimations))]
-[RequireComponent (typeof(PlayerStats))]
+[RequireComponent(typeof(PlayerAnimations2D))]
+[RequireComponent (typeof(PlayerStats2D))]
+[RequireComponent (typeof(PlayerMechanics2D))]
 public class PlayerController2D : MonoBehaviour
 {
     [FoldoutGroup("References")]
     public static PlayerController2D instance;
     [FoldoutGroup("References")]
-    public PlayerMovement playerMovement;
+    public PlayerMovement2D playerMovement;
     [FoldoutGroup("References")]
-    public PlayerAnimations playerAnimations;
+    public PlayerAnimations2D playerAnimations;
     [FoldoutGroup("References")]
-    public PlayerStats playerStats;
+    public PlayerStats2D playerStats; 
+    [FoldoutGroup("References")]
+    public PlayerMechanics2D playerMechanics;
 
     private void Awake()
     {
@@ -26,9 +29,10 @@ public class PlayerController2D : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        playerMovement = GetComponent<PlayerMovement>();
-        playerAnimations = GetComponent<PlayerAnimations>();
-        playerStats = GetComponent<PlayerStats>();
+        playerMovement = GetComponent<PlayerMovement2D>();
+        playerAnimations = GetComponent<PlayerAnimations2D>();
+        playerStats = GetComponent<PlayerStats2D>();
+        playerMechanics = GetComponent<PlayerMechanics2D>();
 
     }
     void Start()

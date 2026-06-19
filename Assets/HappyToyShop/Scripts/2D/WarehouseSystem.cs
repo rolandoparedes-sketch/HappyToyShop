@@ -5,18 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[System.Serializable]
-public class ShelfStorage
-{
-    public int ShelfID;
-    public ToyData data;
-    public int CurrentAmount;
-    public int MaxCapacity = 18;
 
-    
-    
-
-}
 public class WarehouseSystem : MonoBehaviour
 {
     public List<ShelfStorage> Shelfs;
@@ -28,15 +17,15 @@ public class WarehouseSystem : MonoBehaviour
     {
 
         ApplyDataToEachShelf();
-      
+
     }
-    
+
 
     void Update()
     {
 
     }
-    public bool CheckIfThereIsEnoughSpace(int ShelfID,int Amount)
+    public bool CheckIfThereIsEnoughSpace(int ShelfID, int Amount)
     {
         if (Shelfs[ShelfID].CurrentAmount + Amount > Shelfs[ShelfID].MaxCapacity)
         {
@@ -44,28 +33,27 @@ public class WarehouseSystem : MonoBehaviour
             return false;
         }
         else
-        return true;
+            return true;
     }
     public void AddToyToShelf(int ShelfID, int Amount)
     {
-      
-        Shelfs[ShelfID].CurrentAmount += Amount;    
+
+        Shelfs[ShelfID].CurrentAmount += Amount;
         Debug.Log("You added " + Amount + " " + Shelfs[ShelfID].data.EntityName + " to the warehouse, now you have " + Shelfs[ShelfID].CurrentAmount);
-         
-        
+
+
     }
 
-
+    [Button]
     public void ApplyDataToEachShelf()
     {
 
-        Shelfs.SetLength(GameManager2D.instance.FactorySystem.toyDataBase.toyDataBase.Count);
 
         for (int i = 0; i < Shelfs.Count; i++)
         {
             if (Shelfs[i] == null)
             {
-                Shelfs[i] = new ShelfStorage();
+                Debug.LogWarning("Falto asignar un alamacen en la posición número: " + i);
             }
 
             Shelfs[i].data = GameManager2D.instance.FactorySystem.toyDataBase.GetToy(i);
@@ -74,6 +62,8 @@ public class WarehouseSystem : MonoBehaviour
         {
 
             Shelfs[i].ShelfID = Shelfs[i].data.ID;
+
+            Shelfs[i].CurrentAmount = GameManager2D.instance.DataGame.currentAmountInShelfs[i];
         }
 
     }

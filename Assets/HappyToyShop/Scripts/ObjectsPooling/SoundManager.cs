@@ -10,6 +10,9 @@ using static UnityEngine.Rendering.PostProcessing.SubpixelMorphologicalAntialias
 public class SoundManager : MonoBehaviour
 {
     public SoundPlayer SoundPlayerPrefab;
+
+
+
     public List<SoundPlayer> SoundPlayerList;
     
     public MyQueue<SoundPlayer> MusicPool = new();

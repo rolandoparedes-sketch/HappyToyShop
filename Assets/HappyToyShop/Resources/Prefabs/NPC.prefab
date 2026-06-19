@@ -162,10 +162,11 @@ MonoBehaviour:
   moveSpeed: 3
   animator: {fileID: 0}
   patience: 15
-  dir: {x: -1, y: 0}
-  Rb: {fileID: 0}
-  timeDelayReturnPool: 5
+  rb: {fileID: 0}
   stopDistance: 0.05
+  target: {fileID: 0}
+  isMoving: 0
+  exit: 0
 --- !u!50 &5310118344323582675
 Rigidbody2D:
   serializedVersion: 5
@@ -220,7 +221,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.28, z: 0}
-  m_LocalScale: {x: 4.0044184, y: 4.0044184, z: 4.0044184}
+  m_LocalScale: {x: 0.99589884, y: 0.99589884, z: 0.99589884}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4021559168675542570}

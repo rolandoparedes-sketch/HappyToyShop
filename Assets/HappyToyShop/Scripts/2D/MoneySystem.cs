@@ -6,9 +6,9 @@ public class MoneySystem : MonoBehaviour
     [FoldoutGroup("MoneySystem")]
     public float CurrentMoney;
     [FoldoutGroup("MoneySystem")]
-    public int DailySalesGoal;
+    public float DailySalesGoal;
     [FoldoutGroup("MoneySystem")]
-    public int WeekSalesGoal;
+    public float WeekSalesGoal;
     void Start()
     {
         

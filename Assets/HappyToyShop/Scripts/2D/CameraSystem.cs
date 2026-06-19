@@ -39,7 +39,7 @@ public class CameraSystem : MonoBehaviour
         if (camera1.Priority > camera2.Priority)
         {
 
-            Vector3 newpos = new Vector3(originalPos.x - 2, originalPos.y, originalPos.z);
+            Vector3 newpos = new Vector3(originalPos.x - 9.5f, originalPos.y, originalPos.z);
 
 
             PlayerController2D.instance.transform.position = newpos;
@@ -48,7 +48,7 @@ public class CameraSystem : MonoBehaviour
         else
         {
 
-            Vector3 newpos = new Vector3(originalPos.x + 2, originalPos.y, originalPos.z);
+            Vector3 newpos = new Vector3(originalPos.x + 9.5f, originalPos.y, originalPos.z);
 
             PlayerController2D.instance.transform.position = newpos;
         }

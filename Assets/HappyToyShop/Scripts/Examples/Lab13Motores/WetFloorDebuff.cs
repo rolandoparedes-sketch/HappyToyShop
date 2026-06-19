@@ -9,11 +9,11 @@ public class WetFloorDebuff : Buff
         Amount = amount;
     }
 
-    public override void Apply(PlayerStats entity)
+    public override void Apply(PlayerStats2D entity)
     {
         entity.moveSpeed -= Amount;
     }
-    public override void Remove(PlayerStats entity)
+    public override void Remove(PlayerStats2D entity)
     {
         entity.moveSpeed += Amount;
     }

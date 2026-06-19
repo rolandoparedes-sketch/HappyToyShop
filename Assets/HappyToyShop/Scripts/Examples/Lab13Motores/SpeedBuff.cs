@@ -9,11 +9,11 @@ public class SpeedBuff : Buff
         Amount = amount;
     }
 
-    public override void Apply(PlayerStats Stats)
+    public override void Apply(PlayerStats2D Stats)
     {
         Stats.moveSpeed += Amount;
     }
-    public override void Remove(PlayerStats Stats)
+    public override void Remove(PlayerStats2D Stats)
     {
         Stats.moveSpeed -= Amount;
     }
