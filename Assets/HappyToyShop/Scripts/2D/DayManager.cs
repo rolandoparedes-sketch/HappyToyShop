@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class DayManager : MonoBehaviour
 {
-    [FoldoutGroup("GameSettings")]
-    [SerializeField] private MyQueue<int> monthDays = new();
+   // [FoldoutGroup("GameSettings")]
+    //[SerializeField] private MyQueue<int> monthDays = new();
     [FoldoutGroup("GameSettings")]
     [SerializeField] private int daysInMonth = 30;
-    [FoldoutGroup("GameSettings")]
-    [SerializeField] private MyQueue<Months> Months = new();
-    [FoldoutGroup("GameSettings")]
-    [SerializeField] private MyQueue<Days> weekDays = new();
+  //  [FoldoutGroup("GameSettings")]
+   // [SerializeField] private MyQueue<Months> months = new();
+  //  [FoldoutGroup("GameSettings")]
+    //[SerializeField] private MyQueue<Days> weekDays = new();
     [FoldoutGroup("GameSettings")]
     [SerializeField] private MyQueue<SpecialDay> specialDays = new();
     [FoldoutGroup("GameSettings")]
@@ -23,30 +23,50 @@ public class DayManager : MonoBehaviour
     public Action OnNextDay;
     public Action OnWeekComplete;
 
-
+    private int currentDay;
     public struct SpecialDay
     {
         public int Day;
         public string EventText;
         public DayEvents DayEvents;
     }
+
+
+
     void Start()
     {
-        DaysInitializer();
-    }
+        InitializeDaySystem();
 
-    // Update is called once per frame
-    void Update()
+    }
+    public void InitializeDaySystem()
     {
+        InitializeCalendar();
+        FixSavedDay();
+        FixSavedWeek();
+        FixSavedMonth();
+    }
+    public void InitializeCalendar()
+    {
+        //monthDays.Clear();
+      //  weekDays.Clear();
+      //  months.Clear();
+        specialDays.Clear();
+
+       // InitializeMonthDays();
+       // InitializeWeekDays();
+       // InitializeMonths();
+        InitializeSpecialDays();
 
     }
-    public void DaysInitializer()
+   /* private void InitializeMonthDays()
     {
         for (int i = 1; i <= daysInMonth; i++)
         {
             monthDays.Enqueue(i);
         }
-
+    }*/
+   /* private void InitializeWeekDays()
+    {
         weekDays.Enqueue(Days.Monday);
         weekDays.Enqueue(Days.Tuesday);
         weekDays.Enqueue(Days.Wednesday);
@@ -54,106 +74,198 @@ public class DayManager : MonoBehaviour
         weekDays.Enqueue(Days.Friday);
         weekDays.Enqueue(Days.Saturday);
         weekDays.Enqueue(Days.Sunday);
-        Months.Enqueue(global::Months.January);
-        Months.Enqueue(global::Months.February);
-        Months.Enqueue(global::Months.March);
-        Months.Enqueue(global::Months.April);
-        Months.Enqueue(global::Months.May);
-        Months.Enqueue(global::Months.June);
-        Months.Enqueue(global::Months.July);
-        Months.Enqueue(global::Months.August);
-        Months.Enqueue(global::Months.September);
-        Months.Enqueue(global::Months.October);
-        Months.Enqueue(global::Months.November);
-        Months.Enqueue(global::Months.December);
-
-
-        specialDays.Enqueue(new SpecialDay()
-        {
-            Day = 2,
-            EventText = "Hay algo afuera...",
-            DayEvents = DayEvents.MysteryVisitor
-
-        });
-
-        specialDays.Enqueue(new SpecialDay()
-        {
-            Day = 4,
-            EventText = "Escuchaste eso?...",
-            DayEvents = DayEvents.MysterySounds
-        });
-
-        specialDays.Enqueue(new SpecialDay()
-        {
-            Day = 7,
-            EventText = "Alguien entró al local...",
-            DayEvents = DayEvents.HorrorDay
-        });
+    }
+    private void InitializeMonths()
+    {
+        months.Enqueue(Months.January);
+        months.Enqueue(Months.February);
+        months.Enqueue(Months.March);
+        months.Enqueue(Months.April);
+        months.Enqueue(Months.May);
+        months.Enqueue(Months.June);
+        months.Enqueue(Months.July);
+        months.Enqueue(Months.August);
+        months.Enqueue(Months.September);
+        months.Enqueue(Months.October);
+        months.Enqueue(Months.November);
+        months.Enqueue(Months.December);
+    }*/
+    private void InitializeSpecialDays()
+    {
+        
+        AddSpecialDay(2, "Hay algo afuera...", DayEvents.MysteryVisitor);
+        AddSpecialDay(4, "Escuchaste eso?...", DayEvents.MysterySounds);
+        AddSpecialDay(7, "Alguien entró al local...", DayEvents.HorrorDay);
     }
 
+
+    #region Method Save and load
+    private void FixSavedDay()
+    {
+
+        if (GameManager2D.instance.DataGame.day<0 || GameManager2D.instance.DataGame.weekDayIndex > daysInMonth)
+        {
+            Debug.Log("El número se de día se sale de los parametros establecidos");
+        }
+    }
+    private void FixSavedWeek()
+    {
+        if (GameManager2D.instance.DataGame.weekDayIndex < 0 || GameManager2D.instance.DataGame.weekDayIndex > (int)Days.Sunday)
+        {
+            Debug.Log("El index del día de semana se sale de los parametros establecidos");
+        }
+      
+    }
+    private void FixSavedMonth()
+    {
+        if (GameManager2D.instance.DataGame.monthIndex < 0 || GameManager2D.instance.DataGame.monthIndex > (int)Months.December)
+        {
+            Debug.Log("El index del mes se sale de los parametros establecidos");
+        }
+    }
+    /* private void SaveCurrentDay()
+     {
+         GameManager2D.instance.DataGame.day = monthDays.Peek();
+     }
+     private void SetCurrentDay(int day)
+     {
+         if (day < 1 || day > daysInMonth)
+         {
+             Debug.LogWarning("El día del mes se sale de los parametros establecidos: (día " + day +" )");
+             SaveCurrentDay();
+             return;
+         }
+
+         while (monthDays.Peek() != day)
+         {
+             RotateDay();
+         }
+     }
+     private void RotateDay()
+     {
+         int currentDay = monthDays.Dequeue();
+         monthDays.Enqueue(currentDay);
+     }*/
+    #endregion
 
     [Button]
     public void NextDay()
     {
-       /* if (weekDays.Peek() == Days.Sunday)
-        {
-            Debug.Log("Semana Completada");
-            OnWeekComplete?.Invoke();
-            return;
-        }
-       */
+        //int finishedDay = AdvanceToNextDay();
 
-        // Mover el día del calendario y semana actual al final de la cola para avanzar al siguiente día
+        //SaveCurrentDay();
+
+        AdvanceNextDay();
+        AdvanceWeekDay(); 
+        CheckSpecialDay(); 
+
+        OnNextDay?.Invoke();
+    }
+    private void AdvanceNextDay()
+    {
+        IncrementDay();
+        ValidateDaysInMonthCycle();
+    }
+
+    private void IncrementDay()
+    {
+        GameManager2D.instance.DataGame.day++;
+    }
+
+    private void ValidateDaysInMonthCycle()
+    {
+        if(GameManager2D.instance.DataGame.day > daysInMonth)
+        {
+
+            ResetDay();
+            AdvanceMonth();
+        }
+    }
+
+    private void ResetDay()
+    {
+        GameManager2D.instance.DataGame.day = 1;
+    }
+
+    private void AdvanceWeekDay()
+    {
+        IncrementWeekIndex();
+        ValidateWeekCycle();
+    }
+    private void IncrementWeekIndex()
+    {
+        GameManager2D.instance.DataGame.weekDayIndex++;
+    }
+    private void ValidateWeekCycle()
+    {
+        if (GameManager2D.instance.DataGame.weekDayIndex > (int)Days.Sunday)
+        {
+            ResetWeek();
+            OnWeekComplete?.Invoke();
+        }
+    }
+    private void ResetWeek()
+    {
+        GameManager2D.instance.DataGame.weekDayIndex = 0;
+    }
+    private void AdvanceMonth()
+    {
+        IncrementMonthIndex();
+        ValidateMonthCycle();
+    }
+    private void ValidateMonthCycle()
+    {
+        if (GameManager2D.instance.DataGame.monthIndex > (int)Months.December)
+        {
+            ResetMonth();
+        }
+    }
+    private void ResetMonth()
+    {
+        GameManager2D.instance.DataGame.monthIndex = 0;
+    }
+    private void IncrementMonthIndex()
+    {
+        GameManager2D.instance.DataGame.monthIndex++;
+    }
+    /* private int AdvanceToNextDay()
+    {
         int finishedDay = monthDays.Dequeue();
 
         monthDays.Enqueue(finishedDay);
 
-        Debug.Log("Day " + finishedDay + " completed");
+        Debug.Log($"Day {finishedDay} completed");
 
+        return finishedDay;
+    }
+   private void AdvanceWeekDay()
+    {
+        Days weekDay = weekDays.Dequeue();
 
-        Days WeekDay = weekDays.Dequeue();
-
-        weekDays.Enqueue(WeekDay);
-
-
-        OnNextDay?.Invoke();
-
-
-        // Avanzar el mes si se ha completado el número de días en el mes
-
-        if (finishedDay == MonthDays.Count) 
+        weekDays.Enqueue(weekDay);
+    }
+    private void CheckMonthCompleted(int finishedDay)
+    {
+        if (finishedDay == daysInMonth)
         {
-            Months month = Months.Dequeue();
-            Months.Enqueue(month);
-
-            Debug.Log("Month completed");
+            AdvanceMonth();
         }
+    }
+    private void AdvanceMonth()
+    {
+        Months month = months.Dequeue();
 
+        months.Enqueue(month);
 
-        Debug.Log(weekDays.Peek() + ", " + Months.Peek() + " " + monthDays.Peek());
-
-        // Verificar si el día actual es un día especial
-        if (specialDays.Count > 0 && specialDays.Peek().Day == monthDays.Peek())
+        Debug.Log("Month completed");
+    }*/
+    private void CheckSpecialDay()
+    {
+        if (specialDays.Count > 0 && specialDays.Peek().Day == CurrentDay)
         {
-            Debug.Log("Day " + monthDays.Peek() + " is a Special Day");
-
             currentEvent = specialDays.Dequeue();
 
-            //Debug.Log(currentEvent.EventText);
-
-            // Llamar a ParanormalSuccess3D para activar eventos paranormales especiales en funcion del dayEvent del día especial
-            switch (currentEvent.DayEvents)
-            {
-                case DayEvents.MysteryVisitor:
-                    // Activar evento de visitante misterioso
-                    break;
-                case DayEvents.MysterySounds:
-                    // Activar evento de sonidos misteriosos
-                    break;
-                case DayEvents.HorrorDay:
-                    // Activar todos los eventos paranormales del juego
-                    break;
-            }
+            HandleSpecialEvent(currentEvent.DayEvents);
 
             todayIsSpecial = true;
         }
@@ -161,15 +273,26 @@ public class DayManager : MonoBehaviour
         {
             todayIsSpecial = false;
         }
-
-
     }
+    private void HandleSpecialEvent(DayEvents dayEvent)
+    {
+        switch (dayEvent)
+        {
+            case DayEvents.MysteryVisitor:
+                break;
 
+            case DayEvents.MysterySounds:
+                break;
+
+            case DayEvents.HorrorDay:
+                break;
+        }
+    }
     [Button]
-    public int LookDay()
+    public int LookSpecialDay()
     {
         //Debug.Log("Current Day: " + monthDays.Peek());
-        return monthDays.Peek();
+        return specialDays.Peek().Day;
 
     }
     [Button]
@@ -182,12 +305,12 @@ public class DayManager : MonoBehaviour
     [Button]
     public void Clear()
     {
-        monthDays.Clear();
+        specialDays.Clear();
     }
     [Button]
     public void Count()
     {
-        Debug.Log(monthDays.Count);
+        Debug.Log(specialDays.Count);
     }
     [Button]
     public void AddSpecialDay(int day, string eventText, DayEvents dayEvents)
@@ -200,15 +323,17 @@ public class DayManager : MonoBehaviour
         });
     }
     #region Getters
-    public MyQueue<int> MonthDays => monthDays;
-    public MyQueue<Months> YearMonths => Months;
-    public MyQueue<Days> WeekDays => weekDays;
+   // public MyQueue<int> MonthDays => monthDays;
+   // public MyQueue<Months> YearMonths => months;
+   // public MyQueue<Days> WeekDays => weekDays;
 
     public int DaysInMonth => daysInMonth;
     public MyQueue<SpecialDay> SpecialDays => specialDays;
 
     public SpecialDay CurrentEvent => currentEvent;
     public bool TodayIsSpecial => todayIsSpecial;
-
+    public int CurrentDay => GameManager2D.instance.DataGame.day;
+    public Days CurrentWeekDay => (Days)GameManager2D.instance.DataGame.weekDayIndex;
+    public Months CurrentMonth => (Months)GameManager2D.instance.DataGame.monthIndex;
     #endregion
 }

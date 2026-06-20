@@ -24,7 +24,6 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        GameManager2D.instance.DayManager.OnNextDay += UpdateDay;
         ShelfStorage.OnTakeToy += ChangeUIinHand;
     }
 
@@ -43,11 +42,6 @@ public class UIManager : MonoBehaviour
         
     }
 
-    private void UpdateDay()
-    {
-        Day.text = "Día " + GameManager2D.instance.DayManager.MonthDays.Peek();
-      
-    }
 
     void Start()
     {
@@ -63,13 +57,6 @@ public class UIManager : MonoBehaviour
     [Button]
     public void ChangeMessage()
     {
-
-        var weekDays = GameManager2D.instance.DayManager.WeekDays;
-        var yearMonths = GameManager2D.instance.DayManager.YearMonths;
-        var monthDays = GameManager2D.instance.DayManager.MonthDays;
-
-        Day.text = weekDays.Peek() + ", " + yearMonths.Peek() + " " + monthDays.Peek();
-
         var dayManager = GameManager2D.instance.DayManager;
 
         if (dayManager.TodayIsSpecial)
@@ -78,6 +65,6 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        Day.text = dayManager.WeekDays.Peek() + ", " + dayManager.YearMonths.Peek() + " " + dayManager.MonthDays.Peek();
+        Day.text = dayManager.CurrentWeekDay + ", " + dayManager.CurrentMonth + " " + dayManager.CurrentDay;
     }
 }

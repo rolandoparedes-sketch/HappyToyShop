@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using UnityEditor.Animations;
+using System;
 
 public class NPCCustomer : MonoBehaviour
 {
@@ -52,7 +53,7 @@ public class NPCCustomer : MonoBehaviour
     [FoldoutGroup("NpcSettings")]
     [SerializeField] private bool isMoving;
     [FoldoutGroup("NpcSettings")]
-    [SerializeField] private bool exit;
+    [SerializeField] private bool attended;
 
     /* public NPC(NpcDataDialogues dialogues, TypeDialogue typeDialogue, Sprite sprite, Animator animator, float patience)
      {
@@ -72,20 +73,34 @@ public class NPCCustomer : MonoBehaviour
     }
     void Start()
     {
-        //Initializer();
-
-        
 
     }
 
-    private void OnEnable()
-    {
-        //GameManager2D.instance.CustomerManager.OnChangeQueue += expandPatience;
-    }
+    
     void Update()
     {
-       // NpcMovement();
         TimeToWait();
+
+
+        NpcMovement();
+    }
+
+    private void NpcMovement()
+    {
+        if(attended)
+        {
+            target = GameManager2D.instance.CustomerManager.ExitPoint;
+
+            this.GetComponent<Collider2D>().isTrigger = true;
+            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            return;
+        }
+
+
+    }
+    public void CustomerAttended()
+    {
+        attended = true;
     }
     public void expandPatience()
     {
@@ -101,77 +116,16 @@ public class NPCCustomer : MonoBehaviour
 
         if (patience <= 0)
         {
-           // GameManager2D.instance.CustomerManager.OnCustomerAttended?.Invoke(this);
-            
-            //ExitStore(GameManager2D.instance.CustomerManager.ExitPoint);
+            attended = true;
         }
 
 
-    }/*
-    public void NpcMovement()
-    {
-        if (!isMoving || target == null)
-            return;
-
-        Vector2 direction = (target.position - transform.position).normalized;
-
-        rb.linearVelocity = direction * moveSpeed;
-
-        if (Vector2.Distance(transform.position, target.position) <= stopDistance)
-        {
-            transform.position = target.position;
-
-            rb.linearVelocity = Vector2.zero;
-
-            isMoving = false;
-
-            if (exit)
-            {
-                LeaveStore();
-
-                Debug.Log(target);
-                return;
-            }
-
-            if (target.CompareTag("Atention"))
-            {
-                globoPedido.SetActive(true);
-            }
-
-            
-
-        }
-
     }
-    public void ExitStore(Transform exitTransform)
-    {
-        exit = true;
-
-        target = exitTransform;
-        
-        isMoving= true;
-
-        this.gameObject.GetComponent<Collider2D>().enabled = false;
-        globoPedido.SetActive(false);
-
-
-
-    }
-    public void SetTarget(Transform targetPoint)
-    {
-        if (target == targetPoint)
-            return;
-
-        target = targetPoint;
-        isMoving = true;
-
-       
-    }*/
     [Button]
     public void Initializer()
     {
         data = dataBase.GetDataNpc();
-        //globoPedido.SetActive(false);
+        globoPedido.SetActive(false);
 
         int n = UnityEngine.Random.Range(0, 3);
 
@@ -193,7 +147,7 @@ public class NPCCustomer : MonoBehaviour
         int value = UnityEngine.Random.Range(0, 10);
 
 
-        if (DayManager.LookDay() > 5 && value > 9)
+        if (DayManager.LookSpecialDay() > 5 && value > 9)
         {
 
             typeDialogue = TypeDialogue.Disturbing;
@@ -205,7 +159,7 @@ public class NPCCustomer : MonoBehaviour
 
             return;
         }
-        if (DayManager.LookDay() > 3 && value > 5)
+        if (DayManager.LookSpecialDay() > 3 && value > 5)
         {
 
             typeDialogue = TypeDialogue.Strange;
@@ -234,4 +188,14 @@ public class NPCCustomer : MonoBehaviour
         CustomerManager.OnCustomerLeft?.Invoke(this);
     }
 
+    public NpcData DataNpc => data;
+    public int IdPedido => idPedido;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Exit") && attended)
+        {
+            LeaveStore();
+        }
+    }
 }

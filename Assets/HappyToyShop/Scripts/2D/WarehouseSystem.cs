@@ -39,6 +39,10 @@ public class WarehouseSystem : MonoBehaviour
     {
 
         Shelfs[ShelfID].CurrentAmount += Amount;
+
+        GameManager2D.instance.DataGame.currentAmountInShelfs[ShelfID] += Amount;
+
+
         Debug.Log("You added " + Amount + " " + Shelfs[ShelfID].data.EntityName + " to the warehouse, now you have " + Shelfs[ShelfID].CurrentAmount);
 
 

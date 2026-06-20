@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 2941270266019985859}
   - component: {fileID: 2104849496494660322}
   - component: {fileID: 3721892944224035455}
+  - component: {fileID: 2191707691143896766}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -301,11 +302,11 @@ MonoBehaviour:
   target: {fileID: 0}
   entityName: 
   idPedido: 0
-  moveSpeed: 0
+  moveSpeed: 3
   patience: 30
   stopDistance: 0.05
   isMoving: 0
-  exit: 0
+  attended: 0
 --- !u!95 &2104849496494660322
 Animator:
   serializedVersion: 7
@@ -374,3 +375,30 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.90316844, y: 0.26101214}
   m_EdgeRadius: 0
+--- !u!50 &2191707691143896766
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8853684331497859675}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

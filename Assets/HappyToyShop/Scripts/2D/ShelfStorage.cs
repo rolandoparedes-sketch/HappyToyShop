@@ -62,7 +62,6 @@ public class ShelfStorage : MonoBehaviour, IInteractuable
 
         CurrentAmount--;
 
-        GameManager2D.instance.DataGame.currentAmountInShelfs[ShelfID]--;
 
         Debug.Log("DIO JUGUETE: " + data.EntityName);
 
@@ -79,7 +78,6 @@ public class ShelfStorage : MonoBehaviour, IInteractuable
         player.RemoveToy();
         CurrentAmount++;
 
-        GameManager2D.instance.DataGame.currentAmountInShelfs[ShelfID]++;
 
 
         Debug.Log("DEVOLVIO JUGUETE: " + data.EntityName);

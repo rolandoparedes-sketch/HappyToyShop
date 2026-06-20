@@ -10,6 +10,7 @@ TagManager:
   - Puerta
   - Customer
   - Atention
+  - Exit
   layers:
   - Default
   - TransparentFX
