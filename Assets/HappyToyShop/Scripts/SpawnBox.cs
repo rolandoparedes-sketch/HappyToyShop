@@ -2,32 +2,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SpawnerCaja : MonoBehaviour
+public class SpawnBox : MonoBehaviour
 {
-    [Header("Prefab Caja Grande")]
-    public GameObject cajaPrefab;
-
-    [Header("Punto de Spawn")]
+    public GameObject boxPrefab;
     public Transform spawnPoint;
 
-    [Header("Lista de Cajas")]
-    public List<Box> boxes = new();
+    public BoxSimulator simulator;
 
     [Button]
-    public void SpawnCajas()
+    public void SpawnBoxes()
     {
-        for (int i = 0; i < boxes.Count; i++)
+        for (int i = 0; i < simulator.boxCount; i++)
         {
-            GameObject nuevaCaja = Instantiate(
-                cajaPrefab,
+            Instantiate(
+                boxPrefab,
                 spawnPoint.position + new Vector3(i * 2f, 0, 0),
                 Quaternion.identity
             );
-
-            BoxFisic cajaFisica =
-                nuevaCaja.GetComponent<BoxFisic>();
-
-            cajaFisica.toys = boxes[i].toys;
         }
     }
 }
