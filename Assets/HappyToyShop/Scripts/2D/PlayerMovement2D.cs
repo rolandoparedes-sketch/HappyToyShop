@@ -29,6 +29,7 @@ public class PlayerMovement2D : MonoBehaviour
 
     public event Action OnInteract;
 
+
     private void Awake()
     {
         inputs = new();
@@ -120,6 +121,8 @@ public class PlayerMovement2D : MonoBehaviour
         CanMove = false;
         yield return new WaitForSeconds(time);
         CanMove = true;
+
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

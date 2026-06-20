@@ -51,7 +51,7 @@ public class SoundManager : MonoBehaviour
         ExpandSoundPlayerAmbient(size);
         ExpandSoundPlayerVoice(size);
 
-        PlayMusicBackground();
+        Invoke(nameof(PlayMusicBackground), 1.5f);
 
     }
     [Button]
@@ -207,6 +207,10 @@ public class SoundManager : MonoBehaviour
     }
     private void EnqueueAudio(SoundPlayer soundPlayer)
     {
+        if (soundPlayer == currentMusic)
+        {
+            currentMusic = null;
+        }
         soundPlayer.gameObject.SetActive(false);
 
         switch (soundPlayer.AudioType)
@@ -310,7 +314,7 @@ public class SoundManager : MonoBehaviour
             return;
 
         currentMusic.FadeOut(fadeDuration);
-        currentMusic = null;
+      
     }
 
 

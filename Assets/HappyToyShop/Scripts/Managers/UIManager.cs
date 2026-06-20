@@ -33,10 +33,12 @@ public class UIManager : MonoBehaviour
         if(PlayerController2D.instance.playerMechanics.ToyData == null)
         {
 
-            ToyInHand.sprite = null;
+            //ToyInHand.sprite = null;
+            ToyInHand.gameObject.SetActive(false);
             return;
         }
 
+        ToyInHand.gameObject.SetActive(true);
         ToyInHand.sprite = PlayerController2D.instance.playerMechanics.ToyData.Icon;
         
     }

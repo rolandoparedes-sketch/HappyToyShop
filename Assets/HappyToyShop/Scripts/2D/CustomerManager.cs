@@ -18,7 +18,7 @@ public class CustomerManager : MonoBehaviour
     [SerializeField] private Transform[] queuePositions;
 
     [SerializeField] private Transform exitPoint;
-    private readonly Queue<NPCCustomer> waitingCustomers = new();
+   // private readonly Queue<NPCCustomer> waitingCustomers = new();
 
 
     public Action OnCutomerEnter;
@@ -38,12 +38,12 @@ public class CustomerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        OnCustomerLeft += ReturnNPCToPool;
+       OnCustomerLeft += ReturnNPCToPool;
     }
 
     private void OnDisable()
     {
-        OnCustomerLeft -= ReturnNPCToPool;
+       OnCustomerLeft -= ReturnNPCToPool;
     }
 
     [Button]
@@ -72,14 +72,15 @@ public class CustomerManager : MonoBehaviour
     public void AddToQueue(NPCCustomer customer)
     {
 
-        waitingCustomers.Enqueue(customer);
+        //waitingCustomers.Enqueue(customer);
 
-        UpdateQueue();
+        //UpdateQueue();
     }
+    [Button]
     private void ReturnNPCToPool(NPCCustomer customer)
     {
-        if (waitingCustomers.Count == 0)
-            return;
+        //if (waitingCustomers.Count == 0)
+         //   return;
 
        // waitingCustomers.Dequeue();
 
@@ -88,21 +89,21 @@ public class CustomerManager : MonoBehaviour
         customer.gameObject.SetActive(false);
 
         customerPool.Enqueue(customer);
-        UpdateQueue();
+       // UpdateQueue();
 
     }
     private void CustomerAttended(NPCCustomer customer)
     {
-        if (waitingCustomers.Count == 0)
+      //  if (waitingCustomers.Count == 0)
             return;
 
-        waitingCustomers.Dequeue();
+       // waitingCustomers.Dequeue();
         //customer.ResetCustomer();
         //UpdateQueue();
 
        // OnChangeQueue?.Invoke();
     }
-    private void UpdateQueue()
+   /* private void UpdateQueue()
     {
         int index = 0;
 
@@ -126,7 +127,7 @@ public class CustomerManager : MonoBehaviour
         }
 
 
-    }
+    }*/
     #region Getters
     public NPCCustomer CustomerPrefab => customerPrefab;
     public MyQueue<NPCCustomer> CustomerPool => customerPool;

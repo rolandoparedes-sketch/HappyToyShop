@@ -84,7 +84,7 @@ public class NPCCustomer : MonoBehaviour
     }
     void Update()
     {
-        NpcMovement();
+       // NpcMovement();
         TimeToWait();
     }
     public void expandPatience()
@@ -101,13 +101,13 @@ public class NPCCustomer : MonoBehaviour
 
         if (patience <= 0)
         {
-            GameManager2D.instance.CustomerManager.OnCustomerAttended?.Invoke(this);
+           // GameManager2D.instance.CustomerManager.OnCustomerAttended?.Invoke(this);
             
-            ExitStore(GameManager2D.instance.CustomerManager.ExitPoint);
+            //ExitStore(GameManager2D.instance.CustomerManager.ExitPoint);
         }
 
-            
-    }
+
+    }/*
     public void NpcMovement()
     {
         if (!isMoving || target == null)
@@ -166,7 +166,7 @@ public class NPCCustomer : MonoBehaviour
         isMoving = true;
 
        
-    }
+    }*/
     [Button]
     public void Initializer()
     {

@@ -34,7 +34,7 @@ public class ParanormalSuccess2D : MonoBehaviour
 
     public void FreezeALL()
     {
-        StartCoroutine(PlaySoundDoors());
+        StartCoroutine(TimeToFreeze());
     }
     public IEnumerator TimeToFreeze()
     { 

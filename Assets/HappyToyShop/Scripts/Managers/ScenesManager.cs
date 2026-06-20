@@ -65,7 +65,7 @@ public class ScenesManager : MonoBehaviour
     public void ChangeMode3D()
     {
         StartCoroutine(SceneLoad("3D"));
-        GameManager.instance.TurnDay = false;
+     //   GameManager.instance.TurnDay = false;
 
 
     }
