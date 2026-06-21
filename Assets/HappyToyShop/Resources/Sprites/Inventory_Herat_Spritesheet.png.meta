@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 82afd21326b046a43aee685d0d8cc470
+guid: 35b91974ad499844f848ed5fa6f206df
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Amelia_idle_16x16_0
+      name: Inventory_Herat_Spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 16
-        height: 32
+        y: 252
+        width: 112
+        height: 84
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,20 +112,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 673e22cc717c4f64481690bcff35c97a
-      internalID: -1717459486
+      spriteID: 5ee8c0414259db048953c581d13e220a
+      internalID: -1822831848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Amelia_idle_16x16_1
+      name: Inventory_Herat_Spritesheet_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 32
+        x: 0
+        y: 168
+        width: 112
+        height: 84
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,20 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a953baedda851d4d81c711c1c8c4905
-      internalID: 881565785
+      spriteID: 57d2b3b48be09ee4ca56256af4eb0dbe
+      internalID: 1878097546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Amelia_idle_16x16_2
+      name: Inventory_Herat_Spritesheet_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 32
+        x: 0
+        y: 124
+        width: 112
+        height: 44
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3d8f13e675367d4c9b5f8a06806896d
-      internalID: 22982736
+      spriteID: 9c881cdaa80e90b49bee589414a73c01
+      internalID: 1320909763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Amelia_idle_16x16_3
+      name: Inventory_Herat_Spritesheet_3
       rect:
         serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 32
+        x: 0
+        y: 64
+        width: 112
+        height: 23
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,8 +178,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e654e9a5e68e35242850ee5aa3a2c67d
-      internalID: 1659701352
+      spriteID: cb403c41b45701a4cb3971e028bcf4eb
+      internalID: -1802379527
       vertices: []
       indices: 
       edges: []
@@ -188,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d3c6af4ec1219004784181d98ba219a3
+    spriteID: 1a8a818d23135fe419c827c8ebd4592e
     internalID: 0
     vertices: []
     indices: 
@@ -198,12 +198,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":4.0},"gridSpriteSize":{"x":112.0,"y":84.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Amelia_idle_16x16_0: -1717459486
-      Amelia_idle_16x16_1: 881565785
-      Amelia_idle_16x16_2: 22982736
-      Amelia_idle_16x16_3: 1659701352
+      Inventory_Herat_Spritesheet_0: -1822831848
+      Inventory_Herat_Spritesheet_1: 1878097546
+      Inventory_Herat_Spritesheet_2: 1320909763
+      Inventory_Herat_Spritesheet_3: -1802379527
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

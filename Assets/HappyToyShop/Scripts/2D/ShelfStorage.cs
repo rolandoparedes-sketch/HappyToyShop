@@ -10,7 +10,7 @@ public class ShelfStorage : MonoBehaviour, IInteractuable
     public int MaxCapacity = 18;
 
 
-    public static event Action OnTakeToy;
+    public static Action OnTakeToy;
 
     void Start()
     {

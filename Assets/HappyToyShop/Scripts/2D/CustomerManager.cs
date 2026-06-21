@@ -32,7 +32,6 @@ public class CustomerManager : MonoBehaviour
     void Start()
     {
         CreatPoolCustomers(size);
-        OnCustomerAttended += CustomerAttended;
 
     }
 
@@ -68,66 +67,17 @@ public class CustomerManager : MonoBehaviour
             
         }
     }
-
-    public void AddToQueue(NPCCustomer customer)
-    {
-
-        //waitingCustomers.Enqueue(customer);
-
-        //UpdateQueue();
-    }
     [Button]
     private void ReturnNPCToPool(NPCCustomer customer)
     {
-        //if (waitingCustomers.Count == 0)
-         //   return;
 
-       // waitingCustomers.Dequeue();
-
-       // customer.ResetCustomer();
-
-        customer.gameObject.SetActive(false);
 
         customerPool.Enqueue(customer);
-       // UpdateQueue();
+        customer.gameObject.SetActive(false);
+
+   
 
     }
-    private void CustomerAttended(NPCCustomer customer)
-    {
-      //  if (waitingCustomers.Count == 0)
-            return;
-
-       // waitingCustomers.Dequeue();
-        //customer.ResetCustomer();
-        //UpdateQueue();
-
-       // OnChangeQueue?.Invoke();
-    }
-   /* private void UpdateQueue()
-    {
-        int index = 0;
-
-        foreach (var customer in waitingCustomers)
-        {
-            if (index >= queuePositions.Length)
-            {
-                Debug.LogWarning("Hay mas clientes que posiciones dispoinbles, asigna más o disminuye la cantidad de clientes en la store");
-            
-                break;
-            }
-            customer.SetTarget(queuePositions[index]);
-
-            Debug.Log("index: " + index);
-
-            Debug.Log("QueuePostions.Length: " + queuePositions.Length);
-
-            Debug.Log("WaitingCutomers.Count: " + waitingCustomers.Count);
-
-            index++;
-        }
-
-
-    }*/
     #region Getters
     public NPCCustomer CustomerPrefab => customerPrefab;
     public MyQueue<NPCCustomer> CustomerPool => customerPool;

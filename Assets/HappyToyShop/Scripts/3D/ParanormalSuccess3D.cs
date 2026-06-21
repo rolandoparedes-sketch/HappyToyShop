@@ -95,10 +95,10 @@ public class ParanormalSuccess3D : MonoBehaviour
                 switch (number)
                 {
                     case 0:
-                        GameManager.instance.soundManager.PlayMusic(SoundType.Voice, 0);
+                        GameManager.instance.soundManager.CheckTypeAudio(SoundType.Voice, 0);
                         break;
                     case 1:
-                        GameManager.instance.soundManager.PlayMusic(SoundType.Voice, 1);
+                        GameManager.instance.soundManager.CheckTypeAudio(SoundType.Voice, 1);
                         break;
                 }
                 CanSpawnFollower = false;

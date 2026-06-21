@@ -10,6 +10,7 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField] private int customerSpawnedToday;
 
 
+    [SerializeField] private float timeToFirstSpawn = 5;
     [SerializeField] private float timeMinToSpawnCustomers = 10;
     [SerializeField] private float timeMaxToSpawnCustomers = 15;
     [SerializeField] private float currentTimeToSpawnCustomers;
@@ -50,6 +51,10 @@ public class CustomerSpawner : MonoBehaviour
     }
     private IEnumerator SpawnRoutine()
     {
+        yield return new WaitForSeconds(timeToFirstSpawn);
+        SpawnCustomer();
+        customerSpawnedToday++;
+
         while (customerSpawnedToday < customerPerDay)
         {
             ApplySpawnTime();
@@ -81,7 +86,8 @@ public class CustomerSpawner : MonoBehaviour
         customer.gameObject.SetActive(true);
         customer.Initializer();
 
-        GameManager2D.instance.CustomerManager.AddToQueue(customer);
+        GameManager2D.instance.CustomerQueue.AddCustomerInQueue(customer);
+      
         currentCustomers++;
     }
 

@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI Day;
 
     public Image ToyInHand;
+    public Image ToyCustomer;
     private void Awake()
     {
 
@@ -25,8 +26,32 @@ public class UIManager : MonoBehaviour
         }
 
         ShelfStorage.OnTakeToy += ChangeUIinHand;
-    }
 
+        GameManager2D.instance.CustomerQueue.OnCustomerReceived += ChangePedidoUI;
+    }
+    private void ChangePedidoUI(NPCCustomer customer)
+    {
+        var customerWaiting = GameManager2D.instance.CustomerQueue.CustomerWaiting;
+
+        if (customerWaiting.Count == 0)
+        {
+
+            ToyCustomer.gameObject.SetActive(false);
+            return;
+        }
+
+
+        ToyCustomer.gameObject.SetActive(true);
+
+
+        int iDPedido = customer.IdPedido;
+
+
+        ToyData toydata = GameManager2D.instance.FactorySystem.TakeToy(iDPedido);
+
+        ToyCustomer.sprite = toydata.Icon;
+
+    }
     private void ChangeUIinHand()
     {
         if(PlayerController2D.instance.playerMechanics.ToyData == null)

@@ -45,15 +45,33 @@ public class NPCCustomer : MonoBehaviour
     [SerializeField] private float moveSpeed;
 
     [FoldoutGroup("NpcSettings")]
-    [SerializeField] private float patience = 30;
+    [SerializeField] private float baseMoveSpeed;
+
+
+    [FoldoutGroup("NpcSettings")]
+    [SerializeField] private float AngryMoveSpeed;
+
+    [FoldoutGroup("NpcSettings")]
+    [SerializeField] private float maxPatience = 30;
+    [FoldoutGroup("NpcSettings")]
+    [SerializeField] private float patience;
 
     [FoldoutGroup("NpcSettings")]
     [SerializeField] private float stopDistance = 0.05f;
 
     [FoldoutGroup("NpcSettings")]
-    [SerializeField] private bool isMoving;
+    [SerializeField] private bool isWaiting;
+
     [FoldoutGroup("NpcSettings")]
     [SerializeField] private bool attended;
+
+
+    [FoldoutGroup("NpcSettings")]
+    [SerializeField] private bool isAngry;
+
+    [FoldoutGroup("NpcSettings")]
+    [SerializeField] private bool Received;
+
 
     /* public NPC(NpcDataDialogues dialogues, TypeDialogue typeDialogue, Sprite sprite, Animator animator, float patience)
      {
@@ -71,6 +89,17 @@ public class NPCCustomer : MonoBehaviour
 
 
     }
+    private void OnEnable()
+    {
+        ResetState();
+    }
+
+    private void OnDisable()
+    {
+        GameManager2D.instance.CustomerQueue.RemoveWaitingCustomer(this);
+
+
+    }
     void Start()
     {
 
@@ -84,42 +113,118 @@ public class NPCCustomer : MonoBehaviour
 
         NpcMovement();
     }
+    public void ResetState()
+    {
+        Received = false;
+        isAngry = false;
+        patience = maxPatience;
+
+        isWaiting = false;
+        target = null;
+
+        globoPedido.SetActive(false);
+
+        GetComponent<Collider2D>().isTrigger = false;
+        SetNormalState();
+    }
 
     private void NpcMovement()
     {
-        if(attended)
-        {
-            target = GameManager2D.instance.CustomerManager.ExitPoint;
-
-            this.GetComponent<Collider2D>().isTrigger = true;
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        if (target == null || isWaiting)
             return;
+        
+        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+
+        float distance = Vector2.Distance(transform.position, target.position);
+
+        if (distance <= stopDistance)
+        {
+            isWaiting = true;
+
         }
 
+        animator.SetBool("IsWaiting", isWaiting);
 
     }
-    public void CustomerAttended()
+    public void GetAngry()
     {
-        attended = true;
+        isAngry= true;
+        animator.SetBool("Angry", isAngry);
+        moveSpeed = AngryMoveSpeed;
     }
-    public void expandPatience()
+    public void SetNormalState()
     {
-        patience += 5;
+        isAngry = false;
+        animator.SetBool("Angry", isAngry);
+        moveSpeed = baseMoveSpeed;
+    }
+    public void CustomerReceived()
+    {
+        globoPedido.gameObject.SetActive(true);
+
+    }
+    public void CustomerAttended(CustomerExitReason reason)
+    {
+        if (reason == CustomerExitReason.Served)
+        {
+            SetNormalState();
+        }
+        else if (reason == CustomerExitReason.Timeout)
+        {
+            GetAngry();
+        }
+        isWaiting = false;
+        attended = true;
+
+        globoPedido.SetActive(false);
+
+        SetTarget(GameManager2D.instance.CustomerQueue.ExitTarget);
+        GetComponent<Collider2D>().isTrigger = true;
+
+        GameManager2D.instance.CustomerQueue.OnCustomerReceived?.Invoke(this);
+
+    }
+    public void ExpandPatience(float amount)
+    {
+        patience = Mathf.Min(patience + amount, maxPatience);
         Debug.Log("Paciencia aumentada");
     }
     public void TimeToWait()
     {
-        if(isMoving || target == null)
+        if(!isWaiting || target == null)
             return;
+        if(Received)
+        {
 
-        patience-= Time.deltaTime;
+            patience -= Time.deltaTime;
+        }
+        else
+        {
+
+            patience -= 0.5f*Time.deltaTime;
+        }
+            
 
         if (patience <= 0)
         {
-            attended = true;
+            isWaiting = false;
+
+            GameManager2D.instance.CustomerQueue.RemoveWaitingCustomer(this);
+
+            SetTarget(GameManager2D.instance.CustomerQueue.ExitTarget);
+            CustomerAttended(CustomerExitReason.Timeout);
         }
 
+        if(patience <= maxPatience * 0.5 && !attended)
+        {
+            GetAngry();
+        }
 
+    }
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+        isWaiting = false;
     }
     [Button]
     public void Initializer()
@@ -151,8 +256,6 @@ public class NPCCustomer : MonoBehaviour
         {
 
             typeDialogue = TypeDialogue.Disturbing;
-
-
 
 
             Debug.Log(dataBase.GetDialogue(typeDialogue));
@@ -190,12 +293,23 @@ public class NPCCustomer : MonoBehaviour
 
     public NpcData DataNpc => data;
     public int IdPedido => idPedido;
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Exit") && attended)
+        Debug.Log(other.gameObject.name);
+        if (other.gameObject.CompareTag("Attention"))
+        {
+            Received =true;
+            GameManager2D.instance.CustomerQueue.AddWaitingCustomer(this);
+        }
+
+        if (other.gameObject.CompareTag("Exit") && !isWaiting)
         {
             LeaveStore();
         }
+
+       
     }
+
+
 }

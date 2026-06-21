@@ -25,7 +25,7 @@ public class ParanormalSuccess2D : MonoBehaviour
         yield return new WaitForSeconds(TimeDelaySounDoors);
 
 
-        GameManager2D.instance.SoundManager.PlayMusic(SoundType.SFX, 2);
+        GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.SFX, 2);
         yield return new WaitForSeconds(durationSoundDoors);
 
 
@@ -38,10 +38,10 @@ public class ParanormalSuccess2D : MonoBehaviour
     }
     public IEnumerator TimeToFreeze()
     { 
-        GameManager2D.instance.CameraSystem.enabled = false;
+        GameManager2D.instance.CameraSystem.GetComponent<CameraSystem>().enabled = false;
 
-        yield return new WaitForSeconds(5 );
+        yield return new WaitForSeconds(5);
 
-        GameManager2D.instance.CameraSystem.enabled = true;
+        GameManager2D.instance.CameraSystem.GetComponent<CameraSystem>().enabled = true;
     }
 }

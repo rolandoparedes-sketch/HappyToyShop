@@ -21,7 +21,8 @@ public class GameManager2D : MonoBehaviour
     [SerializeField] private SoundManager soundManager;
     [FoldoutGroup("References")]
     [SerializeField] private CameraSystem cameraSystem;
-
+    [FoldoutGroup("References")]
+    [SerializeField] private CustomerQueue customerQueue;
 
     private void Awake()
     {
@@ -54,6 +55,7 @@ public class GameManager2D : MonoBehaviour
 
     public DataGame DataGame => dataGame;
     public SoundManager SoundManager => soundManager;
-
     public CameraSystem CameraSystem => cameraSystem;
+
+    public CustomerQueue CustomerQueue => customerQueue;
 }

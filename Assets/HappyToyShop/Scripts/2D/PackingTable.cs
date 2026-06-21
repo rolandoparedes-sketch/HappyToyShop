@@ -22,6 +22,8 @@ public class PackingTable : MonoBehaviour, IInteractuable
     {
         isPacking = true;
         progress = 0f;
+        PlayerController2D.instance.playerMovement.GetComponent<PlayerMovement2D>().enabled = false;
+
 
         while (progress < timeToPacking)
         {
@@ -32,6 +34,7 @@ public class PackingTable : MonoBehaviour, IInteractuable
 
         isPacking = false;
 
+        PlayerController2D.instance.playerMovement.GetComponent<PlayerMovement2D>().enabled = true;
 
         var player = PlayerController2D.instance.playerMechanics;
 

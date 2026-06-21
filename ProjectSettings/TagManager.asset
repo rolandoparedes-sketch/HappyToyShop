@@ -9,8 +9,8 @@ TagManager:
   - Monitor
   - Puerta
   - Customer
-  - Atention
   - Exit
+  - Attention
   layers:
   - Default
   - TransparentFX

@@ -78,3 +78,8 @@ public enum Endings
     Bad,
     Secret,
 }
+public enum CustomerExitReason
+{
+    Served,
+    Timeout
+}

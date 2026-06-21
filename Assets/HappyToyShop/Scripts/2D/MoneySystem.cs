@@ -11,12 +11,16 @@ public class MoneySystem : MonoBehaviour
     public float WeekSalesGoal;
     void Start()
     {
-        
+        LoadData();
     }
 
     void Update()
     {
 
+    }
+    public void LoadData()
+    {
+        CurrentMoney = GameManager2D.instance.DataGame.money;
     }
     [Button]
     public void Buy(int ShelfID, int Amount)
