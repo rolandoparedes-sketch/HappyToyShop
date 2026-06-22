@@ -3,6 +3,7 @@ using UnityEngine;
 public class GoToWindowState : IState
 {
     private EnemyShadow enemy;
+    private Transform outsidePoint;
 
     public GoToWindowState(EnemyShadow enemy)
     {
@@ -11,10 +12,9 @@ public class GoToWindowState : IState
 
     public void Enter()
     {
-        Debug.Log("Ventana elegida: " + enemy.currentWindow.name);
+        Debug.Log("Destino: " + enemy.currentWindow.name);
 
-        Transform outsidePoint =
-            enemy.currentWindow.Find("OutsidePoint");
+        outsidePoint = enemy.currentWindow.Find("OutsidePoint");
 
         if (outsidePoint == null)
         {
@@ -27,22 +27,17 @@ public class GoToWindowState : IState
 
     public void Update()
     {
-        Transform outsidePoint =
-            enemy.currentWindow.Find("OutsidePoint");
+        if (outsidePoint == null) return;
 
-        float distance = Vector3.Distance(
-            enemy.transform.position,
-            outsidePoint.position);
+        float distance = Vector3.Distance(enemy.transform.position, outsidePoint.position);
 
         if (distance < 2f)
         {
-            enemy.stateMachine.ChangeState(
-                new WaitWindowState(enemy));
+            enemy.stateMachine.ChangeState(new WaitWindowState(enemy));
         }
     }
 
     public void Exit()
     {
-
     }
 }
