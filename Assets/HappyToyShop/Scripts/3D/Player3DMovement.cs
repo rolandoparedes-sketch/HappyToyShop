@@ -311,6 +311,16 @@ public class Player3DMovement : MonoBehaviour
                 StartCoroutine(RepairCoroutine(hit.collider));
             }
         }
+        if (hit.collider.CompareTag("Ventilation"))
+        {
+            VentShock vent =
+                hit.collider.GetComponent<VentShock>();
+
+            if (vent != null)
+            {
+                vent.UseShock();
+            }
+        }
     }
     public  void NextCamera()
     {

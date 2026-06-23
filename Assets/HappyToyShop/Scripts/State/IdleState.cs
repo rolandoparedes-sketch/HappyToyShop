@@ -22,22 +22,40 @@ public class IdleState : IState
 
         if (timer <= 0)
         {
-            int r = Random.Range(0, 2);
+            float totalChance =
+                enemy.windowChance + enemy.ventChance;
 
-            if (r == 0)
+            float randomValue =
+                Random.Range(0f, totalChance);
+
+            if (randomValue < enemy.windowChance)
             {
                 enemy.isVent = false;
-                enemy.currentWindow = enemy.windows[Random.Range(0, enemy.windows.Length)];
+
+                enemy.currentWindow =
+                    enemy.windows[
+                        Random.Range(0, enemy.windows.Length)
+                    ];
+
+                Debug.Log("Ataque por Ventana");
             }
             else
             {
                 enemy.isVent = true;
-                enemy.currentWindow = enemy.VentPoints[Random.Range(0, enemy.VentPoints.Length)];
+
+                enemy.currentWindow =
+                    enemy.VentPoints[
+                        Random.Range(0, enemy.VentPoints.Length)
+                    ];
+
+                Debug.Log("Ataque por Ventilación");
             }
 
-            enemy.stateMachine.ChangeState(new GoToWindowState(enemy));
+            enemy.stateMachine.ChangeState(
+                new GoToWindowState(enemy));
         }
     }
+
     public void Exit()
     {
 
