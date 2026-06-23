@@ -28,7 +28,10 @@ public class CustomerManager : MonoBehaviour
 
     public Action OnChangeQueue;
 
-
+    private void Awake()
+    {
+        GameManager2D.instance.SetCustomerManager(this);
+    }
 
     void Start()
     {

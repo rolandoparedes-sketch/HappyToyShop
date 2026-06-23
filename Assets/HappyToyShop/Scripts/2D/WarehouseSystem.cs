@@ -12,6 +12,7 @@ public class WarehouseSystem : MonoBehaviour
 
     private void Awake()
     {
+        GameManager2D.instance.SetWarehouseSystem(this);
     }
     void Start()
     {

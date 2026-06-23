@@ -1,4 +1,5 @@
 using HappyToyShop.Collections;
+using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,10 @@ public class SoundManager : MonoBehaviour
 
     public static Action<SoundPlayer> OnFinishAudio;
 
+    private void Awake()
+    {
+        GameManager2D.instance.SetSoundManager(this);
+    }
     void Start()
     {
         ExpandSoundPlayerMusic(size);

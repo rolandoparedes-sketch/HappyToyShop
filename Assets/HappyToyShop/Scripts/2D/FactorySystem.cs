@@ -5,7 +5,10 @@ public class FactorySystem : MonoBehaviour
 {
 
     public ToyDataBase toyDataBase;
-
+    private void Awake()
+    {
+        GameManager2D.instance.SetFactorySytem(this);
+    }
     void Start()
     {
         

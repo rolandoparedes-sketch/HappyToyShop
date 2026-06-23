@@ -37,7 +37,44 @@ public class GameManager2D : MonoBehaviour
             
         }
     }
+    public void SetMoneySystem(MoneySystem moneySystem)
+    { 
+        this.moneySystem = moneySystem; 
+    } 
+    public void SetDayManager(DayManager dayManager)
+    {
+        this.dayManager = dayManager;
+    }
 
+    public void SetFactorySytem(FactorySystem factorySystem)
+    {
+        this.factorySystem = factorySystem;
+    }
+
+    public void SetWarehouseSystem(WarehouseSystem warehouseSystem)
+    {
+        this.warehouseSystem = warehouseSystem;
+    }
+
+    public void SetCustomerManager(CustomerManager customerManager)
+    {
+        this.customerManager = customerManager;
+    }
+
+    public void SetSoundManager(SoundManager soundManager)
+    {
+        this.soundManager = soundManager;
+    }
+
+    public void SetCameraSystem(CameraSystem cameraSystem)
+    {
+        this.cameraSystem = cameraSystem;
+    }
+
+    public void SetFurnitureManager(FurnitureManager furnitureManager)
+    {
+        this.furnitureManager = furnitureManager;
+    }
     void Start()
     {
         

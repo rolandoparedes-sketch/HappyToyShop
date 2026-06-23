@@ -5,6 +5,11 @@ public class FurnitureManager : MonoBehaviour
 {
     [SerializeField] private PackingTable packingTable;
     [SerializeField] private AttentionTable attentionTable;
+
+    private void Awake()
+    {
+        GameManager2D.instance.SetFurnitureManager(this);
+    }
     void Start()
     {
         

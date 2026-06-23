@@ -14,6 +14,11 @@ public class CameraSystem : MonoBehaviour
 
     public float timeFade;
     public Transform Target;
+
+    private void Awake()
+    {
+        GameManager2D.instance.SetCameraSystem(this);
+    }
     void Start()
     {
         PlayerController2D.instance.playerMovement.OnEnterDoor += ChangeCameras;

@@ -11,7 +11,7 @@ public class MoneySystem : MonoBehaviour
     public float WeekSalesGoal;
     private void Awake()
     {
-        GameManager2D.instance.MoneySystem = this;
+        GameManager2D.instance.SetMoneySystem(this);
     }
     void Start()
     {

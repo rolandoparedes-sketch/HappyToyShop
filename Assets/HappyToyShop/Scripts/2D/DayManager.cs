@@ -33,7 +33,10 @@ public class DayManager : MonoBehaviour
         public DayEvents DayEvents;
     }
 
-
+    private void Awake()
+    {
+        GameManager2D.instance.SetDayManager(this);
+    }
 
     void Start()
     {
