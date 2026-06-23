@@ -4,7 +4,7 @@ using Sirenix.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+using System.Linq;
 
 public class WarehouseSystem : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class WarehouseSystem : MonoBehaviour
     private void Awake()
     {
     }
+    
     void Start()
     {
 
@@ -20,6 +21,20 @@ public class WarehouseSystem : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        GameManager2D.instance.DayManager.OnDayComplete += TestOrderByAcending;
+    }
+    private void OnDisable()
+    {
+
+        GameManager2D.instance.DayManager.OnDayComplete -= TestOrderByAcending;
+    }
+
+    public void TestOrderByAcending()
+    {
+        Shelfs = Shelfs.OrderBy(Shelfs => Shelfs.CurrentAmount).ToList();
+    }
 
     void Update()
     {

@@ -189,6 +189,9 @@ public class NPCCustomer : MonoBehaviour
     }
     public void TimeToWait()
     {
+        if (ParanormalSuccess2D.paranormalSuccessActive)
+            return;
+
         if(!isWaiting || target == null)
             return;
         if(Received)
@@ -286,7 +289,7 @@ public class NPCCustomer : MonoBehaviour
     public void LeaveStore()
     {
 
-        CustomerManager.OnCustomerLeft?.Invoke(this);
+        CustomerSpawner.OnCustomerLeft?.Invoke(this);
     }
 
     public NpcData DataNpc => data;
@@ -294,7 +297,6 @@ public class NPCCustomer : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.name);
         if (other.gameObject.CompareTag("Attention"))
         {
             Received =true;

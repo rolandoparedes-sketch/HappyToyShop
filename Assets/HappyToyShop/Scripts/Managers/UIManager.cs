@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager instance;
     public TextMeshProUGUI Day;
 
     public Image ToyInHand;
@@ -21,20 +20,18 @@ public class UIManager : MonoBehaviour
 
     public List<Image> ImagesShelfs;
 
+    public TextMeshProUGUI PlayerDialgue;
+
+
+
+    public TextMeshProUGUI Money;
+    public TextMeshProUGUI DailyGoal;
 
     private void Awake()
     {
 
 
      
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
 
         ShelfStorage.OnTakeToy += ChangeUIinHand;
 
@@ -42,8 +39,14 @@ public class UIManager : MonoBehaviour
 
         GameManager2D.instance.DayManager.OnDayComplete += RestockToys;
 
-    }
+        GameManager2D.instance.FurnitureManager.AttentionTable.OnSell += ChangeMoneyUI;
 
+    }
+    public void ChangeDialoguePlayer(string newText)
+    {
+        
+        PlayerDialgue.text = newText;
+    }
     private void RestockToys()
     {
         PlayerController2D.instance.playerMovement.GetComponent<PlayerMovement2D>().enabled = false;
@@ -92,8 +95,21 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         ChangeMessage();
+        InitializerUIGame();
+
+    }
+    public void InitializerUIGame()
+    {
+        DailyGoal.text = GameManager2D.instance.MoneySystem.DailySalesGoal.ToString();
 
 
+        Money.text = GameManager2D.instance.MoneySystem.CurrentMoney.ToString();
+
+
+    }
+    public void ChangeMoneyUI()
+    {
+        Money.text = GameManager2D.instance.MoneySystem.CurrentMoney.ToString();
     }
 
     void Update()

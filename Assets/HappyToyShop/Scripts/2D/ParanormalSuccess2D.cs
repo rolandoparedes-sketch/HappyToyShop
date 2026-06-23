@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ParanormalSuccess2D : MonoBehaviour
 {
+    public static bool paranormalSuccessActive;
+
     public float TimeDelaySounDoors = 4;
     public float durationSoundDoors = 6;
     public float TimeToActiveSound;
@@ -21,7 +23,7 @@ public class ParanormalSuccess2D : MonoBehaviour
         { 
             timer = 0;
             int n = Random.Range(0, 101);
-
+            Debug.Log(n);
             if (n < probability)
             {
                 KnockKnock();
@@ -31,18 +33,30 @@ public class ParanormalSuccess2D : MonoBehaviour
     [Button]
     public void KnockKnock()
     {
-        FreezeALL();
         GameManager2D.instance.SoundManager.StopMusicBackground(TimeDelaySounDoors);
 
 
-        StartCoroutine(PlaySoundDoors());
+        StartCoroutine(PlayStrangeSound());
     }
-    public IEnumerator PlaySoundDoors()
+    public IEnumerator PlayStrangeSound()
     {
+        StartCoroutine(TimeToFreeze());
         yield return new WaitForSeconds(TimeDelaySounDoors);
 
+        int n = Random.Range(0, 2);
 
-        GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.SFX, 2);
+        switch (n)
+        {
+
+                case 0:
+                GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.Ambient, 0);
+                break;
+            case 1:
+                GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.Ambient, 1);
+                break;
+        }
+
+
         yield return new WaitForSeconds(durationSoundDoors);
 
 
@@ -51,14 +65,19 @@ public class ParanormalSuccess2D : MonoBehaviour
 
     public void FreezeALL()
     {
-        StartCoroutine(TimeToFreeze());
+       // StartCoroutine(TimeToFreeze());
     }
     public IEnumerator TimeToFreeze()
-    { 
-        GameManager2D.instance.CameraSystem.GetComponent<CameraSystem>().enabled = false;
+    {
 
-        yield return new WaitForSeconds(5);
+        paranormalSuccessActive = true;
+        GameManager2D.instance.UIManager.ChangeDialoguePlayer(".......");
 
-        GameManager2D.instance.CameraSystem.GetComponent<CameraSystem>().enabled = true;
+        yield return new WaitForSeconds(durationSoundDoors);
+
+
+        GameManager2D.instance.UIManager.ChangeDialoguePlayer("New days, new smiles");
+
+        paranormalSuccessActive = false;
     }
 }

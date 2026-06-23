@@ -40,6 +40,7 @@ public class PackingTable : MonoBehaviour, IInteractuable
 
         player.Gift.SetActive(true);
 
+        GameManager2D.instance.UIManager.ChangeDialoguePlayer("Toy ready to deliver");
         Debug.Log("Packing completo");
 
         player.HasGift = true;
@@ -58,6 +59,7 @@ public class PackingTable : MonoBehaviour, IInteractuable
         var player = PlayerController2D.instance.playerMechanics;
         if (player.ToyData == null)
         {
+            GameManager2D.instance.UIManager.ChangeDialoguePlayer("First I need to get a toy");
             Debug.Log("Primero debes tener un juguete en mano");
             return;
         }

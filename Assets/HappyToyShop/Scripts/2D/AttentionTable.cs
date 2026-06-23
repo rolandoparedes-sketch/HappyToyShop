@@ -1,5 +1,8 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
+using Unity.Android.Gradle;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -7,7 +10,8 @@ using UnityEngine;
 public class AttentionTable : MonoBehaviour, IInteractuable
 {
 
-        
+
+    public event Action OnSell;
     public void Interact()
     {
 
@@ -17,7 +21,9 @@ public class AttentionTable : MonoBehaviour, IInteractuable
 
         if (customerQueue.CustomerWaiting.Count == 0)
         {
-            Debug.Log("No hay clientes en cola");
+            
+            GameManager2D.instance.UIManager.ChangeDialoguePlayer("There's nobody in the queue");
+             Debug.Log("No hay clientes en cola");
             return;
         }
 
@@ -27,17 +33,21 @@ public class AttentionTable : MonoBehaviour, IInteractuable
 
         if (!player.ToyData)
         {
+            GameManager2D.instance.UIManager.ChangeDialoguePlayer("I have nothing to hand over");
             Debug.Log("No tienes nada en mano para entregar");
             return ;
         }
-        
+
+
         if (player.ToyData.ID != nextCustomer.IdPedido)
         {
+            GameManager2D.instance.UIManager.ChangeDialoguePlayer("This is not the toy the customer is looking for");
             Debug.Log("El cliente quiere otro juguete");
             return;
         }
         if (!player.HasGift)
         {
+            GameManager2D.instance.UIManager.ChangeDialoguePlayer("I need to wrap it in a gift first");
             Debug.Log("Debes empaquetar el juguete antes de entregarlo");
             return;
         }
@@ -45,11 +55,11 @@ public class AttentionTable : MonoBehaviour, IInteractuable
 
         player.HasGift = false;
 
-        GameManager2D.instance.DataGame.money += player.ToyData.SalePrice;
 
 
 
 
+        GameManager2D.instance.MoneySystem.CurrentMoney += player.ToyData.SalePrice;
         player.Gift.gameObject.SetActive(false);
 
         customerQueue.RemoveWaitingCustomer(nextCustomer);
@@ -59,17 +69,16 @@ public class AttentionTable : MonoBehaviour, IInteractuable
 
         player.RemoveToy();
 
-        GameManager2D.instance.CustomerManager.OnCustomerAttended?.Invoke(nextCustomer);
 
         ShelfStorage.OnTakeToy?.Invoke();
 
-
-        GameManager2D.instance.DataGame.currentAmountInShelfs[nextCustomer.IdPedido]--;
 
         nextCustomer.CustomerAttended(CustomerExitReason.Served);
 
 
         GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.SFX, 0);
+
+        OnSell?.Invoke();
 
     }
 }

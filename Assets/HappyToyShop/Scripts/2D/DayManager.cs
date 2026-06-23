@@ -38,16 +38,38 @@ public class DayManager : MonoBehaviour
     void Start()
     {
         InitializeDaySystem();
-        CustomerManager.OnCustomerLeft += CheckLastCustomer;
+        CustomerSpawner.OnCustomerLeft += CheckLastCustomer;
 
     }
     [Button]
     public void PassDay()
     {
-        ScenesManager.instance.ChangeMode3D();
-        UIManager.instance.PanelStock.SetActive(false);
-    }
 
+        GameManager2D.instance.DataGame.money = GameManager2D.instance.MoneySystem.CurrentMoney;
+        
+
+        ShelfStorage();
+        ScenesManager.instance.ChangeMode3D();
+        GameManager2D.instance.UIManager.PanelStock.SetActive(false);
+    }
+    public void ShelfStorage()
+    {
+        var data = GameManager2D.instance.DataGame;
+
+        var warehouse = GameManager2D.instance.WarehouseSystem;
+
+
+        for (int i = 0; i < warehouse.Shelfs.Count; i++)
+        {
+            if (warehouse.Shelfs[i] == null)
+            {
+                Debug.LogWarning("Falto asignar un alamacen en la posición número: " + i);
+            }
+
+            data.currentAmountInShelfs[i] = warehouse.Shelfs[i].CurrentAmount;
+
+        }
+    }    
 
     private void CheckLastCustomer(NPCCustomer customer)
     {

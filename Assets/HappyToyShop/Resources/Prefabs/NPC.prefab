@@ -305,11 +305,13 @@ MonoBehaviour:
   moveSpeed: 0
   baseMoveSpeed: 3
   AngryMoveSpeed: 8
-  maxPatience: 50
-  patience: 30
+  maxPatience: 60
+  patience: 0
   stopDistance: 0.05
   isWaiting: 0
   attended: 0
+  isAngry: 0
+  Received: 0
 --- !u!95 &2104849496494660322
 Animator:
   serializedVersion: 7

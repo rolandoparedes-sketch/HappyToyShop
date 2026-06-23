@@ -54,7 +54,10 @@ public class ShelfStorage : MonoBehaviour, IInteractuable
     public void GiveToy()
     {
         if (CurrentAmount <= 0)
+        {
+            GameManager2D.instance.UIManager.ChangeDialoguePlayer("Oh no, these toys are gone");
             return;
+        }
 
         var player = PlayerController2D.instance.playerMechanics;
 

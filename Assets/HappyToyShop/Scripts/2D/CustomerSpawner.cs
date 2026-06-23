@@ -1,6 +1,8 @@
 
-using System.Collections;
+using HappyToyShop.Collections;
 using Sirenix.OdinInspector;
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class CustomerSpawner : MonoBehaviour
@@ -21,10 +23,59 @@ public class CustomerSpawner : MonoBehaviour
 
 
 
+
+
+
+
+    [SerializeField] private NPCCustomer customerPrefab;
+    [SerializeField] private MyQueue<NPCCustomer> customerPool = new();
+
+    [SerializeField] private int size = 5;
+
+
+
+    //public Action OnCutomerEnter;
+    public static Action<NPCCustomer> OnCustomerLeft;
+
     void Start()
     {
 
+        CreatPoolCustomers(size);
         StartCoroutine(SpawnRoutine());
+    }
+
+    [Button]
+
+    public NPCCustomer NextCustomer()
+    {
+        if (customerPool.Count == 0)
+            return null;
+
+        return customerPool.Dequeue();
+    }
+
+    [Button]
+    public void CreatPoolCustomers(int quantity)
+    {
+        for (int i = 0; i < quantity; i++)
+        {
+            NPCCustomer npc = Instantiate(customerPrefab, transform);
+
+            npc.gameObject.SetActive(false);
+            customerPool.Enqueue(npc);
+
+        }
+    }
+    [Button]
+    private void ReturnNPCToPool(NPCCustomer customer)
+    {
+
+
+        customerPool.Enqueue(customer);
+        customer.gameObject.SetActive(false);
+
+
+
     }
 
     void Update()
@@ -33,12 +84,14 @@ public class CustomerSpawner : MonoBehaviour
     }
     private void OnEnable()
     {
-        CustomerManager.OnCustomerLeft += RemoveCustomerInStore;
+        OnCustomerLeft += ReturnNPCToPool;
+        OnCustomerLeft += RemoveCustomerInStore;
     }
 
     private void OnDisable()
     {
-        CustomerManager.OnCustomerLeft -= RemoveCustomerInStore;
+        OnCustomerLeft -= ReturnNPCToPool;
+        OnCustomerLeft -= RemoveCustomerInStore;
     }
 
     private void RemoveCustomerInStore(NPCCustomer customer)
@@ -47,7 +100,7 @@ public class CustomerSpawner : MonoBehaviour
     }
     public void ApplySpawnTime()
     {
-        currentTimeToSpawnCustomers = Random.Range(timeMinToSpawnCustomers, timeMaxToSpawnCustomers + 1);
+        currentTimeToSpawnCustomers = UnityEngine.Random.Range(timeMinToSpawnCustomers, timeMaxToSpawnCustomers + 1);
     }
     private IEnumerator SpawnRoutine()
     {
@@ -73,8 +126,11 @@ public class CustomerSpawner : MonoBehaviour
     public void SpawnCustomer()
     {
 
+        if (ParanormalSuccess2D.paranormalSuccessActive)
+            return;
+
         GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.SFX, 1);
-        NPCCustomer customer = GameManager2D.instance.CustomerManager.NextCustomer();
+        NPCCustomer customer = GameManager2D.instance.CustomerManager.CustomerSpawner.NextCustomer();
 
         if (customer == null)
         {
@@ -92,9 +148,19 @@ public class CustomerSpawner : MonoBehaviour
         currentCustomers++;
     }
 
+    #region Getters
+
     public int CustomerSpawnedToday => customerSpawnedToday;
     public int CustomerPerDay => customerPerDay;
     public int CurrentCustomers => currentCustomers;
 
+
+
+    public NPCCustomer CustomerPrefab => customerPrefab;
+    public MyQueue<NPCCustomer> CustomerPool => customerPool;
+    public int Size => size;
+
+
+    #endregion
 }
 
