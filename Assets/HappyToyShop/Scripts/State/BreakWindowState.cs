@@ -65,19 +65,12 @@ public class BreakWindowState : IState
             planks.health = 0;
 
             GameObject wood =
-                enemy.currentWindow.Find("WoodPlanks").gameObject;
+         enemy.currentWindow.Find("WoodPlanks").gameObject;
 
             wood.SetActive(false);
 
-            Debug.Log("Tablas rotas");
-
-            Transform insidePoint =
-                enemy.currentWindow.Find("InsidePoint");
-
-            enemy.agent.Warp(insidePoint.position);
-
             enemy.stateMachine.ChangeState(
-                new ChasePlayerState(enemy));
+                new RepairWindowState(enemy, planks));
 
             return;
         }

@@ -12,8 +12,12 @@ public class WaitWindowState : IState
     }
     public void Enter()
     {
-        timer = 5f;
-        Debug.Log("Esperando ala ventana");
+        timer = 20f;
+
+        if (enemy.isVent)
+            Debug.Log("Esperando en ventilación");
+        else
+            Debug.Log("Esperando en ventana");
     }
     public void Update()
     {
