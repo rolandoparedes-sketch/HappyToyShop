@@ -9,6 +9,10 @@ public class MoneySystem : MonoBehaviour
     public float DailySalesGoal;
     [FoldoutGroup("MoneySystem")]
     public float WeekSalesGoal;
+    private void Awake()
+    {
+        GameManager2D.instance.MoneySystem = this;
+    }
     void Start()
     {
         LoadData();

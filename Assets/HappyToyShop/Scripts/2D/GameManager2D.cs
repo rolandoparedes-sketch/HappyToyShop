@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager2D : MonoBehaviour
@@ -25,13 +24,17 @@ public class GameManager2D : MonoBehaviour
     [SerializeField] private FurnitureManager furnitureManager;
     private void Awake()
     {
+        Debug.Log(gameObject.name);
         if (instance == null)
         {
-            instance = this;
+          //  instance = this;
+          //  Debug.Log("Instance Created");
         }
         else
         {
+            Debug.Log("F");
             Destroy(gameObject);
+            
         }
     }
 

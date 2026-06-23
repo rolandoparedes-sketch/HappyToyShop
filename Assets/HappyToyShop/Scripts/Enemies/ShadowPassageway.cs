@@ -1,7 +1,5 @@
 using Sirenix.OdinInspector;
-using Unity.Mathematics;
 using UnityEngine;
-using static UnityEditor.Rendering.ShadowCascadeGUI;
 
 public class ShadowPassageway : MonoBehaviour
 {

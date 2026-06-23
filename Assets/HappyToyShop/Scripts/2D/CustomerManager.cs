@@ -1,10 +1,7 @@
 using HappyToyShop.Collections;
-using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using UnityEditor.PackageManager;
+
 using UnityEngine;
 
 public class CustomerManager : MonoBehaviour
@@ -37,6 +34,15 @@ public class CustomerManager : MonoBehaviour
     {
         CreatPoolCustomers(size);
 
+        Debug.Log(GameManager2D.instance.MoneySystem);
+        Debug.Log(GameManager2D.instance.DayManager);
+        Debug.Log(GameManager2D.instance.FactorySystem);
+        Debug.Log(GameManager2D.instance.WarehouseSystem);
+        Debug.Log(GameManager2D.instance.CustomerManager);
+        Debug.Log(GameManager2D.instance.DataGame);
+        Debug.Log(GameManager2D.instance.SoundManager);
+        Debug.Log(GameManager2D.instance.CameraSystem);
+        Debug.Log(GameManager2D.instance.FurnitureManager);
     }
 
     private void OnEnable()

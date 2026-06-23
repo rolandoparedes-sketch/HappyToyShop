@@ -38,6 +38,10 @@ public class DayManager : MonoBehaviour
     void Start()
     {
         InitializeDaySystem();
+       
+    }
+    private void OnEnable()
+    {
         CustomerManager.OnCustomerLeft += CheckLastCustomer;
 
     }

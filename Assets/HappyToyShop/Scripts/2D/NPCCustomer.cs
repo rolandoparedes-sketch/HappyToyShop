@@ -1,10 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
-
-using UnityEditor.Animations;
-using System;
-
 public class NPCCustomer : MonoBehaviour
 {
 

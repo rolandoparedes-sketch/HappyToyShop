@@ -36,12 +36,52 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+
+
+    }
+    private void OnEnable()
+    {
+
+
+        Invoke(nameof(DelayTest), 1f);
+
+    }
+
+    public void DelayTest()
+    {
+        Debug.Log("prueba1");
+
         ShelfStorage.OnTakeToy += ChangeUIinHand;
+
+
+        Debug.Log("prueba2");
+        Debug.Log(GameManager2D.instance != null);
+
+        Debug.Log(GameManager2D.instance.CustomerManager != null);
+
+      /*  Debug.Log(GameManager2D.instance.CustomerManager.CustomerQueue != null);
+
+        Debug.Log(GameManager2D.instance.CustomerManager.CustomerQueue.OnCustomerReceived != null);
 
         GameManager2D.instance.CustomerManager.CustomerQueue.OnCustomerReceived += ChangePedidoUI;
 
-        GameManager2D.instance.DayManager.OnDayComplete += RestockToys;
+        Debug.Log("prueba3");
+        GameManager2D.instance.DayManager.OnDayComplete += RestockToys;*/
 
+        Debug.Log("prueba4");
+
+
+        ChangeMessage();
+    }
+    private void OnDisable()
+    {
+
+
+        ShelfStorage.OnTakeToy -= ChangeUIinHand;
+
+        GameManager2D.instance.CustomerManager.CustomerQueue.OnCustomerReceived -= ChangePedidoUI;
+
+        GameManager2D.instance.DayManager.OnDayComplete -= RestockToys;
     }
 
     private void RestockToys()
@@ -91,15 +131,16 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        ChangeMessage();
+        
 
 
     }
 
     void Update()
     {
-        UICargaPacking();
+        //UICargaPacking();
     }
+
     [Button]
     public void ChangeMessage()
     {

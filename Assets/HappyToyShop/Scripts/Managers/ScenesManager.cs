@@ -28,10 +28,27 @@ public class ScenesManager : MonoBehaviour
     }
     private void OnEnable()
     {
+        
         SceneManager.sceneLoaded += OnSceneLoaded;
-
+        Debug.Log("S1");
         if (GameManager2D.instance != null)
-            GameManager2D.instance.DayManager.OnWeekComplete += YouWon;
+        {
+            if (GameManager2D.instance.DayManager != null )
+                GameManager2D.instance.DayManager.OnWeekComplete += YouWon;
+            else
+            {
+                Debug.Log(GameManager2D.instance.MoneySystem);
+                Debug.Log(GameManager2D.instance.DayManager);
+                Debug.Log(GameManager2D.instance.FactorySystem);
+                Debug.Log(GameManager2D.instance.WarehouseSystem);
+                Debug.Log(GameManager2D.instance.CustomerManager);
+                Debug.Log(GameManager2D.instance.DataGame);
+                Debug.Log(GameManager2D.instance.SoundManager);
+                Debug.Log(GameManager2D.instance.CameraSystem);
+                Debug.Log(GameManager2D.instance.FurnitureManager);
+            }
+        }
+        Debug.Log("S2");
     }
 
     private void OnDisable()

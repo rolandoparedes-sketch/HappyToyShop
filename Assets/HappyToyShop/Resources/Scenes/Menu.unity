@@ -949,9 +949,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   paranormalSuccess: {fileID: 0}
+  Player: {fileID: 0}
+  musicDatabase: {fileID: 0}
+  soundManager: {fileID: 0}
   NumbersOfDays: 7
   TurnDay: 1
-  SpecialDays: 
 --- !u!1 &1613700751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,6 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e31818b17ffc4479cd1f6541326db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuSystem
+  FadeAnim: {fileID: 0}
   fadeDuration: 1
 --- !u!223 &2500925673810612283
 Canvas:
