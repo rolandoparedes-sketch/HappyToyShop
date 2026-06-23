@@ -22134,8 +22134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ParanormalSuccess2D
   TimeDelaySounDoors: 3
   durationSoundDoors: 23
-  TimeToActiveSound: 0
-  probability: 0
+  TimeToActiveSound: 20
+  probability: 50
   timer: 0
 --- !u!4 &1930574741
 Transform:
