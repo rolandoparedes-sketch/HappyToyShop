@@ -3879,15 +3879,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab2d49b8622c7d419f6cc8c03da32c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager2D
-  moneySystem: {fileID: 1270056604}
-  dayManager: {fileID: 1373421473}
-  factorySystem: {fileID: 306000648}
-  warehouseSystem: {fileID: 2087673434}
-  customerManager: {fileID: 605017854}
+  moneySystem: {fileID: 0}
+  dayManager: {fileID: 0}
+  factorySystem: {fileID: 0}
+  warehouseSystem: {fileID: 0}
+  customerManager: {fileID: 0}
   dataGame: {fileID: 11400000, guid: 28097a9f8f2c144409e761eba21fa22f, type: 2}
-  soundManager: {fileID: 1260937823}
-  cameraSystem: {fileID: 806462352}
-  furnitureManager: {fileID: 176057987}
+  soundManager: {fileID: 0}
+  cameraSystem: {fileID: 0}
+  furnitureManager: {fileID: 0}
 --- !u!1 &340020264
 GameObject:
   m_ObjectHideFlags: 0

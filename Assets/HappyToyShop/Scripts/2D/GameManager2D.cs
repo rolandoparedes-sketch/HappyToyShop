@@ -27,7 +27,7 @@ public class GameManager2D : MonoBehaviour
         Debug.Log(gameObject.name);
         if (instance == null)
         {
-          //  instance = this;
+           instance = this;
           //  Debug.Log("Instance Created");
         }
         else
