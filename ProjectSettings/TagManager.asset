@@ -11,6 +11,7 @@ TagManager:
   - Customer
   - Exit
   - Attention
+  - Ventilation
   layers:
   - Default
   - TransparentFX
