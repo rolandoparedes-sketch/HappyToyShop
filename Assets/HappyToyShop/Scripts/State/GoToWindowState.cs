@@ -27,13 +27,22 @@ public class GoToWindowState : IState
 
     public void Update()
     {
-        if (outsidePoint == null) return;
+        if (outsidePoint == null)
+            return;
 
-        float distance = Vector3.Distance(enemy.transform.position, outsidePoint.position);
-
-        if (distance < 2f)
+        if (!enemy.agent.pathPending &&
+            enemy.agent.remainingDistance <= enemy.agent.stoppingDistance)
         {
-            enemy.stateMachine.ChangeState(new WaitWindowState(enemy));
+            if (enemy.isVent)
+            {
+                enemy.stateMachine.ChangeState(
+                    new WaintVentState(enemy));
+            }
+            else
+            {
+                enemy.stateMachine.ChangeState(
+                    new WaitWindowState(enemy));
+            }
         }
     }
 

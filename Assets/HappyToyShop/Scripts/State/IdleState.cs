@@ -36,6 +36,8 @@ public class IdleState : IState
                     enemy.windows[
                         Random.Range(0, enemy.windows.Length)
                     ];
+                enemy.AlertText.SetActive(true);
+            
 
                 Debug.Log("Ataque por Ventana");
             }
@@ -47,12 +49,14 @@ public class IdleState : IState
                     enemy.VentPoints[
                         Random.Range(0, enemy.VentPoints.Length)
                     ];
-
+                enemy.AlertText.SetActive(true);
                 Debug.Log("Ataque por Ventilación");
+                
             }
 
             enemy.stateMachine.ChangeState(
                 new GoToWindowState(enemy));
+
         }
     }
 

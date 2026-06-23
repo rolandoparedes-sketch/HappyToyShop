@@ -324,13 +324,12 @@ public class Player3DMovement : MonoBehaviour
     }
     public  void NextCamera()
     {
-        Debug.Log("Siguiente cámara");
+       
         currentCamera.camera.Priority = 10;
 
         currentCamera = currentCamera.next;
 
-        Debug.Log("Nueva: " + currentCamera.camera.name);
-
+      
         currentCamera.camera.Priority = 50;
     }
     private void PreviousCamera()

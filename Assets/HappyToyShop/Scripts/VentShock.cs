@@ -22,6 +22,7 @@ public class VentShock : MonoBehaviour
 
     public bool CanShock()
     {
+        
         return charge <= 0;
     }
 

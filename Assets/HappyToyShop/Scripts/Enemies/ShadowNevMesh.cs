@@ -25,6 +25,7 @@ public class EnemyShadow : MonoBehaviour
 
     [Header("UI")]
     public GameObject warningText;
+    public GameObject AlertText;
 
     public bool isVent;
 
@@ -48,4 +49,6 @@ public class EnemyShadow : MonoBehaviour
     {
         stateMachine.ChangeState(new IdleState(this));
     }
+
+    
 }
