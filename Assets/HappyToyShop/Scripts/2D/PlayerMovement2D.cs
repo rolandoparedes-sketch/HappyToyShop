@@ -54,7 +54,6 @@ public class PlayerMovement2D : MonoBehaviour
             OnMove?.Invoke(moveInput);
         };
 
-        inputs.Player.Jump.performed += ctx => ScenesManager.instance.ChangeMode3D();
 
         inputs.Player.Interact.performed += ctx =>
         {
@@ -82,7 +81,6 @@ public class PlayerMovement2D : MonoBehaviour
             OnMove?.Invoke(moveInput);
         };
 
-        inputs.Player.Jump.performed -= ctx => ScenesManager.instance.ChangeMode3D();
 
 
 

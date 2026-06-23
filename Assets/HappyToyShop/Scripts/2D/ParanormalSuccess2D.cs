@@ -6,10 +6,27 @@ public class ParanormalSuccess2D : MonoBehaviour
 {
     public float TimeDelaySounDoors = 4;
     public float durationSoundDoors = 6;
-    
+    public float TimeToActiveSound;
+    public int probability;
+    public float timer;
     void Start()
     {
 
+    }
+    private void Update()
+    {
+        timer += Time.deltaTime;
+
+        if (timer > TimeToActiveSound)
+        { 
+            timer = 0;
+            int n = Random.Range(0, 101);
+
+            if (n < probability)
+            {
+                KnockKnock();
+            }
+        }
     }
     [Button]
     public void KnockKnock()

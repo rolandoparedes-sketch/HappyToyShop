@@ -2,6 +2,8 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class AttentionTable : MonoBehaviour, IInteractuable
 {
 
@@ -9,7 +11,7 @@ public class AttentionTable : MonoBehaviour, IInteractuable
     public void Interact()
     {
 
-        var customerQueue = GameManager2D.instance.CustomerQueue;
+        var customerQueue = GameManager2D.instance.CustomerManager.CustomerQueue;
 
 
 

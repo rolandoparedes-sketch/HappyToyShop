@@ -96,7 +96,7 @@ public class NPCCustomer : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager2D.instance.CustomerQueue.RemoveWaitingCustomer(this);
+        GameManager2D.instance.CustomerManager.CustomerQueue.RemoveWaitingCustomer(this);
 
 
     }
@@ -178,10 +178,10 @@ public class NPCCustomer : MonoBehaviour
 
         globoPedido.SetActive(false);
 
-        SetTarget(GameManager2D.instance.CustomerQueue.ExitTarget);
+        SetTarget(GameManager2D.instance.CustomerManager.CustomerQueue.ExitTarget);
         GetComponent<Collider2D>().isTrigger = true;
 
-        GameManager2D.instance.CustomerQueue.OnCustomerReceived?.Invoke(this);
+        GameManager2D.instance.CustomerManager.CustomerQueue.OnCustomerReceived?.Invoke(this);
 
     }
     public void ExpandPatience(float amount)
@@ -201,7 +201,7 @@ public class NPCCustomer : MonoBehaviour
         else
         {
 
-            patience -= 0.5f*Time.deltaTime;
+            patience -= 0.4f*Time.deltaTime;
         }
             
 
@@ -209,13 +209,13 @@ public class NPCCustomer : MonoBehaviour
         {
             isWaiting = false;
 
-            GameManager2D.instance.CustomerQueue.RemoveWaitingCustomer(this);
+            GameManager2D.instance.CustomerManager.CustomerQueue.RemoveWaitingCustomer(this);
 
-            SetTarget(GameManager2D.instance.CustomerQueue.ExitTarget);
+            SetTarget(GameManager2D.instance.CustomerManager.CustomerQueue.ExitTarget);
             CustomerAttended(CustomerExitReason.Timeout);
         }
 
-        if(patience <= maxPatience * 0.5 && !attended)
+        if(patience <= maxPatience * 0.3 && !attended)
         {
             GetAngry();
         }
@@ -300,7 +300,7 @@ public class NPCCustomer : MonoBehaviour
         if (other.gameObject.CompareTag("Attention"))
         {
             Received =true;
-            GameManager2D.instance.CustomerQueue.AddWaitingCustomer(this);
+            GameManager2D.instance.CustomerManager.CustomerQueue.AddWaitingCustomer(this);
         }
 
         if (other.gameObject.CompareTag("Exit") && !isWaiting)

@@ -68,4 +68,8 @@ public class PackingTable : MonoBehaviour, IInteractuable
 
 
     }
+
+    public float Progress  => progress;
+    public float TimeToPacking => timeToPacking;
+    public bool IsPacking => isPacking;
 }

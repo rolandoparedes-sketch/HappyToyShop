@@ -22,8 +22,7 @@ public class GameManager2D : MonoBehaviour
     [FoldoutGroup("References")]
     [SerializeField] private CameraSystem cameraSystem;
     [FoldoutGroup("References")]
-    [SerializeField] private CustomerQueue customerQueue;
-
+    [SerializeField] private FurnitureManager furnitureManager;
     private void Awake()
     {
         if (instance == null)
@@ -57,5 +56,5 @@ public class GameManager2D : MonoBehaviour
     public SoundManager SoundManager => soundManager;
     public CameraSystem CameraSystem => cameraSystem;
 
-    public CustomerQueue CustomerQueue => customerQueue;
+    public FurnitureManager FurnitureManager => furnitureManager;
 }

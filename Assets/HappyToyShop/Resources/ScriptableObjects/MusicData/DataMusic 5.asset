@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DataMusic 5
   m_EditorClassIdentifier: Assembly-CSharp::MusicData
   clip: {fileID: 8300000, guid: 3658b1896002fde428057da76e45dec1, type: 3}
-  volume: 1
+  volume: 0.5

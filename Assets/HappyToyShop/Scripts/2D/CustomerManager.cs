@@ -9,6 +9,10 @@ using UnityEngine;
 
 public class CustomerManager : MonoBehaviour
 {
+    [SerializeField] private CustomerQueue customerQueue;
+    [SerializeField] private CustomerSpawner customerSpawner;
+
+
     [SerializeField] private NPCCustomer customerPrefab;
     [SerializeField] private MyQueue<NPCCustomer> customerPool = new();
 
@@ -79,6 +83,11 @@ public class CustomerManager : MonoBehaviour
 
     }
     #region Getters
+
+    public CustomerSpawner CustomerSpawner => customerSpawner;
+    public CustomerQueue CustomerQueue => customerQueue;
+
+
     public NPCCustomer CustomerPrefab => customerPrefab;
     public MyQueue<NPCCustomer> CustomerPool => customerPool;
     public int Size => size;

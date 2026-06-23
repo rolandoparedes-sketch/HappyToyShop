@@ -1,5 +1,5 @@
 using Sirenix.OdinInspector;
-using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,17 @@ public class UIManager : MonoBehaviour
 
     public Image ToyInHand;
     public Image ToyCustomer;
+
+
+    public Image BarraPacking;
+    public Image BarraContorno;
+
+
+    public GameObject PanelStock;
+
+    public List<Image> ImagesShelfs;
+
+
     private void Awake()
     {
 
@@ -27,11 +38,21 @@ public class UIManager : MonoBehaviour
 
         ShelfStorage.OnTakeToy += ChangeUIinHand;
 
-        GameManager2D.instance.CustomerQueue.OnCustomerReceived += ChangePedidoUI;
+        GameManager2D.instance.CustomerManager.CustomerQueue.OnCustomerReceived += ChangePedidoUI;
+
+        GameManager2D.instance.DayManager.OnDayComplete += RestockToys;
+
     }
+
+    private void RestockToys()
+    {
+        PlayerController2D.instance.playerMovement.GetComponent<PlayerMovement2D>().enabled = false;
+        PanelStock.SetActive(true);
+    }
+
     private void ChangePedidoUI(NPCCustomer customer)
     {
-        var customerWaiting = GameManager2D.instance.CustomerQueue.CustomerWaiting;
+        var customerWaiting = GameManager2D.instance.CustomerManager.CustomerQueue.CustomerWaiting;
 
         if (customerWaiting.Count == 0)
         {
@@ -77,7 +98,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        
+        UICargaPacking();
     }
     [Button]
     public void ChangeMessage()
@@ -91,5 +112,18 @@ public class UIManager : MonoBehaviour
         }
 
         Day.text = dayManager.CurrentWeekDay + ", " + dayManager.CurrentMonth + " " + dayManager.CurrentDay;
+    }
+
+    public void UICargaPacking()
+    {
+        var PackingTable = GameManager2D.instance.FurnitureManager.PackingTable;
+
+        BarraContorno.gameObject.SetActive(PackingTable.IsPacking);
+
+
+        float percentage = PackingTable.Progress/PackingTable.TimeToPacking;
+
+        BarraPacking.fillAmount = percentage;
+
     }
 }

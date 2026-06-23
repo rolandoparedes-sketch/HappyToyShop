@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Toys
   iD: 0
   entityName: FoxPlush
-  icon: {fileID: 0}
+  icon: {fileID: -1545051643, guid: aa3823e0d0fabd2498bb6ee8dc380206, type: 3}
   description: ...
   toyPrefab: {fileID: 0}
   salePrice: 0
-  dozenCost: 0
-  halfDozenCost: 0
+  factoryCost: 0

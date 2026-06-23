@@ -23,6 +23,8 @@ public class DayManager : MonoBehaviour
     public Action OnNextDay;
     public Action OnWeekComplete;
 
+    public Action OnDayComplete;
+
     private int currentDay;
     public struct SpecialDay
     {
@@ -36,8 +38,28 @@ public class DayManager : MonoBehaviour
     void Start()
     {
         InitializeDaySystem();
+        CustomerManager.OnCustomerLeft += CheckLastCustomer;
 
     }
+    [Button]
+    public void PassDay()
+    {
+        ScenesManager.instance.ChangeMode3D();
+        UIManager.instance.PanelStock.SetActive(false);
+    }
+
+
+    private void CheckLastCustomer(NPCCustomer customer)
+    {
+        var customerSpawner = GameManager2D.instance.CustomerManager.CustomerSpawner;
+
+        if (customerSpawner.CustomerSpawnedToday == customerSpawner.CustomerPerDay && customerSpawner.CurrentCustomers == 0)
+        {
+
+            OnDayComplete?.Invoke();
+        }
+    }
+
     public void InitializeDaySystem()
     {
         InitializeCalendar();

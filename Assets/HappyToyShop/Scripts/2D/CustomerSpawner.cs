@@ -73,6 +73,7 @@ public class CustomerSpawner : MonoBehaviour
     public void SpawnCustomer()
     {
 
+        GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.SFX, 1);
         NPCCustomer customer = GameManager2D.instance.CustomerManager.NextCustomer();
 
         if (customer == null)
@@ -86,10 +87,14 @@ public class CustomerSpawner : MonoBehaviour
         customer.gameObject.SetActive(true);
         customer.Initializer();
 
-        GameManager2D.instance.CustomerQueue.AddCustomerInQueue(customer);
+        GameManager2D.instance.CustomerManager.CustomerQueue.AddCustomerInQueue(customer);
       
         currentCustomers++;
     }
+
+    public int CustomerSpawnedToday => customerSpawnedToday;
+    public int CustomerPerDay => customerPerDay;
+    public int CurrentCustomers => currentCustomers;
 
 }
 
