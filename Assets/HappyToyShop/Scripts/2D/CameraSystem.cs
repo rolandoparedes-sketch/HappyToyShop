@@ -2,9 +2,7 @@ using HappyToyShop.Collections.Graphs;
 using Sirenix.OdinInspector;
 using System.Collections;
 using Unity.Cinemachine;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CameraSystem : MonoBehaviour
 {

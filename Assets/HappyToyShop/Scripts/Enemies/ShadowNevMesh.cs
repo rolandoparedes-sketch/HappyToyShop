@@ -1,8 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
-using UnityEngine.XR;
-using UnityEditor.PackageManager.UI;
 public class EnemyShadow : MonoBehaviour
 {
     [Header("BreakWindow")]
