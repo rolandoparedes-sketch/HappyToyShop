@@ -23,8 +23,13 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 1aa4e02df29e6174bba0138449adf478, type: 2}
     - {fileID: 11400000, guid: 224a2e91837122b46a8f7548730f0cc6, type: 2}
     - {fileID: 11400000, guid: b6c44152ccb66644aace4b307d465002, type: 2}
+    - {fileID: 11400000, guid: 6947433faa899f547bfe57f5a8bb924f, type: 2}
+    - {fileID: 11400000, guid: 2d71ef3218f4805418d1171ec9764a4a, type: 2}
     - {fileID: 11400000, guid: 379d3b7fb8d2b2b4c9cd1345d447789a, type: 2}
     - {fileID: 11400000, guid: f34d5aa228928f84fa6be5b03a25a728, type: 2}
+    - {fileID: 11400000, guid: def48cacc99bd414aab277ef6080b494, type: 2}
+    - {fileID: 11400000, guid: cb928fce3acc4884c89a65120b09378a, type: 2}
+    - {fileID: 11400000, guid: 43acec07875a1254fac1d4c878b6c6a5, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -115,7 +120,7 @@ MonoBehaviour:
       Data: 4|System.Collections.Generic.List`1[[AudioData, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 5
     - Name: 
       Entry: 10
       Data: 4
@@ -125,6 +130,12 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 6
+    - Name: 
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 10
+      Data: 8
     - Name: 
       Entry: 13
       Data: 
@@ -145,13 +156,22 @@ MonoBehaviour:
       Data: 5|System.Collections.Generic.List`1[[AudioData, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 5
     - Name: 
       Entry: 10
-      Data: 7
+      Data: 9
     - Name: 
       Entry: 10
-      Data: 8
+      Data: 10
+    - Name: 
+      Entry: 10
+      Data: 11
+    - Name: 
+      Entry: 10
+      Data: 12
+    - Name: 
+      Entry: 10
+      Data: 13
     - Name: 
       Entry: 13
       Data: 

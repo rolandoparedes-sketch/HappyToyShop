@@ -6,14 +6,22 @@ public class PlayerMechanics2D : MonoBehaviour
 {
     [FoldoutGroup("Inventory")]
     public ToyData ToyData;
+    [FoldoutGroup("Inventory")]
     public GameObject Gift;
+    [FoldoutGroup("Inventory")]
     public bool HasGift;
     [FoldoutGroup("Interact")]
     public ShelfStorage CurrentShelf;
+    [FoldoutGroup("Interact")]
     [SerializeField] private Transform InteractController;
+    [FoldoutGroup("Interact")]
     [SerializeField] private Vector2 DimensionBox;
+    [FoldoutGroup("Interact")]
     [SerializeField] private LayerMask InteractuableObjects;
-
+    [FoldoutGroup("Interact")]
+    [SerializeField] private IInteractuable currentInteractable;
+    [FoldoutGroup("Interact")]
+    [SerializeField] private  GameObject interactUI;
 
     void Start()
     {
@@ -29,6 +37,21 @@ public class PlayerMechanics2D : MonoBehaviour
         ToyData = null;
         CurrentShelf = null;
     }
+    private void CheckInteractable()
+    {
+        Collider2D objectTouched = Physics2D.OverlapBox(InteractController.position, DimensionBox, 0f, InteractuableObjects);
+
+        if (objectTouched != null && objectTouched.TryGetComponent<IInteractuable>(out var interactable))
+        {
+            currentInteractable = interactable;
+            interactUI.SetActive(true);
+        }
+        else
+        {
+            currentInteractable = null;
+            interactUI.SetActive(false);
+        }
+    }
     private void Interact()
     {
         Debug.Log("Interacturar");
@@ -43,10 +66,15 @@ public class PlayerMechanics2D : MonoBehaviour
         }
 
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+       
 
+
+    }
     void Update()
     {
-
+        CheckInteractable();
     }
 
     private void OnDrawGizmos()

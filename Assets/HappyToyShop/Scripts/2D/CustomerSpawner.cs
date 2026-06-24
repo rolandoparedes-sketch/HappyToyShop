@@ -37,6 +37,10 @@ public class CustomerSpawner : MonoBehaviour
     //public Action OnCutomerEnter;
     public static Action<NPCCustomer> OnCustomerLeft;
 
+
+    public GameObject Closed;
+
+    [SerializeField] private float timeToShowClosed = 5f;
     void Start()
     {
 
@@ -120,6 +124,7 @@ public class CustomerSpawner : MonoBehaviour
 
             customerSpawnedToday++;
         }
+        StartCoroutine(CloseDelay());
     }
 
     [Button]
@@ -146,8 +151,16 @@ public class CustomerSpawner : MonoBehaviour
         GameManager2D.instance.CustomerManager.CustomerQueue.AddCustomerInQueue(customer);
       
         currentCustomers++;
-    }
 
+    }
+    private IEnumerator CloseDelay()
+    {
+        yield return new WaitForSeconds(timeToShowClosed);
+
+        Closed.gameObject.SetActive(true);
+
+        Debug.Log("spawn3");
+    }
     #region Getters
 
     public int CustomerSpawnedToday => customerSpawnedToday;

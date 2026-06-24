@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f59e6b2d3107fc45bfb702e0f7e27f7, type: 3}
-  m_Name: DataMusic 7
+  m_Name: DataMusic 9
   m_EditorClassIdentifier: Assembly-CSharp::MusicData
-  clip: {fileID: 8300000, guid: 0e92801ff407bc94e9d679cdfd984e43, type: 3}
-  volume: 0.9
+  clip: {fileID: 8300000, guid: 987293b881591b5499639cb7de18c490, type: 3}
+  volume: 0.5

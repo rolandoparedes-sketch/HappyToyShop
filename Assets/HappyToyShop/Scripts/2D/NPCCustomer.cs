@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 
@@ -15,8 +16,9 @@ public class NPCCustomer : MonoBehaviour
     [SerializeField] private TypeDialogue typeDialogue;
     //[SerializeField] private Sprite spriteNpc;
     [FoldoutGroup("References")]
-    [SerializeField] private GameObject NpcModel;
-
+    [SerializeField] private GameObject NpcModel; 
+    [FoldoutGroup("References")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     //[SerializeField] private Sprite spriteToy;
     [FoldoutGroup("References")]
@@ -68,6 +70,9 @@ public class NPCCustomer : MonoBehaviour
     [SerializeField] private bool isAngry;
 
     [FoldoutGroup("NpcSettings")]
+    [SerializeField] private bool isDesperate;
+
+    [FoldoutGroup("NpcSettings")]
     [SerializeField] private bool Received;
 
 
@@ -85,6 +90,7 @@ public class NPCCustomer : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
+        spriteRenderer = NpcModel.GetComponent<SpriteRenderer>();
 
     }
     private void OnEnable()
@@ -120,6 +126,12 @@ public class NPCCustomer : MonoBehaviour
         isWaiting = false;
         target = null;
 
+        animator.speed = 1f;
+
+        isDesperate = false;
+        spriteRenderer.color = Color.white;
+
+
         globoPedido.SetActive(false);
 
         GetComponent<Collider2D>().isTrigger = false;
@@ -146,9 +158,13 @@ public class NPCCustomer : MonoBehaviour
     }
     public void GetAngry()
     {
-        isAngry= true;
-        animator.SetBool("Angry", isAngry);
+        if (isAngry) return;
+
+        isAngry = true;
+        animator.SetBool("Angry", true);
         moveSpeed = AngryMoveSpeed;
+
+        GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.Voice, 3);
     }
     public void SetNormalState()
     {
@@ -210,15 +226,26 @@ public class NPCCustomer : MonoBehaviour
         {
             isWaiting = false;
 
+            animator.speed = 1f;
             GameManager2D.instance.CustomerManager.CustomerQueue.RemoveWaitingCustomer(this);
 
             SetTarget(GameManager2D.instance.CustomerManager.CustomerQueue.ExitTarget);
             CustomerAttended(CustomerExitReason.Timeout);
         }
 
-        if(patience <= maxPatience * 0.3 && !attended)
+        if(patience <= maxPatience * 0.5 && !attended && !isAngry)
         {
             GetAngry();
+        }
+
+        if (patience <= maxPatience * 0.3f && !attended && !isDesperate)
+        {
+            isDesperate = true;
+
+            spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
+
+            animator.speed = 2f;
+            GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.Voice, 2);
         }
 
     }
@@ -301,6 +328,8 @@ public class NPCCustomer : MonoBehaviour
         {
             Received =true;
             GameManager2D.instance.CustomerManager.CustomerQueue.AddWaitingCustomer(this);
+
+            GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.Voice, 4);
         }
 
         if (other.gameObject.CompareTag("Exit") && !isWaiting)

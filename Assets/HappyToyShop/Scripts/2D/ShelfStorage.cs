@@ -70,6 +70,8 @@ public class ShelfStorage : MonoBehaviour, IInteractuable
 
 
         OnTakeToy?.Invoke();
+
+        GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.SFX, 3);
     }
     public void ReturnToy()
     {
