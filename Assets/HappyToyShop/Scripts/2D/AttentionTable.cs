@@ -74,7 +74,6 @@ public class AttentionTable : MonoBehaviour, IInteractuable
 
         nextCustomer.CustomerAttended(CustomerExitReason.Served);
 
-
         GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.SFX, 0);
 
         OnSell?.Invoke();

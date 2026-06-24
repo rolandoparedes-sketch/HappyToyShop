@@ -63,6 +63,12 @@ public class PackingTable : MonoBehaviour, IInteractuable
             Debug.Log("Primero debes tener un juguete en mano");
             return;
         }
+        if (player.HasGift)
+        {
+            GameManager2D.instance.UIManager.ChangeDialoguePlayer("I already have the toy wrapped");
+            Debug.Log("Ya esta envuelto");
+            return;
+        }
         if (isPacking)
             return;
 

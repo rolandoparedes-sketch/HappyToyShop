@@ -168,12 +168,14 @@ public class NPCCustomer : MonoBehaviour
         isAngry = true;
         animator.SetBool("Angry", true);
         moveSpeed = AngryMoveSpeed;
-
+        animator.speed = 1.5f;
         GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.Voice, 3);
     }
     public void SetNormalState()
     {
         isAngry = false;
+        isDesperate = false;
+        spriteRenderer.color = Color.white;
         animator.SetBool("Angry", isAngry);
         moveSpeed = baseMoveSpeed;
     }

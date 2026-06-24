@@ -2890,7 +2890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3035b71e097dcae45acf462de6aeb079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerSpawner
-  customerPerDay: 15
+  customerPerDay: 10
   customerSpawnedToday: 0
   timeToFirstSpawn: 5
   timeMinToSpawnCustomers: 20
@@ -24001,7 +24001,7 @@ MonoBehaviour:
   TimeDelaySounDoors: 3
   durationSoundDoors: 23
   TimeToActiveSound: 50
-  probability: 5
+  probability: 10
   timer: 0
 --- !u!4 &1930574741
 Transform:
