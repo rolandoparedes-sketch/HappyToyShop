@@ -13542,7 +13542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoneySystem
   CurrentMoney: 0
-  DailySalesGoal: 200
+  DailySalesGoal: 2000
   WeekSalesGoal: 0
 --- !u!4 &1270056605
 Transform:
