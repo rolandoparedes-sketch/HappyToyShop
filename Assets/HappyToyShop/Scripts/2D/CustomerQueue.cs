@@ -64,7 +64,7 @@ public class CustomerQueue : MonoBehaviour
             customer.ExpandPatience(amount);
         }
     }
-
+    
     [Button]
     private void UpdateQueuePositions()
     {

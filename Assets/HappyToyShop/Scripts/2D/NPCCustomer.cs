@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -39,6 +40,9 @@ public class NPCCustomer : MonoBehaviour
 
     [FoldoutGroup("NpcSettings")]
     [SerializeField] private string entityName;
+
+    [FoldoutGroup("NpcSettings")]
+    [SerializeField] private string dialogue;
     [FoldoutGroup("NpcSettings")]
     [SerializeField] private int idPedido;
     [FoldoutGroup("NpcSettings")]
@@ -76,6 +80,7 @@ public class NPCCustomer : MonoBehaviour
     [SerializeField] private bool Received;
 
 
+    public static event Action OnReceived;
     /* public NPC(NpcDataDialogues dialogues, TypeDialogue typeDialogue, Sprite sprite, Animator animator, float patience)
      {
          Dialogues = dialogues;
@@ -286,7 +291,9 @@ public class NPCCustomer : MonoBehaviour
             typeDialogue = TypeDialogue.Disturbing;
 
 
-            Debug.Log(dataBase.GetDialogue(typeDialogue));
+            dialogue = dataBase.GetDialogue(typeDialogue);
+
+            Debug.Log(dialogue);
 
             return;
         }
@@ -298,7 +305,9 @@ public class NPCCustomer : MonoBehaviour
 
 
 
-            Debug.Log(dataBase.GetDialogue(typeDialogue));
+            dialogue = dataBase.GetDialogue(typeDialogue);
+
+            Debug.Log(dialogue);
 
             return;
         }
@@ -308,8 +317,9 @@ public class NPCCustomer : MonoBehaviour
         typeDialogue = TypeDialogue.Normal;
 
 
+        dialogue = dataBase.GetDialogue(typeDialogue);
 
-        Debug.Log(dataBase.GetDialogue(typeDialogue));
+        Debug.Log(dialogue);
 
     }
     [Button]
@@ -330,6 +340,7 @@ public class NPCCustomer : MonoBehaviour
             GameManager2D.instance.CustomerManager.CustomerQueue.AddWaitingCustomer(this);
 
             GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.Voice, 4);
+            OnReceived?.Invoke();
         }
 
         if (other.gameObject.CompareTag("Exit") && !isWaiting)
@@ -340,5 +351,5 @@ public class NPCCustomer : MonoBehaviour
        
     }
 
-
+    public string Dialogue => dialogue;
 }

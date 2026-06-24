@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
 
     public Image BarraPacking;
     public Image BarraContorno;
+    public Image GiftBox;
 
 
     public GameObject PanelStock;
@@ -24,14 +26,30 @@ public class UIManager : MonoBehaviour
 
 
 
+    public Image CurrentCustomer;
+    public TextMeshProUGUI CustomerDialogue;
+
+
     public TextMeshProUGUI Money;
     public TextMeshProUGUI DailyGoal;
+
+
+
+
 
     private void Awake()
     {
 
 
      
+
+
+
+
+
+    }
+    private void OnEnable()
+    {
 
         ShelfStorage.OnTakeToy += ChangeUIinHand;
 
@@ -41,6 +59,45 @@ public class UIManager : MonoBehaviour
 
         GameManager2D.instance.FurnitureManager.AttentionTable.OnSell += ChangeMoneyUI;
 
+        NPCCustomer.OnReceived += DialogueCustomerEnter;
+
+       // GameManager2D.instance.FurnitureManager.AttentionTable.OnSell += DialogueCustomerExit;
+
+
+        
+    }
+
+    private void DialogueCustomerEnter()
+    {
+        CurrentCustomer.gameObject.SetActive(true);
+        CustomerDialogue.gameObject.SetActive(true);
+
+        NPCCustomer currentCustomer = GameManager2D.instance.CustomerManager.CustomerQueue.CustomerWaiting.Peek();
+
+
+
+        CurrentCustomer.sprite = currentCustomer.GetComponent<SpriteRenderer>().sprite;
+
+        CustomerDialogue.text = "Hi :D";
+        
+
+
+    }
+    public void DialogueCustomerExit()
+    {
+
+        NPCCustomer currentCustomer = GameManager2D.instance.CustomerManager.CustomerQueue.CustomerWaiting.Peek();
+
+
+
+        CurrentCustomer.sprite = currentCustomer.GetComponent<SpriteRenderer>().sprite;
+
+        CustomerDialogue.text = currentCustomer.Dialogue;
+    }
+
+    private void OnDisable()
+    {
+        
     }
     public void ChangeDialoguePlayer(string newText)
     {
@@ -135,7 +192,7 @@ public class UIManager : MonoBehaviour
         var PackingTable = GameManager2D.instance.FurnitureManager.PackingTable;
 
         BarraContorno.gameObject.SetActive(PackingTable.IsPacking);
-
+        GiftBox.gameObject.SetActive(PackingTable.IsPacking);
 
         float percentage = PackingTable.Progress/PackingTable.TimeToPacking;
 

@@ -46,7 +46,7 @@ public class PackingTable : MonoBehaviour, IInteractuable
         player.HasGift = true;
 
         GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.SFX, 2);
-
+        
         
     }
     public void ReturnGift()
