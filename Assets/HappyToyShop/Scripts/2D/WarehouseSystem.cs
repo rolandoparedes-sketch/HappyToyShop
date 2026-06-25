@@ -20,22 +20,29 @@ public class WarehouseSystem : MonoBehaviour
     void Start()
     {
 
-        ApplyDataToEachShelf();
+       Invoke(nameof(ApplyDataToEachShelf), 1f);
+
+
 
     }
 
     private void OnEnable()
     {
-        GameManager2D.instance.DayManager.OnDayComplete += TestOrderByAcending;
+       // GameManager2D.instance.DayManager.OnDayComplete += TestOrderByAcending;
+       // GameManager2D.instance.UIManager.OnRestock += ApplyDataUIShelf;
     }
     private void OnDisable()
     {
 
-        GameManager2D.instance.DayManager.OnDayComplete -= TestOrderByAcending;
+        //GameManager2D.instance.DayManager.OnDayComplete -= TestOrderByAcending;
+       // GameManager2D.instance.UIManager.OnRestock -= ApplyDataUIShelf;
+
     }
 
     public void TestOrderByAcending()
     {
+
+        Debug.Log("Ordenando Shelfs por CurrentAmount");
         Shelfs = Shelfs.OrderBy(Shelfs => Shelfs.CurrentAmount).ToList();
     }
 
@@ -58,7 +65,7 @@ public class WarehouseSystem : MonoBehaviour
 
         Shelfs[ShelfID].CurrentAmount += Amount;
 
-        GameManager2D.instance.DataGame.currentAmountInShelfs[ShelfID] += Amount;
+        //GameManager2D.instance.DataGame.currentAmountInShelfs[ShelfID] += Amount;
 
 
         Debug.Log("You added " + Amount + " " + Shelfs[ShelfID].data.EntityName + " to the warehouse, now you have " + Shelfs[ShelfID].CurrentAmount);
@@ -78,20 +85,29 @@ public class WarehouseSystem : MonoBehaviour
                 Debug.LogWarning("Falto asignar un alamacen en la posición número: " + i);
             }
 
-            Shelfs[i].data = GameManager2D.instance.FactorySystem.toyDataBase.GetToy(i);
-        }
-        for (int i = 0; i < Shelfs.Count; i++)
-        {
+            Shelfs[i].data = GameManager2D.instance.FactorySystem.toyDataBase.GetToy(i + 1);
 
             Shelfs[i].ShelfID = Shelfs[i].data.ID;
 
-            Shelfs[i].CurrentAmount = GameManager2D.instance.DataGame.currentAmountInShelfs[i];
+            //Shelfs[i].CurrentAmount = GameManager2D.instance.DataGame.currentAmountInShelfs[i + 1];
+
+            Shelfs[i].MaxCapacity = GameManager2D.instance.DataGame.MaxCapacityShelf;
+
+
+
+            if (Shelfs[i].CurrentAmount > GameManager2D.instance.DataGame.MaxCapacityShelf)
+            {
+                Shelfs[i].CurrentAmount = GameManager2D.instance.DataGame.MaxCapacityShelf;
+                Debug.LogWarning("El almacen " + i + " excedio la capacidad máxima.");
+            }
+
         }
 
     }
-
+    [Button]
     public void ApplyDataUIShelf()
     {
+        Debug.Log("data Aplicada");
         for (int i = 0; i < Shelfs.Count; i++)
         {
             if (Shelfs[i] == null)
@@ -101,15 +117,15 @@ public class WarehouseSystem : MonoBehaviour
 
             ShelfUI[i].toyId = Shelfs[i].data.ID;
 
-            ShelfUI[i].name = Shelfs[i].data.EntityName;
+            ShelfUI[i].nameText.text = Shelfs[i].data.EntityName;
 
             ShelfUI[i].stock = Shelfs[i].CurrentAmount;
 
-            ShelfUI[i].stockText.text = Shelfs[i].CurrentAmount.ToString();
+            ShelfUI[i].stockText.text = "Stock: " + Shelfs[i].CurrentAmount.ToString();
 
             ShelfUI[i].price = Shelfs[i].data.SalePrice;
 
-            ShelfUI[i].Icon.GetComponent<SpriteRenderer>().sprite = Shelfs[i].data.Icon;
+            ShelfUI[i].Icon.sprite = Shelfs[i].data.Icon;
         }
 
     }

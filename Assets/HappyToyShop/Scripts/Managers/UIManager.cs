@@ -19,8 +19,11 @@ public class UIManager : MonoBehaviour
 
 
     public GameObject PanelStock;
+    public event Action OnRestock;
+    public Action OnPrueba1;
+    public Action OnPrueba2;
+    public Action OnPrueba3;
 
-    public List<Image> ImagesShelfs;
 
     public TextMeshProUGUI PlayerDialgue;
 
@@ -106,10 +109,22 @@ public class UIManager : MonoBehaviour
     }
     private void RestockToys()
     {
+        OnRestock?.Invoke();
+        OnPrueba1?.Invoke(); OnPrueba2?.Invoke(); OnPrueba3?.Invoke();
+        Debug.Log(OnRestock);
+
+        Debug.Log(OnPrueba1);
+        Debug.Log(OnPrueba2);
+        Debug.Log(OnPrueba3);
+        Debug.Log("Restock Toys");
+        GameManager2D.instance.WarehouseSystem.TestOrderByAcending();
+        GameManager2D.instance.WarehouseSystem.ApplyDataUIShelf();
         PlayerController2D.instance.playerMovement.GetComponent<PlayerMovement2D>().enabled = false;
         PanelStock.SetActive(true);
-    }
 
+
+    }
+    
     private void ChangePedidoUI(NPCCustomer customer)
     {
         var customerWaiting = GameManager2D.instance.CustomerManager.CustomerQueue.CustomerWaiting;

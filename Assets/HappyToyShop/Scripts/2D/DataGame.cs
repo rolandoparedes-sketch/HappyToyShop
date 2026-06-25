@@ -12,8 +12,15 @@ public class DataGame : ScriptableObject
     public int weekDayIndex;
 
     public int monthIndex;
+    public int MaxCapacityShelf;
 
-    public List<int> currentAmountInShelfs;
+
+    public List<ShelfData> CurrentShelfs;
+
+    public List<int> CurrentShelfsID;
+
+    public List<int> CurrentShelfsAmount;
+
 
     public List<OrderData> pedidos;
 }
@@ -22,4 +29,10 @@ public struct OrderData
 {
     public int toyID;
     public int amount;
+}
+[System.Serializable]
+public struct ShelfData
+{
+    public int shelfID;
+    public int currentAmount;
 }

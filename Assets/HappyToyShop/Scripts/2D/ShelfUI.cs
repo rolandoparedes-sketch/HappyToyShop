@@ -18,19 +18,29 @@ public class ShelfUI : MonoBehaviour
 
     public Image Icon;
 
-    public void Increase()
+    public void Start()
+    {
+        Refresh();
+    }
+   
+    public void IncreaseAmount()
     {
         ShelfStorage shelf = GameManager2D.instance.WarehouseSystem.Shelfs[toyId];
 
         int maxcapacity = shelf.MaxCapacity;
 
         if (stock + buyAmount >= maxcapacity)
+        {
+
+            Debug.Log("Max capacity reached");
             return;
+        }
+
 
         buyAmount++;
         Refresh();
     }
-    public void Decrease()
+    public void DecreaseAmount()
     {
         if (buyAmount <= 0)
             return;
@@ -43,7 +53,7 @@ public class ShelfUI : MonoBehaviour
     {
 
         amountText.text = buyAmount.ToString();
-        costText.text = "$" + (buyAmount * price);
+        costText.text = "-$" + (buyAmount * price);
     }
     public void Buy()
     {
@@ -52,6 +62,8 @@ public class ShelfUI : MonoBehaviour
 
         GameManager2D.instance.MoneySystem.Buy(toyId, buyAmount);
 
-        GameManager2D.instance.DataGame.currentAmountInShelfs[toyId] += buyAmount;
+        var data = GameManager2D.instance.DataGame;
+
+       
     }
 }

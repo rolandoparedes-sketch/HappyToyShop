@@ -11,12 +11,29 @@ public class ParanormalSuccess2D : MonoBehaviour
     public float TimeToActiveSound;
     public int probability;
     public float timer;
+
+    public bool DayEnd;
+
     void Start()
     {
 
     }
+    public void OnEnable()
+    {
+        GameManager2D.instance.DayManager.OnDayComplete += () => DayEnd = true;
+    }
+    public void OnDisable()
+    {
+
+        GameManager2D.instance.DayManager.OnDayComplete -= () => DayEnd = true;
+    }
     private void Update()
     {
+
+        if(DayEnd)
+        {
+            return;
+        }
         timer += Time.deltaTime;
 
         if (timer > TimeToActiveSound)
