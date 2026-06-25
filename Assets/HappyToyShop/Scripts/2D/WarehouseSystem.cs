@@ -10,6 +10,9 @@ public class WarehouseSystem : MonoBehaviour
 {
     public List<ShelfStorage> Shelfs;
 
+
+    public List<ShelfUI> ShelfUI;
+
     private void Awake()
     {
     }
@@ -83,6 +86,30 @@ public class WarehouseSystem : MonoBehaviour
             Shelfs[i].ShelfID = Shelfs[i].data.ID;
 
             Shelfs[i].CurrentAmount = GameManager2D.instance.DataGame.currentAmountInShelfs[i];
+        }
+
+    }
+
+    public void ApplyDataUIShelf()
+    {
+        for (int i = 0; i < Shelfs.Count; i++)
+        {
+            if (Shelfs[i] == null)
+            {
+                Debug.LogWarning("Falto asignar un alamacen en la posición número: " + i);
+            }
+
+            ShelfUI[i].toyId = Shelfs[i].data.ID;
+
+            ShelfUI[i].name = Shelfs[i].data.EntityName;
+
+            ShelfUI[i].stock = Shelfs[i].CurrentAmount;
+
+            ShelfUI[i].stockText.text = Shelfs[i].CurrentAmount.ToString();
+
+            ShelfUI[i].price = Shelfs[i].data.SalePrice;
+
+            ShelfUI[i].Icon.GetComponent<SpriteRenderer>().sprite = Shelfs[i].data.Icon;
         }
 
     }

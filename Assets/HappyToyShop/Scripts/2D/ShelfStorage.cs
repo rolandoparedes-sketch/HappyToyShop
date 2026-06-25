@@ -7,7 +7,7 @@ public class ShelfStorage : MonoBehaviour, IInteractuable
     public int ShelfID;
     public ToyData data;
     public int CurrentAmount;
-    public int MaxCapacity = 18;
+    public int MaxCapacity = 6;
 
 
     public static Action OnTakeToy;
