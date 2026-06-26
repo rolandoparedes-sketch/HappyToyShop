@@ -117,7 +117,7 @@ public class UIManager : MonoBehaviour
         Debug.Log(OnPrueba2);
         Debug.Log(OnPrueba3);
         Debug.Log("Restock Toys");
-        GameManager2D.instance.WarehouseSystem.TestOrderByAcending();
+        //GameManager2D.instance.WarehouseSystem.TestOrderByAcending();
         GameManager2D.instance.WarehouseSystem.ApplyDataUIShelf();
         PlayerController2D.instance.playerMovement.GetComponent<PlayerMovement2D>().enabled = false;
         PanelStock.SetActive(true);

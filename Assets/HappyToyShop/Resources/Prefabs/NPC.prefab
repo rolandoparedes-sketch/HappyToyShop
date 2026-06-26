@@ -107,7 +107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4464682223802151752
 Transform:
   m_ObjectHideFlags: 0
@@ -269,7 +269,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -291,16 +291,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d25c7abe2a255546af0b3c68dd389c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCCustomer
-  data: {fileID: 11400000, guid: 892b8c1e4c0ddf747b75cf4b95b96671, type: 2}
+  data: {fileID: 11400000, guid: deb09ccba50c1634884658061d81cf99, type: 2}
   dataBase: {fileID: 11400000, guid: 23193405fc9da4c4aa57508e18a6611f, type: 2}
   typeDialogue: 0
   NpcModel: {fileID: 8853684331497859675}
+  spriteRenderer: {fileID: 0}
   globoPedido: {fileID: 7092522134565100456}
   pedido: {fileID: 1095964411000436558}
   animator: {fileID: 0}
   rb: {fileID: 0}
   target: {fileID: 0}
   entityName: 
+  dialogue: 
   idPedido: 0
   moveSpeed: 0
   baseMoveSpeed: 3
@@ -311,6 +313,7 @@ MonoBehaviour:
   isWaiting: 0
   attended: 0
   isAngry: 0
+  isDesperate: 0
   Received: 0
 --- !u!95 &2104849496494660322
 Animator:

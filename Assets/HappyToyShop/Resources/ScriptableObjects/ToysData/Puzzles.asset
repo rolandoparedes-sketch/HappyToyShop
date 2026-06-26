@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1935830778ec9b640907469b67f77a07, type: 3}
   m_Name: Puzzles
   m_EditorClassIdentifier: Assembly-CSharp::Toys
-  iD: 4
+  iD: 3
   entityName: Puzzles
   icon: {fileID: -1428224709, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Educational puzzles that improve problem solving skills

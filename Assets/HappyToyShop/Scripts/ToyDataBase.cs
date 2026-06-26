@@ -16,7 +16,7 @@ public class ToyDataBase : SerializedScriptableObject
         }
         else
         {
-            throw new System.Exception("No se encontró un juguete con ese ID");
+            throw new System.Exception("No se encontró un juguete con ese ID: " + toyID);
         }
     }
 }

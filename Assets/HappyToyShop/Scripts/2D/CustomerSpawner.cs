@@ -10,7 +10,7 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField] private int customerPerDay = 15;
 
     [SerializeField] private int customerSpawnedToday;
-
+    [SerializeField] private bool canSpawnCustomers = true;
 
     [SerializeField] private float timeToFirstSpawn = 5;
     [SerializeField] private float timeMinToSpawnCustomers = 10;

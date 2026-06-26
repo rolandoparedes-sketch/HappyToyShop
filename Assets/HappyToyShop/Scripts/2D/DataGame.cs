@@ -22,6 +22,11 @@ public class DataGame : ScriptableObject
     public List<int> CurrentShelfsAmount;
 
 
+
+
+    public List<int> currentAmountInShelfs;
+
+
     public List<OrderData> pedidos;
 }
 [System.Serializable]

@@ -28,13 +28,17 @@ public class GameManager2D : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
+
+        Debug.Log($"Money: {moneySystem}");
+        Debug.Log($"Day: {dayManager}");
+        Debug.Log($"Factory: {factorySystem}");
+        Debug.Log($"Warehouse: {warehouseSystem}");
+        Debug.Log($"Customer: {customerManager}");
+        Debug.Log($"UI: {uiManager}");
+        Debug.Log($"Data: {dataGame}");
     }
 
     void Start()

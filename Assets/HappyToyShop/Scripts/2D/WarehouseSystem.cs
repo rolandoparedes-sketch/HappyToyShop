@@ -2,13 +2,15 @@
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
+using UnityEngine;
 
 public class WarehouseSystem : MonoBehaviour
 {
     public List<ShelfStorage> Shelfs;
+
+
 
 
     public List<ShelfUI> ShelfUI;
@@ -28,14 +30,12 @@ public class WarehouseSystem : MonoBehaviour
 
     private void OnEnable()
     {
-       // GameManager2D.instance.DayManager.OnDayComplete += TestOrderByAcending;
-       // GameManager2D.instance.UIManager.OnRestock += ApplyDataUIShelf;
+        GameManager2D.instance.UIManager.OnRestock += ApplyDataUIShelf;
     }
     private void OnDisable()
     {
 
-        //GameManager2D.instance.DayManager.OnDayComplete -= TestOrderByAcending;
-       // GameManager2D.instance.UIManager.OnRestock -= ApplyDataUIShelf;
+       GameManager2D.instance.UIManager.OnRestock -= ApplyDataUIShelf;
 
     }
 
@@ -54,30 +54,40 @@ public class WarehouseSystem : MonoBehaviour
     {
         if (Shelfs[ShelfID].CurrentAmount + Amount > Shelfs[ShelfID].MaxCapacity)
         {
-            Debug.Log("You can't exceed the maximum capacity, upgrade the store before buying more");
+            Debug.Log("You can't exceed the maximum capacity, upgrade the store before buying more, Shelf ID: " + ShelfID);
+
+            Debug.Log("CurrentAmount: " + Shelfs[ShelfID].CurrentAmount);
+
+            Debug.Log("CurrentID: " + Shelfs[ShelfID].ShelfID);
+            Debug.Log("Amount to buy: " + Amount);
+            Debug.Log(Shelfs[ShelfID].CurrentAmount + Amount);
+
+            Debug.Log("MaxCapacity: " + Shelfs[ShelfID].MaxCapacity);
             return false;
         }
         else
+        {
             return true;
+        }
     }
-    public void AddToyToShelf(int ShelfID, int Amount)
-    {
+     public void AddToyToShelf(int ShelfID, int Amount)
+     {
 
-        Shelfs[ShelfID].CurrentAmount += Amount;
+         Shelfs[ShelfID].CurrentAmount += Amount;
 
-        //GameManager2D.instance.DataGame.currentAmountInShelfs[ShelfID] += Amount;
-
-
-        Debug.Log("You added " + Amount + " " + Shelfs[ShelfID].data.EntityName + " to the warehouse, now you have " + Shelfs[ShelfID].CurrentAmount);
+         //GameManager2D.instance.DataGame.currentAmountInShelfs[ShelfID] += Amount;
 
 
-    }
+         Debug.Log("You added " + Amount + " " + Shelfs[ShelfID].data.EntityName + " to the warehouse, now you have " + Shelfs[ShelfID].CurrentAmount);
 
+
+     }
     [Button]
     public void ApplyDataToEachShelf()
     {
 
-
+        Debug.Log("ApplyDataToEachShelf ejecutado");
+        var data = GameManager2D.instance.DataGame;
         for (int i = 0; i < Shelfs.Count; i++)
         {
             if (Shelfs[i] == null)
@@ -85,19 +95,18 @@ public class WarehouseSystem : MonoBehaviour
                 Debug.LogWarning("Falto asignar un alamacen en la posición número: " + i);
             }
 
-            Shelfs[i].data = GameManager2D.instance.FactorySystem.toyDataBase.GetToy(i + 1);
+            Shelfs[i].data = GameManager2D.instance.FactorySystem.toyDataBase.GetToy(i);
 
             Shelfs[i].ShelfID = Shelfs[i].data.ID;
 
-            //Shelfs[i].CurrentAmount = GameManager2D.instance.DataGame.currentAmountInShelfs[i + 1];
+            Shelfs[i].CurrentAmount = GameManager2D.instance.DataGame.currentAmountInShelfs[i];
 
-            Shelfs[i].MaxCapacity = GameManager2D.instance.DataGame.MaxCapacityShelf;
+            Shelfs[i].MaxCapacity = data.MaxCapacityShelf;
 
 
-
-            if (Shelfs[i].CurrentAmount > GameManager2D.instance.DataGame.MaxCapacityShelf)
+            if (Shelfs[i].CurrentAmount > data.MaxCapacityShelf)
             {
-                Shelfs[i].CurrentAmount = GameManager2D.instance.DataGame.MaxCapacityShelf;
+                Shelfs[i].CurrentAmount = data.MaxCapacityShelf;
                 Debug.LogWarning("El almacen " + i + " excedio la capacidad máxima.");
             }
 
@@ -107,28 +116,25 @@ public class WarehouseSystem : MonoBehaviour
     [Button]
     public void ApplyDataUIShelf()
     {
-        Debug.Log("data Aplicada");
-        for (int i = 0; i < Shelfs.Count; i++)
+        Debug.Log("Data aplicada");
+
+        var orderedShelfs = Shelfs.OrderBy(x => x.CurrentAmount).ToList();
+
+        for (int i = 0; i < orderedShelfs.Count; i++)
         {
-            if (Shelfs[i] == null)
-            {
-                Debug.LogWarning("Falto asignar un alamacen en la posición número: " + i);
-            }
+            ShelfStorage shelf = orderedShelfs[i];
 
-            ShelfUI[i].toyId = Shelfs[i].data.ID;
+            ShelfUI[i].toyId = shelf.ShelfID;
 
-            ShelfUI[i].nameText.text = Shelfs[i].data.EntityName;
+            ShelfUI[i].nameText.text = shelf.data.EntityName;
 
-            ShelfUI[i].stock = Shelfs[i].CurrentAmount;
+            ShelfUI[i].stock = shelf.CurrentAmount;
+            ShelfUI[i].stockText.text = $"Stock: {shelf.CurrentAmount}";
 
-            ShelfUI[i].stockText.text = "Stock: " + Shelfs[i].CurrentAmount.ToString();
+            ShelfUI[i].price = shelf.data.SalePrice;
 
-            ShelfUI[i].price = Shelfs[i].data.SalePrice;
-
-            ShelfUI[i].Icon.sprite = Shelfs[i].data.Icon;
+            ShelfUI[i].Icon.sprite = shelf.data.Icon;
         }
-
     }
-    
-    
+
 }

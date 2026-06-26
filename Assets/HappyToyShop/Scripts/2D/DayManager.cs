@@ -66,13 +66,8 @@ public class DayManager : MonoBehaviour
                 Debug.LogWarning("Falto asignar un alamacen en la posición número: " + i);
             }
 
-            
-            if(warehouse.Shelfs[i].CurrentAmount < warehouse.Shelfs[i].MaxCapacity)
-            {
 
-                data.CurrentShelfsID.Add(warehouse.Shelfs[i].ShelfID);
-                data.CurrentShelfsAmount.Add(warehouse.Shelfs[i].CurrentAmount);
-            }
+            data.currentAmountInShelfs[i] = warehouse.Shelfs[i].CurrentAmount;
         }
 
         
