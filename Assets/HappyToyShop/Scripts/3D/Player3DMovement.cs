@@ -372,32 +372,32 @@ public class Player3DMovement : MonoBehaviour
 
     private void CreateCameraList()
     {
-        CameraNode first = null;
-        CameraNode previous = null;
+        CameraNode first = null;// +1
+        CameraNode previous = null;//+1
 
-        foreach (CinemachineCamera cam in securityCameras)
+        foreach (CinemachineCamera cam in securityCameras) // N
         {
            
 
-            CameraNode node = new CameraNode(cam);
+            CameraNode node = new CameraNode(cam); //+1
 
-            if (first == null)
+            if (first == null) // +1
             {
-                first = node;
+                first = node;  //+1
             }
 
-            if (previous != null)
+            if (previous != null) //+1
             {
-                previous.next = node;
-                node.previous = previous;
+                previous.next = node; //+1
+                node.previous = previous; //+1
             }
 
-            previous = node;
+            previous = node; //+1
         }
-        previous.next = first;
-        first.previous = previous;
+        previous.next = first; //+1
+        first.previous = previous; //+1
 
-        currentCamera = first;
+        currentCamera = first; //+1
         
     }
 

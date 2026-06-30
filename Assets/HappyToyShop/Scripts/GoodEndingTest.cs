@@ -44,6 +44,7 @@ public class GoodEndingTest : MonoBehaviour
     IEnumerator PlayEnding()
     {
         fadeAnimator.Play("FadeIn 0");
+       
 
         yield return new WaitForSeconds(1f);
 
