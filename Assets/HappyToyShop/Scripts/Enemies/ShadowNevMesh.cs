@@ -22,6 +22,8 @@ public class EnemyShadow : MonoBehaviour
 
     [Header("Movement")]
     public float enemySpeed = 6f;
+    public float sphereRadius = 1.5f;
+    public float sphereDistance = 8f;
 
     [Header("UI")]
     public GameObject warningText;
@@ -44,10 +46,23 @@ public class EnemyShadow : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+        CheckPlayerSphereCast();
     }
     public void GoIdle()
     {
         stateMachine.ChangeState(new IdleState(this));
+    }
+    private void CheckPlayerSphereCast()
+    {
+        RaycastHit hit;
+
+        if (Physics.SphereCast(transform.position, sphereRadius, transform.forward, out hit, sphereDistance))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                Debug.Log("Detectando Spherecast");
+            }
+        }
     }
 
     private void OnDrawGizmos()
@@ -91,5 +106,8 @@ public class EnemyShadow : MonoBehaviour
             Gizmos.color = Color.magenta;
             Gizmos.DrawLine(transform.position, currentWindow.position);
         }
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position + transform.forward * sphereDistance, sphereRadius);
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * sphereDistance);
     }
 }
