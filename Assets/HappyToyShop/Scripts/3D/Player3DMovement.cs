@@ -143,7 +143,7 @@ public class Player3DMovement : MonoBehaviour
         inputs.Player.FlashLight.performed += LightOn;
         inputs.Player.Inventory.performed += OpenInventory;
 
-        inputs.Player.Jump.performed += ctx => ScenesManager.instance.ChangeMode2D();
+       
 
         OnStateFearChange += ChangefearEffect;
 
@@ -167,7 +167,6 @@ public class Player3DMovement : MonoBehaviour
 
         inputs.Player.Repair.performed -= RepairWindow;
 
-        inputs.Player.Jump.performed -= ctx => ScenesManager.instance.ChangeMode2D();
 
         OnStateFearChange -= ChangefearEffect;
 
@@ -187,7 +186,7 @@ public class Player3DMovement : MonoBehaviour
     {
 
         //OnMove();
-        CheckWindow();
+        //CheckWindow();
         OnSimpleMove();
        
 
@@ -276,7 +275,7 @@ public class Player3DMovement : MonoBehaviour
         }
 
     }
-    private void CheckWindow()
+   /* private void CheckWindow()
     {
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
@@ -295,7 +294,7 @@ public class Player3DMovement : MonoBehaviour
         {
             woodText.SetActive(false);
         }
-    }
+    }*/
     private void RepairWindow(InputAction.CallbackContext ctx)
     {
 
