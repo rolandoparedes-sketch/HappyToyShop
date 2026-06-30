@@ -50,5 +50,46 @@ public class EnemyShadow : MonoBehaviour
         stateMachine.ChangeState(new IdleState(this));
     }
 
-    
+    private void OnDrawGizmos()
+    {
+        
+        Gizmos.color = Color.red;
+        if (windows != null)
+        {
+            foreach (Transform window in windows)
+            {
+                if (window != null)
+                    Gizmos.DrawWireSphere(window.position, 0.4f);
+            }
+        }
+
+        
+        Gizmos.color = Color.blue;
+        if (VentPoints != null)
+        {
+            foreach (Transform vent in VentPoints)
+            {
+                if (vent != null)
+                    Gizmos.DrawWireSphere(vent.position, 0.4f);
+            }
+        }
+
+      
+        if (player != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(player.position, 0.5f);
+        }
+
+       
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 0.5f);
+
+       
+        if (currentWindow != null)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(transform.position, currentWindow.position);
+        }
+    }
 }
