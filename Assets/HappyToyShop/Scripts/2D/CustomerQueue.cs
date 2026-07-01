@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using HappyToyShop.Collections;
 
 public class CustomerQueue : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class CustomerQueue : MonoBehaviour
 
     [SerializeField] private Transform exitTarget;
 
-    [SerializeField] private Queue<NPCCustomer> customerWaiting = new();
+    [SerializeField] private MyQueue<NPCCustomer> customerWaiting = new();
     [SerializeField] private List<NPCCustomer> customersInQueue = new();
 
 
@@ -77,6 +78,6 @@ public class CustomerQueue : MonoBehaviour
     }
     public List<Transform> QueueTargets => queueTargets;
     public Transform ExitTarget => exitTarget;
-    public Queue<NPCCustomer> CustomerWaiting => customerWaiting;
+    public MyQueue<NPCCustomer> CustomerWaiting => customerWaiting;
     public List<NPCCustomer> CustomersInQueue => customersInQueue;
 }
