@@ -23,6 +23,9 @@ public class Player3DMovement : MonoBehaviour
     private CharacterController controller;
     [FoldoutGroup("References")]
     public CinemachineCamera characterCamera;
+    public Transform lookTarget;
+    public float rotationSpeed = 3f;
+
 
     [FoldoutGroup("ControllerSettings")]
     public FearState currentFearState;
@@ -301,7 +304,6 @@ public class Player3DMovement : MonoBehaviour
     }
     private void RepairWindow(InputAction.CallbackContext ctx)
     {
-
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 3f))
@@ -310,27 +312,28 @@ public class Player3DMovement : MonoBehaviour
             {
                 StartCoroutine(RepairCoroutine(hit.collider));
             }
-        }
-        if (hit.collider.CompareTag("Ventilation"))
-        {
-            VentShock vent =
-                hit.collider.GetComponent<VentShock>();
 
-            if (vent != null)
+            if (hit.collider.CompareTag("Ventilation"))
             {
-                vent.UseShock();
+                VentShock vent = hit.collider.GetComponent<VentShock>();
+
+                if (vent != null)
+                {
+                    vent.UseShock();
+                }
             }
         }
     }
     public  void NextCamera()
     {
-       
+
         currentCamera.camera.Priority = 10;
 
         currentCamera = currentCamera.next;
 
-      
         currentCamera.camera.Priority = 50;
+
+        StartCoroutine(RotateCurrentCamera());
     }
     private void PreviousCamera()
     {
@@ -339,6 +342,8 @@ public class Player3DMovement : MonoBehaviour
         currentCamera = currentCamera.previous;
 
         currentCamera.camera.Priority = 50;
+
+        StartCoroutine(RotateCurrentCamera());
     }
     private void Interact(InputAction.CallbackContext ctx)
     {
@@ -418,6 +423,36 @@ public class Player3DMovement : MonoBehaviour
 
             yield return null;
         }
+    }
+    private IEnumerator RotateCurrentCamera()
+    {
+        if (lookTarget == null)
+            yield break;
+
+        Transform cam = currentCamera.camera.transform;
+
+        Quaternion startRotation = cam.rotation;
+
+        Vector3 direction = lookTarget.position - cam.position;
+        direction.y = 0f;
+
+        if (direction == Vector3.zero)
+            yield break;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * rotationSpeed;
+
+            cam.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
+
+            yield return null;
+        }
+
+        cam.rotation = targetRotation;
     }
     public IEnumerator WaitForPlay()
     {
