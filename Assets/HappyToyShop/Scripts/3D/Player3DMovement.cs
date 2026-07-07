@@ -24,8 +24,6 @@ public class Player3DMovement : MonoBehaviour
     [FoldoutGroup("References")]
     public CinemachineCamera characterCamera;
 
-    [FoldoutGroup("ControllerSettings")]
-    public FearState currentFearState;
 
     [FoldoutGroup("ControllerSettings/Windows")]
     //public GameObject woodText;
@@ -61,14 +59,7 @@ public class Player3DMovement : MonoBehaviour
     [FoldoutGroup("ControllerSettings")]
     public float moveSpeed = 5f;
 
-    [FoldoutGroup("ControllerSettings/Cordure")]
-    public float cordureDrainRate = 0.25f;
-
-    [FoldoutGroup("ControllerSettings/Cordure")]
-    public float maxCordure = 100f;
-
-    [FoldoutGroup("ControllerSettings/Cordure")]
-    public float currentCordure;
+    
 
     [FoldoutGroup("ControllerSettings")]
     [SerializeField] private float timeDontMove = 2.5f;
@@ -79,33 +70,6 @@ public class Player3DMovement : MonoBehaviour
     private bool CanMove = false;
 
     private Coroutine currentCoroutine;
-    public Action OnStateFearChange;
-
-    [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 1f)]
-    [SerializeField]private float amplitudeGainCalm = 0.5f;
-    [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 5f)]
-    [SerializeField] private float frequencyGainCalm = 0.5f;
-
-    [Space(10)]
-
-    [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 1f)]
-    [SerializeField] private float amplitudeGainNervous = 0.5f;
-    [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 10f)]
-    [SerializeField] private float frequencyGainNervous= 0.5f;
-
-    [Space(10)]
-
-    [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 1f)]
-    [SerializeField] private float amplitudeGainScared = 0.5f;
-    [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 100f)]
-    [SerializeField] private float frequencyGainScared = 0.5f;
-
-    [Space(10)]
-
-    [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 1f)]
-    [SerializeField] private float amplitudeGainTerrified = 0.5f;
-    [FoldoutGroup("ControllerSettings/FearIntensityLeveles"), Range(0f, 300f)]
-    [SerializeField] private float frequencyGainTerrified = 0.5f;
 
     #endregion
     #region Inicialization
@@ -145,7 +109,6 @@ public class Player3DMovement : MonoBehaviour
 
        
 
-        OnStateFearChange += ChangefearEffect;
 
         
     }
@@ -168,7 +131,6 @@ public class Player3DMovement : MonoBehaviour
         inputs.Player.Repair.performed -= RepairWindow;
 
 
-        OnStateFearChange -= ChangefearEffect;
 
         inputs.Player.Grab.performed -= GrabObject;
         inputs.Player.Grab.canceled -= ReleaseObject;
@@ -178,7 +140,6 @@ public class Player3DMovement : MonoBehaviour
     {
         StartCoroutine(WaitForPlay());
    
-        ChangefearEffect();
         CreateCameraList();
 
     }
@@ -220,58 +181,21 @@ public class Player3DMovement : MonoBehaviour
         if(Player3DController.instance.inventory3D.itemInHandRight.gameObject.activeSelf)
         {
             Player3DController.instance.inventory3D.itemInHandRight.gameObject.SetActive(false);
-        }
-        else 
-            Player3DController.instance.inventory3D.itemInHandRight.gameObject.SetActive(true);
-    }
-    public void UpdateFearState()
-    {
-        if (currentCordure <= 10)
-        {
-            currentFearState = FearState.Terrified;
-            OnStateFearChange?.Invoke();
 
-        }
-        else if (currentCordure <= 30)
-        {
-            currentFearState = FearState.Scared;
-            OnStateFearChange?.Invoke();
-        }
-        else if (currentCordure <= 60)
-        {
-            currentFearState = FearState.Nervous;
-            OnStateFearChange?.Invoke();
+            var state3D= Player3DController.instance.state3D;
+
+            state3D.currentCoroutine= StartCoroutine(state3D.CordureCoroutine());
+
+
         }
         else
         {
-            currentFearState = FearState.Calm;
-            OnStateFearChange?.Invoke();
-        }
-    }
-    private void ChangefearEffect()
-    {
-        switch (currentFearState)
-        {
-            case FearState.Calm:
-                characterCamera.GetComponent<CinemachineBasicMultiChannelPerlin>().AmplitudeGain = amplitudeGainCalm;
 
-                characterCamera.GetComponent<CinemachineBasicMultiChannelPerlin>().FrequencyGain = frequencyGainCalm;
-                break;
-            case FearState.Nervous:
-                characterCamera.GetComponent<CinemachineBasicMultiChannelPerlin>().AmplitudeGain = amplitudeGainNervous;
+            var state3D = Player3DController.instance.state3D;
 
-                characterCamera.GetComponent<CinemachineBasicMultiChannelPerlin>().FrequencyGain = frequencyGainNervous;
-                break;
-            case FearState.Scared:
-                characterCamera.GetComponent<CinemachineBasicMultiChannelPerlin>().AmplitudeGain = amplitudeGainScared;
-
-                characterCamera.GetComponent<CinemachineBasicMultiChannelPerlin>().FrequencyGain = frequencyGainScared;
-                break;
-            case FearState.Terrified:
-                characterCamera.GetComponent<CinemachineBasicMultiChannelPerlin>().AmplitudeGain = amplitudeGainTerrified;
-
-                characterCamera.GetComponent<CinemachineBasicMultiChannelPerlin>().FrequencyGain = frequencyGainTerrified;
-                break;
+            if(currentCoroutine!= null)
+                StopCoroutine(state3D.currentCoroutine);
+            Player3DController.instance.inventory3D.itemInHandRight.gameObject.SetActive(true);
         }
 
     }
@@ -374,19 +298,6 @@ public class Player3DMovement : MonoBehaviour
     #endregion
     #region Coroutines
 
-    private IEnumerator CordureCoroutine()
-    {
-        while (currentCordure > 0)
-        {
-            currentCordure -= cordureDrainRate * Time.deltaTime;
-
-            if (currentCordure < 0)
-                currentCordure = 0;
-            UpdateFearState();
-
-            yield return null;
-        }
-    }
     public IEnumerator WaitForPlay()
     {
         yield return new WaitForSeconds(timeDontMove);

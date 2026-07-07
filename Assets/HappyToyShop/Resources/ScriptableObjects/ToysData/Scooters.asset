@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Scooters
   icon: {fileID: 1263823024, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Lightweight scooters for kids outdoor activity
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 4599103449128774895, guid: 1c42cc1dd17a6ec4d892d507e362aa98, type: 3}
   salePrice: 120
   factoryCost: 115

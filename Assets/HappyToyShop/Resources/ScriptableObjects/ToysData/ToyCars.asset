@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Toy Cars
   icon: {fileID: -903472229, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Small toy vehicles for racing and collecting
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 5743726194273287277, guid: ea6523dffd40c0643bf1d101377b71b5, type: 3}
   salePrice: 18
   factoryCost: 13

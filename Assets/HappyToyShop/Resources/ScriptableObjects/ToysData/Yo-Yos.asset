@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Yo-Yos
   icon: {fileID: -145675825, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Classic string toys for tricks and games
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 3784194861523183691, guid: cf1bfe15bd04d384db0a205ab0e594aa, type: 3}
   salePrice: 12
   factoryCost: 7

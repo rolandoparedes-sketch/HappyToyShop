@@ -7255,7 +7255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3035b71e097dcae45acf462de6aeb079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerSpawner
-  customerPerDay: 5
+  customerPerDay: 3
   customerSpawnedToday: 0
   canSpawnCustomers: 1
   timeToFirstSpawn: 5

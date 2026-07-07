@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2551742222696795529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6912229579078581803}
+  - component: {fileID: 1552462738265877151}
+  - component: {fileID: 3451149146976394860}
+  m_Layer: 0
+  m_Name: Carrito de Juguete030
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6912229579078581803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2551742222696795529}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5866472, y: 0.39477214, z: 0.39477214, w: 0.5866472}
+  m_LocalPosition: {x: 0.25531387, y: 1.0885553, z: -9.231409}
+  m_LocalScale: {x: 0.264657, y: 0.264657, z: 0.264657}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 67.876}
+--- !u!33 &1552462738265877151
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2551742222696795529}
+  m_Mesh: {fileID: 4439989557441423560, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+--- !u!23 &3451149146976394860
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2551742222696795529}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 239378781582670930, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: 5629084884208175553, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: -3661639628750336703, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: 4633966528211553250, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: 824015559753126921, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: 1157471560394431334, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: -604316626302413864, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: -8499701361930146817, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: 7390871704515345542, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: 2412706508545819028, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: -2387884456068917295, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: -6009999331246123084, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: 1625857242065983837, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: 6091876752065036749, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: 6329618919314198989, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: -1497584655720610248, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}

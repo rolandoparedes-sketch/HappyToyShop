@@ -50,7 +50,7 @@ public class ShadowFollower : MonoBehaviour
     }
     public void ShadowDetected()
     {
-        Player3DMovement player = GameManager.instance.Player.GetComponent<Player3DMovement>();
+        Player3DState player = GameManager.instance.Player.GetComponent<Player3DState>();
 
         player.currentCordure = Mathf.Max(player.currentCordure - fearIncrease, 0);
 

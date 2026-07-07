@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Kid Bicycles
   icon: {fileID: 1713955858, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Small bicycles designed for children
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 2707393545615415405, guid: 634dcb5bbe512f24b874885732cf53f8, type: 3}
   salePrice: 250
   factoryCost: 245

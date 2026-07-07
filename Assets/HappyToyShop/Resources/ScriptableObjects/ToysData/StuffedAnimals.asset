@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Stuffed Animals
   icon: {fileID: -1647661915, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Soft plush toys in different animal shapes
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 8956897096927036199, guid: 62c6fa1de85041c4080ce5bc99f1d993, type: 3}
   salePrice: 30
   factoryCost: 25

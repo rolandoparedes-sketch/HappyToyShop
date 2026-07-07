@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Puppets
   icon: {fileID: 260929687, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Hand puppets for storytelling and entertainment
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 5250270516306209421, guid: ab23733d1cccfd34abf0dc491385f5c4, type: 3}
   salePrice: 22
   factoryCost: 17

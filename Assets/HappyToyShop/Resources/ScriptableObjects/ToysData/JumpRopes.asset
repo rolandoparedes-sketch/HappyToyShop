@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Jump Ropes
   icon: {fileID: -1825627809, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Exercise ropes for active play and fitness
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 1117262136286103955, guid: 52fb9805285977d43851dbd9d6158047, type: 3}
   salePrice: 14
   factoryCost: 9

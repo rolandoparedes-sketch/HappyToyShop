@@ -33,15 +33,16 @@ public class LightsError : MonoBehaviour
 
         //timer = Random.Range(MinTime, MaxTime);
         StartCoroutine(FlickerRoutine());
-        GameManager.instance.Player.GetComponent<Player3DMovement>().OnStateFearChange += lightsEffects;
-       
+
+        Player3DController.instance.state3D.OnStateFearChange += lightsEffects;
+
     }
    
  
     public void lightsEffects()
     {
 
-        var Enum = GameManager.instance.Player.GetComponent<Player3DMovement>().currentFearState;
+        var Enum = Player3DController.instance.state3D.currentFearState;
 
         switch (Enum)
         {

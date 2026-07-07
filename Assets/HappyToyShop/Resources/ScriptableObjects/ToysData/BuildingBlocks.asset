@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Building Blocks
   icon: {fileID: 1739922396, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Creative blocks for building structures and shapes
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 5600680569245303349, guid: 14414f796e150154e8d0a5d7871568e6, type: 3}
   salePrice: 40
   factoryCost: 35

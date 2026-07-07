@@ -109,7 +109,7 @@ public class ParanormalSuccess3D : MonoBehaviour
     
     private void TryActivateShadowPassageway()
     {
-        float n = GameManager.instance.Player.GetComponent<Player3DMovement>().currentCordure;
+        float n = GameManager.instance.Player.GetComponent<Player3DState>().currentCordure;
 
 
         int random = Random.Range(0, 100);

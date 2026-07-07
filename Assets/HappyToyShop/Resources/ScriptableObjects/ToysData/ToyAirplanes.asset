@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Toy Airplanes
   icon: {fileID: 380577685, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Mini airplane toys for kids collections and play
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 7743239475132437464, guid: abe67b17cb9fda74e82248ed22f6d58a, type: 3}
   salePrice: 28
   factoryCost: 23

@@ -59,7 +59,7 @@ public class ShadowPassageway : MonoBehaviour
     public void ShadowDetected()
     {
         Debug.Log(GameManager.instance.Player);
-        Player3DMovement player = GameManager.instance.Player.GetComponent<Player3DMovement>();
+        Player3DState player = GameManager.instance.Player.GetComponent<Player3DState>();
         if (CanScare)
         {
             player.currentCordure = Mathf.Max(player.currentCordure - fearIncrease, 0);

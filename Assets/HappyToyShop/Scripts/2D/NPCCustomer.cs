@@ -148,7 +148,7 @@ public class NPCCustomer : MonoBehaviour
         if (target == null || isWaiting)
             return;
         
-        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
 
         float distance = Vector2.Distance(transform.position, target.position);
 

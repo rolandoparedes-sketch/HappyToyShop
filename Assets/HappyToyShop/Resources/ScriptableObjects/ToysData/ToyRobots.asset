@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Toy Robots
   icon: {fileID: -1181194858, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Interactive robot toys with lights and sounds
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 1336291057158259041, guid: 00ab616d3b037464a83198eec23d66ef, type: 3}
   salePrice: 55
   factoryCost: 50

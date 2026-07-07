@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Art Sets
   icon: {fileID: 1698321331, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Kits with crayons, paints, and drawing tools
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 3212152253958864539, guid: db5f4039be23e6b4ca6cb89673996b0a, type: 3}
   salePrice: 38
   factoryCost: 33

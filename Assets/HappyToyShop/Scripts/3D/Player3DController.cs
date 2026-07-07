@@ -12,8 +12,8 @@ public class Player3DController : MonoBehaviour
     [SerializeField] public Player3DInventory inventory3D;
     [FoldoutGroup("References")]
     [SerializeField] public Player3DState state3D;
-    
 
+  
 
     private void Awake()
     {

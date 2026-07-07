@@ -16,6 +16,6 @@ MonoBehaviour:
   entityName: Toy Kitchens
   icon: {fileID: -1344632283, guid: 5fcb4e072eb49f14e8f2bd2113e57e26, type: 3}
   description: Pretend kitchen sets with cooking accessories
-  toyPrefab: {fileID: 0}
+  toyPrefab: {fileID: 218380613123935409, guid: 621b5d0e7e896f944992c32e1b3f91c0, type: 3}
   salePrice: 90
   factoryCost: 85
