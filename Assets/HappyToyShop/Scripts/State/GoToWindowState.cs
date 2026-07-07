@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class GoToWindowState : IState
 {
-    private EnemyShadow enemy;
+    private RandomGuy enemy;
 
-    public GoToWindowState(EnemyShadow enemy)
+    public GoToWindowState(RandomGuy enemy)
     {
         this.enemy = enemy;
     }

@@ -83,22 +83,16 @@ public class ParanormalSuccess3D : MonoBehaviour
         if (random <= PercentageProbablityToApper)
         {
             {
-                Vector3 SpawnShadowFollower =  GameManager.instance.Player.position - GameManager.instance.Player.forward * 5f;
-
-                GameObject shadowFollowerInstance = Instantiate(ShadowFollower.gameObject, SpawnShadowFollower, Quaternion.identity);
-
-                ShadowFollower enemy = shadowFollowerInstance.GetComponent<ShadowFollower>();
-
-                enemy.target = GameManager.instance.Player;
+                GameManager3D.instance.ShadowSpawner.SpawnFollower();
                 int number= Random.Range(0, 2);
 
                 switch (number)
-                {
+                {   
                     case 0:
-                        GameManager.instance.soundManager.CheckTypeAudio(SoundType.Voice, 0);
+                        GameManager3D.instance.SoundManager.CheckTypeAudio(SoundType.Voice, 0);
                         break;
                     case 1:
-                        GameManager.instance.soundManager.CheckTypeAudio(SoundType.Voice, 1);
+                        GameManager3D.instance.SoundManager.CheckTypeAudio(SoundType.Voice, 1);
                         break;
                 }
                 CanSpawnFollower = false;
@@ -109,7 +103,7 @@ public class ParanormalSuccess3D : MonoBehaviour
     
     private void TryActivateShadowPassageway()
     {
-        float n = GameManager.instance.Player.GetComponent<Player3DState>().currentCordure;
+        float n = GameManager3D.instance.ShadowSpawner.Target.GetComponent<Player3DState>().currentCordure;
 
 
         int random = Random.Range(0, 100);
@@ -124,7 +118,7 @@ public class ParanormalSuccess3D : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform == GameManager.instance.Player)
+        if (other.transform == GameManager3D.instance.ShadowSpawner.Target)
         {
             if (CanSpawnPassageway)
             {

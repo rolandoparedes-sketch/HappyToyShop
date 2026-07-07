@@ -1,13 +1,14 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
-public class CameraNode 
+public class CameraNode
 {
-    public Camera camera;
+    public CinemachineCamera camera;
     public CameraNode next;
     public CameraNode previous;
 
-    public CameraNode(Camera camera)
+    public CameraNode(CinemachineCamera cam)
     {
-        this.camera = camera;
+        camera = cam;
     }
 }

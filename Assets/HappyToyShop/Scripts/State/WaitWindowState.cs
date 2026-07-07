@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class WaitWindowState : IState
 {
-    private EnemyShadow enemy;
+    private RandomGuy enemy;
 
     private float timer;
 
-    public WaitWindowState(EnemyShadow enemy)
+    public WaitWindowState(RandomGuy enemy)
     {
         this.enemy = enemy;
     }

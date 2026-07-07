@@ -7,6 +7,8 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class Flashlight : ItemBase
 {
+
+    public MeshCollider meshCollider;
     [SerializeField]private Light pointlight;
     [SerializeField]private bool enoughBattery = true;
     [SerializeField]private float currentBattery = 0;

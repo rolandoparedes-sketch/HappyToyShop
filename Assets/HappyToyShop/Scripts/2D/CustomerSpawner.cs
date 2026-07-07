@@ -135,7 +135,7 @@ public class CustomerSpawner : MonoBehaviour
             return;
 
         GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.SFX, 1);
-        NPCCustomer customer = GameManager2D.instance.CustomerManager.CustomerSpawner.NextCustomer();
+        NPCCustomer customer = NextCustomer();
 
         if (customer == null)
         {

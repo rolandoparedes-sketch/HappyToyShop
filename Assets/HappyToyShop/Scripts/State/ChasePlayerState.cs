@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ChasePlayerState : IState
 {
-    private EnemyShadow enemy;
+    private RandomGuy enemy;
 
-    public ChasePlayerState(EnemyShadow enemy)
+    public ChasePlayerState(RandomGuy enemy)
     {
         this.enemy = enemy;
     }

@@ -5,21 +5,20 @@ public class BreakWindowState : IState
 {
 
 
-    private EnemyShadow enemy;
+    private RandomGuy enemy;
 
     private float timer;
 
     private WoodPlanks planks;
 
-    public BreakWindowState(EnemyShadow enemy)
+    public BreakWindowState(RandomGuy enemy)
     {
         this.enemy = enemy;
     }
 
     public void Enter()
     {
-        GameObject wood =
-        enemy.currentWindow.Find("WoodPlanks").gameObject;
+        GameObject wood = enemy.currentWindow.Find("WoodPlanks").gameObject;
 
         if (!wood.activeSelf)
         {

@@ -79,6 +79,8 @@ public class WarehouseSystem : MonoBehaviour
          Debug.Log("You added " + Amount + " " + Shelfs[ShelfID].data.EntityName + " to the warehouse, now you have " + Shelfs[ShelfID].CurrentAmount);
 
 
+
+
      }
     [Button]
     public void ApplyDataToEachShelf()

@@ -10946,6 +10946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee030ba275ee77b4a925d6825515e218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Flashlight
+  meshCollider: {fileID: 0}
   pointlight: {fileID: 0}
   enoughBattery: 1
   currentBattery: 0

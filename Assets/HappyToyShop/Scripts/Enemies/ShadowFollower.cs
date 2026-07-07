@@ -50,7 +50,7 @@ public class ShadowFollower : MonoBehaviour
     }
     public void ShadowDetected()
     {
-        Player3DState player = GameManager.instance.Player.GetComponent<Player3DState>();
+        Player3DState player = GameManager3D.instance.ShadowSpawner.Target.GetComponent<Player3DState>();
 
         player.currentCordure = Mathf.Max(player.currentCordure - fearIncrease, 0);
 
@@ -58,6 +58,6 @@ public class ShadowFollower : MonoBehaviour
 
         Destroy(gameObject);
 
-        GameManager.instance.paranormalSuccess.CanSpawnFollower = true;
+        GameManager3D.instance.ParanormalSuccess3D.CanSpawnFollower = true;
     }
 }

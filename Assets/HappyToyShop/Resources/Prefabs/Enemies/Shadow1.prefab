@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3326589194128641909
+--- !u!1 &4773066225406260504
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1767904202738369979}
-  - component: {fileID: 912800479708862132}
-  - component: {fileID: 7588801894760848977}
-  - component: {fileID: -7447239286817450631}
-  - component: {fileID: 5208339464770178563}
-  - component: {fileID: 221132058549772624}
-  m_Layer: 0
+  - component: {fileID: 160944011012517997}
+  - component: {fileID: 398275439708109115}
+  - component: {fileID: 2790562508701793971}
+  m_Layer: 3
   m_Name: Shadow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1767904202738369979
+--- !u!4 &160944011012517997
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326589194128641909}
+  m_GameObject: {fileID: 4773066225406260504}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071069, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 332.5745, y: 0.55004865, z: 100.719986}
-  m_LocalScale: {x: 28.605581, y: 28.605581, z: 28.605581}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 45, y: 45, z: 45}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &912800479708862132
+  m_Father: {fileID: 4507006679342378740}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!33 &398275439708109115
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326589194128641909}
+  m_GameObject: {fileID: 4773066225406260504}
   m_Mesh: {fileID: 1430685612209604467, guid: 7b3d4fb7f2d7d864296778da66a4c872, type: 3}
---- !u!23 &7588801894760848977
+--- !u!23 &2790562508701793971
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326589194128641909}
+  m_GameObject: {fileID: 4773066225406260504}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -93,29 +90,85 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-7447239286817450631
+--- !u!1 &5907194099590656120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4507006679342378740}
+  - component: {fileID: 2301879722535467359}
+  - component: {fileID: 3990584317495532317}
+  - component: {fileID: 2498042615293423054}
+  m_Layer: 3
+  m_Name: Shadow1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4507006679342378740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907194099590656120}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.25263, y: -0.8, z: 42.19949}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 160944011012517997}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2301879722535467359
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907194099590656120}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.50872314, y: 2.6237466, z: 0.45248878}
+  m_Center: {x: 0, y: 0.81187356, z: 0}
+--- !u!114 &3990584317495532317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326589194128641909}
+  m_GameObject: {fileID: 5907194099590656120}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce4713a352432994bbef491be8052f90, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Shadow
+  m_EditorClassIdentifier: Assembly-CSharp::ShadowFollower
   target: {fileID: 0}
   Offset: {x: 0, y: 0, z: 0}
   fearIncrease: 10
-  FollowTarget: {fileID: 452203060398943509, guid: 91b0dc138a8284c4e840d55a3b1b4153, type: 3}
---- !u!114 &5208339464770178563
+  FollowTarget: {fileID: 2498042615293423054}
+--- !u!114 &2498042615293423054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326589194128641909}
+  m_GameObject: {fileID: 5907194099590656120}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd8ab284de1a65c49870e4b81e46134a, type: 3}
@@ -127,7 +180,7 @@ MonoBehaviour:
   FollowPositionZ: 1
   PositionSpace: 0
   FollowRotation: 0
-  FollowScale: 0
+  FollowScale: 1
   FollowScaleFactor: 1
   Target: {fileID: 0}
   Offset: {x: 0, y: 0, z: 0}
@@ -157,24 +210,3 @@ MonoBehaviour:
   MaximumDistance: 1
   AnchorToInitialPosition: 0
   MaxDistanceToAnchor: 1
---- !u!65 &221132058549772624
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326589194128641909}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0103259105, y: 0.0109539395, z: 0.04761759}
-  m_Center: {x: 0, y: -0.00029916246, z: 0.023791172}

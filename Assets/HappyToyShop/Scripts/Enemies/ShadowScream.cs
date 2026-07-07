@@ -1,8 +1,15 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class ShadowScream : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [FoldoutGroup("References")]
+    public Transform target;
+
+    [FoldoutGroup("Effects")]
+    public float fearIncrease = 15f;
+
     void Start()
     {
         
