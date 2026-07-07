@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3451149146976394860}
   - component: {fileID: -6365001533460326197}
   - component: {fileID: 978153273023435866}
-  - component: {fileID: -2327518823230970568}
+  - component: {fileID: 8104952137981369008}
   m_Layer: 6
   m_Name: Carrito de Juguete030
   m_TagString: Untagged
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &978153273023435866
@@ -149,8 +150,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &-2327518823230970568
-BoxCollider:
+--- !u!64 &8104952137981369008
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -167,6 +168,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.1069462, y: 1.6374252, z: 1.2797616}
-  m_Center: {x: 0.14487101, y: -0.28930628, z: 0.41272643}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4439989557441423560, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}

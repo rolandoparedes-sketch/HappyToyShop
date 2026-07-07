@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1984594328368129877}
   - component: {fileID: -5113262601948175300}
   - component: {fileID: -3998780171664597812}
-  - component: {fileID: 1362901599639755693}
+  - component: {fileID: 6402782249299150481}
   m_Layer: 6
   m_Name: "Mu\xF1eca045"
   m_TagString: Untagged
@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &-3998780171664597812
@@ -140,8 +141,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1362901599639755693
-BoxCollider:
+--- !u!64 &6402782249299150481
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -158,6 +159,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.2572908, y: 0.7655423, z: 1.2358313}
-  m_Center: {x: 0.000711501, y: 0.00000003567134, z: 0.07141544}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3825305567768022932, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}

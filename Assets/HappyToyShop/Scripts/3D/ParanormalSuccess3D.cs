@@ -99,7 +99,7 @@ public class ParanormalSuccess3D : MonoBehaviour
             }
         }
     }
-
+    
     
     private void TryActivateShadowPassageway()
     {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 508405680681801127}
   - component: {fileID: -9026160818570374269}
   - component: {fileID: -1745331212596083831}
-  - component: {fileID: 5583978734025697455}
+  - component: {fileID: 3375860130121625245}
   m_Layer: 6
   m_Name: Cometa063
   m_TagString: Untagged
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &-1745331212596083831
@@ -138,8 +139,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &5583978734025697455
-BoxCollider:
+--- !u!64 &3375860130121625245
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -156,6 +157,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.9859366, y: 2.271531, z: 0.020170733}
-  m_Center: {x: 0, y: -0.40909663, z: 0.010085367}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -9132452248371202412, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}

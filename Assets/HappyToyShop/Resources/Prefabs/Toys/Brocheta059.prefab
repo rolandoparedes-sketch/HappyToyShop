@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7568838250806946593}
   - component: {fileID: 8519887933721084627}
   - component: {fileID: -4410464731638408999}
-  - component: {fileID: -5778468609423255407}
+  - component: {fileID: -5522373654454141611}
   m_Layer: 6
   m_Name: Brocheta059
   m_TagString: Untagged
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &-4410464731638408999
@@ -142,8 +143,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &-5778468609423255407
-BoxCollider:
+--- !u!64 &-5522373654454141611
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -160,6 +161,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.86741006, y: 0.9782467, z: 0.8943797}
-  m_Center: {x: -0.000000025082677, y: -0.04872779, z: 0.000000040661636}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 304138286537445907, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8370467262632467696}
   - component: {fileID: 4001983105808401927}
   - component: {fileID: -7241805273416107234}
-  - component: {fileID: 7412746668254261341}
+  - component: {fileID: -2690762901091259755}
   m_Layer: 6
   m_Name: Bicicleta004
   m_TagString: Untagged
@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &-7241805273416107234
@@ -140,8 +141,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &7412746668254261341
-BoxCollider:
+--- !u!64 &-2690762901091259755
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -158,6 +159,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7759441, y: 1.5362468, z: 1.3078132}
-  m_Center: {x: 0.040758282, y: 0.43111718, z: 0.20786317}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8429663485723009426, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}

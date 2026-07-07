@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3271584934221039088}
   - component: {fileID: 6498829091967360725}
   - component: {fileID: -2041657909689025615}
-  - component: {fileID: 4607817541096731231}
+  - component: {fileID: 3688025526728831611}
   m_Layer: 6
   m_Name: boardGames
   m_TagString: Untagged
@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &-2041657909689025615
@@ -134,8 +135,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4607817541096731231
-BoxCollider:
+--- !u!64 &3688025526728831611
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,6 +153,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 0.7, z: 0.096599996}
-  m_Center: {x: 0, y: 0, z: 0.048299998}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5920490428811457067, guid: b077db5b874d320448ce87dbc8dd4712, type: 3}

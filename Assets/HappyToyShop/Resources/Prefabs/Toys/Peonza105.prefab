@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7102467613769857569}
   - component: {fileID: 5587012930722701073}
   - component: {fileID: 7537046604901719626}
-  - component: {fileID: 6667164466932583507}
+  - component: {fileID: -8289438308346987471}
   m_Layer: 6
   m_Name: Peonza105
   m_TagString: Untagged
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &7537046604901719626
@@ -139,8 +140,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6667164466932583507
-BoxCollider:
+--- !u!64 &-8289438308346987471
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -157,6 +158,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.42544502, y: 0.4254452, z: 0.573767}
-  m_Center: {x: 0, y: -5.117755e-10, z: -0.017172342}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2914416365090919495, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}

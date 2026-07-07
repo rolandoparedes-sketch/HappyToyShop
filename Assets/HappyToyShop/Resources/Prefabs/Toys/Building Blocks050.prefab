@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4868531203641664927}
   - component: {fileID: 4126248262796142506}
   - component: {fileID: 2941369857640080133}
-  - component: {fileID: 4034728989934415192}
+  - component: {fileID: -5003778513411700649}
   m_Layer: 6
   m_Name: Building Blocks050
   m_TagString: Untagged
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &2941369857640080133
@@ -141,8 +142,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4034728989934415192
-BoxCollider:
+--- !u!64 &-5003778513411700649
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -159,6 +160,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.068119, y: 1.9945544, z: 0.34887552}
-  m_Center: {x: -0.27679637, y: 0.7633229, z: 0.17443776}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6357227838465148284, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}

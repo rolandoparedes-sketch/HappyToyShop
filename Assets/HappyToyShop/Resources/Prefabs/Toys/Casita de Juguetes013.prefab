@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6906039591090959452}
   - component: {fileID: -9084668146959072072}
   - component: {fileID: 5220601046230384500}
-  - component: {fileID: 9044604009694054100}
+  - component: {fileID: 422185826090279497}
   m_Layer: 6
   m_Name: Casita de Juguetes013
   m_TagString: Untagged
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &5220601046230384500
@@ -136,8 +137,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &9044604009694054100
-BoxCollider:
+--- !u!64 &422185826090279497
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -154,6 +155,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.038367, y: 0.9069761, z: 1.2096922}
-  m_Center: {x: 0.018162077, y: -0.012339559, z: 0.604846}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1516693708059137490, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}

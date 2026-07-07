@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6111517165754804062}
   - component: {fileID: 3742620968320431324}
   - component: {fileID: -7519420083329049704}
-  - component: {fileID: -4677091112784235388}
+  - component: {fileID: 5094522756221747187}
   m_Layer: 6
   m_Name: Balon 028
   m_TagString: Untagged
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &-7519420083329049704
@@ -137,8 +138,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &-4677091112784235388
-BoxCollider:
+--- !u!64 &5094522756221747187
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -155,6 +156,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6309898, y: 0.6303544, z: 0.62380886}
-  m_Center: {x: -2.671603e-10, y: 0.00063566864, z: 0.0023796407}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3601018032600723977, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}

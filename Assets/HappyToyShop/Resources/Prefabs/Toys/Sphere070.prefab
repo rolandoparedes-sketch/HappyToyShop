@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1055397007358883220}
   - component: {fileID: -3068972868323633736}
   - component: {fileID: 630656613024290563}
-  - component: {fileID: -4182596533236245556}
+  - component: {fileID: 844202762826258256}
   m_Layer: 6
   m_Name: Sphere070
   m_TagString: Untagged
@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
+  toyData: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
 --- !u!54 &630656613024290563
@@ -134,8 +135,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &-4182596533236245556
-BoxCollider:
+--- !u!64 &844202762826258256
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,6 +153,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.60042137, y: 0.25908747, z: 0.7727143}
-  m_Center: {x: 0.06941228, y: 0.006602219, z: 0.0725241}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6070465799053041171, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
