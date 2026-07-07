@@ -65,6 +65,7 @@ public class Monitor : MonoBehaviour , IInteractuable
 
         currentCamera.camera.Priority = 50;
 
+        Debug.Log("Cambio de camara");
     }
     public void PreviousCamera()
     {
@@ -74,6 +75,7 @@ public class Monitor : MonoBehaviour , IInteractuable
 
         currentCamera.camera.Priority = 50;
 
+        Debug.Log("Devuelta a camara");
     }
 
     private void EnterMonitor()

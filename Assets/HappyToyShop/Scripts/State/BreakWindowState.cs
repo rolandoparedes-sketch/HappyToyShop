@@ -1,13 +1,15 @@
+
 using UnityEngine;
 using UnityEngine.AI;
 
 public class BreakWindowState : IState
 {
-
-
     private RandomGuy enemy;
 
     private float timer;
+
+    private bool waitingToEnter;
+    private float enterTimer;
 
     private WoodPlanks planks;
 
@@ -18,17 +20,16 @@ public class BreakWindowState : IState
 
     public void Enter()
     {
-        GameObject wood = enemy.currentWindow.Find("WoodPlanks").gameObject;
+        GameObject wood =
+            enemy.currentWindow.Find("WoodPlanks").gameObject;
 
+        
         if (!wood.activeSelf)
         {
-            Transform insidePoint =
-                enemy.currentWindow.Find("InsidePoint");
+            waitingToEnter = true;
+            enterTimer = 20f;
 
-            enemy.agent.Warp(insidePoint.position);
-
-            enemy.stateMachine.ChangeState(
-                new ChasePlayerState(enemy));
+            Debug.Log("Esperando a que el jugador repare las tablas...");
 
             return;
         }
@@ -39,13 +40,56 @@ public class BreakWindowState : IState
 
         timer = 1f;
     }
+
     public void Exit()
     {
 
     }
+
     public void Update()
     {
+        
+        if (waitingToEnter)
+        {
+            enterTimer -= Time.deltaTime;
+
+            GameObject wood =
+                enemy.currentWindow.Find("WoodPlanks").gameObject;
+
+            
+            if (wood.activeSelf)
+            {
+                Debug.Log("El jugador reparó las tablas.");
+
+                waitingToEnter = false;
+
+                enemy.GoIdle();
+
+                return;
+            }
+
+           
+            if (enterTimer <= 0)
+            {
+                Debug.Log("El jugador no reparó las tablas.");
+
+                Transform insidePoint =
+                    enemy.currentWindow.Find("InsidePoint");
+
+                enemy.agent.Warp(insidePoint.position);
+
+                enemy.stateMachine.ChangeState(
+                    new ChasePlayerState(enemy));
+
+                return;
+            }
+
+            return;
+        }
+
+        
         timer -= Time.deltaTime;
+
         if (timer <= 0)
         {
             if (planks.health > 0)
@@ -58,7 +102,7 @@ public class BreakWindowState : IState
             timer = 1f;
         }
 
-
+       
         if (planks.health <= 0)
         {
             planks.health = 0;
@@ -70,15 +114,8 @@ public class BreakWindowState : IState
 
             Debug.Log("Tablas rotas");
 
-            Transform insidePoint =
-                enemy.currentWindow.Find("InsidePoint");
-
-            enemy.agent.Warp(insidePoint.position);
-
-            enemy.stateMachine.ChangeState(
-                new ChasePlayerState(enemy));
-
-            return;
+            waitingToEnter = true;
+            enterTimer = 20f;
         }
     }
 }

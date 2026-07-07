@@ -4,6 +4,7 @@ using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 public class RandomGuy : MonoBehaviour
 {
     [Header("BreakWindow")]
@@ -24,7 +25,7 @@ public class RandomGuy : MonoBehaviour
     [Header("Electroshock")]
     public GameObject electroshockParticles;
     [HideInInspector]
-public Transform currentVent;
+     public Transform currentVent;
 
     [Header("Movement")]
     public float enemySpeed = 6f;
@@ -96,6 +97,13 @@ public Transform currentVent;
         isVent = false;
 
         GoIdle();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     private void OnDrawGizmos()
