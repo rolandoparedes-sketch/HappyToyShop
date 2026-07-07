@@ -18,6 +18,7 @@ public class Monitor : MonoBehaviour , IInteractuable
     private void Start()
     {
         CreateCameraList();
+        ExitMonitor();
     }
     public void Interact()
     {

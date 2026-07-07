@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1252897406317711166}
   - component: {fileID: 7300969278400751021}
   - component: {fileID: 7713171944626055652}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lengua de Kirby024
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,10 @@ GameObject:
   - component: {fileID: 8342513908151991330}
   - component: {fileID: 92128841530119627}
   - component: {fileID: 4609678202551316631}
-  m_Layer: 0
+  - component: {fileID: 9180122908397098565}
+  - component: {fileID: -5402925874664433262}
+  - component: {fileID: -6653978240531572474}
+  m_Layer: 6
   m_Name: Kirby025
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,3 +190,65 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9180122908397098565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9084397979307636191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5e16d35c92ebb46aa91673a56942c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Toy
+  rb: {fileID: 0}
+  col: {fileID: 0}
+--- !u!54 &-5402925874664433262
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9084397979307636191}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &-6653978240531572474
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9084397979307636191}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5230887, y: 0.9645134, z: 1.5766019}
+  m_Center: {x: 1.3225365e-14, y: -0.0016195629, z: 0.6356209}

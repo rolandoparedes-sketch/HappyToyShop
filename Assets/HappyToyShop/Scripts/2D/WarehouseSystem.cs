@@ -79,9 +79,12 @@ public class WarehouseSystem : MonoBehaviour
          Debug.Log("You added " + Amount + " " + Shelfs[ShelfID].data.EntityName + " to the warehouse, now you have " + Shelfs[ShelfID].CurrentAmount);
 
 
+        GameManager2D.instance.DataGame.CurrentShelfsID.Add(ShelfID);
+        GameManager2D.instance.DataGame.CurrentShelfsAmount.Add(Amount);
 
 
-     }
+
+    }
     [Button]
     public void ApplyDataToEachShelf()
     {

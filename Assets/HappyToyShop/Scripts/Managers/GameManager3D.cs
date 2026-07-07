@@ -14,6 +14,17 @@ public class GameManager3D : MonoBehaviour
 
     [FoldoutGroup("References")]
     [SerializeField] private ParanormalSuccess3D paranormalSuccess3D;
+
+    [FoldoutGroup("References")]
+    [SerializeField] private FactorySystem factorySystem;
+
+
+    [FoldoutGroup("References")]
+    [SerializeField] private DataGame dataGame;
+
+    [FoldoutGroup("References")]
+    [SerializeField] private RestockManager restockManager;
+
     private void Awake()
     {
         if(instance == null)
@@ -37,4 +48,7 @@ public class GameManager3D : MonoBehaviour
     public ParanormalSuccess3D ParanormalSuccess3D => paranormalSuccess3D;
 
     public SoundManager SoundManager => soundManager;
+    public FactorySystem FactorySystem => factorySystem;
+    public DataGame DataGame => dataGame;
+    public RestockManager RestockManager => restockManager;
 }
