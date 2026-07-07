@@ -48,7 +48,6 @@ public class IdleState : IState
                     enemy.VentPoints[
                         Random.Range(0, enemy.VentPoints.Length)
                     ];
-                enemy.AlertText.SetActive(true);
                 Debug.Log("Ataque por Ventilación");
 
             }

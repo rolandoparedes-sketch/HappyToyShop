@@ -21,14 +21,8 @@ public class Monitor : MonoBehaviour , IInteractuable
     }
     public void Interact()
     {
-
+        Debug.Log("Entró al monitor");
         EnterMonitor();
-
-
-
-
-
-
     }
 
     private void CreateCameraList()
@@ -85,10 +79,10 @@ public class Monitor : MonoBehaviour , IInteractuable
     {
         usingMonitor = true;
 
-        GameManager3D.instance.ShadowSpawner.Target.GetComponent<Player3DMovement>().characterCamera.gameObject.SetActive(false);
+        var playerCamera = GameManager3D.instance.ShadowSpawner.Target.GetComponent<Player3DMovement>().characterCamera;
 
-        currentCamera.camera.gameObject.SetActive(true);
-
+        playerCamera.Priority = 10;
+        currentCamera.camera.Priority = 50;
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -96,20 +90,19 @@ public class Monitor : MonoBehaviour , IInteractuable
         OnWatchingCameras?.Invoke();
     }
 
-    private void ExitMonitor()
+    public void ExitMonitor()
     {
         usingMonitor = false;
 
-        currentCamera.camera.gameObject.SetActive(false);
-        
-        GameManager3D.instance.ShadowSpawner.Target.GetComponent<Player3DMovement>().characterCamera.gameObject.SetActive(true);
+        var playerCamera = GameManager3D.instance.ShadowSpawner.Target.GetComponent<Player3DMovement>().characterCamera;
 
+        currentCamera.camera.Priority = 10;
+        playerCamera.Priority = 50;
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         OnExitCameras?.Invoke();
-
     }
 
 }

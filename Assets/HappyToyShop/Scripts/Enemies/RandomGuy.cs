@@ -23,6 +23,8 @@ public class RandomGuy : MonoBehaviour
 
     [Header("Movement")]
     public float enemySpeed = 6f;
+    public float chaseSpeed = 20f;
+
     public float sphereRadius = 1.5f;
     public float sphereDistance = 8f;
 

@@ -12,6 +12,8 @@ public class ChasePlayerState : IState
     public void Enter()
     {
         Debug.Log("Persiguiendo jugador");
+
+        enemy.agent.speed = enemy.chaseSpeed;
     }
 
     public void Update()

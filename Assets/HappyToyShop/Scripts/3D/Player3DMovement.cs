@@ -71,6 +71,7 @@ public class Player3DMovement : MonoBehaviour
 
     private Coroutine currentCoroutine;
 
+    [SerializeField] private LayerMask interactuableObjects;
     #endregion
     #region Inicialization
     private void Awake()
@@ -95,8 +96,7 @@ public class Player3DMovement : MonoBehaviour
         inputs.Player.Grab.performed += GrabObject;
         inputs.Player.Grab.canceled += ReleaseObject;
 
-        inputs.Player.Interact.performed += Interact;
-        inputs.Player.Interact.canceled += Interact;
+        inputs.Player.Interact.performed += ctx => Interact();
 
         inputs.Player.Sprint.performed += ctx => moveSpeed *= 2;
 
@@ -114,9 +114,23 @@ public class Player3DMovement : MonoBehaviour
 
     }
 
-    private void Interact(InputAction.CallbackContext context)
+    private void Interact()
     {
-        throw new NotImplementedException();
+        Debug.Log("Interactuar");
+
+        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactuableObjects))
+        {
+            Debug.Log(hit.collider.name);
+
+            if (hit.collider.TryGetComponent<IInteractuable>(out var interactuable))
+            {
+                Debug.Log(interactuable);
+
+                interactuable.Interact();
+            }
+        }
     }
 
     private void EnterMonitor()
