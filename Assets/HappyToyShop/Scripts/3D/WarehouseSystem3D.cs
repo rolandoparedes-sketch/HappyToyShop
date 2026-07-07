@@ -12,7 +12,6 @@ public class WarehouseSystem3D : MonoBehaviour
         SetMaximCapacity();
     }
 
-    // Update is called once per frame
     void Update()
     {
 

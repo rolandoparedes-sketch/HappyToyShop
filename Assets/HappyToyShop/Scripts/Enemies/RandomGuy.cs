@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -142,5 +143,13 @@ public Transform currentVent;
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position + transform.forward * sphereDistance, sphereRadius);
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * sphereDistance);
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            ScenesManager.instance.GameOver();
+        }
     }
 }
