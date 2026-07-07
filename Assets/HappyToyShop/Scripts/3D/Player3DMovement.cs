@@ -178,24 +178,29 @@ public class Player3DMovement : MonoBehaviour
     }
     private void LightOn(InputAction.CallbackContext context)
     {
-        if(Player3DController.instance.inventory3D.itemInHandRight.gameObject.activeSelf)
+        var inventory = Player3DController.instance.inventory3D;
+        var state3D = Player3DController.instance.state3D;
+
+        bool flashlightOn = inventory.itemInHandRight.gameObject.activeSelf;
+
+        if (flashlightOn)
         {
-            Player3DController.instance.inventory3D.itemInHandRight.gameObject.SetActive(false);
+            inventory.itemInHandRight.gameObject.SetActive(false);
 
-            var state3D= Player3DController.instance.state3D;
-
-            state3D.currentCoroutine= StartCoroutine(state3D.CordureCoroutine());
-
-
+            if (state3D.currentCoroutine == null)
+            {
+                state3D.currentCoroutine = state3D.StartCoroutine(state3D.CordureCoroutine());
+            }
         }
         else
         {
+            inventory.itemInHandRight.gameObject.SetActive(true);
 
-            var state3D = Player3DController.instance.state3D;
-
-            if(currentCoroutine!= null)
-                StopCoroutine(state3D.currentCoroutine);
-            Player3DController.instance.inventory3D.itemInHandRight.gameObject.SetActive(true);
+            if (state3D.currentCoroutine != null)
+            {
+                state3D.StopCoroutine(state3D.currentCoroutine);
+                state3D.currentCoroutine = null;
+            }
         }
 
     }

@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/HappyToyShop/Resources/Scenes/Menu.unity
+    guid: 4d0b535e31cab9946a1fc37763a8578d
+  - enabled: 1
     path: Assets/HappyToyShop/Resources/Scenes/2D.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/HappyToyShop/Resources/Scenes/3D.unity
     guid: a2d798cf1b313a846af0809a212e9c10
   - enabled: 1
-    path: Assets/HappyToyShop/Resources/Scenes/Menu.unity
-    guid: 4d0b535e31cab9946a1fc37763a8578d
+    path: Assets/HappyToyShop/Resources/Scenes/3Dnew.unity
+    guid: e54840873cbcebd4aac6c74c6323803a
   - enabled: 1
     path: Assets/HappyToyShop/Resources/Scenes/Win.unity
     guid: 101f9be8347632e42b6cccc8a408ed18

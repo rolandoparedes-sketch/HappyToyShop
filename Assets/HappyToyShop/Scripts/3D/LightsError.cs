@@ -47,18 +47,18 @@ public class LightsError : MonoBehaviour
         switch (Enum)
         {
             case FearState.Calm:
-                lightSource.range = 7;
-                lightSource.intensity = 0.5f;
+                lightSource.range = 10;
+                lightSource.intensity = 9f;
                 break;
             case FearState.Nervous:
 
-                lightSource.range = 6;
-                lightSource.intensity = 0.25f;
+                lightSource.range =9.5f;
+                lightSource.intensity = 5f;
                 break;
             case FearState.Scared:
-                lightSource.range = 5;
+                lightSource.range = 9;
 
-                lightSource.intensity = 0.05f;
+                lightSource.intensity = 2f;
                 break;
             case FearState.Terrified:
                 lightSource.gameObject.SetActive(false);

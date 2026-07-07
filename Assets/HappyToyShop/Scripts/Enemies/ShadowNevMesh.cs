@@ -10,7 +10,6 @@ public class EnemyShadow : MonoBehaviour
     [Header("Movement")]
     public float enemySpeed = 6f;
 
-    [HideInInspector]
     public Transform currentWindow;
 
 

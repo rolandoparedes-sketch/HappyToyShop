@@ -53,6 +53,17 @@ public class Player3DState : MonoBehaviour
 
     void Start()
     {
+        currentCordure = maxCordure;
+
+        if (!Player3DController.instance.inventory3D.itemInHandRight.gameObject.activeSelf)
+        {
+            currentCoroutine = StartCoroutine(CordureCoroutine());
+        }
+        else
+        {
+            Debug.Log("Flashlight is on, cordure drain is paused.");
+        }
+
 
         ChangefearEffect();
     }

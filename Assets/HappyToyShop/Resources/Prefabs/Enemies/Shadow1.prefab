@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7588801894760848977}
   - component: {fileID: -7447239286817450631}
   - component: {fileID: 5208339464770178563}
+  - component: {fileID: 221132058549772624}
   m_Layer: 0
   m_Name: Shadow1
   m_TagString: Untagged
@@ -156,3 +157,24 @@ MonoBehaviour:
   MaximumDistance: 1
   AnchorToInitialPosition: 0
   MaxDistanceToAnchor: 1
+--- !u!65 &221132058549772624
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326589194128641909}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0103259105, y: 0.0109539395, z: 0.04761759}
+  m_Center: {x: 0, y: -0.00029916246, z: 0.023791172}

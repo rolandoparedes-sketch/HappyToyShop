@@ -10382,6 +10382,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e67c59035dd8384c825c402b0a36caf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player3DState
+  characterCamera: {fileID: 0}
+  currentFearState: 0
+  cordureDrainRate: 0.25
+  maxCordure: 100
+  currentCordure: 0
+  amplitudeGainCalm: 0.5
+  frequencyGainCalm: 0.5
+  amplitudeGainNervous: 0.5
+  frequencyGainNervous: 0.5
+  amplitudeGainScared: 0.5
+  frequencyGainScared: 0.5
+  amplitudeGainTerrified: 0.5
+  frequencyGainTerrified: 0.5
 --- !u!114 &895927722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10413,7 +10426,6 @@ MonoBehaviour:
   timeToActiveMonitor: 1.5
   velocityToAccessCamera: 4
   characterCamera: {fileID: 1620334787}
-  currentFearState: 0
   interactDistance: 3
   monitorViewPoint: {fileID: 477013537}
   cameraTarget: {fileID: 1102825904}
@@ -10431,19 +10443,8 @@ MonoBehaviour:
   holdPoint: {fileID: 1746658590}
   inventoryUI: {fileID: 1441863048}
   moveSpeed: 5
-  cordureDrainRate: 0.25
-  maxCordure: 100
-  currentCordure: 0
   timeDontMove: 2.5
   moveInput: {x: 0, y: 0}
-  amplitudeGainCalm: 0.5
-  frequencyGainCalm: 0.5
-  amplitudeGainNervous: 0.5
-  frequencyGainNervous: 0.5
-  amplitudeGainScared: 0.5
-  frequencyGainScared: 0.5
-  amplitudeGainTerrified: 0.5
-  frequencyGainTerrified: 0.5
 --- !u!114 &895927724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27093,7 +27094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e31818b17ffc4479cd1f6541326db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuSystem
-  FadeAnim: {fileID: 0}
+  FadeAnim: {fileID: 4281250599636800115}
   fadeDuration: 1
 --- !u!114 &785095059515819709
 MonoBehaviour:
