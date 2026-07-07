@@ -21,6 +21,11 @@ public class RandomGuy : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
 
+    [Header("Electroshock")]
+    public GameObject electroshockParticles;
+    [HideInInspector]
+public Transform currentVent;
+
     [Header("Movement")]
     public float enemySpeed = 6f;
     public float chaseSpeed = 20f;
@@ -66,6 +71,31 @@ public class RandomGuy : MonoBehaviour
                 Debug.Log("Detectando Spherecast");
             }
         }
+    }
+    public void ActivateElectroshock()
+    {
+        if (!isVent)
+        {
+            Debug.Log("El enemigo no está usando la ventilación.");
+            return;
+        }
+
+        if (electroshockParticles != null && currentVent != null)
+        {
+            Instantiate(
+                electroshockParticles,
+                currentVent.position,
+                currentVent.rotation
+            );
+        }
+
+        Debug.Log("¡Electroshock activado!");
+
+        agent.ResetPath();
+
+        isVent = false;
+
+        GoIdle();
     }
 
     private void OnDrawGizmos()

@@ -12,16 +12,23 @@ public class WaitWindowState : IState
     }
     public void Enter()
     {
-        timer = 5f;
+        timer = 15f;
         Debug.Log("Esperando ala ventana");
     }
     public void Update()
     {
         timer -= Time.deltaTime;
 
-        if(timer < 0)
+        if (timer <= 0)
         {
-            enemy.stateMachine.ChangeState(new BreakWindowState(enemy));
+            if (enemy.isVent)
+            {
+                enemy.stateMachine.ChangeState(new ChasePlayerState(enemy));
+            }
+            else
+            {
+                enemy.stateMachine.ChangeState(new BreakWindowState(enemy));
+            }
         }
     }
 
