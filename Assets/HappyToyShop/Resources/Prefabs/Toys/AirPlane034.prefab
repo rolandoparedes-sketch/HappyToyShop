@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3577549191960718802}
   - component: {fileID: -441779744588746183}
   - component: {fileID: 8455945126451390304}
+  - component: {fileID: 4261780831182689099}
   m_Layer: 6
   m_Name: AirPlane034
   m_TagString: Untagged
@@ -69,9 +70,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8499701361930146817, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
-  - {fileID: -3661639628750336703, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
-  - {fileID: 824015559753126921, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+  - {fileID: 2100000, guid: da3865410369b6c428d5ac47eef854cf, type: 2}
+  - {fileID: 2100000, guid: da3865410369b6c428d5ac47eef854cf, type: 2}
+  - {fileID: 2100000, guid: 189cbc73329863f46bd8b8fdb5cecf21, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -159,3 +160,17 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5570042526896760679, guid: 83a547a2e60645d4483bf4923c42f6e8, type: 3}
+--- !u!114 &4261780831182689099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7743239475132437464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f89f3136a6400794fbfd6ddf0af3029a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffectController
+  targetRenderer: {fileID: 8487608933198612291}
+  enableFlashProperty: _EnableFlash

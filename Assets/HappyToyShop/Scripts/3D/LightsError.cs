@@ -48,17 +48,17 @@ public class LightsError : MonoBehaviour
         {
             case FearState.Calm:
                 lightSource.range = 10;
-                lightSource.intensity = 9f;
+                lightSource.intensity = 5f;
                 break;
             case FearState.Nervous:
 
                 lightSource.range =9.5f;
-                lightSource.intensity = 5f;
+                lightSource.intensity = 3f;
                 break;
             case FearState.Scared:
                 lightSource.range = 9;
 
-                lightSource.intensity = 2f;
+                lightSource.intensity = 1f;
                 break;
             case FearState.Terrified:
                 lightSource.gameObject.SetActive(false);

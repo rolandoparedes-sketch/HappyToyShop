@@ -5,6 +5,7 @@ public class ShelfStorage3D : MonoBehaviour, IInteractuable
 {
     [Header("Shelf")]
     public ToyData toyData;
+
     public int maxCapacity = 3;
 
     private readonly List<Toy> toys = new();

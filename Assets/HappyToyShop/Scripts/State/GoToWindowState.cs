@@ -13,7 +13,7 @@ public class GoToWindowState : IState
     {
         Debug.Log("Ventana elegida: " + enemy.currentWindow.name);
 
-        Transform outsidePoint = enemy.currentWindow.Find("OutsidePoint");
+        Transform outsidePoint = enemy.currentWindow;
 
         if (outsidePoint == null)
         {
@@ -27,7 +27,7 @@ public class GoToWindowState : IState
     public void Update()
     {
         Transform outsidePoint =
-            enemy.currentWindow.Find("OutsidePoint");
+            enemy.currentWindow;
 
         float distance = Vector3.Distance(enemy.transform.position,outsidePoint.position);
 
