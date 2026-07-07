@@ -46,6 +46,7 @@ public class Player3DMovement : MonoBehaviour
     private float repairCounter;
     public Slider repairBar;
     public TMP_Text repairText;
+    private Coroutine repairCoroutine;
     
 
     [FoldoutGroup("ControllerSettings/Hold")]
@@ -179,9 +180,11 @@ public class Player3DMovement : MonoBehaviour
     {
 
         StartCoroutine(WaitForPlay(timeDontMove));
-   
+        repairBar.gameObject.SetActive(false);
+        repairBar.maxValue = 10f;
+    
 
-    }
+}
     void Update()
     {
 
@@ -243,28 +246,30 @@ public class Player3DMovement : MonoBehaviour
         }
 
     }
-   /* private void CheckWindow()
-    {
-        Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
+    /* private void CheckWindow()
+     {
+         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
-        {
-            if (hit.collider.CompareTag("Window"))
-            {
-                woodText.SetActive(true);
-            }
-            else
-            {
-                woodText.SetActive(false);
-            }
-        }
-        else
-        {
-            woodText.SetActive(false);
-        }
-    }*/
+         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
+         {
+             if (hit.collider.CompareTag("Window"))
+             {
+                 woodText.SetActive(true);
+             }
+             else
+             {
+                 woodText.SetActive(false);
+             }
+         }
+         else
+         {
+             woodText.SetActive(false);
+         }
+     }*/
     private void RepairWindow(InputAction.CallbackContext ctx)
     {
+        if (repairCoroutine != null)
+            return;
 
         Ray ray = new Ray(characterCamera.transform.position, characterCamera.transform.forward);
 
@@ -272,7 +277,7 @@ public class Player3DMovement : MonoBehaviour
         {
             if (hit.collider.CompareTag("Window"))
             {
-                StartCoroutine(RepairCoroutine(hit.collider));
+                repairCoroutine = StartCoroutine(RepairCoroutine(hit.collider));
             }
         }
     }
@@ -322,30 +327,39 @@ public class Player3DMovement : MonoBehaviour
     }
     private IEnumerator RepairCoroutine(Collider window)
     {
-        repairCounter = 0;
+        repairCounter = 0f;
+
         repairBar.gameObject.SetActive(true);
-        repairBar.value = 0;
+        repairBar.maxValue = 10f;
+        repairBar.value = 0f;
 
         while (inputs.Player.Repair.IsPressed())
         {
-            repairBar.value = repairCounter / 10f;
-            repairCounter += Time.deltaTime * 2;
+            repairCounter += Time.deltaTime;
 
-            Debug.Log(repairCounter);
+            repairBar.value = repairCounter;
 
-            if (repairCounter >= 10)
+            if (repairCounter >= 10f)
             {
                 GameObject wood = window.transform.Find("WoodPlanks").gameObject;
 
                 wood.SetActive(true);
+
                 WoodPlanks planks = wood.GetComponent<WoodPlanks>();
-                planks.health = 5;
+
+                if (planks != null)
+                {
+                    planks.health = 5;
+                }
+
                 repairBar.gameObject.SetActive(false);
-                repairText.text = "Tablas de Maderas Puestas";
+
+                repairText.text = "Tablas de Madera Puestas";
 
                 StartCoroutine(HideMessage());
 
-                repairCounter = 0;
+                repairCounter = 0f;
+                repairCoroutine = null;
 
                 yield break;
             }
@@ -353,10 +367,11 @@ public class Player3DMovement : MonoBehaviour
             yield return null;
         }
 
-        repairCounter = 0;
-
-        repairBar.value = 0;
+        repairCounter = 0f;
+        repairBar.value = 0f;
         repairBar.gameObject.SetActive(false);
+
+        repairCoroutine = null;
     }
     private IEnumerator HideMessage()
     {

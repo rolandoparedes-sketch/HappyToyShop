@@ -7,10 +7,19 @@ public class UIManager3D : MonoBehaviour
 
     public GameObject UICamera;
 
-    void OnEnable()
+    [Header("Electroshock")]
+    public RandomGuy enemy;
+
+    private void OnEnable()
     {
         Monitor.OnWatchingCameras += ActiveButtons;
         Monitor.OnExitCameras += DeactiveButtons;
+    }
+
+    private void OnDisable()
+    {
+        Monitor.OnWatchingCameras -= ActiveButtons;
+        Monitor.OnExitCameras -= DeactiveButtons;
     }
 
     private void DeactiveButtons()
@@ -21,18 +30,13 @@ public class UIManager3D : MonoBehaviour
     private void ActiveButtons()
     {
         UICamera.SetActive(true);
-
     }
 
-    void Start()
+    public void ActivateElectroshock()
     {
-        
-    }
-
-   
-
-    void Update()
-    {
-        
+        if (enemy != null)
+        {
+            enemy.ActivateElectroshock();
+        }
     }
 }
