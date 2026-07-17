@@ -20,4 +20,8 @@ public class Shadow : MonoBehaviour
 
         this.gameObject.SetActive (false);
     }
+
+
+
+
 }
