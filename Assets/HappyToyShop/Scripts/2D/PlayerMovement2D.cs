@@ -124,7 +124,12 @@ public class PlayerMovement2D : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        var Inventory = PlayerController2D.instance.playerMechanics;
+        if (Inventory.HasGift)
+        {
+            GameManager2D.instance.UIManager.ChangeDialoguePlayer("I need to get rid of the gift first");
+            return;
+        }
         if (collision.gameObject.CompareTag("Puerta"))
         {
             OnEnterDoor?.Invoke();

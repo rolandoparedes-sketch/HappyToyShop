@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f211d2341c6a0a49a4cd03df8003475, type: 3}
   m_Name: DataGame
   m_EditorClassIdentifier: Assembly-CSharp::DataGame
-  money: 802
+  money: 500
   day: 5
   weekDayIndex: 4
-  monthIndex: 2
+  monthIndex: 5
   MaxCapacityShelf: 6
   CurrentShelfs: []
   CurrentShelfsID: 

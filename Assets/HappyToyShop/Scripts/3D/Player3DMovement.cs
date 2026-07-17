@@ -354,7 +354,6 @@ public class Player3DMovement : MonoBehaviour
 
                 repairBar.gameObject.SetActive(false);
 
-                repairText.text = "Tablas de Madera Puestas";
 
                 StartCoroutine(HideMessage());
 

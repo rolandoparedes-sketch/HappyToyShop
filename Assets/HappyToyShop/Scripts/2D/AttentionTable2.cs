@@ -1,32 +1,27 @@
-using Sirenix.OdinInspector;
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-
-
-public class AttentionTable : MonoBehaviour, IInteractuable
+public class AttentionTable2 : MonoBehaviour, IInteractuable
 {
 
-    
-    public event Action OnSell;
+
+    public event Action OnSell2;
     public void Interact()
     {
 
-        var customerQueue = GameManager2D.instance.CustomerManager.CustomerQueue;
+        var customerQueue2 = GameManager2D.instance.CustomerManager.CustomerQueue;
 
 
 
-        if (customerQueue.CustomerWaiting.Count == 0)
+        if (customerQueue2.CustomerWaiting.Count == 0)
         {
-            
+
             GameManager2D.instance.UIManager.ChangeDialoguePlayer("There's nobody in the queue");
-             Debug.Log("No hay clientes en cola");
+            Debug.Log("No hay clientes en cola");
             return;
         }
 
-        NPCCustomer nextCustomer = customerQueue.CustomerWaiting.Peek();
+        NPCCustomer nextCustomer = customerQueue2.CustomerWaiting.Peek();
 
         var player = PlayerController2D.instance.playerMechanics;
 
@@ -34,7 +29,7 @@ public class AttentionTable : MonoBehaviour, IInteractuable
         {
             GameManager2D.instance.UIManager.ChangeDialoguePlayer("I have nothing to hand over");
             Debug.Log("No tienes nada en mano para entregar");
-            return ;
+            return;
         }
 
 
@@ -61,10 +56,10 @@ public class AttentionTable : MonoBehaviour, IInteractuable
         GameManager2D.instance.MoneySystem.CurrentMoney += player.ToyData.SalePrice;
         player.Gift.gameObject.SetActive(false);
 
-        customerQueue.RemoveWaitingCustomer(nextCustomer);
+        customerQueue2.RemoveWaitingCustomer(nextCustomer);
 
         Debug.Log("Atendiendo cliente: " + nextCustomer.DataNpc.EntityName);
-        Debug.Log("Juguete vendido: " +player.ToyData.EntityName + ", precio: " + player.ToyData.SalePrice);
+        Debug.Log("Juguete vendido: " + player.ToyData.EntityName + ", precio: " + player.ToyData.SalePrice);
 
         player.RemoveToy();
 
@@ -76,7 +71,7 @@ public class AttentionTable : MonoBehaviour, IInteractuable
 
         GameManager2D.instance.SoundManager.CheckTypeAudio(SoundType.SFX, 0);
 
-        OnSell?.Invoke();
+        OnSell2?.Invoke();
 
     }
 }

@@ -305,9 +305,9 @@ MonoBehaviour:
   dialogue: 
   idPedido: 0
   moveSpeed: 0
-  baseMoveSpeed: 3
-  AngryMoveSpeed: 8
-  maxPatience: 60
+  baseMoveSpeed: 4.5
+  AngryMoveSpeed: 9
+  maxPatience: 50
   patience: 0
   stopDistance: 0.05
   isWaiting: 0
